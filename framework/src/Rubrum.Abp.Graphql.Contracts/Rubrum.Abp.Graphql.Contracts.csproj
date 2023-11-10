@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="..\..\..\common.props"/>
+    <Import Project="..\..\..\fody.props"/>
+
+    <PropertyGroup>
+        <RootNamespace>Rubrum.Abp.Graphql</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="HotChocolate" Version="$(HotChocolatePackageVersion)"/>
+        <PackageReference Include="HotChocolate.Data" Version="$(HotChocolatePackageVersion)"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.Authorization.Abstractions" Version="$(AbpPackageVersion)"/>
+        <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="$(AbpPackageVersion)"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Rubrum.Abp.Core\Rubrum.Abp.Core.csproj"/>
+    </ItemGroup>
+</Project>

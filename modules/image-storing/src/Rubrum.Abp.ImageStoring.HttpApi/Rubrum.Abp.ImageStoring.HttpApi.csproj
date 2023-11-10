@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="..\..\..\..\common.props"/>
+    <Import Project="..\..\..\..\fody.props"/>
+
+    <PropertyGroup>
+        <RootNamespace>Rubrum.Abp.ImageStoring</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="$(AbpPackageVersion)"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Rubrum.Abp.ImageStoring.Application.Contracts\Rubrum.Abp.ImageStoring.Application.Contracts.csproj"/>
+    </ItemGroup>
+</Project>

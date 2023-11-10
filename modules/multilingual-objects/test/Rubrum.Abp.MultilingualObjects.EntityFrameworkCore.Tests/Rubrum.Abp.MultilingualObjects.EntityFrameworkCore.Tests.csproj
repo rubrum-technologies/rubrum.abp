@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Rubrum.Abp.MultilingualObjects.EntityFrameworkCore\Rubrum.Abp.MultilingualObjects.EntityFrameworkCore.csproj" />
+      <ProjectReference Include="..\Rubrum.Abp.MultilingualObjects.TestBase\Rubrum.Abp.MultilingualObjects.TestBase.csproj" />
+    </ItemGroup>
+
+</Project>
