@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="..\..\..\..\common.props"/>
+    <Import Project="..\..\..\..\fody.props"/>
+
+    <PropertyGroup>
+        <RootNamespace>Rubrum.Abp.PermissionManagement</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Google.Protobuf" Version="$(GoogleProtobufPackageVersion)"/>
+        <PackageReference Include="Google.Protobuf.Tools" Version="$(GoogleProtobufToolsPackageVersion)" PrivateAssets="All"/>
+        <PackageReference Include="Grpc.Core" Version="$(GrpcCorePackageVersion)"/>
+        <PackageReference Include="Grpc.Tools" Version="$(GrpcToolsPackageVersion)" PrivateAssets="All"/>
+        <PackageReference Include="Grpc.AspNetCore.Server" Version="$(GrpcAspNetCoreServerPackageVersion)"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="$(AbpPackageVersion)"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\..\framework\src\Rubrum.Abp.Core\Rubrum.Abp.Core.csproj" />
+    </ItemGroup>
+</Project>

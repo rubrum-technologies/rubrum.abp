@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="..\..\..\common.props"/>
+    <Import Project="..\..\..\fody.props"/>
+
+    <PropertyGroup>
+        <RootNamespace>Rubrum.Abp.Cqrs</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MediatR" Version="$(MediatRPackageVersion)"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.Threading" Version="$(AbpPackageVersion)"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Rubrum.Abp.Cqrs.Abstractions\Rubrum.Abp.Cqrs.Abstractions.csproj"/>
+    </ItemGroup>
+</Project>

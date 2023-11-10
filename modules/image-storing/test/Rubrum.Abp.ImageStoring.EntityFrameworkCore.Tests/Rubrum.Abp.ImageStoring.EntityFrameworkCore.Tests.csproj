@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="..\..\..\..\common.test.props"/>
+    <Import Project="..\..\..\..\fody.props"/>
+
+    <PropertyGroup>
+        <RootNamespace>Rubrum.Abp.ImageStoring.EntityFrameworkCore</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="$(AbpPackageVersion)"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Rubrum.Abp.ImageStoring.EntityFrameworkCore\Rubrum.Abp.ImageStoring.EntityFrameworkCore.csproj" />
+      <ProjectReference Include="..\Rubrum.Abp.ImageStoring.TestBase\Rubrum.Abp.ImageStoring.TestBase.csproj" />
+    </ItemGroup>
+</Project>
