@@ -11,7 +11,6 @@
     </ItemGroup>
     
     <ItemGroup>
-      <ProjectReference Include="..\..\..\..\framework\src\Rubrum.Abp.Cqrs.Abstractions\Rubrum.Abp.Cqrs.Abstractions.csproj" />
       <ProjectReference Include="..\Rubrum.Abp.ImageStoring.Application.Contracts\Rubrum.Abp.ImageStoring.Application.Contracts.csproj" />
       <ProjectReference Include="..\Rubrum.Abp.ImageStoring.Domain\Rubrum.Abp.ImageStoring.Domain.csproj" />
     </ItemGroup>
