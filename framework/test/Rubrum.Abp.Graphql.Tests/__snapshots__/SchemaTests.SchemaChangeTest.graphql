@@ -1,0 +1,317 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+interface BusinessError implements Error {
+  code: String
+  details: String
+  message: String!
+}
+
+"This interface can be implemented to store creation information (who and when created)."
+interface CreationAuditedObject implements HasCreationTime & MayHaveCreator {
+  creationTime: DateTime
+  creatorId: ID
+}
+
+"This interface can be implemented to store deletion information (who delete and when deleted)."
+interface DeletionAuditedObject implements HasDeletionTime & SoftDelete {
+  deleterId: ID
+  deletionTime: DateTime
+  isDeleted: Boolean
+}
+
+interface EntityOfInt32 {
+  id: ID!
+}
+
+interface Error {
+  message: String!
+}
+
+"A standard interface to add CreationTime property."
+interface HasCreationTime {
+  creationTime: DateTime
+}
+
+"A standard interface to add DeletionTime property to a class. It also makes the class soft delete (see ISoftDelete)."
+interface HasDeletionTime implements SoftDelete {
+  deletionTime: DateTime
+  isDeleted: Boolean
+}
+
+"A standard interface to add DeletionTime property to a class."
+interface HasModificationTime {
+  lastModificationTime: DateTime
+}
+
+"Standard interface for an entity that MAY have a creator."
+interface MayHaveCreator {
+  creatorId: ID
+}
+
+"This interface can be implemented to store modification information (who and when modified lastly)."
+interface ModificationAuditedObject implements HasModificationTime {
+  lastModificationTime: DateTime
+  lastModifierId: ID
+}
+
+"The node interface is implemented by entities that have a global unique identifier."
+interface Node {
+  id: ID!
+}
+
+" Used to standardize soft deleting entities. Soft-delete entities are not actually deleted, marked as IsDeleted = true in the database, but can not be retrieved to the application normally."
+interface SoftDelete {
+  isDeleted: Boolean
+}
+
+"A connection to a list of items."
+type CitiesConnection {
+  "A list of edges."
+  edges: [CitiesEdge!]
+  "A flattened list of the nodes."
+  nodes: [City!]
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+}
+
+"An edge in a connection."
+type CitiesEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: City!
+}
+
+type City implements Node & EntityOfInt32 & MayHaveCreator & HasCreationTime & CreationAuditedObject & HasModificationTime & ModificationAuditedObject & SoftDelete & HasDeletionTime & DeletionAuditedObject {
+  countryId: UUID!
+  creationTime: DateTime
+  creatorId: ID
+  deleterId: ID
+  deletionTime: DateTime
+  id: ID!
+  isDeleted: Boolean!
+  lastModificationTime: DateTime
+  lastModifierId: ID
+  name: String!
+}
+
+type CreateCityPayload {
+  city: City
+  errors: [CreateCityError!]
+}
+
+type DeleteCityPayload {
+  empty: Empty
+  errors: [DeleteCityError!]
+}
+
+type EntityNotFoundError implements Error {
+  id: String
+  message: String!
+  type: String
+}
+
+type Mutation {
+  createCity(input: CreateCityInput!): CreateCityPayload!
+  deleteCity(input: DeleteCityInput!): DeleteCityPayload!
+  updateCity(input: UpdateCityInput!): UpdateCityPayload!
+}
+
+"Information about pagination in a connection."
+type PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "Indicates whether more edges exist following the set defined by the clients arguments."
+  hasNextPage: Boolean!
+  "Indicates whether more edges exist prior the set defined by the clients arguments."
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
+
+type Query {
+  cities("Returns the elements in the list that come after the specified cursor." after: String "Returns the elements in the list that come before the specified cursor." before: String "Returns the first _n_ elements from the list." first: Int "Returns the last _n_ elements from the list." last: Int order: [CitySortInput!] where: CityFilterInput): CitiesConnection
+  citiesAny(where: CityFilterInput): Boolean!
+  citiesCount(where: CityFilterInput): Int!
+  city(where: CityFilterInput): City
+  cityById(id: ID!): City!
+  "Fetches an object given its ID."
+  node("ID of the object." id: ID!): Node
+  "Lookup nodes by a list of IDs."
+  nodes("The list of node IDs." ids: [ID!]!): [Node]!
+}
+
+type UpdateCityPayload {
+  city: City
+  errors: [UpdateCityError!]
+}
+
+type ValidationError implements Error {
+  message: String!
+}
+
+union CreateCityError = EntityNotFoundError | ValidationError
+
+union DeleteCityError = EntityNotFoundError | ValidationError
+
+union UpdateCityError = EntityNotFoundError | ValidationError
+
+input BooleanOperationFilterInput {
+  eq: Boolean
+  neq: Boolean
+}
+
+input CityFilterInput {
+  and: [CityFilterInput!]
+  or: [CityFilterInput!]
+  countryId: UuidOperationFilterInput
+  name: StringOperationFilterInput
+  isDeleted: BooleanOperationFilterInput
+  deleterId: UuidOperationFilterInput
+  deletionTime: DateTimeOperationFilterInput
+  lastModificationTime: DateTimeOperationFilterInput
+  lastModifierId: UuidOperationFilterInput
+  creationTime: DateTimeOperationFilterInput
+  creatorId: UuidOperationFilterInput
+  id: IntOperationFilterInput
+}
+
+input CitySortInput {
+  countryId: SortEnumType
+  name: SortEnumType
+  isDeleted: SortEnumType
+  deleterId: SortEnumType
+  deletionTime: SortEnumType
+  lastModificationTime: SortEnumType
+  lastModifierId: SortEnumType
+  creationTime: SortEnumType
+  creatorId: SortEnumType
+  id: SortEnumType
+}
+
+input CreateCityInput {
+  countryId: ID!
+  name: String!
+}
+
+input DateOnlyOperationFilterInput {
+  and: [DateOnlyOperationFilterInput!]
+  or: [DateOnlyOperationFilterInput!]
+  eq: Date
+  neq: Date
+  in: [Date!]
+  nin: [Date!]
+  gt: Date
+  ngt: Date
+  gte: Date
+  ngte: Date
+  lt: Date
+  nlt: Date
+  lte: Date
+  nlte: Date
+}
+
+input DateTimeOperationFilterInput {
+  eq: DateTime
+  neq: DateTime
+  in: [DateTime]
+  nin: [DateTime]
+  gt: DateTime
+  ngt: DateTime
+  gte: DateTime
+  ngte: DateTime
+  lt: DateTime
+  nlt: DateTime
+  lte: DateTime
+  nlte: DateTime
+}
+
+input DeleteCityInput {
+  id: ID!
+}
+
+input IntOperationFilterInput {
+  eq: Int
+  neq: Int
+  in: [Int]
+  nin: [Int]
+  gt: Int
+  ngt: Int
+  gte: Int
+  ngte: Int
+  lt: Int
+  nlt: Int
+  lte: Int
+  nlte: Int
+}
+
+input StringOperationFilterInput {
+  and: [StringOperationFilterInput!]
+  or: [StringOperationFilterInput!]
+  eq: String
+  neq: String
+  contains: String
+  ncontains: String
+  in: [String]
+  nin: [String]
+  startsWith: String
+  nstartsWith: String
+  endsWith: String
+  nendsWith: String
+}
+
+input UpdateCityInput {
+  countryId: ID!
+  id: ID!
+  name: String!
+}
+
+input UuidOperationFilterInput {
+  eq: UUID
+  neq: UUID
+  in: [UUID]
+  nin: [UUID]
+  gt: UUID
+  ngt: UUID
+  gte: UUID
+  ngte: UUID
+  lt: UUID
+  nlt: UUID
+  lte: UUID
+  nlte: UUID
+}
+
+enum ApplyPolicy {
+  BEFORE_RESOLVER
+  AFTER_RESOLVER
+  VALIDATION
+}
+
+enum SortEnumType {
+  ASC
+  DESC
+}
+
+directive @allowAnonymous repeatable on FIELD_DEFINITION
+
+directive @authorize("Defines when when the authorize directive shall be applied.By default the authorize directives are applied during the validation phase." apply: ApplyPolicy! = BEFORE_RESOLVER "The name of the authorization policy that determines access to the annotated resource." policy: String "Roles that are allowed to access the annotated resource." roles: [String!]) repeatable on OBJECT | FIELD_DEFINITION
+
+"The `@oneOf` directive is used within the type system definition language\n to indicate:\n\n - an Input Object is a Oneof Input Object, or\n - an Object Type's Field is a Oneof Field."
+directive @oneOf on INPUT_OBJECT
+
+"The `@specifiedBy` directive is used within the type system definition language to provide a URL for specifying the behavior of custom scalar definitions."
+directive @specifiedBy("The specifiedBy URL points to a human-readable specification. This field will only read a result for scalar types." url: String!) on SCALAR
+
+"The `Date` scalar represents an ISO-8601 compliant date type."
+scalar Date
+
+"The `DateTime` scalar represents an ISO-8601 compliant date time type."
+scalar DateTime @specifiedBy(url: "https:\/\/www.graphql-scalars.com\/date-time")
+
+"Empty"
+scalar Empty
+
+scalar UUID @specifiedBy(url: "https:\/\/tools.ietf.org\/html\/rfc4122")

@@ -1,4 +1,4 @@
-﻿namespace Rubrum.Abp.MultilingualObjects.Graphql.Tests;
+﻿namespace Rubrum.Abp.MultilingualObjects;
 
 public class Class1
 {

@@ -3,7 +3,7 @@
     <Import Project="..\..\..\fody.props"/>
 
     <PropertyGroup>
-        <RootNamespace>Iga.HotChocolate.Graphql</RootNamespace>
+        <RootNamespace>Rubrum.Abp.Graphql</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -11,13 +11,16 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Volo.Abp.AspNetCore" Version="$(AbpPackageVersion)"/>
+        <PackageReference Include="Volo.Abp.Ddd.Domain" Version="$(AbpPackageVersion)"/>
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="HotChocolate.AspNetCore" Version="$(HotChocolatePackageVersion)"/>
         <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="$(HotChocolatePackageVersion)"/>
         <PackageReference Include="HotChocolate.AspNetCore.CommandLine" Version="$(HotChocolatePackageVersion)"/>
+        <PackageReference Include="HotChocolate.PersistedQueries.Redis" Version="$(HotChocolatePackageVersion)"/>
+        <PackageReference Include="HotChocolate.Subscriptions.Redis" Version="$(HotChocolatePackageVersion)"/>
+        <PackageReference Include="HotChocolate.Stitching.Redis" Version="$(HotChocolatePackageVersion)"/>
         <PackageReference Include="HotChocolate.Types.Scalars" Version="$(HotChocolatePackageVersion)"/>
         <PackageReference Include="HotChocolate.Types.Scalars.Upload" Version="$(HotChocolatePackageVersion)"/>
         <PackageReference Include="HotChocolate.Data" Version="$(HotChocolatePackageVersion)"/>
