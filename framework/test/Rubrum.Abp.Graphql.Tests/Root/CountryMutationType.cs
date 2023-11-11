@@ -5,7 +5,7 @@ using Rubrum.Abp.Graphql.Types;
 
 namespace Rubrum.Abp.Graphql.Root;
 
-public class CountryMutationType : 
+public class CountryMutationType :
     CudMutationType<CountryDto, Guid, ICountryGraphqlService, CreateCountryInput, UpdateCountryInput>
 {
     protected override string TypeName => CountryConstants.TypeName;

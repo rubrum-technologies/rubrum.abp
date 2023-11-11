@@ -9,8 +9,8 @@
     <ItemGroup>
         <PackageReference Include="Volo.Abp.Ddd.Domain" Version="$(AbpPackageVersion)"/>
     </ItemGroup>
-    
+
     <ItemGroup>
-      <ProjectReference Include="..\Rubrum.Abp.ImageStoring.Domain.Shared\Rubrum.Abp.ImageStoring.Domain.Shared.csproj" />
+        <ProjectReference Include="..\Rubrum.Abp.ImageStoring.Domain.Shared\Rubrum.Abp.ImageStoring.Domain.Shared.csproj"/>
     </ItemGroup>
 </Project>

@@ -14,7 +14,7 @@ public class RubrumAbpGraphqlTestDataSeedContributor : IDataSeedContributor, ITr
     {
         _countryRepository = countryRepository;
     }
-    
+
     public async Task SeedAsync(DataSeedContext context)
     {
         await _countryRepository.InsertAsync(new Country(CountryId, "Russian"));

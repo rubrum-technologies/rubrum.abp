@@ -9,8 +9,8 @@
     <ItemGroup>
         <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="$(AbpPackageVersion)"/>
     </ItemGroup>
-    
+
     <ItemGroup>
-      <ProjectReference Include="..\Rubrum.Abp.Keycloak.Application.Contracts\Rubrum.Abp.Keycloak.Application.Contracts.csproj" />
+        <ProjectReference Include="..\Rubrum.Abp.Keycloak.Application.Contracts\Rubrum.Abp.Keycloak.Application.Contracts.csproj"/>
     </ItemGroup>
 </Project>

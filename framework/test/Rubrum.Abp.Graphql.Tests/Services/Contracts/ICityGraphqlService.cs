@@ -5,5 +5,4 @@ namespace Rubrum.Abp.Graphql.Services.Contracts;
 
 public interface ICityGraphqlService : ICrudGraphqlService<CityDto, int, CreateCityInput, UpdateCityInput>
 {
-    
 }

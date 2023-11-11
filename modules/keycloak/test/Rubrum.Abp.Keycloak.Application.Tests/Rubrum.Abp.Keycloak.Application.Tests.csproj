@@ -11,7 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Rubrum.Abp.Keycloak.Application\Rubrum.Abp.Keycloak.Application.csproj" />
-      <ProjectReference Include="..\Rubrum.Abp.Keycloak.TestBase\Rubrum.Abp.Keycloak.TestBase.csproj" />
+        <ProjectReference Include="..\..\src\Rubrum.Abp.Keycloak.Application\Rubrum.Abp.Keycloak.Application.csproj"/>
+        <ProjectReference Include="..\Rubrum.Abp.Keycloak.TestBase\Rubrum.Abp.Keycloak.TestBase.csproj"/>
     </ItemGroup>
 </Project>

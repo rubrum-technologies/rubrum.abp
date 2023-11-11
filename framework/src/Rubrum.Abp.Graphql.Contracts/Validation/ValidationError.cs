@@ -12,26 +12,26 @@ public class ValidationError
     }
 
     public string Message { get; }
-    
+
     public IReadOnlyList<ValidationResult> Results { get; }
 
     private static string GetMessage(AbpValidationException exception)
     {
         var validationErrors = exception.ValidationErrors;
-        
+
         if (validationErrors.IsNullOrEmpty())
         {
             return string.Empty;
         }
 
         var text = new StringBuilder();
-        
+
         text.AppendLine("There are " + validationErrors.Count + " validation errors:");
-        
+
         foreach (var validationResult in validationErrors)
         {
             var memberNames = string.Empty;
-            
+
             if (validationResult.MemberNames.Any())
             {
                 memberNames = $" ({string.Join(", ", validationResult.MemberNames)})";

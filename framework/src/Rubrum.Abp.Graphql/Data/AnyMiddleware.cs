@@ -16,8 +16,7 @@ internal class AnyMiddleware<T>
     public async Task InvokeAsync(IMiddlewareContext context)
     {
         await _next(context).ConfigureAwait(false);
-        context.Result = context.Result switch
-        {
+        context.Result = context.Result switch {
             IAsyncEnumerable<T> ae => await ae.AnyAsync(),
             IEnumerable<T> en => await Task.Run(() => en.Any(), context.RequestAborted).ConfigureAwait(false),
             _ => context.Result

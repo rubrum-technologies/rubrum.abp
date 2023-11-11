@@ -24,7 +24,7 @@ public class FluentValidationTests : RubrumAbpGraphqlFluentValidationTestBase
             }
             """
         ));
-        
+
         result.MatchSnapshot();
     }
 

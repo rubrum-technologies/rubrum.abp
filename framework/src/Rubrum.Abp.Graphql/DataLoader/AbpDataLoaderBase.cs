@@ -13,8 +13,8 @@ public class AbpDataLoaderBase<TEntity, TKey> : BatchDataLoader<TKey, TEntity>,
     where TEntity : IEntityDto<TKey>
 {
     protected readonly IAsyncQueryableExecuter AsyncExecuter;
-    protected readonly IUnitOfWorkManager UnitOfWorkManager;
     protected readonly IReadOnlyGraphqlService<TEntity, TKey> Service;
+    protected readonly IUnitOfWorkManager UnitOfWorkManager;
 
     public AbpDataLoaderBase(
         IBatchScheduler batchScheduler,
@@ -28,21 +28,6 @@ public class AbpDataLoaderBase<TEntity, TKey> : BatchDataLoader<TKey, TEntity>,
         Service = service;
     }
 
-    protected async override Task<IReadOnlyDictionary<TKey, TEntity>> LoadBatchAsync(
-        IReadOnlyList<TKey> keys,
-        CancellationToken cancellationToken)
-    {
-        using var uow = UnitOfWorkManager.Begin(true, true);
-        
-        var query = (await Service.GetQueryableAsync())
-            .Where(x=> keys.Contains(x.Id));
-        var entities = await AsyncExecuter.ToListAsync(query, cancellationToken);
-
-        await uow.CompleteAsync(cancellationToken);
-        
-        return entities.ToDictionary(x => x.Id);
-    }
-
     public async Task<TEntity?> LoadOrNullAsync(TKey? id, CancellationToken cancellationToken)
     {
         if (id is null)
@@ -51,5 +36,20 @@ public class AbpDataLoaderBase<TEntity, TKey> : BatchDataLoader<TKey, TEntity>,
         }
 
         return await LoadAsync(id, cancellationToken);
+    }
+
+    protected async override Task<IReadOnlyDictionary<TKey, TEntity>> LoadBatchAsync(
+        IReadOnlyList<TKey> keys,
+        CancellationToken cancellationToken)
+    {
+        using var uow = UnitOfWorkManager.Begin(true, true);
+
+        var query = (await Service.GetQueryableAsync())
+            .Where(x => keys.Contains(x.Id));
+        var entities = await AsyncExecuter.ToListAsync(query, cancellationToken);
+
+        await uow.CompleteAsync(cancellationToken);
+
+        return entities.ToDictionary(x => x.Id);
     }
 }

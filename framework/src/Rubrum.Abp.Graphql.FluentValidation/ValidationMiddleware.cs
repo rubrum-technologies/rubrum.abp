@@ -11,7 +11,7 @@ namespace Rubrum.Abp.Graphql;
 internal class ValidationMiddleware
 {
     public const string MiddlewareIdentifier = "Rubrum.Abp.Graphql.FluentValidation.ValidationMiddleware";
-    
+
     private readonly FieldDelegate _next;
 
     public ValidationMiddleware(FieldDelegate next)

@@ -16,7 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Rubrum.Abp.Graphql.FluentValidation\Rubrum.Abp.Graphql.FluentValidation.csproj" />
+        <ProjectReference Include="..\..\src\Rubrum.Abp.Graphql.FluentValidation\Rubrum.Abp.Graphql.FluentValidation.csproj"/>
         <ProjectReference Include="..\..\src\Rubrum.Abp.Graphql.TestBase\Rubrum.Abp.Graphql.TestBase.csproj"/>
     </ItemGroup>
 </Project>

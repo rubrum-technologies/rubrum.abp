@@ -7,8 +7,6 @@ namespace Rubrum.Abp.Graphql.Domain;
 
 public class Country : FullAuditedAggregateRoot<Guid>
 {
-    public string Name { get; set; }
-
     private Country()
     {
     }
@@ -17,4 +15,6 @@ public class Country : FullAuditedAggregateRoot<Guid>
     {
         Name = Check.NotNullOrWhiteSpace(name, nameof(name));
     }
+
+    public string Name { get; set; }
 }

@@ -55,7 +55,7 @@ type ValidationResult {
   errorMessage: String
 }
 
-union CreateCountryError = BusinessError | EntityNotFoundError | ValidationError
+union CreateCountryError = ValidationError | BusinessError | EntityNotFoundError
 
 input CreateCountryInput {
   "IMaximumLengthValidator,\n IMinimumLengthValidator,\n INotEmptyValidator"

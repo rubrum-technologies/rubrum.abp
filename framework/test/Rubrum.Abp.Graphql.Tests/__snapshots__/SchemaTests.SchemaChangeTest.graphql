@@ -215,17 +215,17 @@ type ValidationResult {
   errorMessage: String
 }
 
-union CreateCityError = BusinessError | EntityNotFoundError | ValidationError
+union CreateCityError = ValidationError | BusinessError | EntityNotFoundError
 
-union CreateCountryError = BusinessError | EntityNotFoundError | ValidationError
+union CreateCountryError = ValidationError | BusinessError | EntityNotFoundError
 
-union DeleteCityError = BusinessError | EntityNotFoundError | ValidationError
+union DeleteCityError = ValidationError | BusinessError | EntityNotFoundError
 
-union DeleteCountryError = BusinessError | EntityNotFoundError | ValidationError
+union DeleteCountryError = ValidationError | BusinessError | EntityNotFoundError
 
-union UpdateCityError = BusinessError | EntityNotFoundError | ValidationError
+union UpdateCityError = ValidationError | BusinessError | EntityNotFoundError
 
-union UpdateCountryError = BusinessError | EntityNotFoundError | ValidationError
+union UpdateCountryError = ValidationError | BusinessError | EntityNotFoundError
 
 input BooleanOperationFilterInput {
   eq: Boolean

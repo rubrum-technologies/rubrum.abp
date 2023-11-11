@@ -57,6 +57,14 @@ public abstract class CudMutationType<TEntityDto, TKey, TService, TCreateInput, 
             .ResolveWith<Resolves>(x => x.DeleteAsync(default!, default!));
     }
 
+    private static TKey GetKeyFromUpdateInput(IResolverContext context)
+    {
+        var idSerializer = context.Service<IIdSerializer>();
+        var input = context.ArgumentLiteral<ObjectValueNode>("input");
+        var key = input.Fields.Single(x => x.Name.Value == "id");
+        return (TKey)idSerializer.Deserialize((string)key.Value.Value!).Value;
+    }
+
     private class Resolves
     {
         public Task<TEntityDto> CreateAsync(TCreateInput input, [Service] TService service)
@@ -68,14 +76,6 @@ public abstract class CudMutationType<TEntityDto, TKey, TService, TCreateInput, 
         {
             return service.DeleteAsync(id);
         }
-    }
-
-    private static TKey GetKeyFromUpdateInput(IResolverContext context)
-    {
-        var idSerializer = context.Service<IIdSerializer>();
-        var input = context.ArgumentLiteral<ObjectValueNode>("input");
-        var key = input.Fields.Single(x => x.Name.Value == "id");
-        return (TKey)idSerializer.Deserialize((string)key.Value.Value!).Value;
     }
 }
 

@@ -9,7 +9,7 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)"/>
     </ItemGroup>
-    
+
     <ItemGroup>
         <ProjectReference Include="..\..\src\Rubrum.Abp.ImageStoring.Application\Rubrum.Abp.ImageStoring.Application.csproj"/>
         <ProjectReference Include="..\Rubrum.Abp.ImageStoring.EntityFrameworkCore.Tests\Rubrum.Abp.ImageStoring.EntityFrameworkCore.Tests.csproj"/>

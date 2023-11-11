@@ -14,6 +14,6 @@ public class BusinessError
     public string? Code { get; }
 
     public string? Details { get; }
-    
+
     public string Message { get; }
 }

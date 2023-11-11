@@ -10,5 +10,4 @@ namespace Rubrum.Abp.Graphql;
 [DependsOn(typeof(AbpExceptionHandlingModule))]
 public class RubrumAbpGraphqlContractsModule : AbpModule
 {
-    
 }

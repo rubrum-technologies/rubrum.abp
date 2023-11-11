@@ -4,7 +4,6 @@ using HotChocolate.Types;
 using HotChocolate.Types.Relay;
 using Rubrum.Abp.Graphql.DataLoader;
 using Rubrum.Abp.Graphql.Filters.DateOnly;
-using Rubrum.Abp.Graphql.Services;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Auditing;

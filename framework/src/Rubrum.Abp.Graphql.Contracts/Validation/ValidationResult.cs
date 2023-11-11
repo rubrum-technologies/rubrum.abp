@@ -6,6 +6,6 @@ public class ValidationResult
     {
         ErrorMessage = result.ErrorMessage;
     }
-    
+
     public string? ErrorMessage { get; }
 }

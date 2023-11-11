@@ -11,6 +11,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Rubrum.Abp.ImageStoring.EntityFrameworkCore.Tests\Rubrum.Abp.ImageStoring.EntityFrameworkCore.Tests.csproj" />
+        <ProjectReference Include="..\Rubrum.Abp.ImageStoring.EntityFrameworkCore.Tests\Rubrum.Abp.ImageStoring.EntityFrameworkCore.Tests.csproj"/>
     </ItemGroup>
 </Project>

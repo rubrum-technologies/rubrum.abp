@@ -7,7 +7,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace Rubrum.Abp.Graphql.Services;
 
-public class CityGraphqlService : 
+public class CityGraphqlService :
     CrudGraphqlService<City, CityDto, int, CreateCityInput, UpdateCityInput>,
     ICityGraphqlService
 {
@@ -28,7 +28,7 @@ public class CityGraphqlService :
     {
         entity.CountryId = input.CountryId;
         entity.Name = input.Name;
-        
+
         return Task.CompletedTask;
     }
 }

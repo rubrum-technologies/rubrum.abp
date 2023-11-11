@@ -9,9 +9,9 @@
     <ItemGroup>
         <PackageReference Include="Volo.Abp.Ddd.Application" Version="$(AbpPackageVersion)"/>
     </ItemGroup>
-    
+
     <ItemGroup>
-      <ProjectReference Include="..\Rubrum.Abp.ImageStoring.Application.Contracts\Rubrum.Abp.ImageStoring.Application.Contracts.csproj" />
-      <ProjectReference Include="..\Rubrum.Abp.ImageStoring.Domain\Rubrum.Abp.ImageStoring.Domain.csproj" />
+        <ProjectReference Include="..\Rubrum.Abp.ImageStoring.Application.Contracts\Rubrum.Abp.ImageStoring.Application.Contracts.csproj"/>
+        <ProjectReference Include="..\Rubrum.Abp.ImageStoring.Domain\Rubrum.Abp.ImageStoring.Domain.csproj"/>
     </ItemGroup>
 </Project>

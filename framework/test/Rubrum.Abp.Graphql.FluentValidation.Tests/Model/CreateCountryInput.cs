@@ -2,5 +2,5 @@
 
 public class CreateCountryInput
 {
-    public required string Name { get; init; } 
+    public required string Name { get; init; }
 }

@@ -4,7 +4,7 @@ using Rubrum.Abp.Graphql.Types;
 
 namespace Rubrum.Abp.Graphql.Root;
 
-public class CountryQueryType : 
+public class CountryQueryType :
     ReadOnlyQueryType<CountryDto, Guid, ICountryGraphqlService, CountryFilterType, CountrySortType>
 {
     protected override string TypeName => CountryConstants.TypeName;

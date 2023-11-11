@@ -1,5 +1,4 @@
-﻿using HotChocolate.Execution;
-using HotChocolate.Types;
+﻿using HotChocolate.Types;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -36,14 +35,14 @@ public class RubrumAbpGraphqlTestModule : AbpModule
         {
             options.AddDefaultRepositories();
         });
-        
+
         ConfigureInMemorySqlite(context.Services);
-        
+
         var graphql = context.Services.GetGraphql();
 
         graphql
             .AddQueryType(d => d.Name(OperationTypeNames.Query))
-            .AddMutationType(d=>d.Name(OperationTypeNames.Mutation))
+            .AddMutationType(d => d.Name(OperationTypeNames.Mutation))
             .ModifyRequestOptions(options =>
             {
                 options.IncludeExceptionDetails = true;

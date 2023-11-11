@@ -10,6 +10,11 @@ public class AbpErrorFactory :
     IPayloadErrorFactory<EntityNotFoundException, EntityNotFoundError>,
     IPayloadErrorFactory<AbpValidationException, ValidationError>
 {
+    public ValidationError CreateErrorFrom(AbpValidationException exception)
+    {
+        return new ValidationError(exception);
+    }
+
     public BusinessError CreateErrorFrom(BusinessException exception)
     {
         return new BusinessError(exception);
@@ -18,10 +23,5 @@ public class AbpErrorFactory :
     public EntityNotFoundError CreateErrorFrom(EntityNotFoundException exception)
     {
         return new EntityNotFoundError(exception);
-    }
-
-    public ValidationError CreateErrorFrom(AbpValidationException exception)
-    {
-        return new ValidationError(exception);
     }
 }

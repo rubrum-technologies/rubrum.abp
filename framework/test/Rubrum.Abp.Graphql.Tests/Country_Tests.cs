@@ -135,20 +135,20 @@ public class CountryTests : RubrumAbpGraphqlTestBase
         var id = _idSerializer.Serialize(null, CountryConstants.TypeName, CountryId);
         await using var result = await ExecuteRequestAsync(b => b.SetQuery(
             $$"""
-            mutation {
-                updateCountry (input: { id: "{{id}}", name: "USA" }) {
-                    country {
-                        id
-                        name
-                    }
-                    errors {
-                        ... on Error {
-                            message
-                        }
-                    }
-                }
-            }
-            """
+              mutation {
+                  updateCountry (input: { id: "{{id}}", name: "USA" }) {
+                      country {
+                          id
+                          name
+                      }
+                      errors {
+                          ... on Error {
+                              message
+                          }
+                      }
+                  }
+              }
+              """
         ));
 
         result.MatchSnapshot();

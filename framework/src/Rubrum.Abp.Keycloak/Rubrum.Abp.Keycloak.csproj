@@ -11,6 +11,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Rubrum.Abp.Core\Rubrum.Abp.Core.csproj" />
+        <ProjectReference Include="..\Rubrum.Abp.Core\Rubrum.Abp.Core.csproj"/>
     </ItemGroup>
 </Project>
