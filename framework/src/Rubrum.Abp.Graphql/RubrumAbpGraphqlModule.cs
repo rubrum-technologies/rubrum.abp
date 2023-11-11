@@ -1,4 +1,5 @@
 ﻿using HotChocolate.Configuration;
+using HotChocolate.Data.Filters;
 using HotChocolate.Data.Filters.Expressions;
 using Microsoft.Extensions.DependencyInjection;
 using Rubrum.Abp.Graphql.Extensions;
@@ -49,6 +50,10 @@ public class RubrumAbpGraphqlModule : AbpModule
             })
             .AddSorting()
             .AddProjections()
+            .AddConvention<IFilterConvention>(new FilterConventionExtension(descriptor =>
+            {
+                descriptor.BindRuntimeType<Guid, IdOperationFilterInputType>();
+            }))
             .AddErrorInterfaceType<ErrorInterfaceType>()
             .TryAddTypeInterceptor<DtoTypeInterceptor>()
             .TryAddTypeInterceptor<BusinessExceptionTypeInterceptor>()

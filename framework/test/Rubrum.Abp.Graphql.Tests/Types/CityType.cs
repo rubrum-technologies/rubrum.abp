@@ -4,11 +4,15 @@ using Rubrum.Abp.Graphql.Types.Ddd;
 
 namespace Rubrum.Abp.Graphql.Types;
 
-public class CityDtoType : ObjectType<CityDto>, IGraphqlType
+public class CityType : ObjectType<CityDto>, IGraphqlType
 {
     protected override void Configure(IObjectTypeDescriptor<CityDto> descriptor)
     {
         descriptor.Entity<CityDto, int>();
         descriptor.FullAudited();
+
+        descriptor
+            .Field(x => x.CountryId)
+            .ID(CountryConstants.TypeName);
     }
 }

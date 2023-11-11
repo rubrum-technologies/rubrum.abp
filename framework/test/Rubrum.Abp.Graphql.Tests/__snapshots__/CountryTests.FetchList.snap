@@ -1,0 +1,18 @@
+{
+  "data": {
+    "countries": {
+      "nodes": [
+        {
+          "id": "Q291bnRyeQpnNWE1MzM0MzJlZGRhNDZhZmFkYWEyZTZlNTFlNDYxNjM=",
+          "name": "Russian"
+        }
+      ],
+      "pageInfo": {
+        "endCursor": "MA==",
+        "hasNextPage": false,
+        "hasPreviousPage": false,
+        "startCursor": "MA=="
+      }
+    }
+  }
+}

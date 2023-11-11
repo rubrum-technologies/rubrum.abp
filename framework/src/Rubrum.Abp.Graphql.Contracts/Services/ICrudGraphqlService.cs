@@ -5,7 +5,7 @@ namespace Rubrum.Abp.Graphql.Services;
 public interface ICrudGraphqlService<TEntityDto, TKey, in TCreateInput, in TUpdateInput> :
     IReadOnlyGraphqlService<TEntityDto, TKey>,
     ICreateUpdateGraphqlService<TEntityDto, TKey, TCreateInput, TUpdateInput>,
-    IDeleteGraphqlService<TKey>
+    IDeleteGraphqlService<TEntityDto,TKey>
     where TKey : notnull
     where TEntityDto : IEntityDto<TKey>
 {

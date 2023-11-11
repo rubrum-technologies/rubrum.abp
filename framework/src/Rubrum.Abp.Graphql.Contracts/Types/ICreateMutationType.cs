@@ -3,12 +3,12 @@ using Volo.Abp.Application.Dtos;
 
 namespace Rubrum.Abp.Graphql.Types;
 
-public interface ICreateMutationType<TGetOutputDto, TKey, in TCreateInput, in TService> : IGraphqlType
+public interface ICreateMutationType<TEntityDto, TKey, in TCreateInput, in TService> : IGraphqlType
     where TKey : notnull
-    where TGetOutputDto : IEntityDto<TKey>
-    where TService : ICreateGraphqlService<TGetOutputDto, TKey, TCreateInput>
+    where TEntityDto : IEntityDto<TKey>
+    where TService : ICreateGraphqlService<TEntityDto, TKey, TCreateInput>
 {
-    Task<TGetOutputDto> CreateAsync(TCreateInput input, TService service);
+    Task<TEntityDto> CreateAsync(TCreateInput input, TService service);
 }
 
 public interface ICreateMutationType<TEntityDto, TKey, in TService> :

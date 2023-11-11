@@ -1,4 +1,7 @@
-﻿using Rubrum.Abp.Graphql.Services;
+﻿using HotChocolate.Language;
+using HotChocolate.Resolvers;
+using Rubrum.Abp.Graphql.Data;
+using Rubrum.Abp.Graphql.Services;
 using Rubrum.Abp.Graphql.Validation;
 using Volo.Abp.Application.Dtos;
 
@@ -10,7 +13,7 @@ public abstract class CudMutationType<TEntityDto, TKey, TService, TCreateInput, 
     where TKey : notnull
     where TEntityDto : IEntityDto<TKey>
     where TService : ICreateUpdateGraphqlService<TEntityDto, TKey, TCreateInput, TUpdateInput>,
-    IDeleteGraphqlService<TKey>
+    IDeleteGraphqlService<TEntityDto, TKey>
 {
     protected abstract string TypeName { get; }
     protected abstract string FieldNameCreate { get; }
@@ -20,10 +23,11 @@ public abstract class CudMutationType<TEntityDto, TKey, TService, TCreateInput, 
     protected override void Configure(IObjectTypeDescriptor descriptor)
     {
         descriptor.Name(OperationTypeNames.Mutation);
-        
+
         descriptor
             .Field(FieldNameCreate)
             .Argument("input", a => a.Type<NonNullType<InputObjectType<TCreateInput>>>())
+            .UseUnitOfWork()
             .UseAbpError()
             .UseMutationConvention()
             .ResolveWith<Resolves>(x => x.CreateAsync(default!, default!));
@@ -31,17 +35,26 @@ public abstract class CudMutationType<TEntityDto, TKey, TService, TCreateInput, 
         descriptor
             .Field(FieldNameUpdate)
             .Argument("input", a => a.Type<NonNullType<InputObjectType<TUpdateInput>>>())
+            .UseUnitOfWork()
             .UseAbpError()
             .UseMutationConvention()
-            .ResolveWith<Resolves>(x => x.UpdateAsync(default!, default!));
+            .Resolve(context =>
+            {
+                var service = context.Service<TService>();
+                var id = GetKeyFromUpdateInput(context);
+                var input = context.ArgumentValue<TUpdateInput>("input");
+
+                return service.UpdateAsync(id, input);
+            })
+            .Type(typeof(TEntityDto));
 
         descriptor
             .Field(FieldNameDelete)
             .Argument("id", a => a.Type(typeof(TKey)).ID(TypeName))
+            .UseUnitOfWork()
             .UseAbpError()
             .UseMutationConvention()
-            .ResolveWith<Resolves>(x => x.DeleteAsync(default!, default!))
-            .Type<EmptyType>();
+            .ResolveWith<Resolves>(x => x.DeleteAsync(default!, default!));
     }
 
     private class Resolves
@@ -51,15 +64,18 @@ public abstract class CudMutationType<TEntityDto, TKey, TService, TCreateInput, 
             return service.CreateAsync(input);
         }
 
-        public Task<TEntityDto> UpdateAsync(TUpdateInput input, [Service] TService service)
-        {
-            return service.UpdateAsync(input);
-        }
-
-        public Task DeleteAsync(TKey id, [Service] TService service)
+        public Task<TEntityDto> DeleteAsync(TKey id, [Service] TService service)
         {
             return service.DeleteAsync(id);
         }
+    }
+
+    private static TKey GetKeyFromUpdateInput(IResolverContext context)
+    {
+        var idSerializer = context.Service<IIdSerializer>();
+        var input = context.ArgumentLiteral<ObjectValueNode>("input");
+        var key = input.Fields.Single(x => x.Name.Value == "id");
+        return (TKey)idSerializer.Deserialize((string)key.Value.Value!).Value;
     }
 }
 
@@ -68,6 +84,6 @@ public abstract class CudMutationType<TEntityDto, TKey, TService, TCreateInput> 
     where TKey : notnull
     where TEntityDto : IEntityDto<TKey>
     where TService : ICreateUpdateGraphqlService<TEntityDto, TKey, TCreateInput, TCreateInput>,
-    IDeleteGraphqlService<TKey>
+    IDeleteGraphqlService<TEntityDto, TKey>
 {
 }

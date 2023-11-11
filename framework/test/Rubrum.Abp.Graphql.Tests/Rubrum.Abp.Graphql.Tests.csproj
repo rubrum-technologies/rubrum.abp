@@ -29,4 +29,8 @@
     <ItemGroup>
       <ProjectReference Include="..\..\src\Rubrum.Abp.Graphql\Rubrum.Abp.Graphql.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Application\Services\" />
+    </ItemGroup>
 </Project>

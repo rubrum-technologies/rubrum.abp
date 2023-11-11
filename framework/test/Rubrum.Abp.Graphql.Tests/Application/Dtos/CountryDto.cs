@@ -2,7 +2,7 @@
 
 namespace Rubrum.Abp.Graphql.Application.Dtos;
 
-public class CountryDto : EntityDto<Guid>
+public class CountryDto : FullAuditedEntityDto<Guid>
 {
     public required string Name { get; init; }
 }

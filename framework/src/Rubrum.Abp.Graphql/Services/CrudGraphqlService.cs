@@ -18,28 +18,30 @@ public abstract class CrudGraphqlService<TEntity, TEntityDto, TKey, TCreateInput
         Repository = repository;
     }
 
-    public async Task<TEntityDto> CreateAsync(TCreateInput input)
+    public virtual async Task<TEntityDto> CreateAsync(TCreateInput input)
     {
         var entity = await ToEntityAsync(input);
         await Repository.InsertAsync(entity, true, CancellationToken);
         return await ToDtoAsync(entity);
     }
 
-    public async Task<TEntityDto> UpdateAsync(TUpdateInput input)
+    public virtual async Task<TEntityDto> UpdateAsync(TKey id, TUpdateInput input)
     {
-        var entity = await ToEntityAsync(input);
+        var entity = await Repository.GetAsync(id, true, CancellationToken);
+        await ToEntityAsync(entity, input);
         await Repository.UpdateAsync(entity, true, CancellationToken);
         return await ToDtoAsync(entity);
     }
 
-    public async Task DeleteAsync(TKey id)
+    public virtual async Task<TEntityDto> DeleteAsync(TKey id)
     {
         var entity = await Repository.GetAsync(id, false, CancellationToken);
         await Repository.DeleteAsync(entity);
+        return await ToDtoAsync(entity);
     }
 
     protected abstract Task<TEntity> ToEntityAsync(TCreateInput input);
-    protected abstract Task<TEntity> ToEntityAsync(TUpdateInput input);
+    protected abstract Task ToEntityAsync(TEntity entity, TUpdateInput input);
 }
 
 public abstract class CrudGraphqlService<TEntity, TEntityDto, TKey, TCreateInput> :

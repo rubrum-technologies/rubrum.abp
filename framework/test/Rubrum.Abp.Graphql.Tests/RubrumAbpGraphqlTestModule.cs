@@ -1,4 +1,5 @@
-﻿using HotChocolate.Types;
+﻿using HotChocolate.Execution;
+using HotChocolate.Types;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -31,8 +32,16 @@ public class RubrumAbpGraphqlTestModule : AbpModule
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         context.Services.AddAlwaysAllowAuthorization();
-        ConfigureInMemorySqlite(context.Services);
+        context.Services.AddSingleton(sp =>
+            new RequestExecutorProxy(sp.GetRequiredService<IRequestExecutorResolver>(), "_Default"));
 
+        context.Services.AddAbpDbContext<GraphqlTestDbContext>(options =>
+        {
+            options.AddDefaultRepositories();
+        });
+        
+        ConfigureInMemorySqlite(context.Services);
+        
         var graphql = context.Services.GetGraphql();
 
         graphql

@@ -7,12 +7,10 @@ public class UpdateCityInputType : InputObjectType<UpdateCityInput>, IGraphqlTyp
 {
     protected override void Configure(IInputObjectTypeDescriptor<UpdateCityInput> descriptor)
     {
-        descriptor
-            .Field(x => x.Id)
-            .ID("City");
+        descriptor.AddFieldKey<UpdateCityInput, int>(CityConstants.TypeName);
         
         descriptor
             .Field(x => x.CountryId)
-            .ID();
+            .ID(CountryConstants.TypeName);
     }
 }

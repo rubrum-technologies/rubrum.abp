@@ -21,14 +21,14 @@ public abstract class ReadOnlyGraphqlService<TEntity, TEntityDto, TKey> :
 
     protected abstract Expression<Func<TEntity, TEntityDto>> ToDtoExpression { get; }
 
-    public async Task<TEntityDto> GetByIdAsync(TKey id)
+    public virtual async Task<TEntityDto> GetByIdAsync(TKey id)
     {
         var query = await ReadOnlyRepository.GetQueryableAsync();
 
         return await AsyncExecuter.FirstAsync(query.Select(ToDtoExpression));
     }
 
-    public async Task<IQueryable<TEntityDto>> GetQueryableAsync()
+    public virtual async Task<IQueryable<TEntityDto>> GetQueryableAsync()
     {
         var query = await ReadOnlyRepository.GetQueryableAsync();
 

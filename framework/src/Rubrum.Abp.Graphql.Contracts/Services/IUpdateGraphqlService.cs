@@ -2,9 +2,9 @@
 
 namespace Rubrum.Abp.Graphql.Services;
 
-public interface IUpdateGraphqlService<TEntityDto, TKey, in TUpdateInput> : IGraphqlService
+public interface IUpdateGraphqlService<TEntityDto, in TKey, in TUpdateInput> : IGraphqlService
     where TKey : notnull
     where TEntityDto : IEntityDto<TKey>
 {
-    Task<TEntityDto> UpdateAsync(TUpdateInput input);
+    Task<TEntityDto> UpdateAsync(TKey id, TUpdateInput input);
 }

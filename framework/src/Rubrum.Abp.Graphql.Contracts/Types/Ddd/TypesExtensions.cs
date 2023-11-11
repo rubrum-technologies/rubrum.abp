@@ -2,7 +2,9 @@
 using HotChocolate.Data.Sorting;
 using HotChocolate.Types;
 using HotChocolate.Types.Relay;
+using Rubrum.Abp.Graphql.DataLoader;
 using Rubrum.Abp.Graphql.Filters.DateOnly;
+using Rubrum.Abp.Graphql.Services;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Auditing;
@@ -12,9 +14,10 @@ namespace Rubrum.Abp.Graphql.Types.Ddd;
 
 public static class TypesExtensions
 {
-    public static IInterfaceTypeDescriptor<TEntity> Entity<TEntity, TKey>(
-        this IInterfaceTypeDescriptor<TEntity> descriptor)
-        where TEntity : IEntityDto<TKey>
+    public static IInterfaceTypeDescriptor<TEntityDto> Entity<TEntityDto, TKey>(
+        this IInterfaceTypeDescriptor<TEntityDto> descriptor)
+        where TKey : notnull
+        where TEntityDto : IEntityDto<TKey>
     {
         descriptor.Implements<NodeType>();
         descriptor.Implements<EntityType<TKey>>();
@@ -26,10 +29,11 @@ public static class TypesExtensions
         return descriptor;
     }
 
-    public static IObjectTypeDescriptor<TEntity> Entity<TEntity, TKey>(
-        this IObjectTypeDescriptor<TEntity> descriptor,
-        string? typeName = null)
-        where TEntity : IEntityDto<TKey>
+    public static IObjectTypeDescriptor<TEntityDto> Entity<TEntityDto, TKey>(
+        this IObjectTypeDescriptor<TEntityDto> descriptor,
+        string typeName)
+        where TKey : notnull
+        where TEntityDto : IEntityDto<TKey>
     {
         descriptor.Implements<NodeType>();
         descriptor.Implements<EntityType<TKey>>();
@@ -37,14 +41,33 @@ public static class TypesExtensions
         descriptor
             .Field(x => x.Id)
             .IsProjected()
-            .ID(typeName ?? typeof(TEntity).Name);
+            .ID(typeName);
 
         return descriptor;
     }
 
-    public static IFilterInputTypeDescriptor<TEntity> Entity<TEntity, TKey>(
-        this IFilterInputTypeDescriptor<TEntity> descriptor)
-        where TEntity : IEntityDto<TKey>
+    public static IObjectTypeDescriptor<TEntityDto> Entity<TEntityDto, TKey>(
+        this IObjectTypeDescriptor<TEntityDto> descriptor)
+        where TKey : notnull
+        where TEntityDto : IEntityDto<TKey>
+    {
+        descriptor.Implements<EntityType<TKey>>();
+
+        descriptor
+            .ImplementsNode()
+            .IdField(x => x.Id)
+            .ResolveNode(async (context, id) =>
+            {
+                var service = context.Service<IAbpDataLoader<TEntityDto, TKey>>();
+                return await service.LoadAsync(id, context.RequestAborted);
+            });
+
+        return descriptor;
+    }
+
+    public static IFilterInputTypeDescriptor<TEntityDto> Entity<TEntityDto, TKey>(
+        this IFilterInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IEntityDto<TKey>
     {
         descriptor
             .Field(x => x.Id)
@@ -52,24 +75,25 @@ public static class TypesExtensions
         return descriptor;
     }
 
-    public static ISortInputTypeDescriptor<TEntity> Entity<TEntity, TKey>(
-        this ISortInputTypeDescriptor<TEntity> descriptor)
-        where TEntity : IEntityDto<TKey>
+    public static ISortInputTypeDescriptor<TEntityDto> Entity<TEntityDto, TKey>(
+        this ISortInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IEntityDto<TKey>
     {
         descriptor.Field(x => x.Id);
         return descriptor;
     }
 
-    public static IInterfaceTypeDescriptor<TEntity> MayHaveCreator<TEntity>(
-        this IInterfaceTypeDescriptor<TEntity> descriptor)
-        where TEntity : IMayHaveCreator
+    public static IInterfaceTypeDescriptor<TEntityDto> MayHaveCreator<TEntityDto>(
+        this IInterfaceTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IMayHaveCreator
     {
         descriptor.Implements<MayHaveCreatorType>();
         return descriptor;
     }
 
-    public static IObjectTypeDescriptor<TEntity> MayHaveCreator<TEntity>(this IObjectTypeDescriptor<TEntity> descriptor)
-        where TEntity : IMayHaveCreator
+    public static IObjectTypeDescriptor<TEntityDto> MayHaveCreator<TEntityDto>(
+        this IObjectTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IMayHaveCreator
     {
         descriptor.Implements<MayHaveCreatorType>();
         descriptor
@@ -79,9 +103,9 @@ public static class TypesExtensions
         return descriptor;
     }
 
-    public static IFilterInputTypeDescriptor<TEntity> MayHaveCreator<TEntity>(
-        this IFilterInputTypeDescriptor<TEntity> descriptor)
-        where TEntity : IMayHaveCreator
+    public static IFilterInputTypeDescriptor<TEntityDto> MayHaveCreator<TEntityDto>(
+        this IFilterInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IMayHaveCreator
     {
         descriptor
             .Field(x => x.CreatorId)
@@ -89,25 +113,25 @@ public static class TypesExtensions
         return descriptor;
     }
 
-    public static ISortInputTypeDescriptor<TEntity> MayHaveCreator<TEntity>(
-        this ISortInputTypeDescriptor<TEntity> descriptor)
-        where TEntity : IMayHaveCreator
+    public static ISortInputTypeDescriptor<TEntityDto> MayHaveCreator<TEntityDto>(
+        this ISortInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IMayHaveCreator
     {
         descriptor.Field(x => x.CreatorId);
         return descriptor;
     }
 
-    public static IInterfaceTypeDescriptor<TEntity> HasCreationTime<TEntity>(
-        this IInterfaceTypeDescriptor<TEntity> descriptor)
-        where TEntity : IHasCreationTime
+    public static IInterfaceTypeDescriptor<TEntityDto> HasCreationTime<TEntityDto>(
+        this IInterfaceTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IHasCreationTime
     {
         descriptor.Implements<HasCreationTimeType>();
         return descriptor;
     }
 
-    public static IObjectTypeDescriptor<TEntity> HasCreationTime<TEntity>(
-        this IObjectTypeDescriptor<TEntity> descriptor)
-        where TEntity : IHasCreationTime
+    public static IObjectTypeDescriptor<TEntityDto> HasCreationTime<TEntityDto>(
+        this IObjectTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IHasCreationTime
     {
         descriptor.Implements<HasCreationTimeType>();
         descriptor
@@ -116,9 +140,9 @@ public static class TypesExtensions
         return descriptor;
     }
 
-    public static IFilterInputTypeDescriptor<TEntity> HasCreationTime<TEntity>(
-        this IFilterInputTypeDescriptor<TEntity> descriptor)
-        where TEntity : IHasCreationTime
+    public static IFilterInputTypeDescriptor<TEntityDto> HasCreationTime<TEntityDto>(
+        this IFilterInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IHasCreationTime
     {
         descriptor
             .Field(x => x.CreationTime)
@@ -129,17 +153,17 @@ public static class TypesExtensions
         return descriptor;
     }
 
-    public static ISortInputTypeDescriptor<TEntity> HasCreationTime<TEntity>(
-        this ISortInputTypeDescriptor<TEntity> descriptor)
-        where TEntity : IHasCreationTime
+    public static ISortInputTypeDescriptor<TEntityDto> HasCreationTime<TEntityDto>(
+        this ISortInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IHasCreationTime
     {
         descriptor.Field(x => x.CreationTime);
         return descriptor;
     }
 
-    public static IInterfaceTypeDescriptor<TEntity> CreationAudited<TEntity>(
-        this IInterfaceTypeDescriptor<TEntity> descriptor)
-        where TEntity : ICreationAuditedObject
+    public static IInterfaceTypeDescriptor<TEntityDto> CreationAudited<TEntityDto>(
+        this IInterfaceTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : ICreationAuditedObject
     {
         descriptor.MayHaveCreator();
         descriptor.HasCreationTime();
@@ -147,9 +171,9 @@ public static class TypesExtensions
         return descriptor;
     }
 
-    public static IObjectTypeDescriptor<TEntity> CreationAudited<TEntity>(
-        this IObjectTypeDescriptor<TEntity> descriptor)
-        where TEntity : ICreationAuditedObject
+    public static IObjectTypeDescriptor<TEntityDto> CreationAudited<TEntityDto>(
+        this IObjectTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : ICreationAuditedObject
     {
         descriptor.MayHaveCreator();
         descriptor.HasCreationTime();
@@ -157,35 +181,35 @@ public static class TypesExtensions
         return descriptor;
     }
 
-    public static IFilterInputTypeDescriptor<TEntity> CreationAudited<TEntity>(
-        this IFilterInputTypeDescriptor<TEntity> descriptor)
-        where TEntity : ICreationAuditedObject
+    public static IFilterInputTypeDescriptor<TEntityDto> CreationAudited<TEntityDto>(
+        this IFilterInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : ICreationAuditedObject
     {
         descriptor.MayHaveCreator();
         descriptor.HasCreationTime();
         return descriptor;
     }
 
-    public static ISortInputTypeDescriptor<TEntity> CreationAudited<TEntity>(
-        this ISortInputTypeDescriptor<TEntity> descriptor)
-        where TEntity : ICreationAuditedObject
+    public static ISortInputTypeDescriptor<TEntityDto> CreationAudited<TEntityDto>(
+        this ISortInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : ICreationAuditedObject
     {
         descriptor.MayHaveCreator();
         descriptor.HasCreationTime();
         return descriptor;
     }
 
-    public static IInterfaceTypeDescriptor<TEntity> HasModificationTime<TEntity>(
-        this IInterfaceTypeDescriptor<TEntity> descriptor)
-        where TEntity : IHasModificationTime
+    public static IInterfaceTypeDescriptor<TEntityDto> HasModificationTime<TEntityDto>(
+        this IInterfaceTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IHasModificationTime
     {
         descriptor.Implements<HasModificationTimeType>();
         return descriptor;
     }
 
-    public static IObjectTypeDescriptor<TEntity> HasModificationTime<TEntity>(
-        this IObjectTypeDescriptor<TEntity> descriptor)
-        where TEntity : IHasModificationTime
+    public static IObjectTypeDescriptor<TEntityDto> HasModificationTime<TEntityDto>(
+        this IObjectTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IHasModificationTime
     {
         descriptor.Implements<HasModificationTimeType>();
         descriptor
@@ -194,9 +218,9 @@ public static class TypesExtensions
         return descriptor;
     }
 
-    public static IFilterInputTypeDescriptor<TEntity> HasModificationTime<TEntity>(
-        this IFilterInputTypeDescriptor<TEntity> descriptor)
-        where TEntity : IHasModificationTime
+    public static IFilterInputTypeDescriptor<TEntityDto> HasModificationTime<TEntityDto>(
+        this IFilterInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IHasModificationTime
     {
         descriptor
             .Field(x => x.LastModificationTime)
@@ -207,26 +231,26 @@ public static class TypesExtensions
         return descriptor;
     }
 
-    public static ISortInputTypeDescriptor<TEntity> HasModificationTime<TEntity>(
-        this ISortInputTypeDescriptor<TEntity> descriptor)
-        where TEntity : IHasModificationTime
+    public static ISortInputTypeDescriptor<TEntityDto> HasModificationTime<TEntityDto>(
+        this ISortInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IHasModificationTime
     {
         descriptor.Field(x => x.LastModificationTime);
         return descriptor;
     }
 
-    public static IInterfaceTypeDescriptor<TEntity> ModificationAudited<TEntity>(
-        this IInterfaceTypeDescriptor<TEntity> descriptor)
-        where TEntity : IModificationAuditedObject
+    public static IInterfaceTypeDescriptor<TEntityDto> ModificationAudited<TEntityDto>(
+        this IInterfaceTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IModificationAuditedObject
     {
         descriptor.HasModificationTime();
         descriptor.Implements<ModificationAuditedType>();
         return descriptor;
     }
 
-    public static IObjectTypeDescriptor<TEntity> ModificationAudited<TEntity>(
-        this IObjectTypeDescriptor<TEntity> descriptor)
-        where TEntity : IModificationAuditedObject
+    public static IObjectTypeDescriptor<TEntityDto> ModificationAudited<TEntityDto>(
+        this IObjectTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IModificationAuditedObject
     {
         descriptor.HasModificationTime();
 
@@ -239,9 +263,9 @@ public static class TypesExtensions
         return descriptor;
     }
 
-    public static IFilterInputTypeDescriptor<TEntity> ModificationAudited<TEntity>(
-        this IFilterInputTypeDescriptor<TEntity> descriptor)
-        where TEntity : IModificationAuditedObject
+    public static IFilterInputTypeDescriptor<TEntityDto> ModificationAudited<TEntityDto>(
+        this IFilterInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IModificationAuditedObject
     {
         descriptor.HasModificationTime();
 
@@ -251,25 +275,26 @@ public static class TypesExtensions
         return descriptor;
     }
 
-    public static ISortInputTypeDescriptor<TEntity> ModificationAudited<TEntity>(
-        this ISortInputTypeDescriptor<TEntity> descriptor)
-        where TEntity : IModificationAuditedObject
+    public static ISortInputTypeDescriptor<TEntityDto> ModificationAudited<TEntityDto>(
+        this ISortInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IModificationAuditedObject
     {
         descriptor.HasModificationTime();
         descriptor.Field(x => x.LastModifierId);
         return descriptor;
     }
 
-    public static IInterfaceTypeDescriptor<TEntity> SoftDelete<TEntity>(
-        this IInterfaceTypeDescriptor<TEntity> descriptor)
-        where TEntity : ISoftDelete
+    public static IInterfaceTypeDescriptor<TEntityDto> SoftDelete<TEntityDto>(
+        this IInterfaceTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : ISoftDelete
     {
         descriptor.Implements<SoftDeleteType>();
         return descriptor;
     }
 
-    public static IObjectTypeDescriptor<TEntity> SoftDelete<TEntity>(this IObjectTypeDescriptor<TEntity> descriptor)
-        where TEntity : ISoftDelete
+    public static IObjectTypeDescriptor<TEntityDto> SoftDelete<TEntityDto>(
+        this IObjectTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : ISoftDelete
     {
         descriptor.Implements<SoftDeleteType>();
 
@@ -280,9 +305,9 @@ public static class TypesExtensions
         return descriptor;
     }
 
-    public static IFilterInputTypeDescriptor<TEntity> SoftDelete<TEntity>(
-        this IFilterInputTypeDescriptor<TEntity> descriptor)
-        where TEntity : ISoftDelete
+    public static IFilterInputTypeDescriptor<TEntityDto> SoftDelete<TEntityDto>(
+        this IFilterInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : ISoftDelete
     {
         descriptor
             .Field(x => x.IsDeleted)
@@ -290,17 +315,17 @@ public static class TypesExtensions
         return descriptor;
     }
 
-    public static ISortInputTypeDescriptor<TEntity> SoftDelete<TEntity>(
-        this ISortInputTypeDescriptor<TEntity> descriptor)
-        where TEntity : ISoftDelete
+    public static ISortInputTypeDescriptor<TEntityDto> SoftDelete<TEntityDto>(
+        this ISortInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : ISoftDelete
     {
         descriptor.Field(x => x.IsDeleted);
         return descriptor;
     }
 
-    public static IInterfaceTypeDescriptor<TEntity> HasDeletionTime<TEntity>(
-        this IInterfaceTypeDescriptor<TEntity> descriptor)
-        where TEntity : IHasDeletionTime
+    public static IInterfaceTypeDescriptor<TEntityDto> HasDeletionTime<TEntityDto>(
+        this IInterfaceTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IHasDeletionTime
     {
         descriptor.SoftDelete();
 
@@ -308,9 +333,9 @@ public static class TypesExtensions
         return descriptor;
     }
 
-    public static IObjectTypeDescriptor<TEntity> HasDeletionTime<TEntity>(
-        this IObjectTypeDescriptor<TEntity> descriptor)
-        where TEntity : IHasDeletionTime
+    public static IObjectTypeDescriptor<TEntityDto> HasDeletionTime<TEntityDto>(
+        this IObjectTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IHasDeletionTime
     {
         descriptor.SoftDelete();
 
@@ -322,9 +347,9 @@ public static class TypesExtensions
         return descriptor;
     }
 
-    public static IFilterInputTypeDescriptor<TEntity> HasDeletionTime<TEntity>(
-        this IFilterInputTypeDescriptor<TEntity> descriptor)
-        where TEntity : IHasDeletionTime
+    public static IFilterInputTypeDescriptor<TEntityDto> HasDeletionTime<TEntityDto>(
+        this IFilterInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IHasDeletionTime
     {
         descriptor.SoftDelete();
 
@@ -337,18 +362,18 @@ public static class TypesExtensions
         return descriptor;
     }
 
-    public static ISortInputTypeDescriptor<TEntity> HasDeletionTime<TEntity>(
-        this ISortInputTypeDescriptor<TEntity> descriptor)
-        where TEntity : IHasDeletionTime
+    public static ISortInputTypeDescriptor<TEntityDto> HasDeletionTime<TEntityDto>(
+        this ISortInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IHasDeletionTime
     {
         descriptor.SoftDelete();
         descriptor.Field(x => x.DeletionTime);
         return descriptor;
     }
 
-    public static IInterfaceTypeDescriptor<TEntity> DeletionAudited<TEntity>(
-        this IInterfaceTypeDescriptor<TEntity> descriptor)
-        where TEntity : IDeletionAuditedObject
+    public static IInterfaceTypeDescriptor<TEntityDto> DeletionAudited<TEntityDto>(
+        this IInterfaceTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IDeletionAuditedObject
     {
         descriptor.HasDeletionTime();
 
@@ -356,9 +381,9 @@ public static class TypesExtensions
         return descriptor;
     }
 
-    public static IObjectTypeDescriptor<TEntity> DeletionAudited<TEntity>(
-        this IObjectTypeDescriptor<TEntity> descriptor)
-        where TEntity : IDeletionAuditedObject
+    public static IObjectTypeDescriptor<TEntityDto> DeletionAudited<TEntityDto>(
+        this IObjectTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IDeletionAuditedObject
     {
         descriptor.HasDeletionTime();
 
@@ -371,9 +396,9 @@ public static class TypesExtensions
         return descriptor;
     }
 
-    public static IFilterInputTypeDescriptor<TEntity> DeletionAudited<TEntity>(
-        this IFilterInputTypeDescriptor<TEntity> descriptor)
-        where TEntity : IDeletionAuditedObject
+    public static IFilterInputTypeDescriptor<TEntityDto> DeletionAudited<TEntityDto>(
+        this IFilterInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IDeletionAuditedObject
     {
         descriptor
             .Field(x => x.DeleterId)
@@ -381,42 +406,45 @@ public static class TypesExtensions
         return descriptor;
     }
 
-    public static ISortInputTypeDescriptor<TEntity> DeletionAudited<TEntity>(
-        this ISortInputTypeDescriptor<TEntity> descriptor)
-        where TEntity : IDeletionAuditedObject
+    public static ISortInputTypeDescriptor<TEntityDto> DeletionAudited<TEntityDto>(
+        this ISortInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IDeletionAuditedObject
     {
         descriptor.HasDeletionTime();
         descriptor.Field(x => x.DeleterId);
         return descriptor;
     }
 
-    public static IInterfaceTypeDescriptor<TEntity> Audited<TEntity>(this IInterfaceTypeDescriptor<TEntity> descriptor)
-        where TEntity : IAuditedObject
+    public static IInterfaceTypeDescriptor<TEntityDto> Audited<TEntityDto>(
+        this IInterfaceTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IAuditedObject
     {
         descriptor.CreationAudited();
         descriptor.ModificationAudited();
         return descriptor;
     }
 
-    public static IObjectTypeDescriptor<TEntity> Audited<TEntity>(this IObjectTypeDescriptor<TEntity> descriptor)
-        where TEntity : IAuditedObject
+    public static IObjectTypeDescriptor<TEntityDto> Audited<TEntityDto>(
+        this IObjectTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IAuditedObject
     {
         descriptor.CreationAudited();
         descriptor.ModificationAudited();
         return descriptor;
     }
 
-    public static IFilterInputTypeDescriptor<TEntity> Audited<TEntity>(
-        this IFilterInputTypeDescriptor<TEntity> descriptor)
-        where TEntity : IAuditedObject
+    public static IFilterInputTypeDescriptor<TEntityDto> Audited<TEntityDto>(
+        this IFilterInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IAuditedObject
     {
         descriptor.CreationAudited();
         descriptor.ModificationAudited();
         return descriptor;
     }
 
-    public static ISortInputTypeDescriptor<TEntity> Audited<TEntity>(this ISortInputTypeDescriptor<TEntity> descriptor)
-        where TEntity : IAuditedObject
+    public static ISortInputTypeDescriptor<TEntityDto> Audited<TEntityDto>(
+        this ISortInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IAuditedObject
     {
         descriptor.CreationAudited();
         descriptor.ModificationAudited();
@@ -424,51 +452,53 @@ public static class TypesExtensions
     }
 
 
-    public static IInterfaceTypeDescriptor<TEntity> FullAudited<TEntity>(
-        this IInterfaceTypeDescriptor<TEntity> descriptor)
-        where TEntity : IFullAuditedObject
+    public static IInterfaceTypeDescriptor<TEntityDto> FullAudited<TEntityDto>(
+        this IInterfaceTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IFullAuditedObject
     {
         descriptor.Audited();
         descriptor.DeletionAudited();
         return descriptor;
     }
 
-    public static IObjectTypeDescriptor<TEntity> FullAudited<TEntity>(this IObjectTypeDescriptor<TEntity> descriptor)
-        where TEntity : IFullAuditedObject
+    public static IObjectTypeDescriptor<TEntityDto> FullAudited<TEntityDto>(
+        this IObjectTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IFullAuditedObject
     {
         descriptor.Audited();
         descriptor.DeletionAudited();
         return descriptor;
     }
 
-    public static IFilterInputTypeDescriptor<TEntity> FullAudited<TEntity>(
-        this IFilterInputTypeDescriptor<TEntity> descriptor)
-        where TEntity : IFullAuditedObject
+    public static IFilterInputTypeDescriptor<TEntityDto> FullAudited<TEntityDto>(
+        this IFilterInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IFullAuditedObject
     {
         descriptor.Audited();
         descriptor.DeletionAudited();
         return descriptor;
     }
 
-    public static ISortInputTypeDescriptor<TEntity> FullAudited<TEntity>(
-        this ISortInputTypeDescriptor<TEntity> descriptor)
-        where TEntity : IFullAuditedObject
+    public static ISortInputTypeDescriptor<TEntityDto> FullAudited<TEntityDto>(
+        this ISortInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IFullAuditedObject
     {
         descriptor.Audited();
         descriptor.DeletionAudited();
         return descriptor;
     }
 
-    public static IInterfaceTypeDescriptor<TEntity> MultiTenant<TEntity>(
-        this IInterfaceTypeDescriptor<TEntity> descriptor)
-        where TEntity : IMultiTenant
+    public static IInterfaceTypeDescriptor<TEntityDto> MultiTenant<TEntityDto>(
+        this IInterfaceTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IMultiTenant
     {
         descriptor.Implements<MultiTenantType>();
         return descriptor;
     }
 
-    public static IObjectTypeDescriptor<TEntity> MultiTenant<TEntity>(this IObjectTypeDescriptor<TEntity> descriptor)
-        where TEntity : IMultiTenant
+    public static IObjectTypeDescriptor<TEntityDto> MultiTenant<TEntityDto>(
+        this IObjectTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IMultiTenant
     {
         descriptor.Implements<MultiTenantType>();
         descriptor
@@ -478,17 +508,17 @@ public static class TypesExtensions
         return descriptor;
     }
 
-    public static IFilterInputTypeDescriptor<TEntity> MultiTenant<TEntity>(
-        this IFilterInputTypeDescriptor<TEntity> descriptor)
-        where TEntity : IMultiTenant
+    public static IFilterInputTypeDescriptor<TEntityDto> MultiTenant<TEntityDto>(
+        this IFilterInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IMultiTenant
     {
         descriptor.Ignore(x => x.TenantId);
         return descriptor;
     }
 
-    public static ISortInputTypeDescriptor<TEntity> MultiTenant<TEntity>(
-        this ISortInputTypeDescriptor<TEntity> descriptor)
-        where TEntity : IMultiTenant
+    public static ISortInputTypeDescriptor<TEntityDto> MultiTenant<TEntityDto>(
+        this ISortInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IMultiTenant
     {
         descriptor.Ignore(x => x.TenantId);
         return descriptor;

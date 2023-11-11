@@ -1,7 +1,10 @@
-﻿namespace Rubrum.Abp.Graphql.Services;
+﻿using Volo.Abp.Application.Dtos;
 
-public interface IDeleteGraphqlService<in TKey> : IGraphqlService
+namespace Rubrum.Abp.Graphql.Services;
+
+public interface IDeleteGraphqlService<TEntityDto, in TKey> : IGraphqlService
     where TKey : notnull
+    where TEntityDto : IEntityDto<TKey>
 {
-    Task DeleteAsync(TKey id);
+    Task<TEntityDto> DeleteAsync(TKey id);
 }

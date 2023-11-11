@@ -2,11 +2,14 @@
 using Rubrum.Abp.Graphql.Application.Dtos;
 using Rubrum.Abp.Graphql.Application.Inputs;
 using Rubrum.Abp.Graphql.Domain;
+using Rubrum.Abp.Graphql.Services.Contracts;
 using Volo.Abp.Domain.Repositories;
 
 namespace Rubrum.Abp.Graphql.Services;
 
-public class CityGraphqlService : CrudGraphqlService<City, CityDto, int, CreateCityInput, UpdateCityInput>
+public class CityGraphqlService : 
+    CrudGraphqlService<City, CityDto, int, CreateCityInput, UpdateCityInput>,
+    ICityGraphqlService
 {
     public CityGraphqlService(IRepository<City, int> repository) : base(repository)
     {
@@ -21,9 +24,11 @@ public class CityGraphqlService : CrudGraphqlService<City, CityDto, int, CreateC
         return Task.FromResult(result);
     }
 
-    protected override Task<City> ToEntityAsync(UpdateCityInput input)
+    protected override Task ToEntityAsync(City entity, UpdateCityInput input)
     {
-        var result = new City(input.Id, input.CountryId, input.Name);
-        return Task.FromResult(result);
+        entity.CountryId = input.CountryId;
+        entity.Name = input.Name;
+        
+        return Task.CompletedTask;
     }
 }

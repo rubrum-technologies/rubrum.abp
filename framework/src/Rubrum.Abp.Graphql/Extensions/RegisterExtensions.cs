@@ -62,15 +62,34 @@ public static class RegisterExtensions
     {
         var services = builder.Services;
         var typeFinder = services.GetSingletonInstance<ITypeFinder>();
-        var types = typeFinder.Types
+        var types = GetEntityDtoTypes(services.GetSingletonInstance<ITypeFinder>());
+        var typeServices = typeFinder.Types
             .Where(x => typeof(IGraphqlService).IsAssignableFrom(x) &&
                         x is { IsInterface: true, IsGenericType: false })
             .ToList();
 
-        foreach (var type in types)
+        foreach (var typeService in typeServices)
         {
+            foreach (var type in types)
+            {
+                var keyType = GetKeyEntityDto(type);
+
+                if (keyType is null)
+                {
+                    continue;
+                }
+
+                if (typeof(IReadOnlyGraphqlService<,>).MakeGenericType(type, keyType).IsAssignableFrom(typeService))
+                {
+                    services.AddScoped(typeof(IReadOnlyGraphqlService<,>).MakeGenericType(type, keyType),
+                        typeFinder.Types.Single(x =>
+                            x is { IsClass: true, IsAbstract: false, IsGenericType: false } &&
+                            typeService.IsAssignableFrom(x)));
+                }
+            }
+
             RegisterServiceMethod
-                .MakeGenericMethod(type)
+                .MakeGenericMethod(typeService)
                 .Invoke(null, new object?[] { builder, ServiceKind.Default });
         }
 
