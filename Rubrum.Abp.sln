@@ -134,6 +134,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Keycloak.Abstrac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.MultilingualObjects.Graphql.Tests", "modules\multilingual-objects\test\Rubrum.Abp.MultilingualObjects.Graphql.Tests\Rubrum.Abp.MultilingualObjects.Graphql.Tests.csproj", "{3D543FAD-C92A-4B30-9845-00EE6B67E3AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Graphql.FluentValidation", "framework\src\Rubrum.Abp.Graphql.FluentValidation\Rubrum.Abp.Graphql.FluentValidation.csproj", "{D7093FCF-998F-4653-8F35-936174666AB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Graphql.TestBase", "framework\src\Rubrum.Abp.Graphql.TestBase\Rubrum.Abp.Graphql.TestBase.csproj", "{CC4A8424-F605-44A5-B274-1DB9006AA5DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Graphql.FluentValidation.Tests", "framework\test\Rubrum.Abp.Graphql.FluentValidation.Tests\Rubrum.Abp.Graphql.FluentValidation.Tests.csproj", "{ED70EE1D-2AE4-467B-9638-21FF46B8F504}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -205,6 +211,9 @@ Global
 		{5275C929-3EA6-4967-BCF6-760629DB7243} = {545294C3-2CC7-4F40-8FE2-7C49D898FD55}
 		{CB945760-D704-4822-BA39-016175841F9A} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
 		{3D543FAD-C92A-4B30-9845-00EE6B67E3AA} = {E7F9CDA1-E73F-4CB0-AE19-70A3C37E484C}
+		{D7093FCF-998F-4653-8F35-936174666AB0} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
+		{CC4A8424-F605-44A5-B274-1DB9006AA5DE} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
+		{ED70EE1D-2AE4-467B-9638-21FF46B8F504} = {545294C3-2CC7-4F40-8FE2-7C49D898FD55}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4B66683B-4CA4-430A-9DBB-8A190FE25F86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -411,5 +420,17 @@ Global
 		{3D543FAD-C92A-4B30-9845-00EE6B67E3AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D543FAD-C92A-4B30-9845-00EE6B67E3AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D543FAD-C92A-4B30-9845-00EE6B67E3AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7093FCF-998F-4653-8F35-936174666AB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7093FCF-998F-4653-8F35-936174666AB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7093FCF-998F-4653-8F35-936174666AB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7093FCF-998F-4653-8F35-936174666AB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC4A8424-F605-44A5-B274-1DB9006AA5DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC4A8424-F605-44A5-B274-1DB9006AA5DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC4A8424-F605-44A5-B274-1DB9006AA5DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC4A8424-F605-44A5-B274-1DB9006AA5DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED70EE1D-2AE4-467B-9638-21FF46B8F504}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED70EE1D-2AE4-467B-9638-21FF46B8F504}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED70EE1D-2AE4-467B-9638-21FF46B8F504}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED70EE1D-2AE4-467B-9638-21FF46B8F504}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

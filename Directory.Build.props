@@ -71,7 +71,10 @@
 
     <!-- MediatR Contracts https://www.nuget.org/packages/MediatR.Contracts -->
     <MediatRContractsPackageVersion>2.0.*</MediatRContractsPackageVersion>
-
+    
+    <!-- FluentValidation https://www.nuget.org/packages/FluentValidation -->
+    <FluentValidationPackageVersion>11.8.0</FluentValidationPackageVersion>
+    
     <IsTestProject
       Condition="$(MSBuildProjectFullPath.Contains('test')) and ($(MSBuildProjectName.EndsWith('.Tests')) or $(MSBuildProjectName.EndsWith('.TestBase')))">
       true

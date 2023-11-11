@@ -70,22 +70,19 @@ public static class RegisterExtensions
 
         foreach (var typeService in typeServices)
         {
-            foreach (var type in types)
+            var entity = (from type in types
+                let keyType = GetKeyEntityDto(type)
+                where keyType is not null
+                where typeof(IReadOnlyGraphqlService<,>).MakeGenericType(type, keyType)
+                    .IsAssignableFrom(typeService)
+                select new { Type = type, KeyType = keyType }).SingleOrDefault();
+
+            if (entity is not null)
             {
-                var keyType = GetKeyEntityDto(type);
-
-                if (keyType is null)
-                {
-                    continue;
-                }
-
-                if (typeof(IReadOnlyGraphqlService<,>).MakeGenericType(type, keyType).IsAssignableFrom(typeService))
-                {
-                    services.AddScoped(typeof(IReadOnlyGraphqlService<,>).MakeGenericType(type, keyType),
-                        typeFinder.Types.Single(x =>
-                            x is { IsClass: true, IsAbstract: false, IsGenericType: false } &&
-                            typeService.IsAssignableFrom(x)));
-                }
+                services.AddScoped(typeof(IReadOnlyGraphqlService<,>).MakeGenericType(entity.Type, entity.KeyType),
+                    typeFinder.Types.Single(x =>
+                        x is { IsClass: true, IsAbstract: false, IsGenericType: false } &&
+                        typeService.IsAssignableFrom(x)));
             }
 
             RegisterServiceMethod

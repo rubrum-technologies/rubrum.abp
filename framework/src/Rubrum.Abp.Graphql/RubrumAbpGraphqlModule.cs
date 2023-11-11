@@ -56,7 +56,6 @@ public class RubrumAbpGraphqlModule : AbpModule
             }))
             .AddErrorInterfaceType<ErrorInterfaceType>()
             .TryAddTypeInterceptor<DtoTypeInterceptor>()
-            .TryAddTypeInterceptor<BusinessExceptionTypeInterceptor>()
             .ModifyOptions(options =>
             {
                 options.UseXmlDocumentation = true;

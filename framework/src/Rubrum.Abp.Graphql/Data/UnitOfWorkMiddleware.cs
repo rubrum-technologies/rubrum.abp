@@ -5,7 +5,7 @@ using Volo.Abp.Uow;
 
 namespace Rubrum.Abp.Graphql.Data;
 
-public class UnitOfWorkMiddleware<T>
+internal class UnitOfWorkMiddleware<T>
 {
     private readonly FieldDelegate _next;
 

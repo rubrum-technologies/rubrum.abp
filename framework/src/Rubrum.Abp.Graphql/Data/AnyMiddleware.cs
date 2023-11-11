@@ -3,7 +3,7 @@ using Volo.Abp;
 
 namespace Rubrum.Abp.Graphql.Data;
 
-public class AnyMiddleware<T>
+internal class AnyMiddleware<T>
     where T : class
 {
     private readonly FieldDelegate _next;

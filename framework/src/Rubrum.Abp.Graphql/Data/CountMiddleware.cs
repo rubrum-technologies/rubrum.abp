@@ -3,7 +3,7 @@ using Volo.Abp;
 
 namespace Rubrum.Abp.Graphql.Data;
 
-public class CountMiddleware<T>
+internal class CountMiddleware<T>
     where T : class
 {
     private readonly FieldDelegate _next;

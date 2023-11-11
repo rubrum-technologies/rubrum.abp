@@ -3,12 +3,6 @@ schema {
   mutation: Mutation
 }
 
-interface BusinessError implements Error {
-  code: String
-  details: String
-  message: String!
-}
-
 "This interface can be implemented to store creation information (who and when created)."
 interface CreationAuditedObject implements HasCreationTime & MayHaveCreator {
   creationTime: DateTime
@@ -69,6 +63,12 @@ interface Node {
 " Used to standardize soft deleting entities. Soft-delete entities are not actually deleted, marked as IsDeleted = true in the database, but can not be retrieved to the application normally."
 interface SoftDelete {
   isDeleted: Boolean
+}
+
+type BusinessError implements Error {
+  code: String
+  details: String
+  message: String!
 }
 
 "A connection to a list of items."
@@ -208,19 +208,24 @@ type UpdateCountryPayload {
 
 type ValidationError implements Error {
   message: String!
+  results: [ValidationResult!]!
 }
 
-union CreateCityError = EntityNotFoundError | ValidationError
+type ValidationResult {
+  errorMessage: String
+}
 
-union CreateCountryError = EntityNotFoundError | ValidationError
+union CreateCityError = BusinessError | EntityNotFoundError | ValidationError
 
-union DeleteCityError = EntityNotFoundError | ValidationError
+union CreateCountryError = BusinessError | EntityNotFoundError | ValidationError
 
-union DeleteCountryError = EntityNotFoundError | ValidationError
+union DeleteCityError = BusinessError | EntityNotFoundError | ValidationError
 
-union UpdateCityError = EntityNotFoundError | ValidationError
+union DeleteCountryError = BusinessError | EntityNotFoundError | ValidationError
 
-union UpdateCountryError = EntityNotFoundError | ValidationError
+union UpdateCityError = BusinessError | EntityNotFoundError | ValidationError
+
+union UpdateCountryError = BusinessError | EntityNotFoundError | ValidationError
 
 input BooleanOperationFilterInput {
   eq: Boolean

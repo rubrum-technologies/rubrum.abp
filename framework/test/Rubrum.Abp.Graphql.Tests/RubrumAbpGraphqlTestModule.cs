@@ -20,11 +20,10 @@ using Volo.Abp.Uow;
 namespace Rubrum.Abp.Graphql;
 
 [DependsOn(typeof(AbpAutofacModule))]
-[DependsOn(typeof(AbpTestBaseModule))]
 [DependsOn(typeof(AbpAuthorizationModule))]
 [DependsOn(typeof(AbpDataModule))]
 [DependsOn(typeof(AbpEntityFrameworkCoreSqliteModule))]
-[DependsOn(typeof(RubrumAbpGraphqlModule))]
+[DependsOn(typeof(RubrumAbpGraphqlTestBaseModule))]
 public class RubrumAbpGraphqlTestModule : AbpModule
 {
     private SqliteConnection? _sqliteConnection;
@@ -32,8 +31,6 @@ public class RubrumAbpGraphqlTestModule : AbpModule
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         context.Services.AddAlwaysAllowAuthorization();
-        context.Services.AddSingleton(sp =>
-            new RequestExecutorProxy(sp.GetRequiredService<IRequestExecutorResolver>(), "_Default"));
 
         context.Services.AddAbpDbContext<GraphqlTestDbContext>(options =>
         {

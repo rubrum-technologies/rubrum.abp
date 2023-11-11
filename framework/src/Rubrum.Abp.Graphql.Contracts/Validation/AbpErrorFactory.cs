@@ -1,19 +1,26 @@
-﻿using System.ComponentModel.DataAnnotations;
-using HotChocolate.Types;
+﻿using HotChocolate.Types;
+using Volo.Abp;
 using Volo.Abp.Domain.Entities;
+using Volo.Abp.Validation;
 
 namespace Rubrum.Abp.Graphql.Validation;
 
 public class AbpErrorFactory :
+    IPayloadErrorFactory<BusinessException, BusinessError>,
     IPayloadErrorFactory<EntityNotFoundException, EntityNotFoundError>,
-    IPayloadErrorFactory<ValidationException, ValidationError>
+    IPayloadErrorFactory<AbpValidationException, ValidationError>
 {
+    public BusinessError CreateErrorFrom(BusinessException exception)
+    {
+        return new BusinessError(exception);
+    }
+
     public EntityNotFoundError CreateErrorFrom(EntityNotFoundException exception)
     {
         return new EntityNotFoundError(exception);
     }
 
-    public ValidationError CreateErrorFrom(ValidationException exception)
+    public ValidationError CreateErrorFrom(AbpValidationException exception)
     {
         return new ValidationError(exception);
     }
