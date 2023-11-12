@@ -2,11 +2,9 @@
 
 namespace Rubrum.Abp.Graphql.Services;
 
-public interface IReadOnlyGraphqlService<TEntityDto, in TKey>
+public interface IReadOnlyGraphqlService<TEntityDto, in TKey> : IGraphqlService
     where TKey : notnull
     where TEntityDto : IEntityDto<TKey>
 {
-    Task<TEntityDto> GetByIdAsync(TKey id);
-
     Task<IQueryable<TEntityDto>> GetQueryableAsync();
 }

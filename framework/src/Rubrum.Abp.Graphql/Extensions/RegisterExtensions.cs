@@ -2,7 +2,6 @@
 using HotChocolate.Execution.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Rubrum.Abp.Graphql.DataLoader;
-using Rubrum.Abp.Graphql.Services;
 using Rubrum.Abp.Graphql.Types;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Reflection;
@@ -52,41 +51,6 @@ public static class RegisterExtensions
 
             RegisterServiceMethod
                 .MakeGenericMethod(dataLoaderType)
-                .Invoke(null, new object?[] { builder, ServiceKind.Default });
-        }
-
-        return builder;
-    }
-
-    public static IRequestExecutorBuilder RegisterGraphqlServices(this IRequestExecutorBuilder builder)
-    {
-        var services = builder.Services;
-        var typeFinder = services.GetSingletonInstance<ITypeFinder>();
-        var types = GetEntityDtoTypes(services.GetSingletonInstance<ITypeFinder>());
-        var typeServices = typeFinder.Types
-            .Where(x => typeof(IGraphqlService).IsAssignableFrom(x) &&
-                        x is { IsInterface: true, IsGenericType: false })
-            .ToList();
-
-        foreach (var typeService in typeServices)
-        {
-            var entity = (from type in types
-                let keyType = GetKeyEntityDto(type)
-                where keyType is not null
-                where typeof(IReadOnlyGraphqlService<,>).MakeGenericType(type, keyType)
-                    .IsAssignableFrom(typeService)
-                select new { Type = type, KeyType = keyType }).SingleOrDefault();
-
-            if (entity is not null)
-            {
-                services.AddScoped(typeof(IReadOnlyGraphqlService<,>).MakeGenericType(entity.Type, entity.KeyType),
-                    typeFinder.Types.Single(x =>
-                        x is { IsClass: true, IsAbstract: false, IsGenericType: false } &&
-                        typeService.IsAssignableFrom(x)));
-            }
-
-            RegisterServiceMethod
-                .MakeGenericMethod(typeService)
                 .Invoke(null, new object?[] { builder, ServiceKind.Default });
         }
 

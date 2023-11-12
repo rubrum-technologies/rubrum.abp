@@ -6,21 +6,21 @@ using Volo.Abp.Uow;
 
 namespace Rubrum.Abp.Graphql.DataLoader;
 
-public class AbpDataLoaderBase<TEntity, TKey> : BatchDataLoader<TKey, TEntity>,
-    IAbpDataLoader<TEntity, TKey>,
+public class AbpDataLoaderBase<TEntityDto, TKey> : BatchDataLoader<TKey, TEntityDto>,
+    IAbpDataLoader<TEntityDto, TKey>,
     IScopedDependency
     where TKey : notnull
-    where TEntity : IEntityDto<TKey>
+    where TEntityDto : IEntityDto<TKey>
 {
     protected readonly IAsyncQueryableExecuter AsyncExecuter;
-    protected readonly IReadOnlyGraphqlService<TEntity, TKey> Service;
+    protected readonly IReadOnlyGraphqlService<TEntityDto, TKey> Service;
     protected readonly IUnitOfWorkManager UnitOfWorkManager;
 
     public AbpDataLoaderBase(
         IBatchScheduler batchScheduler,
         IAsyncQueryableExecuter asyncExecuter,
         IUnitOfWorkManager unitOfWorkManager,
-        IReadOnlyGraphqlService<TEntity, TKey> service,
+        IReadOnlyGraphqlService<TEntityDto, TKey> service,
         DataLoaderOptions? options = null) : base(batchScheduler, options)
     {
         AsyncExecuter = asyncExecuter;
@@ -28,7 +28,7 @@ public class AbpDataLoaderBase<TEntity, TKey> : BatchDataLoader<TKey, TEntity>,
         Service = service;
     }
 
-    public async Task<TEntity?> LoadOrNullAsync(TKey? id, CancellationToken cancellationToken)
+    public async Task<TEntityDto?> LoadOrNullAsync(TKey? id, CancellationToken cancellationToken)
     {
         if (id is null)
         {
@@ -38,7 +38,7 @@ public class AbpDataLoaderBase<TEntity, TKey> : BatchDataLoader<TKey, TEntity>,
         return await LoadAsync(id, cancellationToken);
     }
 
-    protected async override Task<IReadOnlyDictionary<TKey, TEntity>> LoadBatchAsync(
+    protected async override Task<IReadOnlyDictionary<TKey, TEntityDto>> LoadBatchAsync(
         IReadOnlyList<TKey> keys,
         CancellationToken cancellationToken)
     {

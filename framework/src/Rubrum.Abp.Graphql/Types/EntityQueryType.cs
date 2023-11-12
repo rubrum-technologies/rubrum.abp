@@ -7,21 +7,22 @@ using Volo.Abp.Application.Dtos;
 
 namespace Rubrum.Abp.Graphql.Types;
 
-public abstract class ReadOnlyQueryType<TEntityDto, TKey, TService, TFilterInput, TSortInput> :
+public abstract class EntityQueryType<TEntityDto, TKey, TService> :
     ObjectTypeExtension,
     IGraphqlType
     where TKey : notnull
     where TEntityDto : IEntityDto<TKey>
     where TService : IReadOnlyGraphqlService<TEntityDto, TKey>
-    where TFilterInput : FilterInputType<TEntityDto>
-    where TSortInput : SortInputType<TEntityDto>
 {
     protected abstract string TypeName { get; }
-    protected abstract string FieldNameGetById { get; }
-    protected abstract string FieldNameGet { get; }
-    protected abstract string FieldNameGetList { get; }
-    protected abstract string FieldNameAny { get; }
-    protected abstract string FieldNameCount { get; }
+    protected abstract string TypeNameSingular { get; }
+    protected abstract string TypeNameInPlural { get; }
+
+    protected virtual string FieldNameGetById => $"{TypeNameSingular.ToLowerFirstChar()}ById";
+    protected virtual string FieldNameGet => TypeNameSingular.ToLowerFirstChar();
+    protected virtual string FieldNameGetList => $"{TypeNameInPlural.ToLowerFirstChar()}";
+    protected virtual string FieldNameAny => $"{TypeNameInPlural.ToLowerFirstChar()}Any";
+    protected virtual string FieldNameCount => $"{TypeNameInPlural.ToLowerFirstChar()}Count";
 
     protected override void Configure(IObjectTypeDescriptor descriptor)
     {
@@ -37,29 +38,29 @@ public abstract class ReadOnlyQueryType<TEntityDto, TKey, TService, TFilterInput
             .Field(FieldNameGet)
             .UseUnitOfWork()
             .UseFirstOrDefault()
-            .UseFiltering<TFilterInput>()
+            .UseFiltering<FilterInputType<TEntityDto>>()
             .ResolveWith<Resolves>(x => x.GetQueryableAsync(default!));
 
         descriptor
             .Field(FieldNameGetList)
             .UseUnitOfWork()
             .UsePaging()
-            .UseFiltering<TFilterInput>()
-            .UseSorting<TSortInput>()
+            .UseFiltering<FilterInputType<TEntityDto>>()
+            .UseSorting<SortInputType<TEntityDto>>()
             .ResolveWith<Resolves>(x => x.GetQueryableAsync(default!));
 
         descriptor
             .Field(FieldNameAny)
             .UseUnitOfWork()
             .UseAny()
-            .UseFiltering<TFilterInput>()
+            .UseFiltering<FilterInputType<TEntityDto>>()
             .ResolveWith<Resolves>(x => x.GetQueryableAsync(default!));
 
         descriptor
             .Field(FieldNameCount)
             .UseUnitOfWork()
             .UseCount()
-            .UseFiltering<TFilterInput>()
+            .UseFiltering<FilterInputType<TEntityDto>>()
             .ResolveWith<Resolves>(x => x.GetQueryableAsync(default!));
     }
 

@@ -30,8 +30,8 @@ type CreateCountryPayload {
 
 type EntityNotFoundError implements Error {
   id: String
-  message: String!
   type: String
+  message: String!
 }
 
 type Mutation {
@@ -39,11 +39,11 @@ type Mutation {
 }
 
 type Query {
-  country: Country!
   "Fetches an object given its ID."
   node("ID of the object." id: ID!): Node
   "Lookup nodes by a list of IDs."
   nodes("The list of node IDs." ids: [ID!]!): [Node]!
+  country: Country!
 }
 
 type ValidationError implements Error {
@@ -87,10 +87,7 @@ enum ApplyPolicy {
 
 directive @allowAnonymous repeatable on FIELD_DEFINITION
 
-directive @authorize("Defines when when the authorize directive shall be applied.By default the authorize directives are applied during the validation phase." apply: ApplyPolicy! = BEFORE_RESOLVER "The name of the authorization policy that determines access to the annotated resource." policy: String "Roles that are allowed to access the annotated resource." roles: [String!]) repeatable on OBJECT | FIELD_DEFINITION
-
-"The `@oneOf` directive is used within the type system definition language\n to indicate:\n\n - an Input Object is a Oneof Input Object, or\n - an Object Type's Field is a Oneof Field."
-directive @oneOf on INPUT_OBJECT
+directive @authorize("The name of the authorization policy that determines access to the annotated resource." policy: String "Roles that are allowed to access the annotated resource." roles: [String!] "Defines when when the authorize directive shall be applied.By default the authorize directives are applied during the validation phase." apply: ApplyPolicy! = BEFORE_RESOLVER) repeatable on OBJECT | FIELD_DEFINITION
 
 "The `@specifiedBy` directive is used within the type system definition language to provide a URL for specifying the behavior of custom scalar definitions."
 directive @specifiedBy("The specifiedBy URL points to a human-readable specification. This field will only read a result for scalar types." url: String!) on SCALAR

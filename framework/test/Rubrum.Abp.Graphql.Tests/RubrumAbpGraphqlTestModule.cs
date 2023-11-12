@@ -1,4 +1,5 @@
-﻿using HotChocolate.Types;
+﻿using HotChocolate.Data.Filters;
+using HotChocolate.Types;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -43,6 +44,10 @@ public class RubrumAbpGraphqlTestModule : AbpModule
         graphql
             .AddQueryType(d => d.Name(OperationTypeNames.Query))
             .AddMutationType(d => d.Name(OperationTypeNames.Mutation))
+            .AddConvention<IFilterConvention>(new FilterConventionExtension(descriptor =>
+            {
+                descriptor.BindRuntimeType<Guid, IdOperationFilterInputType>();
+            }))
             .ModifyRequestOptions(options =>
             {
                 options.IncludeExceptionDetails = true;

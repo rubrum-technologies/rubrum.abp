@@ -9,9 +9,9 @@
     <ItemGroup>
         <PackageReference Include="System.Interactive.Async" Version="6.0.1"/>
     </ItemGroup>
-
+    
     <ItemGroup>
-        <PackageReference Include="Volo.Abp.Ddd.Domain" Version="$(AbpPackageVersion)"/>
+        <PackageReference Include="Volo.Abp.Ddd.Application" Version="$(AbpPackageVersion)"/>
     </ItemGroup>
 
     <ItemGroup>

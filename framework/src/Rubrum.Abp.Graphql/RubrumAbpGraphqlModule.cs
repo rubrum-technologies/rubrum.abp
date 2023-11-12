@@ -1,22 +1,22 @@
-﻿using HotChocolate.Configuration;
-using HotChocolate.Data.Filters;
-using HotChocolate.Data.Filters.Expressions;
+﻿using HotChocolate.Data.Filters.Expressions;
 using Microsoft.Extensions.DependencyInjection;
 using Rubrum.Abp.Graphql.Extensions;
 using Rubrum.Abp.Graphql.Filters.DateOnly;
 using Rubrum.Abp.Graphql.Interceptors;
 using Rubrum.Abp.Graphql.Types.Ddd;
-using Volo.Abp.Domain;
+using Volo.Abp.Application;
 using Volo.Abp.Modularity;
 
 namespace Rubrum.Abp.Graphql;
 
-[DependsOn(typeof(AbpDddDomainModule))]
+[DependsOn(typeof(AbpDddApplicationModule))]
 [DependsOn(typeof(RubrumAbpGraphqlContractsModule))]
 public class RubrumAbpGraphqlModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
+        context.Services.AddConventionalRegistrar(new GraphqlServiceConventionalRegistrar());
+        
         var graphql = context.Services
             .AddGraphQL()
             .AddGraphQLServer();
@@ -50,23 +50,9 @@ public class RubrumAbpGraphqlModule : AbpModule
             })
             .AddSorting()
             .AddProjections()
-            .AddConvention<IFilterConvention>(new FilterConventionExtension(descriptor =>
-            {
-                descriptor.BindRuntimeType<Guid, IdOperationFilterInputType>();
-            }))
             .AddErrorInterfaceType<ErrorInterfaceType>()
             .TryAddTypeInterceptor<DtoTypeInterceptor>()
-            .ModifyOptions(options =>
-            {
-                options.UseXmlDocumentation = true;
-                options.SortFieldsByName = true;
-                options.EnableDirectiveIntrospection = true;
-                options.DefaultDirectiveVisibility = DirectiveVisibility.Public;
-                options.StrictValidation = true;
-                options.EnableOneOf = true;
-            })
             .RegisterGraphqlTypes()
-            .RegisterGraphqlServices()
             .RegisterDataLoaders();
 
         context.Services.AddSingleton(graphql);
