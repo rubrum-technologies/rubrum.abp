@@ -58,7 +58,7 @@ type ValidationResult {
 union CreateCountryError = ValidationError | BusinessError | EntityNotFoundError
 
 input CreateCountryInput {
-  "IMaximumLengthValidator,\n IMinimumLengthValidator,\n INotEmptyValidator"
+  "Максимальная длина '20',\n Минимальная длина '1',\n Обязательный и не пустой"
   name: String!
 }
 
