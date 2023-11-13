@@ -21,10 +21,10 @@ public class RubrumAbpGraphqlFluentValidationModule : AbpModule
         Configure<AbpLocalizationOptions>(options =>
         {
             options.Resources
-                .Add<RubrumAbpGraphqlFluentValidationsResource>("en")
-                .AddVirtualJson("/Localization/Rubrum/Abp/Graphql/FluentValidations");
+                .Add<RubrumAbpGraphqlFluentValidationResource>("en")
+                .AddVirtualJson("/Localization/Rubrum/Abp/Graphql/FluentValidation");
 
-            options.DefaultResourceType = typeof(RubrumAbpGraphqlFluentValidationsResource);
+            options.DefaultResourceType = typeof(RubrumAbpGraphqlFluentValidationResource);
         });
     }
 }

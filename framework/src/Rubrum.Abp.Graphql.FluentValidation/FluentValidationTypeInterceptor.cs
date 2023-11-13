@@ -100,7 +100,7 @@ public class FluentValidationTypeInterceptor : TypeInterceptor
             return result;
         }
 
-        var localizer = completionContext.Services.GetRequiredService<IStringLocalizer<RubrumAbpGraphqlFluentValidationsResource>>();
+        var localizer = completionContext.Services.GetRequiredService<IStringLocalizer<RubrumAbpGraphqlFluentValidationResource>>();
         
         foreach (var rule in rules)
         {
@@ -113,24 +113,24 @@ public class FluentValidationTypeInterceptor : TypeInterceptor
 
     private static string GetDescription(
         IPropertyValidator validator, 
-        IStringLocalizer<RubrumAbpGraphqlFluentValidationsResource> localizer)
+        IStringLocalizer<RubrumAbpGraphqlFluentValidationResource> localizer)
     {
         return validator switch {
-            IExactLengthValidator v => localizer["Validator:ExactLength", v.Min, v.Max],
+            IExactLengthValidator v => localizer["Validator:ExactLength", v.Max],
             IMaximumLengthValidator v => localizer["Validator:MaximumLength",v.Max],
             IMinimumLengthValidator v => localizer["Validator:MinimumLength", v.Min],
             ILengthValidator v => localizer["Validator:Length", v.Min, v.Max],
-            INullValidator v => localizer["Validator:Null"],
-            INotNullValidator v => localizer["Validator:NotNull"],
-            INotEmptyValidator v => localizer["Validator:NotEmpty"],
+            INullValidator => localizer["Validator:Null"],
+            INotNullValidator => localizer["Validator:NotNull"],
+            INotEmptyValidator => localizer["Validator:NotEmpty"],
             IInclusiveBetweenValidator v => localizer["Validator:InclusiveBetween", v.From, v.To],
             IBetweenValidator v => localizer["Validator:Between", v.From, v.To],
-            IEqualValidator v => localizer["Validator:Equal", v.Comparison, v.MemberToCompare, v.ValueToCompare],
+            IEqualValidator v => localizer["Validator:Equal", v.ValueToCompare],
             IGreaterThanOrEqualValidator v => localizer["Validator:GreaterThanOrEqual", v.ValueToCompare],
             ILessThanOrEqualValidator v => localizer["Validator:LessThanOrEqual", v.ValueToCompare],
-            IComparisonValidator v => localizer["Validator:Comparison", v.Comparison, v.MemberToCompare, v.ValueToCompare],
-            IEmailValidator v => localizer["Validator:Email"],
-            IPredicateValidator v => localizer["Validator:Predicate"],
+            IComparisonValidator v => localizer["Validator:Comparison", v.ValueToCompare],
+            IEmailValidator => localizer["Validator:Email"],
+            IPredicateValidator => localizer["Validator:Predicate"],
             IRegularExpressionValidator v => localizer["Validator:RegularExpression", v.Expression],
             _ => ""
         };
