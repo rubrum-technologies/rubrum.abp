@@ -7,11 +7,11 @@ public static class InputObjectTypeExtensions
     public static IInputObjectTypeDescriptor<TInput> AddFieldKey<TInput, TKey>(
         this IInputObjectTypeDescriptor<TInput> descriptor,
         string typeName)
-        where TKey : notnull
+        where TKey : IType
     {
         descriptor
             .Field("id")
-            .Type(typeof(TKey))
+            .Type<NonNullType<TKey>>()
             .ID(typeName);
 
         return descriptor;

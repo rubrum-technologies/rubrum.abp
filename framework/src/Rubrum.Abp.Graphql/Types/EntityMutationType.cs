@@ -5,6 +5,7 @@ using Rubrum.Abp.Graphql.DataLoader;
 using Rubrum.Abp.Graphql.Services;
 using Rubrum.Abp.Graphql.Validation;
 using Volo.Abp.Application.Dtos;
+using Volo.Abp.Application.Services;
 
 namespace Rubrum.Abp.Graphql.Types;
 
@@ -13,7 +14,9 @@ public abstract class EntityMutationType<TEntityDto, TKey, TService, TCreateInpu
     IGraphqlType
     where TKey : notnull
     where TEntityDto : IEntityDto<TKey>
-    where TService : ICrudGraphqlService<TEntityDto, TKey, TCreateInput, TUpdateInput>
+    where TService : IReadOnlyGraphqlService<TEntityDto, TKey>,
+    ICreateUpdateAppService<TEntityDto, TKey, TCreateInput, TUpdateInput>,
+    IDeleteAppService<TKey>
 {
     protected abstract string TypeName { get; }
     protected abstract string TypeNameSingular { get; }
