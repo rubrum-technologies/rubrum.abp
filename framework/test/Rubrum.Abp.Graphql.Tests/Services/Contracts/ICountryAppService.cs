@@ -5,8 +5,7 @@ using Volo.Abp.Application.Services;
 
 namespace Rubrum.Abp.Graphql.Services.Contracts;
 
-public interface ICountryAppService : 
+public interface ICountryAppService :
     ICrudAppService<CountryDto, Guid, PagedAndSortedResultRequestDto, CreateCountryInput, UpdateCountryInput>
 {
-    
 }

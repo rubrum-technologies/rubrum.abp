@@ -21,4 +21,4 @@ public class RubrumAbpLanguageManagementHttpApiClientModule : AbpModule
             options.FileSets.AddEmbedded<RubrumAbpLanguageManagementHttpApiClientModule>();
         });
     }
-} 
+}

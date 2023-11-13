@@ -7,5 +7,4 @@ namespace Rubrum.Abp.LanguageManagement;
 [DependsOn(typeof(RubrumAbpLanguageManagementApplicationContractsModule))]
 public class RubrumAbpLanguageManagementGraphqlContractsModule : AbpModule
 {
-    
 }

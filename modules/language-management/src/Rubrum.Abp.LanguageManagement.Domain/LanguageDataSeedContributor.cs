@@ -25,9 +25,10 @@ public class LanguageDataSeedContributor : IDataSeedContributor, ITransientDepen
         { Russian, "Русский" }
     };
 
-    private readonly IRepository<Language, string> _repository;
-    private readonly LanguageManager _manager;
     private readonly ICancellationTokenProvider _cancellationTokenProvider;
+    private readonly LanguageManager _manager;
+
+    private readonly IRepository<Language, string> _repository;
 
     public LanguageDataSeedContributor(
         IRepository<Language, string> repository,

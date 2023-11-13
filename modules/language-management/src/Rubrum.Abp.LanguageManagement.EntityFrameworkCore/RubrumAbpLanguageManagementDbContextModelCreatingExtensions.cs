@@ -12,18 +12,18 @@ public static class RubrumAbpLanguageManagementDbContextModelCreatingExtensions
         builder.Entity<Language>(b =>
         {
             b.ToTable(DbTablePrefix + "Languages", DbSchema);
-            
+
             b.ConfigureByConvention();
 
             b.HasIndex(x => x.Name);
-            
+
             b.Property(x => x.Name)
                 .HasMaxLength(MaxNameLenght)
                 .IsRequired();
-            
+
             b.ApplyObjectExtensionMappings();
         });
-        
+
         builder.TryConfigureObjectExtensions<LanguageManagementDbContext>();
     }
 }

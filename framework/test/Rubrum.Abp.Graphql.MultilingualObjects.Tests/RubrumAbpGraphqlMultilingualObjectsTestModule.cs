@@ -13,7 +13,7 @@ public class RubrumAbpGraphqlMultilingualObjectsTestModule : AbpModule
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         LanguageDefault.Culture = "ru";
-        
+
         var graphql = context.Services.GetGraphql();
 
         graphql

@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <Import Project="..\..\..\common.props"/>
-    <Import Project="..\..\..\fody.props"/>
+  <Import Project="..\..\..\common.props"/>
+  <Import Project="..\..\..\fody.props"/>
 
-    <PropertyGroup>
-        <RootNamespace>Rubrum.Abp</RootNamespace>
-    </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>Rubrum.Abp</RootNamespace>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Volo.Abp.Core" Version="$(AbpPackageVersion)"/>
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Core" Version="$(AbpPackageVersion)"/>
+  </ItemGroup>
 </Project>

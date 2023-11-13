@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <Import Project="..\..\..\common.props"/>
-    <Import Project="..\..\..\fody.props"/>
+  <Import Project="..\..\..\common.props"/>
+  <Import Project="..\..\..\fody.props"/>
 
-    <PropertyGroup>
-        <RootNamespace>Rubrum.Abp.Keycloak</RootNamespace>
-    </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>Rubrum.Abp.Keycloak</RootNamespace>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\Rubrum.Abp.Core\Rubrum.Abp.Core.csproj"/>
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Rubrum.Abp.Core\Rubrum.Abp.Core.csproj"/>
+  </ItemGroup>
 </Project>

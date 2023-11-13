@@ -8,10 +8,10 @@ namespace Rubrum.Abp.LanguageManagement;
 
 public class LanguageAppService : ApplicationService, ILanguageAppService
 {
-    protected readonly IRepository<Language, string> Repository;
+    protected readonly ICancellationTokenProvider CancellationTokenProvider;
     protected readonly LanguageManager Manager;
     protected readonly ILanguageMapper Mapper;
-    protected readonly ICancellationTokenProvider CancellationTokenProvider;
+    protected readonly IRepository<Language, string> Repository;
 
     public LanguageAppService(
         IRepository<Language, string> repository,

@@ -6,5 +6,4 @@ namespace Rubrum.Abp.LanguageManagement;
 [DependsOn(typeof(RubrumAbpLanguageManagementApplicationModule))]
 public class RubrumAbpLanguageManagementApplicationTestModule : AbpModule
 {
-    
 }

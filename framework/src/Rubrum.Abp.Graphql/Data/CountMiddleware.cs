@@ -16,7 +16,8 @@ internal class CountMiddleware<T>
     public async Task InvokeAsync(IMiddlewareContext context)
     {
         await _next(context).ConfigureAwait(false);
-        context.Result = context.Result switch {
+        context.Result = context.Result switch
+        {
             IAsyncEnumerable<T> ae => await ae.CountAsync(),
             IEnumerable<T> en => await Task.Run(() => en.Count(), context.RequestAborted).ConfigureAwait(false),
             _ => context.Result

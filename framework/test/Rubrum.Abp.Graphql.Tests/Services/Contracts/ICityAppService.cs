@@ -5,8 +5,7 @@ using Volo.Abp.Application.Services;
 
 namespace Rubrum.Abp.Graphql.Services.Contracts;
 
-public interface ICityAppService : 
+public interface ICityAppService :
     ICrudAppService<CityDto, int, PagedAndSortedResultRequestDto, CreateCityInput, UpdateCityInput>
 {
-    
 }

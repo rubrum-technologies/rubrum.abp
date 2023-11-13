@@ -14,7 +14,8 @@ public static class DateOnlyOperationFilterExtensions
             .Extend()
             .OnBeforeCreate((context, definition) =>
             {
-                definition.Fields.Add(new FilterFieldDefinition {
+                definition.Fields.Add(new FilterFieldDefinition
+                {
                     Member = (propertyOrMember.Body as MemberExpression)!.Member,
                     Name = fieldName,
                     Type = context.TypeInspector.GetTypeRef(typeof(DateOnlyOperationFilterInputType))
@@ -32,7 +33,8 @@ public static class DateOnlyOperationFilterExtensions
             .Extend()
             .OnBeforeCreate((context, definition) =>
             {
-                definition.Fields.Add(new FilterFieldDefinition {
+                definition.Fields.Add(new FilterFieldDefinition
+                {
                     Member = (propertyOrMember.Body as MemberExpression)!.Member,
                     Name = fieldName,
                     Type = context.TypeInspector.GetTypeRef(typeof(DateOnlyOperationFilterInputType))

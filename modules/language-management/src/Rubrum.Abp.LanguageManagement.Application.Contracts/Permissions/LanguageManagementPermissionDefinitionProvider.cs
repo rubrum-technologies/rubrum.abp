@@ -11,10 +11,10 @@ public class LanguageManagementPermissionDefinitionProvider : PermissionDefiniti
     {
         var group = context.AddGroup(GroupName, L("Permission:LanguageManagement"));
 
-        var language = group.AddPermission(LanguageManagementPermissions.Languages.Default, L("Permission:LanguageManagement"));
-        language.AddChild(LanguageManagementPermissions.Languages.Create, L("Permission:Create"));
-        language.AddChild(LanguageManagementPermissions.Languages.Update, L("Permission:Update"));
-        language.AddChild(LanguageManagementPermissions.Languages.Delete, L("Permission:Delete"));
+        var language = group.AddPermission(Languages.Default, L("Permission:LanguageManagement"));
+        language.AddChild(Languages.Create, L("Permission:Create"));
+        language.AddChild(Languages.Update, L("Permission:Update"));
+        language.AddChild(Languages.Delete, L("Permission:Delete"));
     }
 
     private static LocalizableString L(string name)

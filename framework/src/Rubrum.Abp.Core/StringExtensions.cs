@@ -15,7 +15,7 @@ public static class StringExtensions
         {
             return firstChar.ToString();
         }
-        
+
         return firstChar + input[1..];
     }
 }

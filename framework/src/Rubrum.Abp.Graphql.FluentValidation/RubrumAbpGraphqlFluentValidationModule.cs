@@ -24,7 +24,7 @@ public class RubrumAbpGraphqlFluentValidationModule : AbpModule
         {
             options.FileSets.AddEmbedded<RubrumAbpGraphqlFluentValidationModule>();
         });
-        
+
         Configure<AbpLocalizationOptions>(options =>
         {
             options.Resources

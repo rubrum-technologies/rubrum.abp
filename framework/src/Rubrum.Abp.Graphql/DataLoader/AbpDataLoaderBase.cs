@@ -38,7 +38,7 @@ public class AbpDataLoaderBase<TEntityDto, TKey> : BatchDataLoader<TKey, TEntity
         return await LoadAsync(id, cancellationToken);
     }
 
-    protected async override Task<IReadOnlyDictionary<TKey, TEntityDto>> LoadBatchAsync(
+    protected override async Task<IReadOnlyDictionary<TKey, TEntityDto>> LoadBatchAsync(
         IReadOnlyList<TKey> keys,
         CancellationToken cancellationToken)
     {

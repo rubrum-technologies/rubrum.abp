@@ -10,7 +10,7 @@ namespace Rubrum.Abp.Graphql.Extensions;
 
 public static class RegisterExtensions
 {
-    private readonly static MethodInfo RegisterServiceMethod =
+    private static readonly MethodInfo RegisterServiceMethod =
         typeof(RequestExecutorBuilderExtensions)
             .GetMethods()
             .First(x => x.Name == "RegisterService" && x.GetParameters().Length == 2);

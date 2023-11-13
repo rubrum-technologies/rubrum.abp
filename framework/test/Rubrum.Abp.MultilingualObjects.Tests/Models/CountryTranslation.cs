@@ -8,7 +8,7 @@ public class CountryTranslation : IObjectTranslation
         Name = name;
     }
 
-    public string Language { get; }
-
     public string Name { get; }
+
+    public string Language { get; }
 }

@@ -1,17 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <Import Project="..\..\..\..\common.test.props"/>
-    <Import Project="..\..\..\..\fody.props"/>
+  <Import Project="..\..\..\..\common.test.props"/>
+  <Import Project="..\..\..\..\fody.props"/>
 
-    <PropertyGroup>
-        <RootNamespace>Rubrum.Abp.Keycloak</RootNamespace>
-    </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>Rubrum.Abp.Keycloak</RootNamespace>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)"/>
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)"/>
+  </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\..\src\Rubrum.Abp.Keycloak.Application\Rubrum.Abp.Keycloak.Application.csproj"/>
-        <ProjectReference Include="..\Rubrum.Abp.Keycloak.TestBase\Rubrum.Abp.Keycloak.TestBase.csproj"/>
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Rubrum.Abp.Keycloak.Application\Rubrum.Abp.Keycloak.Application.csproj"/>
+    <ProjectReference Include="..\Rubrum.Abp.Keycloak.TestBase\Rubrum.Abp.Keycloak.TestBase.csproj"/>
+  </ItemGroup>
 </Project>

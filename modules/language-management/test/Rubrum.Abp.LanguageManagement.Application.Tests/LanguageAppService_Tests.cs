@@ -32,11 +32,7 @@ public class LanguageAppServiceTests : LanguageManagementApplicationTestBase
     [Fact]
     public async Task CreateAsync()
     {
-        var language = await _service.CreateAsync(new CreateLanguageInput
-        {
-            Code = "te",
-            Name = "Test"
-        });
+        var language = await _service.CreateAsync(new CreateLanguageInput { Code = "te", Name = "Test" });
 
         language.Id.ShouldBe("te");
         language.Name.ShouldBe("Test");
@@ -56,10 +52,7 @@ public class LanguageAppServiceTests : LanguageManagementApplicationTestBase
     {
         var language = UsingDbContext(db => db.Languages.Single(t => t.Id == "ru"));
 
-        var result = await _service.UpdateAsync(language.Id, new UpdateLanguageInput
-        {
-            Name = "Russian"
-        });
+        var result = await _service.UpdateAsync(language.Id, new UpdateLanguageInput { Name = "Russian" });
         result.Id.ShouldBe(language.Id);
         result.Name.ShouldBe("Russian");
 
@@ -74,10 +67,7 @@ public class LanguageAppServiceTests : LanguageManagementApplicationTestBase
 
         await Assert.ThrowsAsync<LanguageNameAlreadyExistsException>(async () =>
         {
-            await _service.UpdateAsync(language.Id, new UpdateLanguageInput
-            {
-                Name = "Русский"
-            });
+            await _service.UpdateAsync(language.Id, new UpdateLanguageInput { Name = "Русский" });
         });
     }
 

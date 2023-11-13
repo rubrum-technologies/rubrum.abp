@@ -3,7 +3,7 @@ using Volo.Abp.Application.Services;
 
 namespace Rubrum.Abp.LanguageManagement;
 
-public interface ILanguageAppService : 
+public interface ILanguageAppService :
     ICreateUpdateAppService<LanguageDto, string, CreateLanguageInput, UpdateLanguageInput>,
     IDeleteAppService<string>
 {

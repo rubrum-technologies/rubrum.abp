@@ -22,9 +22,6 @@ public class Language : FullAuditedAggregateRoot<string>
     public string Name
     {
         get => _name;
-        internal set
-        {
-            _name = Check.NotNullOrWhiteSpace(value, nameof(value), MaxNameLenght);
-        }
+        internal set => _name = Check.NotNullOrWhiteSpace(value, nameof(value), MaxNameLenght);
     }
 }

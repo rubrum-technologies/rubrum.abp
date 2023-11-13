@@ -5,5 +5,4 @@ namespace Rubrum.Abp.LanguageManagement;
 public abstract class LanguageManagementGraphqlTestBase :
     RubrumAbpGraphqlTestBase<RubrumAbpLanguageManagementGraphqlTestModule>
 {
-    
 }

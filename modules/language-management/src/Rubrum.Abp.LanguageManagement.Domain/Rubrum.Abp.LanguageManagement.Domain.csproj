@@ -1,17 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <Import Project="..\..\..\..\common.props"/>
-    <Import Project="..\..\..\..\fody.props"/>
+  <Import Project="..\..\..\..\common.props"/>
+  <Import Project="..\..\..\..\fody.props"/>
 
-    <PropertyGroup>
-        <RootNamespace>Rubrum.Abp.LanguageManagement</RootNamespace>
-    </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>Rubrum.Abp.LanguageManagement</RootNamespace>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Volo.Abp.Ddd.Domain" Version="$(AbpPackageVersion)"/>
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="$(AbpPackageVersion)"/>
+  </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\..\..\..\framework\src\Rubrum.Abp.Data\Rubrum.Abp.Data.csproj" />
-        <ProjectReference Include="..\Rubrum.Abp.LanguageManagement.Domain.Shared\Rubrum.Abp.LanguageManagement.Domain.Shared.csproj"/>
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\framework\src\Rubrum.Abp.Data\Rubrum.Abp.Data.csproj"/>
+    <ProjectReference Include="..\Rubrum.Abp.LanguageManagement.Domain.Shared\Rubrum.Abp.LanguageManagement.Domain.Shared.csproj"/>
+  </ItemGroup>
 </Project>

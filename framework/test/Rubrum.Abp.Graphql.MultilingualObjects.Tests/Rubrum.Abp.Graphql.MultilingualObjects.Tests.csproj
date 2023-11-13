@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Rubrum.Abp.Graphql.MultilingualObjects\Rubrum.Abp.Graphql.MultilingualObjects.csproj" />
+    <ProjectReference Include="..\..\src\Rubrum.Abp.Graphql.MultilingualObjects\Rubrum.Abp.Graphql.MultilingualObjects.csproj"/>
     <ProjectReference Include="..\..\src\Rubrum.Abp.Graphql.TestBase\Rubrum.Abp.Graphql.TestBase.csproj"/>
   </ItemGroup>
 </Project>

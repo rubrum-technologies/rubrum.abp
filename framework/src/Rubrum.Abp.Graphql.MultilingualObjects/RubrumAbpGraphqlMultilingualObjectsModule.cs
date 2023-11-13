@@ -7,5 +7,4 @@ namespace Rubrum.Abp.Graphql.MultilingualObjects;
 [DependsOn(typeof(RubrumAbpMultilingualObjectsModule))]
 public class RubrumAbpGraphqlMultilingualObjectsModule : AbpModule
 {
-    
 }

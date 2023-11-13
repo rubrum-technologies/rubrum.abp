@@ -9,5 +9,4 @@ namespace Rubrum.Abp.LanguageManagement;
 [DependsOn(typeof(RubrumAbpLanguageManagementDomainSharedModule))]
 public class RubrumAbpLanguageManagementDomainModule : AbpModule
 {
-    
 }

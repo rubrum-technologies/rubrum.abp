@@ -16,7 +16,7 @@ public class RubrumAbpGraphqlModule : AbpModule
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         context.Services.AddConventionalRegistrar(new GraphqlServiceConventionalRegistrar());
-        
+
         var graphql = context.Services
             .AddGraphQL()
             .AddGraphQLServer();

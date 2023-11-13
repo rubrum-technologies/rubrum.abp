@@ -100,8 +100,9 @@ public class FluentValidationTypeInterceptor : TypeInterceptor
             return result;
         }
 
-        var localizer = completionContext.Services.GetRequiredService<IStringLocalizer<RubrumAbpGraphqlFluentValidationResource>>();
-        
+        var localizer = completionContext.Services
+            .GetRequiredService<IStringLocalizer<RubrumAbpGraphqlFluentValidationResource>>();
+
         foreach (var rule in rules)
         {
             var list = result.GetOrAdd(rule.PropertyName, _ => new List<string>());
@@ -112,12 +113,13 @@ public class FluentValidationTypeInterceptor : TypeInterceptor
     }
 
     private static string GetDescription(
-        IPropertyValidator validator, 
+        IPropertyValidator validator,
         IStringLocalizer<RubrumAbpGraphqlFluentValidationResource> localizer)
     {
-        return validator switch {
+        return validator switch
+        {
             IExactLengthValidator v => localizer["Validator:ExactLength", v.Max],
-            IMaximumLengthValidator v => localizer["Validator:MaximumLength",v.Max],
+            IMaximumLengthValidator v => localizer["Validator:MaximumLength", v.Max],
             IMinimumLengthValidator v => localizer["Validator:MinimumLength", v.Min],
             ILengthValidator v => localizer["Validator:Length", v.Min, v.Max],
             INullValidator => localizer["Validator:Null"],

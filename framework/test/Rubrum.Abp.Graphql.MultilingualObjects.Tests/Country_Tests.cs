@@ -1,5 +1,4 @@
 ﻿using CookieCrumble;
-using HotChocolate.Types.Relay;
 using Xunit;
 
 namespace Rubrum.Abp.Graphql.MultilingualObjects;
@@ -29,7 +28,7 @@ public class CountryTests : MultilingualObjectsTestBase
 
         result.MatchSnapshot();
     }
-    
+
     [Fact]
     public async Task Fetch_By_Ru()
     {

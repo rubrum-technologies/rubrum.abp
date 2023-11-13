@@ -6,8 +6,8 @@ namespace Rubrum.Abp.LanguageManagement;
 
 public class LanguageManager : DomainService
 {
-    private readonly IReadOnlyRepository<Language, string> _repository;
     private readonly ICancellationTokenProvider _cancellationTokenProvider;
+    private readonly IReadOnlyRepository<Language, string> _repository;
 
     public LanguageManager(
         IReadOnlyRepository<Language, string> repository,
@@ -34,8 +34,8 @@ public class LanguageManager : DomainService
         await CheckNameAsync(name);
 
         language.Name = name;
-    } 
-    
+    }
+
     private async Task CheckNameAsync(string name)
     {
         var cancellationToken = _cancellationTokenProvider.Token;

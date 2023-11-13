@@ -21,7 +21,8 @@ internal class UnitOfWorkMiddleware<T>
 
         await _next(context).ConfigureAwait(false);
 
-        context.Result = context.Result switch {
+        context.Result = context.Result switch
+        {
             IAsyncEnumerable<T> ae => await ae.ToListAsync(),
             ICollection<T> => context.Result,
             IEnumerable<T> e => e.ToList(),

@@ -12,7 +12,7 @@ public class Query : IGraphqlType
         var country = new Country("Россия");
 
         country.ChangeTranslation(new CountryTranslation("en", "Russian"));
-        
+
         return country;
     }
 }

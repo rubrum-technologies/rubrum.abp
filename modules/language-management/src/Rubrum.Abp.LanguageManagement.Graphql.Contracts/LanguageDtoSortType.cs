@@ -5,5 +5,4 @@ namespace Rubrum.Abp.LanguageManagement;
 
 public class LanguageDtoSortType : SortInputType<LanguageDto>, IGraphqlType
 {
-    
 }

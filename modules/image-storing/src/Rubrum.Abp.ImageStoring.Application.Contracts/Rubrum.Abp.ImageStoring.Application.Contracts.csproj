@@ -1,16 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <Import Project="..\..\..\..\common.props"/>
-    <Import Project="..\..\..\..\fody.props"/>
+  <Import Project="..\..\..\..\common.props"/>
+  <Import Project="..\..\..\..\fody.props"/>
 
-    <PropertyGroup>
-        <RootNamespace>Rubrum.Abp.ImageStoring</RootNamespace>
-    </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>Rubrum.Abp.ImageStoring</RootNamespace>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="$(AbpPackageVersion)"/>
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="$(AbpPackageVersion)"/>
+  </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\Rubrum.Abp.ImageStoring.Domain.Shared\Rubrum.Abp.ImageStoring.Domain.Shared.csproj"/>
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Rubrum.Abp.ImageStoring.Domain.Shared\Rubrum.Abp.ImageStoring.Domain.Shared.csproj"/>
+  </ItemGroup>
 </Project>
