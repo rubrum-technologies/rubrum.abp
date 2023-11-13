@@ -1,0 +1,12 @@
+{
+  "data": {
+    "createLanguage": {
+      "language": {
+        "id": "TGFuZ3VhZ2UKZHRlc3Q=",
+        "code": "test",
+        "name": "Test"
+      },
+      "errors": null
+    }
+  }
+}

@@ -26,12 +26,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5E4351F5-94E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{8BFEEC91-9A3C-4B66-B128-2CE7B8B22AE9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "multilingual-objects", "multilingual-objects", "{6B2A9BDF-C0B5-4014-88F8-B3EDDEDC60A7}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{056EBFF4-E142-4894-9734-514830E5AD26}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E7F9CDA1-E73F-4CB0-AE19-70A3C37E484C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Graphql.Contracts", "framework\src\Rubrum.Abp.Graphql.Contracts\Rubrum.Abp.Graphql.Contracts.csproj", "{4B66683B-4CA4-430A-9DBB-8A190FE25F86}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Data", "framework\src\Rubrum.Abp.Data\Rubrum.Abp.Data.csproj", "{A2D1CFDA-3FAF-4184-BBAB-07DC79CA3D8C}"
@@ -98,30 +92,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.ImageStoring.Ent
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.ImageStoring.TestBase", "modules\image-storing\test\Rubrum.Abp.ImageStoring.TestBase\Rubrum.Abp.ImageStoring.TestBase.csproj", "{7FA951F2-071F-419A-8591-48FF913F8CE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.MultilingualObjects.Application", "modules\multilingual-objects\src\Rubrum.Abp.MultilingualObjects.Application\Rubrum.Abp.MultilingualObjects.Application.csproj", "{864994A7-E5BC-4EDF-9408-0A93DACB1DB1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.MultilingualObjects.Application.Contracts", "modules\multilingual-objects\src\Rubrum.Abp.MultilingualObjects.Application.Contracts\Rubrum.Abp.MultilingualObjects.Application.Contracts.csproj", "{29E7FA4E-9DB5-4EF3-8BDB-A88AD85A6C29}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.MultilingualObjects.Domain", "modules\multilingual-objects\src\Rubrum.Abp.MultilingualObjects.Domain\Rubrum.Abp.MultilingualObjects.Domain.csproj", "{65E29823-CD67-46D9-8FAE-62861328C928}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.MultilingualObjects.Domain.Shared", "modules\multilingual-objects\src\Rubrum.Abp.MultilingualObjects.Domain.Shared\Rubrum.Abp.MultilingualObjects.Domain.Shared.csproj", "{CB872BF1-EF85-4756-B9A3-1742D9C0E893}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.MultilingualObjects.EntityFrameworkCore", "modules\multilingual-objects\src\Rubrum.Abp.MultilingualObjects.EntityFrameworkCore\Rubrum.Abp.MultilingualObjects.EntityFrameworkCore.csproj", "{C745087F-A8B3-47AE-97A3-623B64CE6E06}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.MultilingualObjects.Graphql.Contracts", "modules\multilingual-objects\src\Rubrum.Abp.MultilingualObjects.Graphql.Contracts\Rubrum.Abp.MultilingualObjects.Graphql.Contracts.csproj", "{893BAE16-BC30-4CC3-BD76-B3988509E45B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.MultilingualObjects.HttpApi", "modules\multilingual-objects\src\Rubrum.Abp.MultilingualObjects.HttpApi\Rubrum.Abp.MultilingualObjects.HttpApi.csproj", "{6C2CF45C-56ED-47E5-ACE2-C288B6B4430A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.MultilingualObjects.HttpApi.Client", "modules\multilingual-objects\src\Rubrum.Abp.MultilingualObjects.HttpApi.Client\Rubrum.Abp.MultilingualObjects.HttpApi.Client.csproj", "{9BD69923-0738-4636-B542-AEAB11BF86C9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.MultilingualObjects.Application.Tests", "modules\multilingual-objects\test\Rubrum.Abp.MultilingualObjects.Application.Tests\Rubrum.Abp.MultilingualObjects.Application.Tests.csproj", "{2B38DD9F-70D8-4B35-8D31-4A0546FBC905}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.MultilingualObjects.Domain.Tests", "modules\multilingual-objects\test\Rubrum.Abp.MultilingualObjects.Domain.Tests\Rubrum.Abp.MultilingualObjects.Domain.Tests.csproj", "{6708C22C-39C9-465A-A957-F8F757F42D5F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.MultilingualObjects.EntityFrameworkCore.Tests", "modules\multilingual-objects\test\Rubrum.Abp.MultilingualObjects.EntityFrameworkCore.Tests\Rubrum.Abp.MultilingualObjects.EntityFrameworkCore.Tests.csproj", "{488E6AB9-B419-431E-9047-034F6903A8EE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.MultilingualObjects.TestBase", "modules\multilingual-objects\test\Rubrum.Abp.MultilingualObjects.TestBase\Rubrum.Abp.MultilingualObjects.TestBase.csproj", "{D37EEA40-1831-46AE-A859-742E5E71E4D1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Keycloak.Tests", "framework\test\Rubrum.Abp.Keycloak.Tests\Rubrum.Abp.Keycloak.Tests.csproj", "{C5EF3BF8-6144-4848-826B-318BFBEA9704}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Graphql.Tests", "framework\test\Rubrum.Abp.Graphql.Tests\Rubrum.Abp.Graphql.Tests.csproj", "{BEDAE24C-7E75-4DAD-8821-A60316C4DD9F}"
@@ -132,13 +102,53 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Cqrs.Mediatr.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Keycloak.Abstractions", "framework\src\Rubrum.Abp.Keycloak.Abstractions\Rubrum.Abp.Keycloak.Abstractions.csproj", "{CB945760-D704-4822-BA39-016175841F9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.MultilingualObjects.Graphql.Tests", "modules\multilingual-objects\test\Rubrum.Abp.MultilingualObjects.Graphql.Tests\Rubrum.Abp.MultilingualObjects.Graphql.Tests.csproj", "{3D543FAD-C92A-4B30-9845-00EE6B67E3AA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Graphql.FluentValidation", "framework\src\Rubrum.Abp.Graphql.FluentValidation\Rubrum.Abp.Graphql.FluentValidation.csproj", "{D7093FCF-998F-4653-8F35-936174666AB0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Graphql.TestBase", "framework\src\Rubrum.Abp.Graphql.TestBase\Rubrum.Abp.Graphql.TestBase.csproj", "{CC4A8424-F605-44A5-B274-1DB9006AA5DE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Graphql.FluentValidation.Tests", "framework\test\Rubrum.Abp.Graphql.FluentValidation.Tests\Rubrum.Abp.Graphql.FluentValidation.Tests.csproj", "{ED70EE1D-2AE4-467B-9638-21FF46B8F504}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.MultilingualObjects", "framework\src\Rubrum.Abp.MultilingualObjects\Rubrum.Abp.MultilingualObjects.csproj", "{CF699804-8FD8-4CF0-B850-E98F82418B1E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "language-management", "language-management", "{43351D6C-CF82-4679-A12E-2DBEEA5E7110}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5A2C3572-B8BC-4EA2-8953-C0589B61A3F3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{0AA00B1C-C40A-4CBD-8B3E-D4AD39807BAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.LanguageManagement.Application", "modules\language-management\src\Rubrum.Abp.LanguageManagement.Application\Rubrum.Abp.LanguageManagement.Application.csproj", "{A9FC9CF5-F834-421F-82C0-7F1414A6496A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.LanguageManagement.Application.Contracts", "modules\language-management\src\Rubrum.Abp.LanguageManagement.Application.Contracts\Rubrum.Abp.LanguageManagement.Application.Contracts.csproj", "{7E671B3D-934E-4836-BAC9-BF2AFCDFE029}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.LanguageManagement.Domain", "modules\language-management\src\Rubrum.Abp.LanguageManagement.Domain\Rubrum.Abp.LanguageManagement.Domain.csproj", "{F63CD853-7F42-45A9-ACA0-DF37E45A2D7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.LanguageManagement.Domain.Shared", "modules\language-management\src\Rubrum.Abp.LanguageManagement.Domain.Shared\Rubrum.Abp.LanguageManagement.Domain.Shared.csproj", "{1E00A629-6748-470A-AE51-8C4EA282C87E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.LanguageManagement.EntityFrameworkCore", "modules\language-management\src\Rubrum.Abp.LanguageManagement.EntityFrameworkCore\Rubrum.Abp.LanguageManagement.EntityFrameworkCore.csproj", "{8A98D1D2-0C3B-4DB8-A833-9D0B2F514D29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.LanguageManagement.Graphql", "modules\language-management\src\Rubrum.Abp.LanguageManagement.Graphql\Rubrum.Abp.LanguageManagement.Graphql.csproj", "{3AEE6D97-8BAA-4CEA-BEF3-C9FCB12B58B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.LanguageManagement.Graphql.Contracts", "modules\language-management\src\Rubrum.Abp.LanguageManagement.Graphql.Contracts\Rubrum.Abp.LanguageManagement.Graphql.Contracts.csproj", "{2485362D-566B-4D52-A16F-BD1ED34410DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.LanguageManagement.HttpApi", "modules\language-management\src\Rubrum.Abp.LanguageManagement.HttpApi\Rubrum.Abp.LanguageManagement.HttpApi.csproj", "{97FA2EC9-128C-4906-A496-2DBE9B472029}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.LanguageManagement.HttpApi.Client", "modules\language-management\src\Rubrum.Abp.LanguageManagement.HttpApi.Client\Rubrum.Abp.LanguageManagement.HttpApi.Client.csproj", "{A624ADA2-B8BF-48FA-964B-5E1C31B84B30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.LanguageManagement.Application.Tests", "modules\language-management\test\Rubrum.Abp.LanguageManagement.Application.Tests\Rubrum.Abp.LanguageManagement.Application.Tests.csproj", "{7906DEF1-1322-4586-A65C-702F4702455C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.LanguageManagement.Domain.Tests", "modules\language-management\test\Rubrum.Abp.LanguageManagement.Domain.Tests\Rubrum.Abp.LanguageManagement.Domain.Tests.csproj", "{AC60FBC8-278A-4084-96F4-99B42ACF3179}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.LanguageManagement.EntityFrameworkCore.Tests", "modules\language-management\test\Rubrum.Abp.LanguageManagement.EntityFrameworkCore.Tests\Rubrum.Abp.LanguageManagement.EntityFrameworkCore.Tests.csproj", "{8ADABB46-E05A-48EB-9F1D-4B1092E25C61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.LanguageManagement.Graphql.Tests", "modules\language-management\test\Rubrum.Abp.LanguageManagement.Graphql.Tests\Rubrum.Abp.LanguageManagement.Graphql.Tests.csproj", "{57A84510-68D7-4AD7-A449-C78ADD1B660C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.LanguageManagement.TestBase", "modules\language-management\test\Rubrum.Abp.LanguageManagement.TestBase\Rubrum.Abp.LanguageManagement.TestBase.csproj", "{E4D44521-4C65-41CA-895B-27D621F1FF92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.MultilingualObjects.Tests", "framework\test\Rubrum.Abp.MultilingualObjects.Tests\Rubrum.Abp.MultilingualObjects.Tests.csproj", "{C2A402E4-1E20-454F-8E2F-47A07FBD480F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Graphql.MultilingualObjects", "framework\src\Rubrum.Abp.Graphql.MultilingualObjects\Rubrum.Abp.Graphql.MultilingualObjects.csproj", "{DC04723A-041B-448E-B3AA-877B7FC60F03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Graphql.MultilingualObjects.Tests", "framework\test\Rubrum.Abp.Graphql.MultilingualObjects.Tests\Rubrum.Abp.Graphql.MultilingualObjects.Tests.csproj", "{290105D0-789D-4F08-A950-5941008BB2BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -157,9 +167,6 @@ Global
 		{025C2C6A-9856-4B76-BA04-E83EC4D0835D} = {0082B452-004C-44BF-AB2F-32EB7D261242}
 		{5E4351F5-94E0-48B6-ADD1-EBE8390B1BE1} = {025C2C6A-9856-4B76-BA04-E83EC4D0835D}
 		{8BFEEC91-9A3C-4B66-B128-2CE7B8B22AE9} = {025C2C6A-9856-4B76-BA04-E83EC4D0835D}
-		{6B2A9BDF-C0B5-4014-88F8-B3EDDEDC60A7} = {0082B452-004C-44BF-AB2F-32EB7D261242}
-		{056EBFF4-E142-4894-9734-514830E5AD26} = {6B2A9BDF-C0B5-4014-88F8-B3EDDEDC60A7}
-		{E7F9CDA1-E73F-4CB0-AE19-70A3C37E484C} = {6B2A9BDF-C0B5-4014-88F8-B3EDDEDC60A7}
 		{4B66683B-4CA4-430A-9DBB-8A190FE25F86} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
 		{A2D1CFDA-3FAF-4184-BBAB-07DC79CA3D8C} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
 		{44720785-6D33-4204-8C46-D1BF7B5379C5} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
@@ -193,27 +200,35 @@ Global
 		{032204AF-50E2-4220-8857-D02150BFE7AC} = {8BFEEC91-9A3C-4B66-B128-2CE7B8B22AE9}
 		{F8576EF4-8E2C-439B-AB96-66CCC9609D1C} = {8BFEEC91-9A3C-4B66-B128-2CE7B8B22AE9}
 		{7FA951F2-071F-419A-8591-48FF913F8CE2} = {8BFEEC91-9A3C-4B66-B128-2CE7B8B22AE9}
-		{864994A7-E5BC-4EDF-9408-0A93DACB1DB1} = {056EBFF4-E142-4894-9734-514830E5AD26}
-		{29E7FA4E-9DB5-4EF3-8BDB-A88AD85A6C29} = {056EBFF4-E142-4894-9734-514830E5AD26}
-		{65E29823-CD67-46D9-8FAE-62861328C928} = {056EBFF4-E142-4894-9734-514830E5AD26}
-		{CB872BF1-EF85-4756-B9A3-1742D9C0E893} = {056EBFF4-E142-4894-9734-514830E5AD26}
-		{C745087F-A8B3-47AE-97A3-623B64CE6E06} = {056EBFF4-E142-4894-9734-514830E5AD26}
-		{893BAE16-BC30-4CC3-BD76-B3988509E45B} = {056EBFF4-E142-4894-9734-514830E5AD26}
-		{6C2CF45C-56ED-47E5-ACE2-C288B6B4430A} = {056EBFF4-E142-4894-9734-514830E5AD26}
-		{9BD69923-0738-4636-B542-AEAB11BF86C9} = {056EBFF4-E142-4894-9734-514830E5AD26}
-		{2B38DD9F-70D8-4B35-8D31-4A0546FBC905} = {E7F9CDA1-E73F-4CB0-AE19-70A3C37E484C}
-		{6708C22C-39C9-465A-A957-F8F757F42D5F} = {E7F9CDA1-E73F-4CB0-AE19-70A3C37E484C}
-		{488E6AB9-B419-431E-9047-034F6903A8EE} = {E7F9CDA1-E73F-4CB0-AE19-70A3C37E484C}
-		{D37EEA40-1831-46AE-A859-742E5E71E4D1} = {E7F9CDA1-E73F-4CB0-AE19-70A3C37E484C}
 		{C5EF3BF8-6144-4848-826B-318BFBEA9704} = {545294C3-2CC7-4F40-8FE2-7C49D898FD55}
 		{BEDAE24C-7E75-4DAD-8821-A60316C4DD9F} = {545294C3-2CC7-4F40-8FE2-7C49D898FD55}
 		{8E91A592-4ED1-4539-A088-BAAD178A5887} = {545294C3-2CC7-4F40-8FE2-7C49D898FD55}
 		{5275C929-3EA6-4967-BCF6-760629DB7243} = {545294C3-2CC7-4F40-8FE2-7C49D898FD55}
 		{CB945760-D704-4822-BA39-016175841F9A} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
-		{3D543FAD-C92A-4B30-9845-00EE6B67E3AA} = {E7F9CDA1-E73F-4CB0-AE19-70A3C37E484C}
 		{D7093FCF-998F-4653-8F35-936174666AB0} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
 		{CC4A8424-F605-44A5-B274-1DB9006AA5DE} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
 		{ED70EE1D-2AE4-467B-9638-21FF46B8F504} = {545294C3-2CC7-4F40-8FE2-7C49D898FD55}
+		{CF699804-8FD8-4CF0-B850-E98F82418B1E} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
+		{43351D6C-CF82-4679-A12E-2DBEEA5E7110} = {0082B452-004C-44BF-AB2F-32EB7D261242}
+		{5A2C3572-B8BC-4EA2-8953-C0589B61A3F3} = {43351D6C-CF82-4679-A12E-2DBEEA5E7110}
+		{0AA00B1C-C40A-4CBD-8B3E-D4AD39807BAB} = {43351D6C-CF82-4679-A12E-2DBEEA5E7110}
+		{A9FC9CF5-F834-421F-82C0-7F1414A6496A} = {5A2C3572-B8BC-4EA2-8953-C0589B61A3F3}
+		{7E671B3D-934E-4836-BAC9-BF2AFCDFE029} = {5A2C3572-B8BC-4EA2-8953-C0589B61A3F3}
+		{F63CD853-7F42-45A9-ACA0-DF37E45A2D7F} = {5A2C3572-B8BC-4EA2-8953-C0589B61A3F3}
+		{1E00A629-6748-470A-AE51-8C4EA282C87E} = {5A2C3572-B8BC-4EA2-8953-C0589B61A3F3}
+		{8A98D1D2-0C3B-4DB8-A833-9D0B2F514D29} = {5A2C3572-B8BC-4EA2-8953-C0589B61A3F3}
+		{3AEE6D97-8BAA-4CEA-BEF3-C9FCB12B58B9} = {5A2C3572-B8BC-4EA2-8953-C0589B61A3F3}
+		{2485362D-566B-4D52-A16F-BD1ED34410DB} = {5A2C3572-B8BC-4EA2-8953-C0589B61A3F3}
+		{97FA2EC9-128C-4906-A496-2DBE9B472029} = {5A2C3572-B8BC-4EA2-8953-C0589B61A3F3}
+		{A624ADA2-B8BF-48FA-964B-5E1C31B84B30} = {5A2C3572-B8BC-4EA2-8953-C0589B61A3F3}
+		{7906DEF1-1322-4586-A65C-702F4702455C} = {0AA00B1C-C40A-4CBD-8B3E-D4AD39807BAB}
+		{AC60FBC8-278A-4084-96F4-99B42ACF3179} = {0AA00B1C-C40A-4CBD-8B3E-D4AD39807BAB}
+		{8ADABB46-E05A-48EB-9F1D-4B1092E25C61} = {0AA00B1C-C40A-4CBD-8B3E-D4AD39807BAB}
+		{57A84510-68D7-4AD7-A449-C78ADD1B660C} = {0AA00B1C-C40A-4CBD-8B3E-D4AD39807BAB}
+		{E4D44521-4C65-41CA-895B-27D621F1FF92} = {0AA00B1C-C40A-4CBD-8B3E-D4AD39807BAB}
+		{C2A402E4-1E20-454F-8E2F-47A07FBD480F} = {545294C3-2CC7-4F40-8FE2-7C49D898FD55}
+		{DC04723A-041B-448E-B3AA-877B7FC60F03} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
+		{290105D0-789D-4F08-A950-5941008BB2BA} = {545294C3-2CC7-4F40-8FE2-7C49D898FD55}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4B66683B-4CA4-430A-9DBB-8A190FE25F86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -348,54 +363,6 @@ Global
 		{7FA951F2-071F-419A-8591-48FF913F8CE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FA951F2-071F-419A-8591-48FF913F8CE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FA951F2-071F-419A-8591-48FF913F8CE2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{864994A7-E5BC-4EDF-9408-0A93DACB1DB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{864994A7-E5BC-4EDF-9408-0A93DACB1DB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{864994A7-E5BC-4EDF-9408-0A93DACB1DB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{864994A7-E5BC-4EDF-9408-0A93DACB1DB1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{29E7FA4E-9DB5-4EF3-8BDB-A88AD85A6C29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{29E7FA4E-9DB5-4EF3-8BDB-A88AD85A6C29}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{29E7FA4E-9DB5-4EF3-8BDB-A88AD85A6C29}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{29E7FA4E-9DB5-4EF3-8BDB-A88AD85A6C29}.Release|Any CPU.Build.0 = Release|Any CPU
-		{65E29823-CD67-46D9-8FAE-62861328C928}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{65E29823-CD67-46D9-8FAE-62861328C928}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{65E29823-CD67-46D9-8FAE-62861328C928}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{65E29823-CD67-46D9-8FAE-62861328C928}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CB872BF1-EF85-4756-B9A3-1742D9C0E893}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CB872BF1-EF85-4756-B9A3-1742D9C0E893}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CB872BF1-EF85-4756-B9A3-1742D9C0E893}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CB872BF1-EF85-4756-B9A3-1742D9C0E893}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C745087F-A8B3-47AE-97A3-623B64CE6E06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C745087F-A8B3-47AE-97A3-623B64CE6E06}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C745087F-A8B3-47AE-97A3-623B64CE6E06}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C745087F-A8B3-47AE-97A3-623B64CE6E06}.Release|Any CPU.Build.0 = Release|Any CPU
-		{893BAE16-BC30-4CC3-BD76-B3988509E45B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{893BAE16-BC30-4CC3-BD76-B3988509E45B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{893BAE16-BC30-4CC3-BD76-B3988509E45B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{893BAE16-BC30-4CC3-BD76-B3988509E45B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6C2CF45C-56ED-47E5-ACE2-C288B6B4430A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6C2CF45C-56ED-47E5-ACE2-C288B6B4430A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6C2CF45C-56ED-47E5-ACE2-C288B6B4430A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6C2CF45C-56ED-47E5-ACE2-C288B6B4430A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9BD69923-0738-4636-B542-AEAB11BF86C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9BD69923-0738-4636-B542-AEAB11BF86C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9BD69923-0738-4636-B542-AEAB11BF86C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9BD69923-0738-4636-B542-AEAB11BF86C9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2B38DD9F-70D8-4B35-8D31-4A0546FBC905}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2B38DD9F-70D8-4B35-8D31-4A0546FBC905}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2B38DD9F-70D8-4B35-8D31-4A0546FBC905}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2B38DD9F-70D8-4B35-8D31-4A0546FBC905}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6708C22C-39C9-465A-A957-F8F757F42D5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6708C22C-39C9-465A-A957-F8F757F42D5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6708C22C-39C9-465A-A957-F8F757F42D5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6708C22C-39C9-465A-A957-F8F757F42D5F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{488E6AB9-B419-431E-9047-034F6903A8EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{488E6AB9-B419-431E-9047-034F6903A8EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{488E6AB9-B419-431E-9047-034F6903A8EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{488E6AB9-B419-431E-9047-034F6903A8EE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D37EEA40-1831-46AE-A859-742E5E71E4D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D37EEA40-1831-46AE-A859-742E5E71E4D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D37EEA40-1831-46AE-A859-742E5E71E4D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D37EEA40-1831-46AE-A859-742E5E71E4D1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C5EF3BF8-6144-4848-826B-318BFBEA9704}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C5EF3BF8-6144-4848-826B-318BFBEA9704}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5EF3BF8-6144-4848-826B-318BFBEA9704}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -416,10 +383,6 @@ Global
 		{CB945760-D704-4822-BA39-016175841F9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB945760-D704-4822-BA39-016175841F9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB945760-D704-4822-BA39-016175841F9A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3D543FAD-C92A-4B30-9845-00EE6B67E3AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3D543FAD-C92A-4B30-9845-00EE6B67E3AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3D543FAD-C92A-4B30-9845-00EE6B67E3AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3D543FAD-C92A-4B30-9845-00EE6B67E3AA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D7093FCF-998F-4653-8F35-936174666AB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D7093FCF-998F-4653-8F35-936174666AB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7093FCF-998F-4653-8F35-936174666AB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -432,5 +395,77 @@ Global
 		{ED70EE1D-2AE4-467B-9638-21FF46B8F504}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED70EE1D-2AE4-467B-9638-21FF46B8F504}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED70EE1D-2AE4-467B-9638-21FF46B8F504}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF699804-8FD8-4CF0-B850-E98F82418B1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF699804-8FD8-4CF0-B850-E98F82418B1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF699804-8FD8-4CF0-B850-E98F82418B1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF699804-8FD8-4CF0-B850-E98F82418B1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9FC9CF5-F834-421F-82C0-7F1414A6496A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9FC9CF5-F834-421F-82C0-7F1414A6496A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9FC9CF5-F834-421F-82C0-7F1414A6496A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9FC9CF5-F834-421F-82C0-7F1414A6496A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E671B3D-934E-4836-BAC9-BF2AFCDFE029}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E671B3D-934E-4836-BAC9-BF2AFCDFE029}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E671B3D-934E-4836-BAC9-BF2AFCDFE029}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E671B3D-934E-4836-BAC9-BF2AFCDFE029}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F63CD853-7F42-45A9-ACA0-DF37E45A2D7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F63CD853-7F42-45A9-ACA0-DF37E45A2D7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F63CD853-7F42-45A9-ACA0-DF37E45A2D7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F63CD853-7F42-45A9-ACA0-DF37E45A2D7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E00A629-6748-470A-AE51-8C4EA282C87E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E00A629-6748-470A-AE51-8C4EA282C87E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E00A629-6748-470A-AE51-8C4EA282C87E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E00A629-6748-470A-AE51-8C4EA282C87E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A98D1D2-0C3B-4DB8-A833-9D0B2F514D29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A98D1D2-0C3B-4DB8-A833-9D0B2F514D29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A98D1D2-0C3B-4DB8-A833-9D0B2F514D29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A98D1D2-0C3B-4DB8-A833-9D0B2F514D29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AEE6D97-8BAA-4CEA-BEF3-C9FCB12B58B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AEE6D97-8BAA-4CEA-BEF3-C9FCB12B58B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AEE6D97-8BAA-4CEA-BEF3-C9FCB12B58B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AEE6D97-8BAA-4CEA-BEF3-C9FCB12B58B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2485362D-566B-4D52-A16F-BD1ED34410DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2485362D-566B-4D52-A16F-BD1ED34410DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2485362D-566B-4D52-A16F-BD1ED34410DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2485362D-566B-4D52-A16F-BD1ED34410DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97FA2EC9-128C-4906-A496-2DBE9B472029}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97FA2EC9-128C-4906-A496-2DBE9B472029}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97FA2EC9-128C-4906-A496-2DBE9B472029}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97FA2EC9-128C-4906-A496-2DBE9B472029}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A624ADA2-B8BF-48FA-964B-5E1C31B84B30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A624ADA2-B8BF-48FA-964B-5E1C31B84B30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A624ADA2-B8BF-48FA-964B-5E1C31B84B30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A624ADA2-B8BF-48FA-964B-5E1C31B84B30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7906DEF1-1322-4586-A65C-702F4702455C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7906DEF1-1322-4586-A65C-702F4702455C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7906DEF1-1322-4586-A65C-702F4702455C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7906DEF1-1322-4586-A65C-702F4702455C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC60FBC8-278A-4084-96F4-99B42ACF3179}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC60FBC8-278A-4084-96F4-99B42ACF3179}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC60FBC8-278A-4084-96F4-99B42ACF3179}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC60FBC8-278A-4084-96F4-99B42ACF3179}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ADABB46-E05A-48EB-9F1D-4B1092E25C61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ADABB46-E05A-48EB-9F1D-4B1092E25C61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ADABB46-E05A-48EB-9F1D-4B1092E25C61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ADABB46-E05A-48EB-9F1D-4B1092E25C61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57A84510-68D7-4AD7-A449-C78ADD1B660C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57A84510-68D7-4AD7-A449-C78ADD1B660C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57A84510-68D7-4AD7-A449-C78ADD1B660C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57A84510-68D7-4AD7-A449-C78ADD1B660C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4D44521-4C65-41CA-895B-27D621F1FF92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4D44521-4C65-41CA-895B-27D621F1FF92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4D44521-4C65-41CA-895B-27D621F1FF92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4D44521-4C65-41CA-895B-27D621F1FF92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2A402E4-1E20-454F-8E2F-47A07FBD480F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2A402E4-1E20-454F-8E2F-47A07FBD480F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2A402E4-1E20-454F-8E2F-47A07FBD480F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2A402E4-1E20-454F-8E2F-47A07FBD480F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC04723A-041B-448E-B3AA-877B7FC60F03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC04723A-041B-448E-B3AA-877B7FC60F03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC04723A-041B-448E-B3AA-877B7FC60F03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC04723A-041B-448E-B3AA-877B7FC60F03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{290105D0-789D-4F08-A950-5941008BB2BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{290105D0-789D-4F08-A950-5941008BB2BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{290105D0-789D-4F08-A950-5941008BB2BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{290105D0-789D-4F08-A950-5941008BB2BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

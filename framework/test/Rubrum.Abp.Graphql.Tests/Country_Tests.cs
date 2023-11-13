@@ -57,22 +57,22 @@ public class CountryTests : RubrumAbpGraphqlTestBase
     public async Task FetchList()
     {
         await using var result = await ExecuteRequestAsync(b => b.SetQuery(
-            $$"""
-              query {
-                  countries {
-                      nodes {
-                        id
-                        name
-                      }
-                      pageInfo {
-                        endCursor
-                        hasNextPage
-                        hasPreviousPage
-                        startCursor
-                      }
-                  }
-              }
-              """
+            """
+            query {
+                countries {
+                    nodes {
+                      id
+                      name
+                    }
+                    pageInfo {
+                      endCursor
+                      hasNextPage
+                      hasPreviousPage
+                      startCursor
+                    }
+                }
+            }
+            """
         ));
 
         result.MatchSnapshot();

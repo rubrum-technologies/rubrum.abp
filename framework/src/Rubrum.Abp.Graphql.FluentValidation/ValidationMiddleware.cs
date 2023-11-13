@@ -2,7 +2,6 @@
 using FluentValidation;
 using HotChocolate.Resolvers;
 using Microsoft.Extensions.DependencyInjection;
-using Rubrum.Abp.Graphql.Extensions;
 using Volo.Abp;
 using Volo.Abp.Validation;
 

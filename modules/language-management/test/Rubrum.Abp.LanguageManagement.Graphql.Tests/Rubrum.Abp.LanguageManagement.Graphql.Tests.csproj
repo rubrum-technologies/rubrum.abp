@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="..\..\..\..\common.test.props"/>
+    <Import Project="..\..\..\..\fody.props"/>
+
+    <PropertyGroup>
+        <RootNamespace>Rubrum.Abp.LanguageManagement</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\..\framework\src\Rubrum.Abp.Graphql.TestBase\Rubrum.Abp.Graphql.TestBase.csproj" />
+        <ProjectReference Include="..\..\src\Rubrum.Abp.LanguageManagement.Graphql\Rubrum.Abp.LanguageManagement.Graphql.csproj" />
+        <ProjectReference Include="..\Rubrum.Abp.LanguageManagement.EntityFrameworkCore.Tests\Rubrum.Abp.LanguageManagement.EntityFrameworkCore.Tests.csproj" />
+    </ItemGroup>
+</Project>
