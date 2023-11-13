@@ -1,0 +1,21 @@
+{
+  "culture": "en",
+  "texts": {
+    "Validator:ExactLength" : "Exact length {0}",
+    "Validator:MaximumLength" : "Maximum length {0}",
+    "Validator:MinimumLength" : "Minimum length {0}",
+    "Validator:Length" : "Minimum length {0}, maximum length {1}",
+    "Validator:Null" : "Null",
+    "Validator:NotNull" : "Not null",
+    "Validator:NotEmpty" : "Not empty",
+    "Validator:InclusiveBetween" : "Inclusive between from {0} to {1}",
+    "Validator:Between" : "Between from {0} to {1}",
+    "Validator:Equal" : "Equal {0}",
+    "Validator:GreaterThanOrEqual" : "Greater than or equal {0}",
+    "Validator:LessThanOrEqual" : "Less than or equal {0}",
+    "Validator:Comparison" : "Comparison {0}",
+    "Validator:Email" : "Email",
+    "Validator:Predicate" : "Predicate",
+    "Validator:RegularExpression" : "Regular Expression {0} not valid"
+  }
+}
