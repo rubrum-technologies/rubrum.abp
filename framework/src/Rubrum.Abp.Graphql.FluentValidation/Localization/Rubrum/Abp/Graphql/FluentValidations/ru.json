@@ -1,0 +1,21 @@
+{
+  "culture": "ru",
+  "texts": {
+    "Validator:ExactLength" : "Точная длина",
+    "Validator:MaximumLength" : "Максимальная длина",
+    "Validator:MinimumLength" : "Минимальная длина",
+    "Validator:Length" : "Длина",
+    "Validator:Null" : "Нулевой",
+    "Validator:NotNull" : "Не ноль",
+    "Validator:NotEmpty" : "Не пусто",
+    "Validator:InclusiveBetween" : "Включительно между",
+    "Validator:Between" : "Между",
+    "Validator:Equal" : "Равный",
+    "Validator:GreaterThanOrEqual" : "Больше или равно",
+    "Validator:LessThanOrEqual" : "Меньше или равно",
+    "Validator:Comparison" : "Сравнение",
+    "Validator:Email" : "Электронная почта",
+    "Validator:Predicate" : "Предикат",
+    "Validator:RegularExpression" : "Регулярное выражение"
+  }
+}

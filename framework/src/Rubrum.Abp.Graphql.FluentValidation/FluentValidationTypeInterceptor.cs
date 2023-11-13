@@ -3,7 +3,10 @@ using FluentValidation.Validators;
 using HotChocolate.Configuration;
 using HotChocolate.Resolvers;
 using HotChocolate.Types.Descriptors.Definitions;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Localization;
 using Rubrum.Abp.Graphql.Extensions;
+using Rubrum.Abp.Graphql.Localization.Rubrum.Abp.Graphql;
 
 namespace Rubrum.Abp.Graphql;
 
@@ -23,7 +26,7 @@ public class FluentValidationTypeInterceptor : TypeInterceptor
             return;
         }
 
-        var descriptions = GetDescriptions(validator);
+        var descriptions = GetDescriptions(validator, completionContext);
 
         foreach (var (propertyName, values) in descriptions)
         {
@@ -86,7 +89,9 @@ public class FluentValidationTypeInterceptor : TypeInterceptor
         return (validator, type);
     }
 
-    private static Dictionary<string, List<string>> GetDescriptions(IValidator validator)
+    private static Dictionary<string, List<string>> GetDescriptions(
+        IValidator validator, 
+        ITypeCompletionContext completionContext)
     {
         var result = new Dictionary<string, List<string>>();
 
@@ -95,35 +100,38 @@ public class FluentValidationTypeInterceptor : TypeInterceptor
             return result;
         }
 
+        var localizer = completionContext.Services.GetRequiredService<IStringLocalizer<RubrumAbpGraphqlFluentValidationsResource>>();
+        
         foreach (var rule in rules)
         {
             var list = result.GetOrAdd(rule.PropertyName, _ => new List<string>());
-            list.AddRange(rule.Components.Select(component => GetDescription(component.Validator)));
+            list.AddRange(rule.Components.Select(component => GetDescription(component.Validator, localizer)));
         }
 
         return result;
     }
 
-    private static string GetDescription(IPropertyValidator validator)
+    private static string GetDescription(
+        IPropertyValidator validator, 
+        IStringLocalizer<RubrumAbpGraphqlFluentValidationsResource> localizer)
     {
-        // TODO: Сделать через локализацию Abp
         return validator switch {
-            IExactLengthValidator => "IExactLengthValidator",
-            IMaximumLengthValidator => "IMaximumLengthValidator",
-            IMinimumLengthValidator => "IMinimumLengthValidator",
-            ILengthValidator => "ILengthValidator",
-            INullValidator => "INullValidator",
-            INotNullValidator => "INotNullValidator",
-            INotEmptyValidator => "INotEmptyValidator",
-            IInclusiveBetweenValidator => "IInclusiveBetweenValidator",
-            IBetweenValidator => "IBetweenValidator",
-            IEqualValidator => "IEqualValidator",
-            IGreaterThanOrEqualValidator => "IGreaterThanOrEqualValidator",
-            ILessThanOrEqualValidator => "ILessThanOrEqualValidator",
-            IComparisonValidator => "IComparisonValidator",
-            IEmailValidator => "IEmailValidator",
-            IPredicateValidator => "IPredicateValidator",
-            IRegularExpressionValidator => "IRegularExpressionValidator",
+            IExactLengthValidator v => localizer["Validator:ExactLength", v.Min, v.Max],
+            IMaximumLengthValidator v => localizer["Validator:MaximumLength",v.Max],
+            IMinimumLengthValidator v => localizer["Validator:MinimumLength", v.Min],
+            ILengthValidator v => localizer["Validator:Length", v.Min, v.Max],
+            INullValidator v => localizer["Validator:Null"],
+            INotNullValidator v => localizer["Validator:NotNull"],
+            INotEmptyValidator v => localizer["Validator:NotEmpty"],
+            IInclusiveBetweenValidator v => localizer["Validator:InclusiveBetween", v.From, v.To],
+            IBetweenValidator v => localizer["Validator:Between", v.From, v.To],
+            IEqualValidator v => localizer["Validator:Equal", v.Comparison, v.MemberToCompare, v.ValueToCompare],
+            IGreaterThanOrEqualValidator v => localizer["Validator:GreaterThanOrEqual", v.ValueToCompare],
+            ILessThanOrEqualValidator v => localizer["Validator:LessThanOrEqual", v.ValueToCompare],
+            IComparisonValidator v => localizer["Validator:Comparison", v.Comparison, v.MemberToCompare, v.ValueToCompare],
+            IEmailValidator v => localizer["Validator:Email"],
+            IPredicateValidator v => localizer["Validator:Predicate"],
+            IRegularExpressionValidator v => localizer["Validator:RegularExpression", v.Expression],
             _ => ""
         };
     }

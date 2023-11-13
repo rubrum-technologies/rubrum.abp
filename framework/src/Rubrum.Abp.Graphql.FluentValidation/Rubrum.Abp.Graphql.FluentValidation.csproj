@@ -4,6 +4,7 @@
 
     <PropertyGroup>
         <RootNamespace>Rubrum.Abp.Graphql</RootNamespace>
+        <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
     </PropertyGroup>
 
     <ItemGroup>
@@ -12,5 +13,12 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Rubrum.Abp.Graphql\Rubrum.Abp.Graphql.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="Localization\**\*.json"/>
+        <Content Remove="Localization\**\*.json"/>
+        <EmbeddedResource Include="Localization\**\*.json"/>
+        <Content Remove="Localization\**\*.json"/>
     </ItemGroup>
 </Project>
