@@ -3,7 +3,9 @@ using Rubrum.Abp.Graphql.Extensions;
 using Rubrum.Abp.Graphql.Localization.Rubrum.Abp.Graphql;
 using Volo.Abp.FluentValidation;
 using Volo.Abp.Localization;
+using Volo.Abp.Localization.ExceptionHandling;
 using Volo.Abp.Modularity;
+using Volo.Abp.VirtualFileSystem;
 
 namespace Rubrum.Abp.Graphql;
 
@@ -17,6 +19,11 @@ public class RubrumAbpGraphqlFluentValidationModule : AbpModule
         var graphql = context.Services.GetGraphql();
 
         graphql.TryAddTypeInterceptor<FluentValidationTypeInterceptor>();
+
+        Configure<AbpVirtualFileSystemOptions>(options =>
+        {
+            options.FileSets.AddEmbedded<RubrumAbpGraphqlFluentValidationModule>();
+        });
         
         Configure<AbpLocalizationOptions>(options =>
         {
@@ -25,6 +32,11 @@ public class RubrumAbpGraphqlFluentValidationModule : AbpModule
                 .AddVirtualJson("/Localization/Rubrum/Abp/Graphql/FluentValidation");
 
             options.DefaultResourceType = typeof(RubrumAbpGraphqlFluentValidationResource);
+        });
+
+        Configure<AbpExceptionLocalizationOptions>(options =>
+        {
+            options.MapCodeNamespace("Rubrum.Abp.Graphql", typeof(RubrumAbpGraphqlFluentValidationResource));
         });
     }
 }

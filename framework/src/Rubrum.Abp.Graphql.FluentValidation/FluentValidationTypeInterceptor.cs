@@ -26,7 +26,7 @@ public class FluentValidationTypeInterceptor : TypeInterceptor
             return;
         }
 
-        var descriptions = GetDescriptions(validator, completionContext);
+        var descriptions = GetDescriptions(completionContext, validator);
 
         foreach (var (propertyName, values) in descriptions)
         {
@@ -90,8 +90,8 @@ public class FluentValidationTypeInterceptor : TypeInterceptor
     }
 
     private static Dictionary<string, List<string>> GetDescriptions(
-        IValidator validator, 
-        ITypeCompletionContext completionContext)
+        ITypeCompletionContext completionContext,
+        IValidator validator)
     {
         var result = new Dictionary<string, List<string>>();
 
@@ -130,7 +130,6 @@ public class FluentValidationTypeInterceptor : TypeInterceptor
             ILessThanOrEqualValidator v => localizer["Validator:LessThanOrEqual", v.ValueToCompare],
             IComparisonValidator v => localizer["Validator:Comparison", v.ValueToCompare],
             IEmailValidator => localizer["Validator:Email"],
-            IPredicateValidator => localizer["Validator:Predicate"],
             IRegularExpressionValidator v => localizer["Validator:RegularExpression", v.Expression],
             _ => ""
         };
