@@ -3,9 +3,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <LangVersion>11</LangVersion>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
-
     <Authors>Rubrum Technologies</Authors>
-    
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>

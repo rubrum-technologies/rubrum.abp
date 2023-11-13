@@ -1,0 +1,20 @@
+{
+  "culture": "ru",
+  "texts": {
+    "Validator:ExactLength" : "Точная длина '{0}'",
+    "Validator:MaximumLength" : "Максимальная длина '{0}'",
+    "Validator:MinimumLength" : "Минимальная длина '{0}'",
+    "Validator:Length" : "Минимальная длина '{0}', максимальная длина '{1}'",
+    "Validator:Null" : "Должен быть пустым",
+    "Validator:NotNull" : "Обязательный",
+    "Validator:NotEmpty" : "Обязательный и не пустой",
+    "Validator:InclusiveBetween" : "Включительно между '{0}' и '{1}'",
+    "Validator:Between" : "Между '{0}' и '{1}'",
+    "Validator:Equal" : "Равно значению '{0}'",
+    "Validator:GreaterThanOrEqual" : "Больше или равно '{0}'",
+    "Validator:LessThanOrEqual" : "Меньше или равно '{0}'",
+    "Validator:Comparison" : "Равен значению '{0}'",
+    "Validator:Email" : "Содержит электронную почту",
+    "Validator:RegularExpression" : "Соответствует регулярному выражению '{0}'"
+  }
+}

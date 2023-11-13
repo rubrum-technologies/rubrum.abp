@@ -9,9 +9,9 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)"/>
     </ItemGroup>
-    
+
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Rubrum.Abp.Keycloak.Graphql\Rubrum.Abp.Keycloak.Graphql.csproj" />
-      <ProjectReference Include="..\Rubrum.Abp.Keycloak.TestBase\Rubrum.Abp.Keycloak.TestBase.csproj" />
+        <ProjectReference Include="..\..\src\Rubrum.Abp.Keycloak.Graphql\Rubrum.Abp.Keycloak.Graphql.csproj"/>
+        <ProjectReference Include="..\Rubrum.Abp.Keycloak.TestBase\Rubrum.Abp.Keycloak.TestBase.csproj"/>
     </ItemGroup>
 </Project>

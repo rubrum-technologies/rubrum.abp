@@ -7,8 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Rubrum.Abp.MultilingualObjects.EntityFrameworkCore\Rubrum.Abp.MultilingualObjects.EntityFrameworkCore.csproj" />
-      <ProjectReference Include="..\Rubrum.Abp.MultilingualObjects.TestBase\Rubrum.Abp.MultilingualObjects.TestBase.csproj" />
+        <ProjectReference Include="..\..\src\Rubrum.Abp.MultilingualObjects.EntityFrameworkCore\Rubrum.Abp.MultilingualObjects.EntityFrameworkCore.csproj"/>
+        <ProjectReference Include="..\Rubrum.Abp.MultilingualObjects.TestBase\Rubrum.Abp.MultilingualObjects.TestBase.csproj"/>
     </ItemGroup>
 
 </Project>

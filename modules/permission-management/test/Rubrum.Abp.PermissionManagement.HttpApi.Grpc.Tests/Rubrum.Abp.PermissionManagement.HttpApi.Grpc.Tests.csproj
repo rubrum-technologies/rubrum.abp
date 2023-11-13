@@ -22,6 +22,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Rubrum.Abp.PermissionManagement.HttpApi.Grpc\Rubrum.Abp.PermissionManagement.HttpApi.Grpc.csproj" />
+        <ProjectReference Include="..\..\src\Rubrum.Abp.PermissionManagement.HttpApi.Grpc\Rubrum.Abp.PermissionManagement.HttpApi.Grpc.csproj"/>
     </ItemGroup>
 </Project>

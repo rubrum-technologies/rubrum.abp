@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Rubrum.Abp.MultilingualObjects.Domain\Rubrum.Abp.MultilingualObjects.Domain.csproj" />
+        <ProjectReference Include="..\Rubrum.Abp.MultilingualObjects.Domain\Rubrum.Abp.MultilingualObjects.Domain.csproj"/>
     </ItemGroup>
 
 </Project>

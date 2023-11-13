@@ -1,0 +1,10 @@
+{
+  "data": {
+    "createCountry": {
+      "country": {
+        "name": "Test"
+      },
+      "errors": null
+    }
+  }
+}

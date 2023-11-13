@@ -9,8 +9,8 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)"/>
     </ItemGroup>
-    
+
     <ItemGroup>
-      <ProjectReference Include="..\Rubrum.Abp.Keycloak.TestBase\Rubrum.Abp.Keycloak.TestBase.csproj" />
+        <ProjectReference Include="..\Rubrum.Abp.Keycloak.TestBase\Rubrum.Abp.Keycloak.TestBase.csproj"/>
     </ItemGroup>
 </Project>

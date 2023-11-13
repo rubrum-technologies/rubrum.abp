@@ -21,6 +21,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Rubrum.Abp.Keycloak\Rubrum.Abp.Keycloak.csproj" />
+        <ProjectReference Include="..\..\src\Rubrum.Abp.Keycloak\Rubrum.Abp.Keycloak.csproj"/>
     </ItemGroup>
 </Project>

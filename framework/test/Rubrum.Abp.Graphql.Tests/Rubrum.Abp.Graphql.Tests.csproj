@@ -16,17 +16,11 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="CookieCrumble" Version="$(HotChocolatePackageVersion)"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Volo.Abp.TestBase" Version="$(AbpPackageVersion)"/>
-        <PackageReference Include="Volo.Abp.Autofac" Version="$(AbpPackageVersion)"/>
         <PackageReference Include="Volo.Abp.Authorization" Version="$(AbpPackageVersion)"/>
         <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="$(AbpPackageVersion)"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Rubrum.Abp.Graphql\Rubrum.Abp.Graphql.csproj" />
+        <ProjectReference Include="..\..\src\Rubrum.Abp.Graphql.TestBase\Rubrum.Abp.Graphql.TestBase.csproj"/>
     </ItemGroup>
 </Project>
