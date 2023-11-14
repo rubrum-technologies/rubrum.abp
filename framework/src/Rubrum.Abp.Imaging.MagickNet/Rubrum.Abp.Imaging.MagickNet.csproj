@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\common.props"/>
+  <Import Project="..\..\..\fody.props"/>
+
+  <PropertyGroup>
+    <RootNamespace>Rubrum.Abp.Imaging.MagickNet</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="13.4.0"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Rubrum.Abp.Imaging.Abstractions\Rubrum.Abp.Imaging.Abstractions.csproj" />
+  </ItemGroup>
+</Project>

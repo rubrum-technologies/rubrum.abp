@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Rubrum.Abp.Graphql;
 
-public class SchemaTests : RubrumAbpGraphqlFluentValidationTestBase
+public class SchemaTests : GraphqlFluentValidationTestBase
 {
     private readonly IRequestExecutorBuilder _builder;
 
