@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Volo.Abp.Authorization.Abstractions" Version="$(AbpPackageVersion)"/>
     <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="$(AbpPackageVersion)"/>
   </ItemGroup>
 

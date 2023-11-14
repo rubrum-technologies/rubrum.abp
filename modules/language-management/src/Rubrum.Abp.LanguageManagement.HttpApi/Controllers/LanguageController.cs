@@ -4,7 +4,7 @@ using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.AspNetCore.Mvc;
 using static Rubrum.Abp.LanguageManagement.Permissions.LanguageManagementPermissions.Languages;
-using static Rubrum.Abp.LanguageManagement.RubrumAbpLanguageManagementRemoteServiceConstants;
+using static Rubrum.Abp.LanguageManagement.LanguageManagementRemoteServiceConstants;
 
 namespace Rubrum.Abp.LanguageManagement.Controllers;
 

@@ -5,12 +5,15 @@
   <PropertyGroup>
     <RootNamespace>Rubrum.Abp.ImageStoring</RootNamespace>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Ddd.Domain" Version="$(AbpPackageVersion)"/>
+    <PackageReference Include="Volo.Abp.BlobStoring" Version="$(AbpPackageVersion)"/>
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\framework\src\Rubrum.Abp.Data\Rubrum.Abp.Data.csproj" />
+    <ProjectReference Include="..\..\..\..\framework\src\Rubrum.Abp.Imaging.Abstractions\Rubrum.Abp.Imaging.Abstractions.csproj" />
     <ProjectReference Include="..\Rubrum.Abp.ImageStoring.Domain.Shared\Rubrum.Abp.ImageStoring.Domain.Shared.csproj"/>
   </ItemGroup>
 </Project>

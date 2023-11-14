@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Rubrum.Abp.Graphql;
 
-public class FluentValidationTests : RubrumAbpGraphqlFluentValidationTestBase
+public class FluentValidationTests : GraphqlFluentValidationTestBase
 {
     [Fact]
     public async Task Successfully()

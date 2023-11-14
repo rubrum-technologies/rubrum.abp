@@ -98,8 +98,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Graphql.Tests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Data.Tests", "framework\test\Rubrum.Abp.Data.Tests\Rubrum.Abp.Data.Tests.csproj", "{8E91A592-4ED1-4539-A088-BAAD178A5887}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Cqrs.Mediatr.Tests", "framework\test\Rubrum.Abp.Cqrs.Mediatr.Tests\Rubrum.Abp.Cqrs.Mediatr.Tests.csproj", "{5275C929-3EA6-4967-BCF6-760629DB7243}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Keycloak.Abstractions", "framework\src\Rubrum.Abp.Keycloak.Abstractions\Rubrum.Abp.Keycloak.Abstractions.csproj", "{CB945760-D704-4822-BA39-016175841F9A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Graphql.FluentValidation", "framework\src\Rubrum.Abp.Graphql.FluentValidation\Rubrum.Abp.Graphql.FluentValidation.csproj", "{D7093FCF-998F-4653-8F35-936174666AB0}"
@@ -149,6 +147,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Graphql.MultilingualObjects", "framework\src\Rubrum.Abp.Graphql.MultilingualObjects\Rubrum.Abp.Graphql.MultilingualObjects.csproj", "{DC04723A-041B-448E-B3AA-877B7FC60F03}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Graphql.MultilingualObjects.Tests", "framework\test\Rubrum.Abp.Graphql.MultilingualObjects.Tests\Rubrum.Abp.Graphql.MultilingualObjects.Tests.csproj", "{290105D0-789D-4F08-A950-5941008BB2BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Imaging.Abstractions", "framework\src\Rubrum.Abp.Imaging.Abstractions\Rubrum.Abp.Imaging.Abstractions.csproj", "{4DCCEE1B-FBDE-4414-A6F7-C85FECAC191D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Imaging.MagickNet", "framework\src\Rubrum.Abp.Imaging.MagickNet\Rubrum.Abp.Imaging.MagickNet.csproj", "{F0D65A4E-82CA-40F9-A9CC-DB8BA0F0FF30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Imaging.MagickNet.Tests", "framework\test\Rubrum.Abp.Imaging.MagickNet.Tests\Rubrum.Abp.Imaging.MagickNet.Tests.csproj", "{CC5C5BD3-5730-421D-8C87-A61B2CBB8FB9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -203,7 +207,6 @@ Global
 		{C5EF3BF8-6144-4848-826B-318BFBEA9704} = {545294C3-2CC7-4F40-8FE2-7C49D898FD55}
 		{BEDAE24C-7E75-4DAD-8821-A60316C4DD9F} = {545294C3-2CC7-4F40-8FE2-7C49D898FD55}
 		{8E91A592-4ED1-4539-A088-BAAD178A5887} = {545294C3-2CC7-4F40-8FE2-7C49D898FD55}
-		{5275C929-3EA6-4967-BCF6-760629DB7243} = {545294C3-2CC7-4F40-8FE2-7C49D898FD55}
 		{CB945760-D704-4822-BA39-016175841F9A} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
 		{D7093FCF-998F-4653-8F35-936174666AB0} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
 		{CC4A8424-F605-44A5-B274-1DB9006AA5DE} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
@@ -229,6 +232,9 @@ Global
 		{C2A402E4-1E20-454F-8E2F-47A07FBD480F} = {545294C3-2CC7-4F40-8FE2-7C49D898FD55}
 		{DC04723A-041B-448E-B3AA-877B7FC60F03} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
 		{290105D0-789D-4F08-A950-5941008BB2BA} = {545294C3-2CC7-4F40-8FE2-7C49D898FD55}
+		{4DCCEE1B-FBDE-4414-A6F7-C85FECAC191D} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
+		{F0D65A4E-82CA-40F9-A9CC-DB8BA0F0FF30} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
+		{CC5C5BD3-5730-421D-8C87-A61B2CBB8FB9} = {545294C3-2CC7-4F40-8FE2-7C49D898FD55}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4B66683B-4CA4-430A-9DBB-8A190FE25F86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -375,10 +381,6 @@ Global
 		{8E91A592-4ED1-4539-A088-BAAD178A5887}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E91A592-4ED1-4539-A088-BAAD178A5887}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E91A592-4ED1-4539-A088-BAAD178A5887}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5275C929-3EA6-4967-BCF6-760629DB7243}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5275C929-3EA6-4967-BCF6-760629DB7243}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5275C929-3EA6-4967-BCF6-760629DB7243}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5275C929-3EA6-4967-BCF6-760629DB7243}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CB945760-D704-4822-BA39-016175841F9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CB945760-D704-4822-BA39-016175841F9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB945760-D704-4822-BA39-016175841F9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -467,5 +469,17 @@ Global
 		{290105D0-789D-4F08-A950-5941008BB2BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{290105D0-789D-4F08-A950-5941008BB2BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{290105D0-789D-4F08-A950-5941008BB2BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DCCEE1B-FBDE-4414-A6F7-C85FECAC191D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DCCEE1B-FBDE-4414-A6F7-C85FECAC191D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DCCEE1B-FBDE-4414-A6F7-C85FECAC191D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DCCEE1B-FBDE-4414-A6F7-C85FECAC191D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0D65A4E-82CA-40F9-A9CC-DB8BA0F0FF30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0D65A4E-82CA-40F9-A9CC-DB8BA0F0FF30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0D65A4E-82CA-40F9-A9CC-DB8BA0F0FF30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0D65A4E-82CA-40F9-A9CC-DB8BA0F0FF30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC5C5BD3-5730-421D-8C87-A61B2CBB8FB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC5C5BD3-5730-421D-8C87-A61B2CBB8FB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC5C5BD3-5730-421D-8C87-A61B2CBB8FB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC5C5BD3-5730-421D-8C87-A61B2CBB8FB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

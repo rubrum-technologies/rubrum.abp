@@ -4,13 +4,23 @@
 
   <PropertyGroup>
     <RootNamespace>Rubrum.Abp.ImageStoring</RootNamespace>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
   </PropertyGroup>
-
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="$(MicrosoftPackageVersion)"/>
+  </ItemGroup>
+  
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Ddd.Domain.Shared" Version="$(AbpPackageVersion)"/>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\framework\src\Rubrum.Abp.Core\Rubrum.Abp.Core.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Localization\Rubrum\Abp\ImageStoring\*.json"/>
+    <Content Remove="Localization\Rubrum\Abp\ImageStoring\*.json"/>
   </ItemGroup>
 </Project>
