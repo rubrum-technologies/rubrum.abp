@@ -20,7 +20,7 @@ public class RubrumAbpLanguageManagementDomainSharedModule : AbpModule
         Configure<AbpLocalizationOptions>(options =>
         {
             options.Resources
-                .Add<RubrumAbpLanguageManagementResource>("ru")
+                .Add<RubrumAbpLanguageManagementResource>("en")
                 .AddVirtualJson("/Localization/Rubrum/Abp/LanguageManagement");
 
             options.DefaultResourceType = typeof(RubrumAbpLanguageManagementResource);

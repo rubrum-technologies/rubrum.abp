@@ -20,7 +20,7 @@ public class RubrumAbpImageStoringDomainSharedModule : AbpModule
         Configure<AbpLocalizationOptions>(options =>
         {
             options.Resources
-                .Add<RubrumAbpImageStoringResource>("ru")
+                .Add<RubrumAbpImageStoringResource>("en")
                 .AddVirtualJson("/Localization/Rubrum/Abp/ImageStoring");
         });
 

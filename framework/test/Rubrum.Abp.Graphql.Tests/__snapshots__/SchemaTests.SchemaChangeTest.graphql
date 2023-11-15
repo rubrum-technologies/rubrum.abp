@@ -1,218 +1,218 @@
 schema {
-    query: Query
-    mutation: Mutation
+  query: Query
+  mutation: Mutation
 }
 
 "This interface can be implemented to store creation information (who and when created)."
 interface CreationAuditedObject implements HasCreationTime & MayHaveCreator {
-    creationTime: DateTime
-    creatorId: ID
+  creationTime: DateTime
+  creatorId: ID
 }
 
 "This interface can be implemented to store deletion information (who delete and when deleted)."
 interface DeletionAuditedObject implements HasDeletionTime & SoftDelete {
-    deleterId: ID
-    deletionTime: DateTime
-    isDeleted: Boolean
+  deleterId: ID
+  deletionTime: DateTime
+  isDeleted: Boolean
 }
 
 interface EntityOfGuid {
-    id: ID!
+  id: ID!
 }
 
 interface EntityOfInt32 {
-    id: ID!
+  id: ID!
 }
 
 interface Error {
-    message: String!
+  message: String!
 }
 
 "A standard interface to add CreationTime property."
 interface HasCreationTime {
-    creationTime: DateTime
+  creationTime: DateTime
 }
 
 "A standard interface to add DeletionTime property to a class. It also makes the class soft delete (see ISoftDelete)."
 interface HasDeletionTime implements SoftDelete {
-    deletionTime: DateTime
-    isDeleted: Boolean
+  deletionTime: DateTime
+  isDeleted: Boolean
 }
 
 "A standard interface to add DeletionTime property to a class."
 interface HasModificationTime {
-    lastModificationTime: DateTime
+  lastModificationTime: DateTime
 }
 
 "Standard interface for an entity that MAY have a creator."
 interface MayHaveCreator {
-    creatorId: ID
+  creatorId: ID
 }
 
 "This interface can be implemented to store modification information (who and when modified lastly)."
 interface ModificationAuditedObject implements HasModificationTime {
-    lastModifierId: ID
-    lastModificationTime: DateTime
+  lastModifierId: ID
+  lastModificationTime: DateTime
 }
 
 "The node interface is implemented by entities that have a global unique identifier."
 interface Node {
-    id: ID!
+  id: ID!
 }
 
 " Used to standardize soft deleting entities. Soft-delete entities are not actually deleted, marked as IsDeleted = true in the database, but can not be retrieved to the application normally."
 interface SoftDelete {
-    isDeleted: Boolean
+  isDeleted: Boolean
 }
 
 type BusinessError implements Error {
-    code: String
-    details: String
-    message: String!
+  code: String
+  details: String
+  message: String!
 }
 
 "A connection to a list of items."
 type CitiesConnection {
-    "Information to aid in pagination."
-    pageInfo: PageInfo!
-    "A list of edges."
-    edges: [CitiesEdge!]
-    "A flattened list of the nodes."
-    nodes: [City!]
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [CitiesEdge!]
+  "A flattened list of the nodes."
+  nodes: [City!]
 }
 
 "An edge in a connection."
 type CitiesEdge {
-    "A cursor for use in pagination."
-    cursor: String!
-    "The item at the end of the edge."
-    node: City!
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: City!
 }
 
 type City implements EntityOfInt32 & Node & MayHaveCreator & HasCreationTime & CreationAuditedObject & HasModificationTime & ModificationAuditedObject & SoftDelete & HasDeletionTime & DeletionAuditedObject {
-    id: ID!
-    creatorId: ID
-    creationTime: DateTime
-    lastModificationTime: DateTime
-    lastModifierId: ID
-    isDeleted: Boolean!
-    deletionTime: DateTime
-    deleterId: ID
-    countryId: ID!
-    name: String!
+  id: ID!
+  creatorId: ID
+  creationTime: DateTime
+  lastModificationTime: DateTime
+  lastModifierId: ID
+  isDeleted: Boolean!
+  deletionTime: DateTime
+  deleterId: ID
+  countryId: ID!
+  name: String!
 }
 
 "A connection to a list of items."
 type CountriesConnection {
-    "Information to aid in pagination."
-    pageInfo: PageInfo!
-    "A list of edges."
-    edges: [CountriesEdge!]
-    "A flattened list of the nodes."
-    nodes: [Country!]
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [CountriesEdge!]
+  "A flattened list of the nodes."
+  nodes: [Country!]
 }
 
 "An edge in a connection."
 type CountriesEdge {
-    "A cursor for use in pagination."
-    cursor: String!
-    "The item at the end of the edge."
-    node: Country!
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Country!
 }
 
 type Country implements EntityOfGuid & Node & MayHaveCreator & HasCreationTime & CreationAuditedObject & HasModificationTime & ModificationAuditedObject & SoftDelete & HasDeletionTime & DeletionAuditedObject {
-    id: ID!
-    creatorId: ID
-    creationTime: DateTime
-    lastModificationTime: DateTime
-    lastModifierId: ID
-    isDeleted: Boolean!
-    deletionTime: DateTime
-    deleterId: ID
-    name: String!
+  id: ID!
+  creatorId: ID
+  creationTime: DateTime
+  lastModificationTime: DateTime
+  lastModifierId: ID
+  isDeleted: Boolean!
+  deletionTime: DateTime
+  deleterId: ID
+  name: String!
 }
 
 type CreateCityPayload {
-    city: City
-    errors: [CreateCityError!]
+  city: City
+  errors: [CreateCityError!]
 }
 
 type CreateCountryPayload {
-    country: Country
-    errors: [CreateCountryError!]
+  country: Country
+  errors: [CreateCountryError!]
 }
 
 type DeleteCityPayload {
-    city: City
-    errors: [DeleteCityError!]
+  city: City
+  errors: [DeleteCityError!]
 }
 
 type DeleteCountryPayload {
-    country: Country
-    errors: [DeleteCountryError!]
+  country: Country
+  errors: [DeleteCountryError!]
 }
 
 type EntityNotFoundError implements Error {
-    id: String
-    type: String
-    message: String!
+  id: String
+  type: String
+  message: String!
 }
 
 type Mutation {
-    createCity(input: CreateCityInput!): CreateCityPayload!
-    updateCity(input: UpdateCityInput!): UpdateCityPayload!
-    deleteCity(input: DeleteCityInput!): DeleteCityPayload!
-    createCountry(input: CreateCountryInput!): CreateCountryPayload!
-    updateCountry(input: UpdateCountryInput!): UpdateCountryPayload!
-    deleteCountry(input: DeleteCountryInput!): DeleteCountryPayload!
+  createCity(input: CreateCityInput!): CreateCityPayload!
+  updateCity(input: UpdateCityInput!): UpdateCityPayload!
+  deleteCity(input: DeleteCityInput!): DeleteCityPayload!
+  createCountry(input: CreateCountryInput!): CreateCountryPayload!
+  updateCountry(input: UpdateCountryInput!): UpdateCountryPayload!
+  deleteCountry(input: DeleteCountryInput!): DeleteCountryPayload!
 }
 
 "Information about pagination in a connection."
 type PageInfo {
-    "Indicates whether more edges exist following the set defined by the clients arguments."
-    hasNextPage: Boolean!
-    "Indicates whether more edges exist prior the set defined by the clients arguments."
-    hasPreviousPage: Boolean!
-    "When paginating backwards, the cursor to continue."
-    startCursor: String
-    "When paginating forwards, the cursor to continue."
-    endCursor: String
+  "Indicates whether more edges exist following the set defined by the clients arguments."
+  hasNextPage: Boolean!
+  "Indicates whether more edges exist prior the set defined by the clients arguments."
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
 }
 
 type Query {
-    "Fetches an object given its ID."
-    node("ID of the object." id: ID!): Node
-    "Lookup nodes by a list of IDs."
-    nodes("The list of node IDs." ids: [ID!]!): [Node]!
-    cityById(id: ID!): City!
-    city(where: CityFilterInput): City
-    cities("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: CityFilterInput order: [CitySortInput!]): CitiesConnection
-    citiesAny(where: CityFilterInput): Boolean!
-    citiesCount(where: CityFilterInput): Int!
-    countryById(id: ID!): Country!
-    country(where: CountryFilterInput): Country
-    countries("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: CountryFilterInput order: [CountrySortInput!]): CountriesConnection
-    countriesAny(where: CountryFilterInput): Boolean!
-    countriesCount(where: CountryFilterInput): Int!
+  "Fetches an object given its ID."
+  node("ID of the object." id: ID!): Node
+  "Lookup nodes by a list of IDs."
+  nodes("The list of node IDs." ids: [ID!]!): [Node]!
+  cityById(id: ID!): City!
+  city(where: CityFilterInput): City
+  cities("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: CityFilterInput order: [CitySortInput!]): CitiesConnection
+  citiesAny(where: CityFilterInput): Boolean!
+  citiesCount(where: CityFilterInput): Int!
+  countryById(id: ID!): Country!
+  country(where: CountryFilterInput): Country
+  countries("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: CountryFilterInput order: [CountrySortInput!]): CountriesConnection
+  countriesAny(where: CountryFilterInput): Boolean!
+  countriesCount(where: CountryFilterInput): Int!
 }
 
 type UpdateCityPayload {
-    city: City
-    errors: [UpdateCityError!]
+  city: City
+  errors: [UpdateCityError!]
 }
 
 type UpdateCountryPayload {
-    country: Country
-    errors: [UpdateCountryError!]
+  country: Country
+  errors: [UpdateCountryError!]
 }
 
 type ValidationError implements Error {
-    message: String!
-    results: [ValidationResult!]!
+  message: String!
+  results: [ValidationResult!]!
 }
 
 type ValidationResult {
-    errorMessage: String
+  errorMessage: String
 }
 
 union CreateCityError = ValidationError | BusinessError | EntityNotFoundError
@@ -228,185 +228,185 @@ union UpdateCityError = ValidationError | BusinessError | EntityNotFoundError
 union UpdateCountryError = ValidationError | BusinessError | EntityNotFoundError
 
 input BooleanOperationFilterInput {
-    eq: Boolean
-    neq: Boolean
+  eq: Boolean
+  neq: Boolean
 }
 
 input CityFilterInput {
-    and: [CityFilterInput!]
-    or: [CityFilterInput!]
-    countryId: IdOperationFilterInput
-    name: StringOperationFilterInput
-    isDeleted: BooleanOperationFilterInput
-    deleterId: UuidOperationFilterInput
-    deletionTime: DateTimeOperationFilterInput
-    lastModificationTime: DateTimeOperationFilterInput
-    lastModifierId: UuidOperationFilterInput
-    creationTime: DateTimeOperationFilterInput
-    creatorId: UuidOperationFilterInput
-    id: IntOperationFilterInput
+  and: [CityFilterInput!]
+  or: [CityFilterInput!]
+  countryId: IdOperationFilterInput
+  name: StringOperationFilterInput
+  isDeleted: BooleanOperationFilterInput
+  deleterId: UuidOperationFilterInput
+  deletionTime: DateTimeOperationFilterInput
+  lastModificationTime: DateTimeOperationFilterInput
+  lastModifierId: UuidOperationFilterInput
+  creationTime: DateTimeOperationFilterInput
+  creatorId: UuidOperationFilterInput
+  id: IntOperationFilterInput
 }
 
 input CitySortInput {
-    countryId: SortEnumType
-    name: SortEnumType
-    isDeleted: SortEnumType
-    deleterId: SortEnumType
-    deletionTime: SortEnumType
-    lastModificationTime: SortEnumType
-    lastModifierId: SortEnumType
-    creationTime: SortEnumType
-    creatorId: SortEnumType
-    id: SortEnumType
+  countryId: SortEnumType
+  name: SortEnumType
+  isDeleted: SortEnumType
+  deleterId: SortEnumType
+  deletionTime: SortEnumType
+  lastModificationTime: SortEnumType
+  lastModifierId: SortEnumType
+  creationTime: SortEnumType
+  creatorId: SortEnumType
+  id: SortEnumType
 }
 
 input CountryFilterInput {
-    and: [CountryFilterInput!]
-    or: [CountryFilterInput!]
-    name: StringOperationFilterInput
-    isDeleted: BooleanOperationFilterInput
-    deleterId: UuidOperationFilterInput
-    deletionTime: DateTimeOperationFilterInput
-    lastModificationTime: DateTimeOperationFilterInput
-    lastModifierId: UuidOperationFilterInput
-    creationTime: DateTimeOperationFilterInput
-    creatorId: UuidOperationFilterInput
-    id: IdOperationFilterInput
+  and: [CountryFilterInput!]
+  or: [CountryFilterInput!]
+  name: StringOperationFilterInput
+  isDeleted: BooleanOperationFilterInput
+  deleterId: UuidOperationFilterInput
+  deletionTime: DateTimeOperationFilterInput
+  lastModificationTime: DateTimeOperationFilterInput
+  lastModifierId: UuidOperationFilterInput
+  creationTime: DateTimeOperationFilterInput
+  creatorId: UuidOperationFilterInput
+  id: IdOperationFilterInput
 }
 
 input CountrySortInput {
-    name: SortEnumType
-    isDeleted: SortEnumType
-    deleterId: SortEnumType
-    deletionTime: SortEnumType
-    lastModificationTime: SortEnumType
-    lastModifierId: SortEnumType
-    creationTime: SortEnumType
-    creatorId: SortEnumType
-    id: SortEnumType
+  name: SortEnumType
+  isDeleted: SortEnumType
+  deleterId: SortEnumType
+  deletionTime: SortEnumType
+  lastModificationTime: SortEnumType
+  lastModifierId: SortEnumType
+  creationTime: SortEnumType
+  creatorId: SortEnumType
+  id: SortEnumType
 }
 
 input CreateCityInput {
-    countryId: ID!
-    name: String!
+  countryId: ID!
+  name: String!
 }
 
 input CreateCountryInput {
-    name: String!
+  name: String!
 }
 
 input DateOnlyOperationFilterInput {
-    and: [DateOnlyOperationFilterInput!]
-    or: [DateOnlyOperationFilterInput!]
-    eq: Date
-    neq: Date
-    in: [Date!]
-    nin: [Date!]
-    gt: Date
-    ngt: Date
-    gte: Date
-    ngte: Date
-    lt: Date
-    nlt: Date
-    lte: Date
-    nlte: Date
+  and: [DateOnlyOperationFilterInput!]
+  or: [DateOnlyOperationFilterInput!]
+  eq: Date
+  neq: Date
+  in: [Date!]
+  nin: [Date!]
+  gt: Date
+  ngt: Date
+  gte: Date
+  ngte: Date
+  lt: Date
+  nlt: Date
+  lte: Date
+  nlte: Date
 }
 
 input DateTimeOperationFilterInput {
-    eq: DateTime
-    neq: DateTime
-    in: [DateTime]
-    nin: [DateTime]
-    gt: DateTime
-    ngt: DateTime
-    gte: DateTime
-    ngte: DateTime
-    lt: DateTime
-    nlt: DateTime
-    lte: DateTime
-    nlte: DateTime
+  eq: DateTime
+  neq: DateTime
+  in: [DateTime]
+  nin: [DateTime]
+  gt: DateTime
+  ngt: DateTime
+  gte: DateTime
+  ngte: DateTime
+  lt: DateTime
+  nlt: DateTime
+  lte: DateTime
+  nlte: DateTime
 }
 
 input DeleteCityInput {
-    id: ID!
+  id: ID!
 }
 
 input DeleteCountryInput {
-    id: ID!
+  id: ID!
 }
 
 input IdOperationFilterInput {
-    eq: ID
-    neq: ID
-    in: [ID]
-    nin: [ID]
+  eq: ID
+  neq: ID
+  in: [ID]
+  nin: [ID]
 }
 
 input IntOperationFilterInput {
-    eq: Int
-    neq: Int
-    in: [Int]
-    nin: [Int]
-    gt: Int
-    ngt: Int
-    gte: Int
-    ngte: Int
-    lt: Int
-    nlt: Int
-    lte: Int
-    nlte: Int
+  eq: Int
+  neq: Int
+  in: [Int]
+  nin: [Int]
+  gt: Int
+  ngt: Int
+  gte: Int
+  ngte: Int
+  lt: Int
+  nlt: Int
+  lte: Int
+  nlte: Int
 }
 
 input StringOperationFilterInput {
-    and: [StringOperationFilterInput!]
-    or: [StringOperationFilterInput!]
-    eq: String
-    neq: String
-    contains: String
-    ncontains: String
-    in: [String]
-    nin: [String]
-    startsWith: String
-    nstartsWith: String
-    endsWith: String
-    nendsWith: String
+  and: [StringOperationFilterInput!]
+  or: [StringOperationFilterInput!]
+  eq: String
+  neq: String
+  contains: String
+  ncontains: String
+  in: [String]
+  nin: [String]
+  startsWith: String
+  nstartsWith: String
+  endsWith: String
+  nendsWith: String
 }
 
 input UpdateCityInput {
-    id: ID!
-    countryId: ID!
-    name: String!
+  id: ID!
+  countryId: ID!
+  name: String!
 }
 
 input UpdateCountryInput {
-    id: ID!
-    name: String!
+  id: ID!
+  name: String!
 }
 
 input UuidOperationFilterInput {
-    eq: UUID
-    neq: UUID
-    in: [UUID]
-    nin: [UUID]
-    gt: UUID
-    ngt: UUID
-    gte: UUID
-    ngte: UUID
-    lt: UUID
-    nlt: UUID
-    lte: UUID
-    nlte: UUID
+  eq: UUID
+  neq: UUID
+  in: [UUID]
+  nin: [UUID]
+  gt: UUID
+  ngt: UUID
+  gte: UUID
+  ngte: UUID
+  lt: UUID
+  nlt: UUID
+  lte: UUID
+  nlte: UUID
 }
 
 enum ApplyPolicy {
-    BEFORE_RESOLVER
-    AFTER_RESOLVER
-    VALIDATION
+  BEFORE_RESOLVER
+  AFTER_RESOLVER
+  VALIDATION
 }
 
 enum SortEnumType {
-    ASC
-    DESC
+  ASC
+  DESC
 }
 
 directive @allowAnonymous repeatable on FIELD_DEFINITION
