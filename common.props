@@ -4,6 +4,7 @@
     <LangVersion>11</LangVersion>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
     <Authors>Rubrum Technologies</Authors>
+    <Description>Rubrum</Description>
     <PackageProjectUrl>https://github.com/rubrum-technologies/rubrum.abp/</PackageProjectUrl>
     <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
@@ -28,6 +29,13 @@
   
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotNet.ReproducibleBuilds" Version="1.1.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
