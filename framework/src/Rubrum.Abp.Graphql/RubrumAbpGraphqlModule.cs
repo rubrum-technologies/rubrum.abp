@@ -61,6 +61,9 @@ public class RubrumAbpGraphqlModule : AbpModule
     public override void PostConfigureServices(ServiceConfigurationContext context)
     {
         var graphql = context.Services.GetGraphql();
-        graphql.InitializeOnStartup();
+
+        graphql
+            .TryAddTypeInterceptor<NewLineTypeInterceptor>()
+            .InitializeOnStartup();
     }
 }
