@@ -8,7 +8,7 @@ public class BusinessError
     {
         Code = exception.Code;
         Details = exception.Details;
-        Message = exception.Message;
+        Message = exception.Message.ReplaceNewLine() ?? string.Empty;
     }
 
     public string? Code { get; }

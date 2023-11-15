@@ -37,7 +37,7 @@ public class FluentValidationTypeInterceptor : TypeInterceptor
                 continue;
             }
 
-            field.Description = string.Join(",\n ", values);
+            field.Description = string.Join($",{Environment.NewLine} ", values);
         }
     }
 

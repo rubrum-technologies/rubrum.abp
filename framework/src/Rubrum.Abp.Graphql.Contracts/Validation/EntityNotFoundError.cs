@@ -8,7 +8,7 @@ public class EntityNotFoundError
     {
         Id = exception.Id?.ToString();
         Type = exception.EntityType?.Name;
-        Message = exception.Message;
+        Message = exception.Message.ReplaceNewLine() ?? string.Empty;
     }
 
     public string? Id { get; }

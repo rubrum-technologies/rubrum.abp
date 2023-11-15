@@ -7,7 +7,7 @@ public class ValidationError
 {
     public ValidationError(AbpValidationException exception)
     {
-        Message = GetMessage(exception);
+        Message = GetMessage(exception).ReplaceNewLine() ?? string.Empty;
         Results = exception.ValidationErrors.Select(x => new ValidationResult(x)).ToList();
     }
 

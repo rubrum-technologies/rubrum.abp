@@ -2,6 +2,18 @@
 
 public static class StringExtensions
 {
+    public static string? ReplaceNewLine(this string? text)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            return text;
+        }
+
+        return text
+            .Replace("\r\n", "\n")
+            .Replace("\r", "\n");
+    }
+    
     public static string ToLowerFirstChar(this string input)
     {
         if (string.IsNullOrEmpty(input))
