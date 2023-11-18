@@ -1,4 +1,6 @@
-﻿namespace Rubrum.Abp.Keycloak;
+﻿using System.Text.Json.Serialization;
+
+namespace Rubrum.Abp.Keycloak;
 
 public class ClientRepresentation
 {
@@ -29,7 +31,10 @@ public class ClientRepresentation
     public bool? AuthorizationServicesEnabled { get; set; }
     public bool? DirectGrantsOnly { get; set; }
     public bool? PublicClient { get; set; }
-    public bool? FrontchannelLogout { get; set; }
+
+    [JsonPropertyName("FrontchannelLogout")]
+    public bool? FrontChannelLogout { get; set; }
+
     public string? Protocol { get; set; }
     public Dictionary<string, string>? Attributes { get; set; }
     public Dictionary<string, string>? AuthenticationFlowBindingOverrides { get; set; }

@@ -11,8 +11,7 @@ public interface IKeycloakClient
     /// Url: /{realm}/client-registration-policy/providers
     /// </remarks>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetBasePathForRetrieveProvidersAsync(
-        CancellationToken cancellationToken = default);
+    Task<object> GetBasePathForRetrieveProvidersAsync(CancellationToken cancellationToken = default);
 
     #endregion
 
@@ -25,8 +24,7 @@ public interface IKeycloakClient
     /// Url: /{realm}/keys
     /// </remarks>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<KeysMetadataRepresentation> GetKeysAsync(
-        CancellationToken cancellationToken = default);
+    Task<KeysMetadataRepresentation> GetKeysAsync(CancellationToken cancellationToken = default);
 
     #endregion
 
@@ -40,7 +38,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="userId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request</param>
-    Task<Dictionary<string, object>> GetBruteForceUserAsync(
+    Task<Dictionary<string, object>> GetUserNameStatusInBruteForceDetectionAsync(
         string userId,
         CancellationToken cancellationToken = default);
 
@@ -51,7 +49,7 @@ public interface IKeycloakClient
     /// Url: /{realm}/attack-detection/brute-force/users
     /// </remarks>
     /// <param name="cancellationToken">Cancellation Token to cancel the request</param>
-    Task DeleteUsersAsync(CancellationToken cancellationToken = default);
+    Task ClearUserLoginFailuresAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Clear any user login failures for the user This can release temporary disabled user
@@ -61,7 +59,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="userId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request</param>
-    Task DeleteBruteForceUserAsync(string userId, CancellationToken cancellationToken = default);
+    Task ClearUserLoginFailuresAsync(string userId, CancellationToken cancellationToken = default);
 
     #endregion
 
@@ -73,10 +71,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/authentication/config/{id}
     /// </remarks>
-    /// <param name="id">Configuration id</param>
+    /// <param name="configurationId">Configuration id</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<AuthenticatorConfigRepresentation> GetAuthenticatorConfigurationAsync(
-        string id,
+        string configurationId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -117,7 +115,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="executionId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task GetSingleExecutionAsync(
+    Task<object> GetAuthenticationExecutionAsync(
         string executionId,
         CancellationToken cancellationToken = default);
 
@@ -128,11 +126,11 @@ public interface IKeycloakClient
     /// Url: /{realm}/authentication/executions/{executionId}/config/{id}
     /// </remarks>
     /// <param name="executionId">Execution id</param>
-    /// <param name="id">Configuration id</param>
+    /// <param name="configurationId">Configuration id</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<AuthenticatorConfigRepresentation> GetExecutionConfigurationAsync(
+    Task<AuthenticatorConfigRepresentation> GetAuthenticationExecutionConfigurationAsync(
         string executionId,
-        string id,
+        string configurationId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -143,7 +141,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="flowAlias">Flow alias</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task GetAuthenticationExecutionsForFlowAsync(
+    Task<object> GetAuthenticationExecutionsForFlowAsync(
         string flowAlias,
         CancellationToken cancellationToken = default);
 
@@ -153,10 +151,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/authentication/flows/{id}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="flowId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<AuthenticationFlowRepresentation> GetAuthenticationFlowForIdAsync(
-        string id,
+        string flowId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -166,7 +164,7 @@ public interface IKeycloakClient
     /// Url: /{realm}/authentication/flows
     /// </remarks>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetAuthenticationFlowsAsync(
+    Task<ICollection<AuthenticationFlowRepresentation>> GetAuthenticationFlowsAsync(
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -176,8 +174,7 @@ public interface IKeycloakClient
     /// Url: /{realm}/authentication/form-action-providers
     /// </remarks>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetFormActionProvidersAsync(
-        CancellationToken cancellationToken = default);
+    Task<Dictionary<string, object>> GetFormActionProvidersAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get form providers Returns a stream of form providers.
@@ -186,8 +183,7 @@ public interface IKeycloakClient
     /// Url: /{realm}/authentication/form-providers
     /// </remarks>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetFormProvidersAsync(
-        CancellationToken cancellationToken = default);
+    Task<Dictionary<string, object>> GetFormProvidersAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get configuration descriptions for all clients
@@ -218,7 +214,7 @@ public interface IKeycloakClient
     /// Url: /{realm}/authentication/required-actions
     /// </remarks>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetRequiredActionsAsync(
+    Task<ICollection<RequiredActionProviderRepresentation>> GetRequiredActionsAsync(
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -228,8 +224,7 @@ public interface IKeycloakClient
     /// Url: /{realm}/authentication/unregistered-required-actions
     /// </remarks>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetUnregisteredRequiredActionsAsync(
-        CancellationToken cancellationToken = default);
+    Task<Dictionary<string, object>> GetUnregisteredRequiredActionsAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Create new authenticator configuration
@@ -293,9 +288,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="executionId">Execution id</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task ExecutionLowerPriorityAsync(
-        string executionId,
-        CancellationToken cancellationToken = default);
+    Task ExecutionLowerPriorityAsync(string executionId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Raise execution’s priority
@@ -305,9 +298,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="executionId">Execution id</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task ExecutionRaisePriorityAsync(
-        string executionId,
-        CancellationToken cancellationToken = default);
+    Task ExecutionRaisePriorityAsync(string executionId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Add new authentication execution
@@ -355,9 +346,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="body">[string] (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task RegisterRequiredActionAsync(
-        string? body,
-        CancellationToken cancellationToken = default);
+    Task RegisterRequiredActionAsync(string? body, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Lower required action’s priority
@@ -367,9 +356,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="alias">Alias of required action</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task RequiredActionLowerPriorityAsync(
-        string alias,
-        CancellationToken cancellationToken = default);
+    Task RequiredActionLowerPriorityAsync(string alias, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Raise required action’s priority
@@ -379,9 +366,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="alias">Alias of required action</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task RequiredActionRaisePriorityAsync(
-        string alias,
-        CancellationToken cancellationToken = default);
+    Task RequiredActionRaisePriorityAsync(string alias, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Update authenticator configuration
@@ -389,11 +374,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/authentication/config/{id}
     /// </remarks>
-    /// <param name="id">Configuration id</param>
+    /// <param name="configurationId">Configuration id</param>
     /// <param name="authenticatorConfigRepresentation">AuthenticatorConfigRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task UpdateAuthenticationConfigurationAsync(
-        string id,
+        string configurationId,
         AuthenticatorConfigRepresentation? authenticatorConfigRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -417,11 +402,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/authentication/flows/{id}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="flowId"></param>
     /// <param name="authenticationFlowRepresentation">AuthenticationFlowRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task UpdateAuthenticationFlowAsync(
-        string id,
+        string flowId,
         AuthenticationFlowRepresentation? authenticationFlowRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -445,11 +430,9 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/authentication/config/{id}
     /// </remarks>
-    /// <param name="id">Configuration id</param>
+    /// <param name="configurationId">Configuration id</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task DeleteAuthenticatorConfigurationAsync(
-        string id,
-        CancellationToken cancellationToken = default);
+    Task DeleteAuthenticatorConfigurationAsync(string configurationId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Delete execution
@@ -459,9 +442,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="executionId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task DeleteExecutionAsync(
-        string executionId,
-        CancellationToken cancellationToken = default);
+    Task DeleteExecutionAsync(string executionId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Delete an authentication flow
@@ -469,11 +450,9 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/authentication/flows/{id}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="flowId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task DeleteAuthenticationFlowAsync(
-        string id,
-        CancellationToken cancellationToken = default);
+    Task DeleteAuthenticationFlowAsync(string flowId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Delete required action
@@ -483,9 +462,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="alias">Alias of required action</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task DeleteRequiredActionAsync(
-        string alias,
-        CancellationToken cancellationToken = default);
+    Task DeleteRequiredActionAsync(string alias, CancellationToken cancellationToken = default);
 
     #endregion
 
@@ -498,11 +475,11 @@ public interface IKeycloakClient
     /// Url: /{realm}/clients/{id}/certificates/{attr}
     /// </remarks>
     /// <param name="id"></param>
-    /// <param name="attr"></param>
+    /// <param name="attribute"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<CertificateRepresentation> GetCertificateAsync(
         string id,
-        string attr,
+        string attribute,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -511,13 +488,13 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/certificates/{attr}/download
     /// </remarks>
-    /// <param name="id"></param>
-    /// <param name="attr"></param>
+    /// <param name="clientId"></param>
+    /// <param name="attribute"></param>
     /// <param name="keyStoreConfig">KeyStoreConfig (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<Stream> GetKeystoreFileForClientAsync(
-        string id,
-        string attr,
+        string clientId,
+        string attribute,
         KeyStoreConfig? keyStoreConfig,
         CancellationToken cancellationToken = default);
 
@@ -527,12 +504,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/certificates/{attr}/generate
     /// </remarks>
-    /// <param name="id"></param>
-    /// <param name="attr"></param>
+    /// <param name="clientId"></param>
+    /// <param name="attribute"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<CertificateRepresentation> GenerateCertificateAsync(
-        string id,
-        string attr,
+        string clientId,
+        string attribute,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -541,13 +518,13 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/certificates/{attr}/generate-and-download
     /// </remarks>
-    /// <param name="id"></param>
-    /// <param name="attr"></param>
+    /// <param name="clientId"></param>
+    /// <param name="attribute"></param>
     /// <param name="keyStoreConfig">KeyStoreConfig (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<Stream> GenerateKeypairAndCertificateAsync(
-        string id,
-        string attr,
+        string clientId,
+        string attribute,
         KeyStoreConfig? keyStoreConfig,
         CancellationToken cancellationToken = default);
 
@@ -557,12 +534,14 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/certificates/{attr}/upload
     /// </remarks>
-    /// <param name="id"></param>
-    /// <param name="attr"></param>
+    /// <param name="clientId"></param>
+    /// <param name="attribute"></param>
+    /// <param name="file"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<CertificateRepresentation> UploadCertificateAndPrivateKeyAsync(
-        string id,
-        string attr,
+        string clientId,
+        string attribute,
+        Stream file,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -571,12 +550,14 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/certificates/{attr}/upload-certificate
     /// </remarks>
-    /// <param name="id"></param>
-    /// <param name="attr"></param>
+    /// <param name="clientId"></param>
+    /// <param name="attribute"></param>
+    /// <param name="file"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<CertificateRepresentation> UploadOnlyCertificateAsync(
-        string id,
-        string attr,
+        string clientId,
+        string attribute,
+        Stream file,
         CancellationToken cancellationToken = default);
 
     #endregion
@@ -590,7 +571,7 @@ public interface IKeycloakClient
     /// Url: /{realm}/clients-initial-access
     /// </remarks>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientsInitialAccessAsync(
+    Task<ICollection<ClientInitialAccessPresentation>> GetClientInitialAccessAsync(
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -601,7 +582,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="clientInitialAccessCreatePresentation">ClientInitialAccessCreatePresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<ClientInitialAccessPresentation> CreateClientsInitialAccessAsync(
+    Task<ClientInitialAccessPresentation> CreateInitialAccessTokenAsync(
         ClientInitialAccessCreatePresentation? clientInitialAccessCreatePresentation,
         CancellationToken cancellationToken = default);
 
@@ -613,9 +594,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="id"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task DeleteClientsInitialAccessAsync(
-        string id,
-        CancellationToken cancellationToken = default);
+    Task DeleteInitialAccessTokenAsync(string id, CancellationToken cancellationToken = default);
 
     #endregion
 
@@ -627,11 +606,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/groups/{id}/role-mappings/clients/{client}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="groupId"></param>
     /// <param name="client"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetGroupRoleMappingsClientAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetGroupRoleMappingsClientAsync(
+        string groupId,
         string client,
         CancellationToken cancellationToken = default);
 
@@ -641,11 +620,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/groups/{id}/role-mappings/clients/{client}/available
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="groupId"></param>
     /// <param name="client"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetGroupRoleMappingsClientAvailableAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetGroupRoleMappingsClientAvailableAsync(
+        string groupId,
         string client,
         CancellationToken cancellationToken = default);
 
@@ -655,14 +634,14 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/groups/{id}/role-mappings/clients/{client}/composite
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="groupId"></param>
     /// <param name="client"></param>
     /// <param name="briefRepresentation">if false, return roles with their attributes (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetGroupRoleMappingsClientCompositeAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetGroupRoleMappingsClientCompositeAsync(
+        string groupId,
         string client,
-        string briefRepresentation,
+        bool briefRepresentation = true,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -671,11 +650,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/role-mappings/clients/{client}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="client"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetUserRoleMappingsClientAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetUserRoleMappingsClientAsync(
+        string userId,
         string client,
         CancellationToken cancellationToken = default);
 
@@ -685,11 +664,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/role-mappings/clients/{client}/available
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="client"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetUserRoleMappingsClientAvailableAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetUserRoleMappingsClientAvailableAsync(
+        string userId,
         string client,
         CancellationToken cancellationToken = default);
 
@@ -699,14 +678,14 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/role-mappings/clients/{client}/composite
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="client"></param>
     /// <param name="briefRepresentation">if false, return roles with their attributes (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetUserRoleMappingsClientCompositeAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetUserRoleMappingsClientCompositeAsync(
+        string userId,
         string client,
-        string briefRepresentation,
+        bool briefRepresentation = true,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -715,12 +694,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/groups/{id}/role-mappings/clients/{client}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="groupId"></param>
     /// <param name="client"></param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task CreateGroupRoleMappingsClientAsync(
-        string id,
+        string groupId,
         string client,
         RoleRepresentation roleRepresentation,
         CancellationToken cancellationToken = default);
@@ -731,12 +710,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/role-mappings/clients/{client}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="client"></param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task CreateUserRoleMappingsClientAsync(
-        string id,
+        string userId,
         string client,
         RoleRepresentation roleRepresentation,
         CancellationToken cancellationToken = default);
@@ -747,12 +726,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/groups/{id}/role-mappings/clients/{client}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="groupId"></param>
     /// <param name="client"></param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DeleteGroupRoleMappingsClientAsync(
-        string id,
+        string groupId,
         string client,
         RoleRepresentation roleRepresentation,
         CancellationToken cancellationToken = default);
@@ -763,12 +742,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/role-mappings/clients/{client}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="client"></param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DeleteUserRoleMappingsClientAsync(
-        string id,
+        string userId,
         string client,
         RoleRepresentation roleRepresentation,
         CancellationToken cancellationToken = default);
@@ -783,11 +762,9 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<ClientRepresentation> GetClientByIdAsync(
-        string id,
-        CancellationToken cancellationToken = default);
+    Task<ClientRepresentation> GetClientByIdAsync(string clientId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return object stating whether client Authorization permissions have been initialized or not and a reference
@@ -795,10 +772,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/management/permissions
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<ManagementPermissionReference> GetClientManagementPermissionsAsync(
-        string id,
+        string clientId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -807,11 +784,9 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/client-secret
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<CredentialRepresentation> GetClientSecretAsync(
-        string id,
-        CancellationToken cancellationToken = default);
+    Task<CredentialRepresentation> GetClientSecretAsync(string clientId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get user sessions for client Returns a list of user sessions associated with this client
@@ -819,14 +794,14 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/user-sessions
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="first">Paging offset (optional)</param>
     /// <param name="max">Maximum results size (defaults to 100) (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientUserSessionsAsync(
-        string id,
-        string? first = null,
-        string? max = null,
+    Task<ICollection<UserSession>> GetClientUserSessionsAsync(
+        string clientId,
+        int? first = null,
+        int? max = null,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -842,13 +817,13 @@ public interface IKeycloakClient
     /// <param name="search">whether this is a search query or a getClientById query (optional)</param>
     /// <param name="viewableOnly">filter clients that cannot be viewed in full by admin (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientsAsync(
+    Task<ICollection<ClientRepresentation>> GetClientsAsync(
         string? clientId = null,
-        string? first = null,
-        string? max = null,
+        int? first = null,
+        int? max = null,
         string? q = null,
         string? search = null,
-        string? viewableOnly = null,
+        bool? viewableOnly = null,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -857,10 +832,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/default-client-scopes
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetDefaultClientScopesAsync(
-        string id,
+    Task<ICollection<ClientScopeRepresentation>> GetDefaultClientScopesAsync(
+        string clientId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -869,12 +844,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/evaluate-scopes/generate-example-access-token
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="scope"> (optional)</param>
     /// <param name="userId"> (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<AccessToken> GetGenerateExampleAccessTokenAsync(
-        string id,
+        string clientId,
         string? scope = null,
         string? userId = null,
         CancellationToken cancellationToken = default);
@@ -885,12 +860,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/evaluate-scopes/generate-example-id-token
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="scope"> (optional)</param>
     /// <param name="userId"> (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<IdToken> GetGenerateExampleIdTokenAsync(
-        string id,
+        string clientId,
         string? scope = null,
         string? userId = null,
         CancellationToken cancellationToken = default);
@@ -901,12 +876,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/evaluate-scopes/generate-example-userinfo
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="scope"> (optional)</param>
     /// <param name="userId"> (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<Dictionary<string, object>> GetGenerateExampleUserinfoAsync(
-        string id,
+        string clientId,
         string? scope = null,
         string? userId = null,
         CancellationToken cancellationToken = default);
@@ -917,28 +892,14 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/evaluate-scopes/scope-mappings/{roleContainerId}/granted
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="roleContainerId">either realm name OR client UUID</param>
     /// <param name="scope"> (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetGrantedAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetGrantedAsync(
+        string clientId,
         string roleContainerId,
         string? scope = null,
-        CancellationToken cancellationToken = default);
-
-    /// <summary>
-    /// Missing description
-    /// </summary>
-    /// <remarks>
-    /// Url: /{realm}/clients/{id}/installation/providers/{providerId}
-    /// </remarks>
-    /// <param name="id"></param>
-    /// <param name="providerId"></param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task GetInstallationProviderAsync(
-        string id,
-        string providerId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -947,12 +908,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/evaluate-scopes/scope-mappings/{roleContainerId}/not-granted
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="roleContainerId">either realm name OR client UUID</param>
     /// <param name="scope"> (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetNotGrantedAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetNotGrantedAsync(
+        string clientId,
         string roleContainerId,
         string? scope = null,
         CancellationToken cancellationToken = default);
@@ -963,10 +924,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/offline-session-count
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<Dictionary<string, long>> GetOfflineSessionCountAsync(
-        string id,
+        string clientId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -975,14 +936,14 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/offline-sessions
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="first">Paging offset (optional)</param>
     /// <param name="max">Maximum results size (defaults to 100) (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetOfflineSessionsAsync(
-        string id,
-        string? first = null,
-        string? max = null,
+    Task<ICollection<UserSession>> GetOfflineSessionsAsync(
+        string clientId,
+        int? first = null,
+        int? max = null,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -991,10 +952,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/optional-client-scopes
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetOptionalClientScopesAsync(
-        string id,
+    Task<ICollection<ClientScopeRepresentation>> GetOptionalClientScopesAsync(
+        string clientId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1003,11 +964,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/evaluate-scopes/protocol-mappers
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="scope"> (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetProtocolMappersAsync(
-        string id,
+    Task<ICollection<ClientScopeEvaluateResourceProtocolMapperEvaluation>> GetProtocolMappersInTokenGenerationAsync(
+        string clientId,
         string? scope = null,
         CancellationToken cancellationToken = default);
 
@@ -1017,10 +978,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/client-secret/rotated
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<CredentialRepresentation> GetRotatedClientSecretAsync(
-        string id,
+        string clientId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1029,11 +990,9 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/service-account-user
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<UserRepresentation> GetServiceAccountUserAsync(
-        string id,
-        CancellationToken cancellationToken = default);
+    Task<UserRepresentation> GetServiceAccountUserAsync(string clientId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get application session count Returns a number of user sessions associated with this client { \\\&amp;quot;count\\\&amp;quot;: number }
@@ -1041,11 +1000,9 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/session-count
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<Dictionary<string, long>> GetSessionCountAsync(
-        string id,
-        CancellationToken cancellationToken = default);
+    Task<Dictionary<string, long>> GetSessionCountAsync(string clientId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Test if registered cluster nodes are available Tests availability by sending &amp;#39;ping&amp;#39; request to all cluster nodes.
@@ -1053,10 +1010,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/test-nodes-available
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<GlobalRequestResult> GetTestNodesAvailableAsync(
-        string id,
+        string clientId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1065,11 +1022,9 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/push-revocation
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<GlobalRequestResult> ClientPushRevocationAsync(
-        string id,
-        CancellationToken cancellationToken = default);
+    Task<GlobalRequestResult> ClientPushRevocationAsync(string clientId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Generate a new secret for the client
@@ -1077,10 +1032,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/client-secret
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<CredentialRepresentation> GenerateClientSecretAsync(
-        string id,
+        string clientId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1091,9 +1046,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="clientRepresentation">ClientRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task CreateClientAsync(
-        ClientRepresentation? clientRepresentation,
-        CancellationToken cancellationToken = default);
+    Task CreateClientAsync(ClientRepresentation? clientRepresentation, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Register a cluster node with the client Manually register cluster node to this client - usually it’s not needed to call this directly as adapter should handle by sending registration request to Keycloak
@@ -1101,11 +1054,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/nodes
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="body">[string] (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task RegisterClusterNodeWithClientAsync(
-        string id,
+        string clientId,
         string? body = null,
         CancellationToken cancellationToken = default);
 
@@ -1115,10 +1068,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/registration-access-token
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<ClientRepresentation> GenerateRegistrationAccessTokenAsync(
-        string id,
+        string clientId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1127,11 +1080,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="clientRepresentation">ClientRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task UpdateClientAsync(
-        string id,
+        string clientId,
         ClientRepresentation? clientRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -1141,11 +1094,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/management/permissions
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="managementPermissionReference">ManagementPermissionReference (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<ManagementPermissionReference> UpdateClientManagementPermissionsAsync(
-        string id,
+        string clientId,
         ManagementPermissionReference? managementPermissionReference,
         CancellationToken cancellationToken = default);
 
@@ -1155,11 +1108,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/default-client-scopes/{clientScopeId}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="clientScopeId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task UpdateDefaultClientScopeAsync(
-        string id,
+        string clientId,
         string clientScopeId,
         CancellationToken cancellationToken = default);
 
@@ -1169,11 +1122,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/optional-client-scopes/{clientScopeId}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="clientScopeId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task UpdateOptionalClientScopeAsync(
-        string id,
+        string clientId,
         string clientScopeId,
         CancellationToken cancellationToken = default);
 
@@ -1183,11 +1136,9 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-scopes/{id}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task DeleteClientByIdAsync(
-        string id,
-        CancellationToken cancellationToken = default);
+    Task DeleteClientByIdAsync(string clientId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Missing description
@@ -1195,11 +1146,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/default-client-scopes/{clientScopeId}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="clientScopeId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DeleteDefaultClientScopeAsync(
-        string id,
+        string clientId,
         string clientScopeId,
         CancellationToken cancellationToken = default);
 
@@ -1209,11 +1160,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/nodes/{node}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="node"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task UnregisterClusterNodeFromClient(
-        string id,
+        string clientId,
         string node,
         CancellationToken cancellationToken = default);
 
@@ -1223,11 +1174,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/optional-client-scopes/{clientScopeId}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="clientScopeId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DeleteOptionalClientScopeAsync(
-        string id,
+        string clientId,
         string clientScopeId,
         CancellationToken cancellationToken = default);
 
@@ -1237,10 +1188,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/client-secret/rotated
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DeleteRotatedAsync(
-        string id,
+        string clientId,
         CancellationToken cancellationToken = default);
 
     #endregion
@@ -1253,10 +1204,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-scopes/{id}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<ClientScopeRepresentation> GetClientScopeAsync(
-        string id,
+        string clientId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1266,7 +1217,7 @@ public interface IKeycloakClient
     /// Url: /{realm}/client-scopes
     /// </remarks>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientScopesAsync(
+    Task<ICollection<ClientScopeRepresentation>> GetClientScopesAsync(
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1275,10 +1226,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-templates/{id}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<ClientScopeRepresentation> GetClientTemplateAsync(
-        string id,
+        string clientId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1288,7 +1239,7 @@ public interface IKeycloakClient
     /// Url: /{realm}/client-templates
     /// </remarks>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientTemplatesAsync(
+    Task<ICollection<ClientScopeRepresentation>> GetClientTemplatesAsync(
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1321,11 +1272,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-scopes/{id}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="clientScopeRepresentation">ClientScopeRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task UpdateClientScopeAsync(
-        string id,
+        string clientId,
         ClientScopeRepresentation? clientScopeRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -1335,11 +1286,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-templates/{id}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="clientScopeRepresentation">ClientScopeRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task UpdateClientTemplateAsync(
-        string id,
+        string clientId,
         ClientScopeRepresentation? clientScopeRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -1349,10 +1300,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-scopes/{id}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DeleteClientScopeAsync(
-        string id,
+        string clientId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1361,10 +1312,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-templates/{id}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DeleteClientTemplateAsync(
-        string id,
+        string clientId,
         CancellationToken cancellationToken = default);
 
     #endregion
@@ -1377,11 +1328,9 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/components/{id}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="componentId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<ComponentRepresentation> GetComponentAsync(
-        string id,
-        CancellationToken cancellationToken = default);
+    Task<ComponentRepresentation> GetComponentAsync(string componentId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Missing description
@@ -1393,7 +1342,7 @@ public interface IKeycloakClient
     /// <param name="parent"> (optional)</param>
     /// <param name="type"> (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetComponentsAsync(
+    Task<ICollection<ComponentRepresentation>> GetComponentsAsync(
         string? name = null,
         string? parent = null,
         string? type = null,
@@ -1405,11 +1354,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/components/{id}/sub-component-types
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="componentId"></param>
     /// <param name="type"> (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetSubComponentTypesAsync(
-        string id,
+    Task<ICollection<ComponentRepresentation>> GetSubComponentTypesAsync(
+        string componentId,
         string? type = null,
         CancellationToken cancellationToken = default);
 
@@ -1431,11 +1380,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/components/{id}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="componentId"></param>
     /// <param name="componentRepresentation">ComponentRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task UpdateComponentAsync(
-        string id,
+        string componentId,
         ComponentRepresentation? componentRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -1445,11 +1394,9 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/components/{id}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="componentId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task DeleteComponentAsync(
-        string id,
-        CancellationToken cancellationToken = default);
+    Task DeleteComponentAsync(string componentId, CancellationToken cancellationToken = default);
 
     #endregion
 
@@ -1461,11 +1408,9 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/groups/{id}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="groupId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<GroupRepresentation> GetGroupAsync(
-        string id,
-        CancellationToken cancellationToken = default);
+    Task<GroupRepresentation> GetGroupAsync(string groupId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Return object stating whether client Authorization permissions have been initialized or not and a reference
@@ -1473,10 +1418,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/groups/{id}/management/permissions
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="groupId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<ManagementPermissionReference> GetGroupManagementPermissionsAsync(
-        string id,
+        string groupId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1493,12 +1438,12 @@ public interface IKeycloakClient
     /// <param name="q"> (optional)</param>
     /// <param name="search"> (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetGroupsAsync(
-        string? briefRepresentation = null,
-        string? exact = null,
-        string? first = null,
-        string? max = null,
-        string? populateHierarchy = null,
+    Task<ICollection<GroupRepresentation>> GetGroupsAsync(
+        bool? briefRepresentation = true,
+        bool? exact = false,
+        int? first = null,
+        int? max = null,
+        bool? populateHierarchy = true,
         string? q = null,
         string? search = null,
         CancellationToken cancellationToken = default);
@@ -1514,7 +1459,7 @@ public interface IKeycloakClient
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<Dictionary<string, long>> GetGroupsCountAsync(
         string? search = null,
-        string? top = null,
+        bool? top = false,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1523,16 +1468,16 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/groups/{id}/members
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="groupId"></param>
     /// <param name="briefRepresentation">Only return basic information (only guaranteed to return id, username, created, first and last name, email, enabled state, email verification state, federation link, and access. Note that it means that namely user attributes, required actions, and not before are not returned.) (optional)</param>
     /// <param name="first">Pagination offset (optional)</param>
     /// <param name="max">Maximum results size (defaults to 100) (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetMembersAsync(
-        string id,
-        string? briefRepresentation = null,
-        string? first = null,
-        string? max = null,
+    Task<ICollection<UserRepresentation>> GetGroupUsersAsync(
+        string groupId,
+        bool? briefRepresentation = null,
+        int? first = null,
+        int? max = null,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1541,11 +1486,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/groups/{id}/children
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="groupId"></param>
     /// <param name="groupRepresentation">GroupRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task CreateChildrenAsync(
-        string id,
+        string groupId,
         GroupRepresentation? groupRepresentation = null,
         CancellationToken cancellationToken = default);
 
@@ -1558,7 +1503,7 @@ public interface IKeycloakClient
     /// <param name="groupRepresentation">GroupRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task CreateGroupAsync(
-        GroupRepresentation? groupRepresentation = null,
+        GroupRepresentation? groupRepresentation,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1567,12 +1512,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/groups/{id}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="groupId"></param>
     /// <param name="groupRepresentation">GroupRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task UpdateGroupByIdAsync(
-        string id,
-        GroupRepresentation? groupRepresentation = null,
+        string groupId,
+        GroupRepresentation? groupRepresentation,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1581,12 +1526,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/groups/{id}/management/permissions
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="groupId"></param>
     /// <param name="managementPermissionReference">ManagementPermissionReference (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<ManagementPermissionReference> UpdateGroupManagementPermissionsAsync(
-        string id,
-        ManagementPermissionReference? managementPermissionReference = null,
+        string groupId,
+        ManagementPermissionReference? managementPermissionReference,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1595,11 +1540,9 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/groups/{id}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="groupId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task DeleteGroupByIdAsync(
-        string id,
-        CancellationToken cancellationToken = default);
+    Task DeleteGroupByIdAsync(string groupId, CancellationToken cancellationToken = default);
 
     #endregion
 
@@ -1612,12 +1555,9 @@ public interface IKeycloakClient
     /// Url: /{realm}/identity-provider/instances/{alias}/export
     /// </remarks>
     /// <param name="alias"></param>
-    /// <param name="format">Format to use (optional)</param>
+    /// <param name="format">Format to use</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task GetExportAsync(
-        string alias,
-        string? format = null,
-        CancellationToken cancellationToken = default);
+    Task<Stream> ExportAsync(string alias, string? format, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get identity providers
@@ -1627,7 +1567,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="providerId">Provider id</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task GetIdentityProvidersAsync(
+    Task<ICollection<IdentityProviderRepresentation>> GetIdentityProvidersAsync(
         string providerId,
         CancellationToken cancellationToken = default);
 
@@ -1662,7 +1602,7 @@ public interface IKeycloakClient
     /// Url: /{realm}/identity-provider/instances
     /// </remarks>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetIdentityProvidersAsync(
+    Task<ICollection<IdentityProviderRepresentation>> GetIdentityProvidersAsync(
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1672,11 +1612,11 @@ public interface IKeycloakClient
     /// Url: /{realm}/identity-provider/instances/{alias}/mappers/{id}
     /// </remarks>
     /// <param name="alias"></param>
-    /// <param name="id">Mapper id</param>
+    /// <param name="mapperId">Mapper id</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<IdentityProviderMapperRepresentation> GetMapperForIdentityProviderAsync(
+    Task<IdentityProviderMapperRepresentation> GetIdentityProviderMappersAsync(
         string alias,
-        string id,
+        string mapperId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1687,7 +1627,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="alias"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<Dictionary<string, IdentityProviderMapperTypeRepresentation>> GetMapperTypesForIdentityProviderAsync(
+    Task<Dictionary<string, IdentityProviderMapperTypeRepresentation>> GetIdentityProviderMapperTypesAsync(
         string alias,
         CancellationToken cancellationToken = default);
 
@@ -1699,7 +1639,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="alias"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetMappersForIdentityProviderAsync(
+    Task<ICollection<IdentityProviderMapperRepresentation>> GetIdentityProviderMappersAsync(
         string alias,
         CancellationToken cancellationToken = default);
 
@@ -1776,12 +1716,12 @@ public interface IKeycloakClient
     /// Url: /{realm}/identity-provider/instances/{alias}/mappers/{id}
     /// </remarks>
     /// <param name="alias"></param>
-    /// <param name="id">Mapper id</param>
+    /// <param name="mapperId">Mapper id</param>
     /// <param name="identityProviderMapperRepresentation">IdentityProviderMapperRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task UpdateMapperForIdentityProviderAsync(
         string alias,
-        string id,
+        string mapperId,
         IdentityProviderMapperRepresentation? identityProviderMapperRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -1804,11 +1744,11 @@ public interface IKeycloakClient
     /// Url: /{realm}/identity-provider/instances/{alias}/mappers/{id}
     /// </remarks>
     /// <param name="alias"></param>
-    /// <param name="id">Mapper id</param>
+    /// <param name="mapperId">Mapper id</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DeleteMapperForIdentityProviderAsync(
         string alias,
-        string id,
+        string mapperId,
         CancellationToken cancellationToken = default);
 
     #endregion
@@ -1821,12 +1761,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id1}/protocol-mappers/models/{id2}
     /// </remarks>
-    /// <param name="id1"></param>
-    /// <param name="id2"></param>
+    /// <param name="clientId"></param>
+    /// <param name="protocolMapperId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<ProtocolMapperRepresentation> GetClientProtocolMappersAsync(
-        string id1,
-        string id2,
+    Task<ProtocolMapperRepresentation> GetProtocolMapperAsync(
+        string clientId,
+        string protocolMapperId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1835,10 +1775,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/protocol-mappers/models
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientProtocolMappersAsync(
-        string id,
+    Task<ICollection<ProtocolMapperRepresentation>> GetProtocolMappersAsync(
+        string clientId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1847,11 +1787,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/protocol-mappers/protocol/{protocol}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="protocol"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientProtocolMappersProtocolAsync(
-        string id,
+    Task<ICollection<ProtocolMapperRepresentation>> GetProtocolMappersAsync(
+        string clientId,
         string protocol,
         CancellationToken cancellationToken = default);
 
@@ -1861,12 +1801,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-scopes/{id1}/protocol-mappers/models/{id2}
     /// </remarks>
-    /// <param name="id1"></param>
-    /// <param name="id2"></param>
+    /// <param name="clientId"></param>
+    /// <param name="protocolMapperId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<ProtocolMapperRepresentation> GetClientScopeProtocolMappersAsync(
-        string id1,
-        string id2,
+    Task<ProtocolMapperRepresentation> GetClientScopeProtocolMapperAsync(
+        string clientId,
+        string protocolMapperId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1875,10 +1815,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-scopes/{id}/protocol-mappers/models
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientScopeProtocolMappersAsync(
-        string id,
+    Task<ICollection<ProtocolMapperRepresentation>> GetClientScopeProtocolMappersAsync(
+        string clientId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1887,11 +1827,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-scopes/{id}/protocol-mappers/protocol/{protocol}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="protocol"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientScopeProtocolMappersProtocolAsync(
-        string id,
+    Task<ICollection<ProtocolMapperRepresentation>> GetClientScopeProtocolMappersAsync(
+        string clientId,
         string protocol,
         CancellationToken cancellationToken = default);
 
@@ -1901,12 +1841,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-templates/{id1}/protocol-mappers/models/{id2}
     /// </remarks>
-    /// <param name="id1"></param>
-    /// <param name="id2"></param>
+    /// <param name="clientId"></param>
+    /// <param name="protocolMapperId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<ProtocolMapperRepresentation> GetClientTemplateProtocolMappersAsync(
-        string id1,
-        string id2,
+    Task<ProtocolMapperRepresentation> GetClientTemplateProtocolMapperAsync(
+        string clientId,
+        string protocolMapperId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1915,10 +1855,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-templates/{id}/protocol-mappers/models
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientTemplateProtocolMappersAsync(
-        string id,
+    Task<ICollection<ProtocolMapperRepresentation>> GetClientTemplateProtocolMappersAsync(
+        string clientId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1927,12 +1867,26 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-templates/{id}/protocol-mappers/protocol/{protocol}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="protocol"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientTemplateProtocolMappersProtocolAsync(
-        string id,
+    Task<ICollection<ProtocolMapperRepresentation>> GetClientTemplateProtocolMappersAsync(
+        string clientId,
         string protocol,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Create a mapper
+    /// </summary>
+    /// <remarks>
+    /// Url: /{realm}/clients/{id}/protocol-mappers/models
+    /// </remarks>
+    /// <param name="clientId"></param>
+    /// <param name="protocolMapperRepresentation">ProtocolMapperRepresentation (optional)</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    Task CreateClientProtocolMapperAsync(
+        string clientId,
+        ProtocolMapperRepresentation? protocolMapperRepresentation,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1941,26 +1895,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/protocol-mappers/add-models
     /// </remarks>
-    /// <param name="id"></param>
-    /// <param name="protocolMapperRepresentation">ProtocolMapperRepresentation (optional)</param>
+    /// <param name="clientId"></param>
+    /// <param name="protocolMapperRepresentations">ProtocolMapperRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task CreateClientProtocolMappersAsync(
-        string id,
-        ProtocolMapperRepresentation? protocolMapperRepresentation = null,
-        CancellationToken cancellationToken = default);
-
-    /// <summary>
-    /// Create a mapper
-    /// </summary>
-    /// <remarks>
-    /// Url: /{realm}/client-templates/{id}/protocol-mappers/models
-    /// </remarks>
-    /// <param name="id"></param>
-    /// <param name="protocolMapperRepresentation">ProtocolMapperRepresentation (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task CreateClientTemplatesProtocolMappersAsync(
-        string id,
-        ProtocolMapperRepresentation? protocolMapperRepresentation = null,
+    Task CreateClientMultipleProtocolMappersAsync(
+        string clientId,
+        ICollection<ProtocolMapperRepresentation>? protocolMapperRepresentations,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1969,12 +1909,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-scopes/{id}/protocol-mappers/add-models
     /// </remarks>
-    /// <param name="id"></param>
-    /// <param name="protocolMapperRepresentation">ProtocolMapperRepresentation (optional)</param>
+    /// <param name="clientId"></param>
+    /// <param name="protocolMapperRepresentations">ProtocolMapperRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task CreateClientScopeProtocolMultipleMappersAsync(
-        string id,
-        ProtocolMapperRepresentation? protocolMapperRepresentation = null,
+    Task CreateClientScopeMultipleProtocolMappersAsync(
+        string clientId,
+        ICollection<ProtocolMapperRepresentation>? protocolMapperRepresentations,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -1983,26 +1923,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-scopes/{id}/protocol-mappers/models
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="protocolMapperRepresentation">ProtocolMapperRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task CreateClientScopeProtocolMappersAsync(
-        string id,
-        ProtocolMapperRepresentation? protocolMapperRepresentation = null,
-        CancellationToken cancellationToken = default);
-
-    /// <summary>
-    /// Create multiple mappers
-    /// </summary>
-    /// <remarks>
-    /// Url: /{realm}/client-templates/{id}/protocol-mappers/add-models
-    /// </remarks>
-    /// <param name="id"></param>
-    /// <param name="protocolMapperRepresentation">ProtocolMapperRepresentation (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task CreateClientTemplateProtocolMultipleMappersAsync(
-        string id,
-        ProtocolMapperRepresentation? protocolMapperRepresentation = null,
+    Task CreateClientScopeProtocolMapperAsync(
+        string clientId,
+        ProtocolMapperRepresentation? protocolMapperRepresentation,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2011,12 +1937,26 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-templates/{id}/protocol-mappers/models
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="protocolMapperRepresentation">ProtocolMapperRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task CreateClientTemplateProtocolMappersAsync(
-        string id,
-        ProtocolMapperRepresentation? protocolMapperRepresentation = null,
+    Task CreateClientTemplateProtocolMapperAsync(
+        string clientId,
+        ProtocolMapperRepresentation? protocolMapperRepresentation,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Create multiple mappers
+    /// </summary>
+    /// <remarks>
+    /// Url: /{realm}/client-templates/{id}/protocol-mappers/add-models
+    /// </remarks>
+    /// <param name="clientId"></param>
+    /// <param name="protocolMapperRepresentations">ProtocolMapperRepresentation (optional)</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    Task CreateClientTemplateMultipleProtocolMappersAsync(
+        string clientId,
+        ICollection<ProtocolMapperRepresentation>? protocolMapperRepresentations,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2025,13 +1965,13 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id1}/protocol-mappers/models/{id2}
     /// </remarks>
-    /// <param name="id1"></param>
-    /// <param name="id2"></param>
+    /// <param name="clientId"></param>
+    /// <param name="protocolMapperId"></param>
     /// <param name="protocolMapperRepresentation">ProtocolMapperRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task UpdateClientProtocolMappersAsync(
-        string id1,
-        string id2,
+    Task UpdateClientProtocolMapperAsync(
+        string clientId,
+        string protocolMapperId,
         ProtocolMapperRepresentation? protocolMapperRepresentation = null,
         CancellationToken cancellationToken = default);
 
@@ -2041,14 +1981,14 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-scopes/{id1}/protocol-mappers/models/{id2}
     /// </remarks>
-    /// <param name="id1"></param>
-    /// <param name="id2"></param>
+    /// <param name="clientId"></param>
+    /// <param name="protocolMapperId"></param>
     /// <param name="protocolMapperRepresentation">ProtocolMapperRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task UpdateClientScopeProtocolMappersAsync(
-        string id1,
-        string id2,
-        ProtocolMapperRepresentation? protocolMapperRepresentation = null,
+    Task UpdateClientScopeProtocolMapperAsync(
+        string clientId,
+        string protocolMapperId,
+        ProtocolMapperRepresentation? protocolMapperRepresentation,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2057,14 +1997,14 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-templates/{id1}/protocol-mappers/models/{id2}
     /// </remarks>
-    /// <param name="id1"></param>
-    /// <param name="id2"></param>
+    /// <param name="clientId"></param>
+    /// <param name="protocolMapperId"></param>
     /// <param name="protocolMapperRepresentation">ProtocolMapperRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task UpdateClientTemplateProtocolMappersAsync(
-        string id1,
-        string id2,
-        ProtocolMapperRepresentation? protocolMapperRepresentation = null,
+    Task UpdateClientTemplateProtocolMapperAsync(
+        string clientId,
+        string protocolMapperId,
+        ProtocolMapperRepresentation? protocolMapperRepresentation,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2073,12 +2013,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id1}/protocol-mappers/models/{id2}
     /// </remarks>
-    /// <param name="id1"></param>
-    /// <param name="id2"></param>
+    /// <param name="clientId"></param>
+    /// <param name="protocolMapperId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task DeleteClientProtocolMappersAsync(
-        string id1,
-        string id2,
+    Task DeleteClientProtocolMapperAsync(
+        string clientId,
+        string protocolMapperId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2087,12 +2027,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-scopes/{id1}/protocol-mappers/models/{id2}
     /// </remarks>
-    /// <param name="id1"></param>
-    /// <param name="id2"></param>
+    /// <param name="clientId"></param>
+    /// <param name="protocolMapperId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task DeleteClientScopeProtocolMappersAsync(
-        string id1,
-        string id2,
+    Task DeleteClientScopeProtocolMapperAsync(
+        string clientId,
+        string protocolMapperId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2101,12 +2041,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-templates/{id1}/protocol-mappers/models/{id2}
     /// </remarks>
-    /// <param name="id1"></param>
-    /// <param name="id2"></param>
+    /// <param name="clientId"></param>
+    /// <param name="protocolMapperId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task DeleteClientTemplateProtocolMappersAsync(
-        string id1,
-        string id2,
+    Task DeleteClientTemplateProtocolMapperAsync(
+        string clientId,
+        string protocolMapperId,
         CancellationToken cancellationToken = default);
 
     #endregion
@@ -2121,8 +2061,8 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="briefRepresentation"> (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetAccessibleRealmsAsync(
-        string? briefRepresentation = null,
+    Task<ICollection<RealmRepresentation>> GetAccessibleRealmsAsync(
+        bool? briefRepresentation = null,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2143,15 +2083,15 @@ public interface IKeycloakClient
     /// <param name="resourcePath"> (optional)</param>
     /// <param name="resourceTypes">[String] (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetAdminEventsAsync(
+    Task<ICollection<AdminEvent>> GetAdminEventsAsync(
         string? authClient = null,
         string? authIpAddress = null,
         string? authRealm = null,
         string? authUser = null,
-        string? dateFrom = null,
-        string? dateTo = null,
-        string? first = null,
-        string? max = null,
+        DateTime? dateFrom = null,
+        DateTime? dateTo = null,
+        int? first = null,
+        int? max = 100,
         string? operationTypes = null,
         string? resourcePath = null,
         string? resourceTypes = null,
@@ -2173,10 +2113,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}
     /// </remarks>
-    /// <param name="realm">realm name (not id!)</param>
+    /// <param name="realmName">realm name (not id!)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<RealmRepresentation> GetRealmAsync(
-        string realm,
+        string realmName,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2186,7 +2126,7 @@ public interface IKeycloakClient
     /// Url: /{realm}/client-session-stats
     /// </remarks>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientSessionStatsAsync(
+    Task<Dictionary<string, object>> GetClientSessionStatsAsync(
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2206,7 +2146,7 @@ public interface IKeycloakClient
     /// Url: /{realm}/default-default-client-scopes
     /// </remarks>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetDefaultDefaultClientScopesAsync(
+    Task<ICollection<ClientScopeRepresentation>> GetDefaultDefaultClientScopesAsync(
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2216,7 +2156,7 @@ public interface IKeycloakClient
     /// Url: /{realm}/default-groups
     /// </remarks>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetDefaultGroupsAsync(
+    Task<ICollection<GroupRepresentation>> GetDefaultGroupsAsync(
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2226,7 +2166,7 @@ public interface IKeycloakClient
     /// Url: /{realm}/default-optional-client-scopes
     /// </remarks>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetDefaultOptionalClientScopesAsync(
+    Task<ICollection<ClientScopeRepresentation>> GetDefaultOptionalClientScopesAsync(
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2244,13 +2184,13 @@ public interface IKeycloakClient
     /// <param name="type">The types of events to return [String] (optional)</param>
     /// <param name="user">User id (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetEventsAsync(
+    Task<ICollection<KeycloakEvent>> GetEventsAsync(
         string? client = null,
-        string? dateFrom = null,
-        string? dateTo = null,
-        string? first = null,
+        DateTime? dateFrom = null,
+        DateTime? dateTo = null,
+        int? first = null,
         string? ipAddress = null,
-        string? max = null,
+        int? max = 100,
         string? type = null,
         string? user = null,
         CancellationToken cancellationToken = default);
@@ -2284,7 +2224,7 @@ public interface IKeycloakClient
     /// Url: /{realm}/localization
     /// </remarks>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetLocalizationAsync(
+    Task<Dictionary<string, string>> GetLocalizationAsync(
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2334,7 +2274,7 @@ public interface IKeycloakClient
     /// <param name="includeGlobalProfiles"> (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<ClientProfilesRepresentation> GetProfilesAsync(
-        string? includeGlobalProfiles = null,
+        bool? includeGlobalProfiles = null,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2392,8 +2332,7 @@ public interface IKeycloakClient
     /// Url: /{realm}/logout-all
     /// </remarks>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<GlobalRequestResult> LogoutAllAsync(
-        CancellationToken cancellationToken = default);
+    Task<GlobalRequestResult> LogoutAllAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Partial export of existing realm into a JSON file.
@@ -2417,9 +2356,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="body">[file] (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task ImportPartialRealmAsync(
-        Stream? body,
-        CancellationToken cancellationToken = default);
+    Task ImportPartialRealmAsync(Stream? body, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Push the realm’s revocation policy to any client that has an admin url associated with it.
@@ -2428,8 +2365,7 @@ public interface IKeycloakClient
     /// Url: /{realm}/push-revocation
     /// </remarks>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<GlobalRequestResult> PushRevocationByRealmAsync(
-        CancellationToken cancellationToken = default);
+    Task<GlobalRequestResult> PushRevocationByRealmAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Test SMTP connection with current logged in user
@@ -2439,9 +2375,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="body">[string] (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task TestSmtpConnectionAsync(
-        string? body,
-        CancellationToken cancellationToken = default);
+    Task TestSmtpConnectionAsync(string? body, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Update the top-level information of the realm Any user, roles or client information in the representation will be ignored.
@@ -2451,7 +2385,19 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="realmRepresentation">RealmRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    Task UpdateRealmAsync(RealmRepresentation? realmRepresentation, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Update the top-level information of the realm Any user, roles or client information in the representation will be ignored.
+    /// </summary>
+    /// <remarks>
+    /// Url: /{realm}
+    /// </remarks>
+    /// <param name="realmName">realm name (not id!)</param>
+    /// <param name="realmRepresentation">RealmRepresentation (optional)</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task UpdateRealmAsync(
+        string realmName,
         RealmRepresentation? realmRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -2463,9 +2409,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="clientScopeId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task UpdateDefaultDefaultClientScopeAsync(
-        string clientScopeId,
-        CancellationToken cancellationToken = default);
+    Task UpdateDefaultClientScopeAsync(string clientScopeId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Missing description
@@ -2475,9 +2419,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="groupId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task UpdateDefaultGroupAsync(
-        string groupId,
-        CancellationToken cancellationToken = default);
+    Task UpdateDefaultGroupAsync(string groupId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Missing description
@@ -2487,15 +2429,13 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="clientScopeId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task UpdateDefaultOptionalClientScopeAsync(
-        string clientScopeId,
-        CancellationToken cancellationToken = default);
+    Task UpdateDefaultOptionalClientScopeAsync(string clientScopeId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Missing description
     /// </summary>
     /// <remarks>
-    /// Url: 
+    /// Url: /{realm}/events/config
     /// </remarks>
     /// <param name="realmEventsConfigRepresentation">RealmEventsConfigRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2507,7 +2447,7 @@ public interface IKeycloakClient
     /// Missing description
     /// </summary>
     /// <remarks>
-    /// Url: /{realm}/events/config
+    /// Url: /{realm}/localization/{locale}/{key}
     /// </remarks>
     /// <param name="locale"></param>
     /// <param name="key"></param>
@@ -2535,7 +2475,7 @@ public interface IKeycloakClient
     /// Missing description
     /// </summary>
     /// <remarks>
-    /// Url: 
+    /// Url: /{realm}/client-policies/profiles
     /// </remarks>
     /// <param name="clientProfilesRepresentation">ClientProfilesRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2562,8 +2502,7 @@ public interface IKeycloakClient
     /// Url: /{realm}/admin-events
     /// </remarks>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task DeleteAdminEventsAsync(
-        CancellationToken cancellationToken = default);
+    Task DeleteAdminEventsAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Delete the realm
@@ -2571,8 +2510,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}
     /// </remarks>
+    /// <param name="realmName">realm name (not id!)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DeleteRealmAsync(
+        string realmName,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2669,10 +2610,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /admin/realms/{realm}/groups/{id}/role-mappings
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="groupId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<MappingsRepresentation> GetGroupRoleMappingsAsync(
-        string id,
+        string groupId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2681,10 +2622,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /admin/realms/{realm}/groups/{id}/role-mappings/realm
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="groupId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetGroupRoleMappingsRealmAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetGroupRoleMappingsRealmAsync(
+        string groupId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2693,10 +2634,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/groups/{id}/role-mappings/realm/available
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="groupId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetGroupRoleMappingsRealmAvailableAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetGroupRoleMappingsRealmAvailableAsync(
+        string groupId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2705,12 +2646,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/groups/{id}/role-mappings/realm/composite
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="groupId"></param>
     /// <param name="briefRepresentation">if false, return roles with their attributes (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetGroupRoleMappingsRealmCompositeAsync(
-        string id,
-        string? briefRepresentation = null,
+    Task<ICollection<RoleRepresentation>> GetGroupRoleMappingsRealmCompositeAsync(
+        string groupId,
+        bool? briefRepresentation = true,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2719,10 +2660,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/role-mappings
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<MappingsRepresentation> GetUserRoleMappingsAsync(
-        string id,
+        string userId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2731,10 +2672,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/role-mappings/realm
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetUserRoleMappingsRealmAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetUserRoleMappingsRealmAsync(
+        string userId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2743,10 +2684,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/role-mappings/realm/available
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetUserRoleMappingsRealmAvailableAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetUserRoleMappingsRealmAvailableAsync(
+        string userId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2755,12 +2696,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/role-mappings/realm/composite
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="briefRepresentation">if false, return roles with their attributes (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetUserRoleMappingsRealmCompositeAsync(
-        string id,
-        string? briefRepresentation = null,
+    Task<ICollection<RoleRepresentation>> GetUserRoleMappingsRealmCompositeAsync(
+        string userId,
+        bool? briefRepresentation = null,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2769,11 +2710,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/groups/{id}/role-mappings/realm
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="groupId"></param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task CreateGroupRoleMappingsRealmAsync(
-        string id,
+        string groupId,
         RoleRepresentation? roleRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -2783,11 +2724,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/role-mappings/realm
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task CreateUserRoleMappingsRealmAsync(
-        string id,
+        string userId,
         RoleRepresentation? roleRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -2797,11 +2738,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/groups/{id}/role-mappings/realm
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="groupId"></param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DeleteGroupRoleMappingsRealmAsync(
-        string id,
+        string groupId,
         RoleRepresentation? roleRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -2811,11 +2752,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/role-mappings/realm
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DeleteUserRoleMappingsRealmAsync(
-        string id,
+        string userId,
         RoleRepresentation? roleRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -2829,11 +2770,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/roles/{role-name}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="roleName">role&#39;s name (not id!)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<RoleRepresentation> GetClientRoleAsync(
-        string id,
+        string clientId,
         string roleName,
         CancellationToken cancellationToken = default);
 
@@ -2843,11 +2784,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/roles/{role-name}/composites
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="roleName">role&#39;s name (not id!)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientRoleCompositesAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetClientRoleCompositesAsync(
+        string clientId,
         string roleName,
         CancellationToken cancellationToken = default);
 
@@ -2857,14 +2798,14 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/roles/{role-name}/composites/clients/{clientUuid}
     /// </remarks>
-    /// <param name="id"></param>
-    /// <param name="roleName">role&#39;s name (not id!)</param>
     /// <param name="clientId"></param>
+    /// <param name="roleName">role&#39;s name (not id!)</param>
+    /// <param name="forClientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientRoleCompositesClientAsync(
-        string id,
-        string roleName,
+    Task<ICollection<RoleRepresentation>> GetClientRoleCompositesClientAsync(
         string clientId,
+        string roleName,
+        string forClientId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2873,11 +2814,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/roles/{role-name}/composites/realm
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="roleName">role&#39;s name (not id!)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientRoleCompositesRealmAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetClientRoleCompositesRealmAsync(
+        string clientId,
         string roleName,
         CancellationToken cancellationToken = default);
 
@@ -2887,18 +2828,18 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/roles/{role-name}/groups
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="roleName">the role name.</param>
     /// <param name="briefRepresentation">if false, return a full representation of the {@code GroupRepresentation} objects. (optional)</param>
     /// <param name="first">first result to return. Ignored if negative or {@code null}. (optional)</param>
     /// <param name="max">maximum number of results to return. Ignored if negative or {@code null}. (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientRoleGroupsAsync(
-        string id,
+    Task<ICollection<GroupRepresentation>> GetClientRoleGroupsAsync(
+        string clientId,
         string roleName,
-        string? briefRepresentation = null,
-        string? first = null,
-        string? max = null,
+        bool? briefRepresentation = true,
+        int? first = null,
+        int? max = null,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2907,11 +2848,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/roles/{role-name}/management/permissions
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="roleName"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<ManagementPermissionReference> GetClientRoleManagementPermissionsAsync(
-        string id,
+        string clientId,
         string roleName,
         CancellationToken cancellationToken = default);
 
@@ -2921,16 +2862,16 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/roles/{role-name}/users
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="roleName">the role name.</param>
     /// <param name="first">first result to return. Ignored if negative or {@code null}. (optional)</param>
     /// <param name="max">maximum number of results to return. Ignored if negative or {@code null}. (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientRoleUsersAsync(
-        string id,
+    Task<ICollection<UserRepresentation>> GetClientRoleUsersAsync(
+        string clientId,
         string roleName,
-        string? first = null,
-        string? max = null,
+        int? first = null,
+        int? max = null,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2939,17 +2880,17 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/roles
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="briefRepresentation"> (optional)</param>
     /// <param name="first"> (optional)</param>
     /// <param name="max"> (optional)</param>
     /// <param name="search"> (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientRolesAsync(
-        string id,
-        string? briefRepresentation = null,
-        string? first = null,
-        string? max = null,
+    Task<ICollection<RoleRepresentation>> GetClientRolesAsync(
+        string clientId,
+        bool? briefRepresentation = null,
+        int? first = null,
+        int? max = null,
         string? search = null,
         CancellationToken cancellationToken = default);
 
@@ -2973,7 +2914,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="roleName">role&#39;s name (not id!)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetRoleCompositesByNameAsync(
+    Task<ICollection<RoleRepresentation>> GetRoleCompositesByNameAsync(
         string roleName,
         CancellationToken cancellationToken = default);
 
@@ -2984,11 +2925,11 @@ public interface IKeycloakClient
     /// Url: /{realm}/roles/{role-name}/composites/clients/{clientUuid}
     /// </remarks>
     /// <param name="roleName">role&#39;s name (not id!)</param>
-    /// <param name="clientId"></param>
+    /// <param name="clientUuid"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetRoleCompositesClientByNameByClientIdAsync(
+    Task<ICollection<RoleRepresentation>> GetRoleCompositesClientByNameByClientIdAsync(
         string roleName,
-        string clientId,
+        string clientUuid,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2999,7 +2940,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="roleName">role&#39;s name (not id!)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetRoleCompositesRealmByNameAsync(
+    Task<ICollection<RoleRepresentation>> GetRoleCompositesRealmByNameAsync(
         string roleName,
         CancellationToken cancellationToken = default);
 
@@ -3014,11 +2955,11 @@ public interface IKeycloakClient
     /// <param name="first">first result to return. Ignored if negative or {@code null}. (optional)</param>
     /// <param name="max">maximum number of results to return. Ignored if negative or {@code null}. (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetRoleGroupsByNameAsync(
+    Task<ICollection<GroupRepresentation>> GetRoleGroupsByNameAsync(
         string roleName,
-        string? briefRepresentation = null,
-        string? first = null,
-        string? max = null,
+        bool? briefRepresentation = null,
+        int? first = null,
+        int? max = null,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -3043,10 +2984,10 @@ public interface IKeycloakClient
     /// <param name="first">first result to return. Ignored if negative or {@code null}. (optional)</param>
     /// <param name="max">maximum number of results to return. Ignored if negative or {@code null}. (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetRoleUsersByNameAsync(
+    Task<ICollection<UserRepresentation>> GetRoleUsersByNameAsync(
         string roleName,
-        string? first = null,
-        string? max = null,
+        int? first = null,
+        int? max = null,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -3060,10 +3001,10 @@ public interface IKeycloakClient
     /// <param name="max"> (optional)</param>
     /// <param name="search"> (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetRolesAsync(
-        string? briefRepresentation = null,
-        string? first = null,
-        string? max = null,
+    Task<ICollection<RoleRepresentation>> GetRolesAsync(
+        bool? briefRepresentation = null,
+        int? first = null,
+        int? max = null,
         string? search = null,
         CancellationToken cancellationToken = default);
 
@@ -3073,12 +3014,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/roles/{role-name}/composites
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="roleName">role&#39;s name (not id!)</param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task CreateClientRoleCompositesAsync(
-        string id,
+        string clientId,
         string roleName,
         RoleRepresentation? roleRepresentation,
         CancellationToken cancellationToken = default);
@@ -3089,11 +3030,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/roles
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task CreateClientRolesAsync(
-        string id,
+        string clientId,
         RoleRepresentation? roleRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -3129,12 +3070,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/roles/{role-name}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="roleName">role&#39;s name (not id!)</param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task UpdateClientRoleAsync(
-        string id,
+        string clientId,
         string roleName,
         RoleRepresentation? roleRepresentation,
         CancellationToken cancellationToken = default);
@@ -3145,12 +3086,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/roles/{role-name}/management/permissions
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="roleName"></param>
     /// <param name="managementPermissionReference">ManagementPermissionReference (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<ManagementPermissionReference> UpdateClientRoleManagementPermissionsAsync(
-        string id,
+        string clientId,
         string roleName,
         ManagementPermissionReference? managementPermissionReference,
         CancellationToken cancellationToken = default);
@@ -3189,11 +3130,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/roles/{role-name}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="roleName">role&#39;s name (not id!)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DeleteClientRoleAsync(
-        string id,
+        string clientId,
         string roleName,
         CancellationToken cancellationToken = default);
 
@@ -3203,12 +3144,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/roles/{role-name}/composites
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="roleName">role&#39;s name (not id!)</param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DeleteClientRoleCompositesAsync(
-        string id,
+        string clientId,
         string roleName,
         RoleRepresentation roleRepresentation,
         CancellationToken cancellationToken = default);
@@ -3251,9 +3192,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="roleId">id of role</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<RoleRepresentation> GetRoleByIdAsync(
-        string roleId,
-        CancellationToken cancellationToken = default);
+    Task<RoleRepresentation> GetRoleByIdAsync(string roleId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get role’s children Returns a set of role’s children provided the role is a composite.
@@ -3266,10 +3205,10 @@ public interface IKeycloakClient
     /// <param name="max"> (optional)</param>
     /// <param name="search"> (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetRoleByIdCompositesAsync(
+    Task<ICollection<RoleRepresentation>> GetRoleByIdCompositesAsync(
         string roleId,
-        string? first = null,
-        string? max = null,
+        int? first = null,
+        int? max = null,
         string? search = null,
         CancellationToken cancellationToken = default);
 
@@ -3282,7 +3221,7 @@ public interface IKeycloakClient
     /// <param name="roleId"></param>
     /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetRoleByIdCompositesClientAsync(
+    Task<ICollection<RoleRepresentation>> GetRoleByIdCompositesClientAsync(
         string roleId,
         string clientId,
         CancellationToken cancellationToken = default);
@@ -3295,7 +3234,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="roleId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetRoleByIdCompositesRealmAsync(
+    Task<ICollection<RoleRepresentation>> GetRoleByIdCompositesRealmAsync(
         string roleId,
         CancellationToken cancellationToken = default);
 
@@ -3389,10 +3328,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/scope-mappings
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<MappingsRepresentation> GetClientScopeMappingsAsync(
-        string id,
+        string clientId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -3401,11 +3340,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/scope-mappings/clients/{client}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="client"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientScopeMappingsClientAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetClientScopeMappingsClientAsync(
+        string clientId,
         string client,
         CancellationToken cancellationToken = default);
 
@@ -3415,11 +3354,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/scope-mappings/clients/{client}/available
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="client"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientScopeMappingsClientAvailableAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetClientScopeMappingsClientAvailableAsync(
+        string clientId,
         string client,
         CancellationToken cancellationToken = default);
 
@@ -3429,14 +3368,14 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/scope-mappings/clients/{client}/composite
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="client"></param>
     /// <param name="briefRepresentation">if false, return roles with their attributes (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientScopeMappingsClientCompositeAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetClientScopeMappingsClientCompositeAsync(
+        string clientId,
         string client,
-        string? briefRepresentation = null,
+        bool? briefRepresentation = null,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -3445,10 +3384,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/scope-mappings/realm
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientScopeMappingsRealmAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetClientScopeMappingsRealmAsync(
+        string clientId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -3457,10 +3396,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/scope-mappings/realm/available
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientScopeMappingsRealmAvailableAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetClientScopeMappingsRealmAvailableAsync(
+        string clientId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -3469,12 +3408,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/scope-mappings/realm/composite
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="briefRepresentation">if false, return roles with their attributes (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientScopeMappingsRealmCompositeAsync(
-        string id,
-        string? briefRepresentation = null,
+    Task<ICollection<RoleRepresentation>> GetClientScopeMappingsRealmCompositeAsync(
+        string clientId,
+        bool? briefRepresentation = null,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -3483,10 +3422,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-scopes/{id}/scope-mappings
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<MappingsRepresentation> GetClientScopeScopeMappingsAsync(
-        string id,
+        string clientId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -3495,11 +3434,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-scopes/{id}/scope-mappings/clients/{client}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="client"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientScopeScopeMappingsClientAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetClientScopeScopeMappingsClientAsync(
+        string clientId,
         string client,
         CancellationToken cancellationToken = default);
 
@@ -3509,11 +3448,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-scopes/{id}/scope-mappings/clients/{client}/available
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="client"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientScopeScopeMappingsClientAvailableAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetClientScopeScopeMappingsClientAvailableAsync(
+        string clientId,
         string client,
         CancellationToken cancellationToken = default);
 
@@ -3523,14 +3462,14 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-scopes/{id}/scope-mappings/clients/{client}/composite
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="client"></param>
     /// <param name="briefRepresentation">if false, return roles with their attributes (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientScopeScopeMappingsClientCompositeAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetClientScopeScopeMappingsClientCompositeAsync(
+        string clientId,
         string client,
-        string? briefRepresentation = null,
+        bool? briefRepresentation = null,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -3539,10 +3478,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-scopes/{id}/scope-mappings/realm
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientScopeScopeMappingsRealmAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetClientScopeScopeMappingsRealmAsync(
+        string clientId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -3551,10 +3490,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-scopes/{id}/scope-mappings/realm/available
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientScopeScopeMappingsRealmAvailableAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetClientScopeScopeMappingsRealmAvailableAsync(
+        string clientId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -3563,12 +3502,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-scopes/{id}/scope-mappings/realm/composite
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="briefRepresentation">if false, return roles with their attributes (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientScopeScopeMappingsRealmCompositeAsync(
-        string id,
-        string? briefRepresentation = null,
+    Task<ICollection<RoleRepresentation>> GetClientScopeScopeMappingsRealmCompositeAsync(
+        string clientId,
+        bool? briefRepresentation = null,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -3577,10 +3516,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-templates/{id}/scope-mappings
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<MappingsRepresentation> GetClientTemplateScopeMappingsAsync(
-        string id,
+        string clientId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -3589,11 +3528,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-templates/{id}/scope-mappings/clients/{client}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="client"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientTemplateScopeMappingsClientAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetClientTemplateScopeMappingsClientAsync(
+        string clientId,
         string client,
         CancellationToken cancellationToken = default);
 
@@ -3603,11 +3542,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-templates/{id}/scope-mappings/clients/{client}/available
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="client"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientTemplateScopeMappingsClientAvailableAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetClientTemplateScopeMappingsClientAvailableAsync(
+        string clientId,
         string client,
         CancellationToken cancellationToken = default);
 
@@ -3617,14 +3556,14 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-templates/{id}/scope-mappings/clients/{client}/composite
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="client"></param>
     /// <param name="briefRepresentation">if false, return roles with their attributes (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientTemplateScopeMappingsClientCompositeAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetClientTemplateScopeMappingsClientCompositeAsync(
+        string clientId,
         string client,
-        string? briefRepresentation = null,
+        bool? briefRepresentation = null,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -3633,10 +3572,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-templates/{id}/scope-mappings/realm
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientTemplateScopeMappingsRealmAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetClientTemplateScopeMappingsRealmAsync(
+        string clientId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -3645,10 +3584,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-templates/{id}/scope-mappings/realm/available
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientTemplateScopeMappingsRealmAvailableAsync(
-        string id,
+    Task<ICollection<RoleRepresentation>> GetClientTemplateScopeMappingsRealmAvailableAsync(
+        string clientId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -3657,12 +3596,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-templates/{id}/scope-mappings/realm/composite
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="briefRepresentation">if false, return roles with their attributes (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetClientTemplateScopeMappingsRealmCompositeAsync(
-        string id,
-        string? briefRepresentation = null,
+    Task<ICollection<RoleRepresentation>> GetClientTemplateScopeMappingsRealmCompositeAsync(
+        string clientId,
+        bool? briefRepresentation = null,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -3671,12 +3610,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/scope-mappings/clients/{client}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="client"></param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task CreateClientScopeMappingsClientAsync(
-        string id,
+        string clientId,
         string client,
         RoleRepresentation? roleRepresentation,
         CancellationToken cancellationToken = default);
@@ -3687,11 +3626,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/scope-mappings/realm
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task CreateClientScopeMappingsRealmAsync(
-        string id,
+        string clientId,
         RoleRepresentation? roleRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -3701,12 +3640,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-scopes/{id}/scope-mappings/clients/{client}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="client"></param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task CreateClientScopeScopeMappingsClientAsync(
-        string id,
+        string clientId,
         string client,
         RoleRepresentation? roleRepresentation,
         CancellationToken cancellationToken = default);
@@ -3717,11 +3656,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-scopes/{id}/scope-mappings/realm
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task CreateClientScopeScopeMappingsRealmAsync(
-        string id,
+        string clientId,
         RoleRepresentation? roleRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -3731,12 +3670,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-templates/{id}/scope-mappings/clients/{client}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="client"></param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task CreateClientTemplateScopeMappingsClientAsync(
-        string id,
+        string clientId,
         string client,
         RoleRepresentation? roleRepresentation,
         CancellationToken cancellationToken = default);
@@ -3747,11 +3686,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-templates/{id}/scope-mappings/realm
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task CreateClientTemplateScopeMappingsRealmAsync(
-        string id,
+        string clientId,
         RoleRepresentation? roleRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -3761,12 +3700,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/scope-mappings/clients/{client}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="client"></param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DeleteClientScopeMappingsClientAsync(
-        string id,
+        string clientId,
         string client,
         RoleRepresentation? roleRepresentation,
         CancellationToken cancellationToken = default);
@@ -3777,11 +3716,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/clients/{id}/scope-mappings/realm
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DeleteClientScopeMappingsRealmAsync(
-        string id,
+        string clientId,
         RoleRepresentation? roleRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -3791,12 +3730,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-scopes/{id}/scope-mappings/clients/{client}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="client"></param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DeleteClientScopeScopeMappingsClientAsync(
-        string id,
+        string clientId,
         string client,
         RoleRepresentation? roleRepresentation,
         CancellationToken cancellationToken = default);
@@ -3807,11 +3746,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-scopes/{id}/scope-mappings/realm
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DeleteClientScopeScopeMappingsRealmAsync(
-        string id,
+        string clientId,
         RoleRepresentation? roleRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -3821,12 +3760,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-templates/{id}/scope-mappings/clients/{client}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="client"></param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DeleteClientTemplateScopeMappingsClientAsync(
-        string id,
+        string clientId,
         string client,
         RoleRepresentation? roleRepresentation,
         CancellationToken cancellationToken = default);
@@ -3837,11 +3776,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/client-templates/{id}/scope-mappings/realm
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="clientId"></param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DeleteClientTemplateScopeMappingsRealmAsync(
-        string id,
+        string clientId,
         RoleRepresentation? roleRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -3855,10 +3794,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/configured-user-storage-credential-types
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<object> GetConfiguredUserStorageCredentialTypesAsync(
-        string id,
+        string userId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -3867,10 +3806,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/consents
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<object> GetConsentsAsync(
-        string id,
+        string userId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -3879,10 +3818,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/credentials
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<object> GetCredentialsAsync(
-        string id,
+        string userId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -3891,10 +3830,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/federated-identity
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetFederatedIdentityAsync(
-        string id,
+    Task<ICollection<FederatedIdentityRepresentation>> GetFederatedIdentityAsync(
+        string userId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -3903,11 +3842,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/offline-sessions/{clientUuid}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="clientId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetOfflineSessionAsync(
-        string id,
+    Task<ICollection<UserSession>> GetOfflineSessionAsync(
+        string userId,
         string clientId,
         CancellationToken cancellationToken = default);
 
@@ -3927,10 +3866,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/sessions
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetSessionsAsync(
-        string id,
+    Task<ICollection<UserSession>> GetSessionsAsync(
+        string userId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -3939,11 +3878,9 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<UserRepresentation> GetUserByIdAsync(
-        string id,
-        CancellationToken cancellationToken = default);
+    Task<UserRepresentation> GetUserByIdAsync(string userId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Missing description
@@ -3951,17 +3888,17 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/groups
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="briefRepresentation"> (optional)</param>
     /// <param name="first"> (optional)</param>
     /// <param name="max"> (optional)</param>
     /// <param name="search"> (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetUserGroupsAsync(
-        string id,
-        string? briefRepresentation = null,
-        string? first = null,
-        string? max = null,
+    Task<ICollection<GroupRepresentation>> GetUserGroupsAsync(
+        string userId,
+        bool? briefRepresentation = null,
+        int? first = null,
+        int? max = null,
         string? search = null,
         CancellationToken cancellationToken = default);
 
@@ -3971,11 +3908,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/groups/count
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="search"> (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<Dictionary<string, long>> GetUserGroupsCountAsync(
-        string id,
+        string userId,
         string? search = null,
         CancellationToken cancellationToken = default);
 
@@ -4000,18 +3937,18 @@ public interface IKeycloakClient
     /// <param name="search">A String contained in username, first or last name, or email. Default search behavior is prefix-based (e.g., foo or foo*). Use foo for infix search and &amp;quot;foo&amp;quot; for exact search. (optional)</param>
     /// <param name="username">A String contained in username, or the complete username, if param &amp;quot;exact&amp;quot; is true (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetUsersAsync(
-        string? briefRepresentation = null,
+    Task<ICollection<UserRepresentation>> GetUsersAsync(
+        bool? briefRepresentation = null,
         string? email = null,
         string? emailVerified = null,
         string? enabled = null,
         string? exact = null,
-        string? first = null,
+        int? first = null,
         string? firstName = null,
         string? idpAlias = null,
         string? idpUserId = null,
         string? lastName = null,
-        string? max = null,
+        int? max = null,
         string? q = null,
         string? search = null,
         string? username = null,
@@ -4049,11 +3986,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/federated-identity/{provider}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="provider">Social login provider id</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task CreateFederatedIdentityAsync(
-        string id,
+        string userId,
         string provider,
         CancellationToken cancellationToken = default);
 
@@ -4063,10 +4000,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/impersonation
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task<Dictionary<string, object>> ImpersonationUserAsync(
-        string id,
+        string userId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -4075,10 +4012,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/logout
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task LogoutAsync(
-        string id,
+        string userId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -4087,12 +4024,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/credentials/{credentialId}/moveAfter/{newPreviousCredentialId}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="credentialId">The credential to move</param>
     /// <param name="newPreviousCredentialId">The credential that will be the previous element in the list. If set to null, the moved credential will be the first element in the list.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task MoveCredentialAfterAsync(
-        string id,
+        string userId,
         string credentialId,
         string newPreviousCredentialId,
         CancellationToken cancellationToken = default);
@@ -4103,11 +4040,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/credentials/{credentialId}/moveToFirst
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="credentialId">The credential to move</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task MoveCredentialToFirstAsync(
-        string id,
+        string userId,
         string credentialId,
         CancellationToken cancellationToken = default);
 
@@ -4129,11 +4066,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/disable-credential-types
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="body">[string] (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DisableCredentialTypesAsync(
-        string id,
+        string userId,
         string? body,
         CancellationToken cancellationToken = default);
 
@@ -4143,14 +4080,14 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/execute-actions-email
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="clientId">Client id (optional)</param>
     /// <param name="lifespan">Number of seconds after which the generated token expires (optional)</param>
     /// <param name="redirectUri">Redirect uri (optional)</param>
     /// <param name="body">[string] (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task ExecuteActionsEmailAsync(
-        string id,
+        string userId,
         string? clientId = null,
         string? lifespan = null,
         string? redirectUri = null,
@@ -4175,11 +4112,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/reset-password
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="credentialRepresentation">CredentialRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task ResetPasswordAsync(
-        string id,
+        string userId,
         CredentialRepresentation? credentialRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -4189,12 +4126,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/reset-password-email
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="clientId">client id (optional)</param>
     /// <param name="redirectUri">redirect uri (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task ResetPasswordEmailAsync(
-        string id,
+        string userId,
         string? clientId = null,
         string? redirectUri = null,
         CancellationToken cancellationToken = default);
@@ -4205,12 +4142,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/send-verify-email
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="clientId">Client id (optional)</param>
     /// <param name="redirectUri">Redirect uri (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task SendVerifyEmailAsync(
-        string id,
+        string userId,
         string? clientId = null,
         string? redirectUri = null,
         CancellationToken cancellationToken = default);
@@ -4219,13 +4156,13 @@ public interface IKeycloakClient
     /// Update the user
     /// </summary>
     /// <remarks>
-    /// Url: 
+    /// Url: /{realm}/users/{id}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="userRepresentation">UserRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task UpdateUserAsync(
-        string id,
+        string userId,
         UserRepresentation? userRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -4235,11 +4172,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/groups/{groupId}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="groupId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task UpdateUserGroupAsync(
-        string id,
+        string userId,
         string groupId,
         CancellationToken cancellationToken = default);
 
@@ -4249,12 +4186,12 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/credentials/{credentialId}/userLabel
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="credentialId"></param>
     /// <param name="body">[string] (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task UpdateUserLabelAsync(
-        string id,
+        string userId,
         string credentialId,
         string? body,
         CancellationToken cancellationToken = default);
@@ -4265,11 +4202,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/consents/{client}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="client">Client id</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DeleteConsentAsync(
-        string id,
+        string userId,
         string client,
         CancellationToken cancellationToken = default);
 
@@ -4279,11 +4216,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/credentials/{credentialId}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="credentialId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DeleteCredentialAsync(
-        string id,
+        string userId,
         string credentialId,
         CancellationToken cancellationToken = default);
 
@@ -4293,11 +4230,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/federated-identity/{provider}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="provider">Social login provider id</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DeleteFederatedIdentityAsync(
-        string id,
+        string userId,
         string provider,
         CancellationToken cancellationToken = default);
 
@@ -4307,10 +4244,10 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DeleteUserByRealmByIdAsync(
-        string id,
+        string userId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -4319,11 +4256,11 @@ public interface IKeycloakClient
     /// <remarks>
     /// Url: /{realm}/users/{id}/groups/{groupId}
     /// </remarks>
-    /// <param name="id"></param>
+    /// <param name="userId"></param>
     /// <param name="groupId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     Task DeleteUserGroupAsync(
-        string id,
+        string userId,
         string groupId,
         CancellationToken cancellationToken = default);
 
