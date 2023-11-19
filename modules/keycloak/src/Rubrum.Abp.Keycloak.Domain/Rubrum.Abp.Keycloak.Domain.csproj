@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\framework\src\Rubrum.Abp.Keycloak.Abstractions\Rubrum.Abp.Keycloak.Abstractions.csproj" />
     <ProjectReference Include="..\Rubrum.Abp.Keycloak.Domain.Shared\Rubrum.Abp.Keycloak.Domain.Shared.csproj"/>
   </ItemGroup>
 </Project>

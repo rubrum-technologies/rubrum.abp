@@ -1,14 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\common.props"/>
+  <Import Project="..\..\..\fody.props"/>
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <RootNamespace>Rubrum.Abp.MultilingualObjects</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Rubrum.Abp.Core\Rubrum.Abp.Core.csproj"/>
     <ProjectReference Include="..\Rubrum.Abp.Data\Rubrum.Abp.Data.csproj"/>
   </ItemGroup>
-
 </Project>

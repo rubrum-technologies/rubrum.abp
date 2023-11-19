@@ -4,14 +4,28 @@
 
   <PropertyGroup>
     <RootNamespace>Rubrum.Abp.Keycloak</RootNamespace>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Mapster" Version="$(MapsterPackageVersion)"/>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Ddd.Application" Version="$(AbpPackageVersion)"/>
+    <PackageReference Include="Volo.Abp.FluentValidation" Version="$(AbpPackageVersion)"/>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Rubrum.Abp.Keycloak.Application.Contracts\Rubrum.Abp.Keycloak.Application.Contracts.csproj"/>
     <ProjectReference Include="..\Rubrum.Abp.Keycloak.Domain\Rubrum.Abp.Keycloak.Domain.csproj"/>
   </ItemGroup>
+
+  <Target Name="Mapster">
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet build"/>
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet tool restore"/>
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster model -a &quot;$(TargetDir)$(ProjectName).dll&quot; -o &quot;Mapper/Generated&quot;"/>
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster extension -a &quot;$(TargetDir)$(ProjectName).dll&quot; -o &quot;Mapper/Generated&quot;"/>
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster mapper -a &quot;$(TargetDir)$(ProjectName).dll&quot; -o &quot;Mapper/Generated&quot;"/>
+  </Target>
 </Project>

@@ -32,7 +32,7 @@ public class ClientRepresentation
     public bool? DirectGrantsOnly { get; set; }
     public bool? PublicClient { get; set; }
 
-    [JsonPropertyName("FrontchannelLogout")]
+    [JsonPropertyName("frontchannelLogout")]
     public bool? FrontChannelLogout { get; set; }
 
     public string? Protocol { get; set; }

@@ -698,7 +698,7 @@ public interface IKeycloakClient
     /// <param name="client"></param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task CreateGroupRoleMappingsClientAsync(
+    Task ChangeGroupRoleMappingsClientAsync(
         string groupId,
         string client,
         RoleRepresentation roleRepresentation,
@@ -714,7 +714,7 @@ public interface IKeycloakClient
     /// <param name="client"></param>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task CreateUserRoleMappingsClientAsync(
+    Task ChangeUserRoleMappingsClientAsync(
         string userId,
         string client,
         RoleRepresentation roleRepresentation,
@@ -1250,7 +1250,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="clientScopeRepresentation">ClientScopeRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task CreateClientScopesAsync(
+    Task CreateClientScopeAsync(
         ClientScopeRepresentation? clientScopeRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -1262,7 +1262,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="clientScopeRepresentation">ClientScopeRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task CreateClientTemplatesAsync(
+    Task CreateClientTemplateAsync(
         ClientScopeRepresentation? clientScopeRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -2365,7 +2365,7 @@ public interface IKeycloakClient
     /// Url: /{realm}/push-revocation
     /// </remarks>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<GlobalRequestResult> PushRevocationByRealmAsync(CancellationToken cancellationToken = default);
+    Task<GlobalRequestResult> PushRevocationAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Test SMTP connection with current logged in user
@@ -2711,11 +2711,11 @@ public interface IKeycloakClient
     /// Url: /{realm}/groups/{id}/role-mappings/realm
     /// </remarks>
     /// <param name="groupId"></param>
-    /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
+    /// <param name="roleRepresentations">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task CreateGroupRoleMappingsRealmAsync(
+    Task ChangeGroupRoleMappingsRealmAsync(
         string groupId,
-        RoleRepresentation? roleRepresentation,
+        ICollection<RoleRepresentation>? roleRepresentations,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -2725,11 +2725,11 @@ public interface IKeycloakClient
     /// Url: /{realm}/users/{id}/role-mappings/realm
     /// </remarks>
     /// <param name="userId"></param>
-    /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
+    /// <param name="roleRepresentations">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task CreateUserRoleMappingsRealmAsync(
+    Task ChangeUserRoleMappingsRealmAsync(
         string userId,
-        RoleRepresentation? roleRepresentation,
+        ICollection<RoleRepresentation>? roleRepresentations,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -3060,7 +3060,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="roleRepresentation">RoleRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task CreateRolesAsync(
+    Task CreateRoleAsync(
         RoleRepresentation? roleRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -4056,7 +4056,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="userRepresentation">UserRepresentation (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task CreateUsersAsync(
+    Task CreateUserAsync(
         UserRepresentation? userRepresentation,
         CancellationToken cancellationToken = default);
 
@@ -4246,7 +4246,7 @@ public interface IKeycloakClient
     /// </remarks>
     /// <param name="userId"></param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task DeleteUserByRealmByIdAsync(
+    Task DeleteUserByIdAsync(
         string userId,
         CancellationToken cancellationToken = default);
 

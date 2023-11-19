@@ -1,4 +1,6 @@
-﻿namespace Rubrum.Abp.Keycloak;
+﻿using System.Text.Json.Serialization;
+
+namespace Rubrum.Abp.Keycloak;
 
 public class RealmRepresentation
 {
@@ -28,10 +30,13 @@ public class RealmRepresentation
     public int? AccessCodeLifespanLogin { get; set; }
     public int? ActionTokenGeneratedByAdminLifespan { get; set; }
     public int? ActionTokenGeneratedByUserLifespan { get; set; }
-    public int? Oauth2DeviceCodeLifespan { get; set; }
+
+    [JsonPropertyName("oauth2DeviceCodeLifespan")]
     public int? OAuth2DeviceCodeLifespan { get; set; }
-    public int? Oauth2DevicePollingInterval { get; set; }
+
+    [JsonPropertyName("oauth2DevicePollingInterval")]
     public int? OAuth2DevicePollingInterval { get; set; }
+
     public bool? Enabled { get; set; }
     public string? SslRequired { get; set; }
     public bool? PasswordCredentialGrantAllowed { get; set; }
@@ -59,10 +64,10 @@ public class RealmRepresentation
     public string? CodeSecret { get; set; }
     public RolesRepresentation? Roles { get; set; }
     public List<GroupRepresentation>? Groups { get; set; }
-    public List<string?>? DefaultRoles { get; set; }
+    public List<string>? DefaultRoles { get; set; }
     public RoleRepresentation? DefaultRole { get; set; }
-    public List<string?>? DefaultGroups { get; set; }
-    public List<string?>? RequiredCredentials { get; set; }
+    public List<string>? DefaultGroups { get; set; }
+    public List<string>? RequiredCredentials { get; set; }
     public string? PasswordPolicy { get; set; }
     public string? OtpPolicyType { get; set; }
     public string? OtpPolicyAlgorithm { get; set; }
@@ -92,8 +97,8 @@ public class RealmRepresentation
     public int? WebAuthnPolicyPasswordlessCreateTimeout { get; set; }
     public bool? WebAuthnPolicyPasswordlessAvoidSameAuthenticatorRegister { get; set; }
     public List<string>? WebAuthnPolicyPasswordlessAcceptableAaguids { get; set; }
-    public List<Object>? ClientProfiles { get; set; }
-    public List<Object>? ClientPolicies { get; set; }
+    public RealmClientProfiles? ClientProfiles { get; set; }
+    public RealmClientPolicies? ClientPolicies { get; set; }
     public List<UserRepresentation>? Users { get; set; }
     public List<UserRepresentation>? FederatedUsers { get; set; }
     public List<ScopeMappingRepresentation>? ScopeMappings { get; set; }

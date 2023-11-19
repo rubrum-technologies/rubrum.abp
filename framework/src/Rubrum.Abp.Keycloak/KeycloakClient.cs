@@ -537,7 +537,7 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
             cancellationToken);
     }
 
-    public virtual Task CreateGroupRoleMappingsClientAsync(
+    public virtual Task ChangeGroupRoleMappingsClientAsync(
         string groupId,
         string client,
         RoleRepresentation roleRepresentation,
@@ -549,7 +549,7 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
             cancellationToken);
     }
 
-    public virtual Task CreateUserRoleMappingsClientAsync(
+    public virtual Task ChangeUserRoleMappingsClientAsync(
         string userId,
         string client,
         RoleRepresentation roleRepresentation,
@@ -978,7 +978,7 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
             cancellationToken);
     }
 
-    public virtual Task CreateClientScopesAsync(
+    public virtual Task CreateClientScopeAsync(
         ClientScopeRepresentation? clientScopeRepresentation,
         CancellationToken cancellationToken = default)
     {
@@ -988,7 +988,7 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
             cancellationToken);
     }
 
-    public virtual Task CreateClientTemplatesAsync(
+    public virtual Task CreateClientTemplateAsync(
         ClientScopeRepresentation? clientScopeRepresentation,
         CancellationToken cancellationToken = default)
     {
@@ -1854,7 +1854,7 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
             cancellationToken);
     }
 
-    public virtual Task<GlobalRequestResult> PushRevocationByRealmAsync(CancellationToken cancellationToken = default)
+    public virtual Task<GlobalRequestResult> PushRevocationAsync(CancellationToken cancellationToken = default)
     {
         return PostAsync<GlobalRequestResult>(
             $"/admin/realms/{RealmName}/push-revocation",
@@ -2094,25 +2094,25 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
             cancellationToken);
     }
 
-    public virtual Task CreateGroupRoleMappingsRealmAsync(
+    public virtual Task ChangeGroupRoleMappingsRealmAsync(
         string groupId,
-        RoleRepresentation? roleRepresentation,
+        ICollection<RoleRepresentation>? roleRepresentations,
         CancellationToken cancellationToken = default)
     {
         return PostAsync(
             $"/admin/realms/{RealmName}/groups/{groupId}/role-mappings/realm",
-            roleRepresentation,
+            roleRepresentations,
             cancellationToken);
     }
 
-    public virtual Task CreateUserRoleMappingsRealmAsync(
+    public virtual Task ChangeUserRoleMappingsRealmAsync(
         string userId,
-        RoleRepresentation? roleRepresentation,
+        ICollection<RoleRepresentation>? roleRepresentations,
         CancellationToken cancellationToken = default)
     {
         return PostAsync(
             $"/admin/realms/{RealmName}/users/{userId}/role-mappings/realm",
-            roleRepresentation,
+            roleRepresentations,
             cancellationToken);
     }
 
@@ -2362,7 +2362,7 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
             cancellationToken);
     }
 
-    public virtual Task CreateRolesAsync(
+    public virtual Task CreateRoleAsync(
         RoleRepresentation? roleRepresentation,
         CancellationToken cancellationToken = default)
     {
@@ -3117,7 +3117,7 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
             cancellationToken);
     }
 
-    public virtual Task CreateUsersAsync(
+    public virtual Task CreateUserAsync(
         UserRepresentation? userRepresentation,
         CancellationToken cancellationToken = default)
     {
@@ -3246,7 +3246,7 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
             cancellationToken);
     }
 
-    public virtual Task DeleteUserByRealmByIdAsync(string userId, CancellationToken cancellationToken = default)
+    public virtual Task DeleteUserByIdAsync(string userId, CancellationToken cancellationToken = default)
     {
         return DeleteAsync($"/admin/realms/{RealmName}/users/{userId}", cancellationToken);
     }
@@ -3271,15 +3271,18 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
 
         if (value is not null)
         {
-            request.Content = JsonContent.Create(value);
+            var content = Serializer.Serialize(value);
+            request.Content = new StringContent(content, new MediaTypeHeaderValue("application/json") { CharSet = "utf-8" });
         }
 
         request.Method = method;
         request.RequestUri = CreateUri(path);
 
         using var httpClient = CreateHttpClient();
-        using var response = await httpClient.SendAsync(request, cancellationToken);
+        httpClient.DefaultRequestHeaders.Authorization = await GetAuthenticationHeaderAsync();
 
+        using var response = await httpClient.SendAsync(request, cancellationToken);
+        
         response.EnsureSuccessStatusCode();
     }
 
@@ -3329,8 +3332,6 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
         request.RequestUri = CreateUri($"/realms/{RealmName}/protocol/openid-connect/token");
 
         using var httpClient = CreateHttpClient();
-        httpClient.DefaultRequestHeaders.Authorization = await GetAuthenticationHeaderAsync();
-        
         using var response = await httpClient.SendAsync(request, cancellationToken);
 
         response.EnsureSuccessStatusCode();
@@ -3415,7 +3416,7 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
         string path,
         CancellationToken cancellationToken = default)
     {
-        return PostAsync<object>(path, null, cancellationToken);
+        return PutAsync<string>(path, null, cancellationToken);
     }
 
     private Task PutAsync<TValue>(

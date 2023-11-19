@@ -1,0 +1,17 @@
+{
+  "data": {
+    "keycloakUsers": {
+      "nodes": [
+        {
+          "userName": "admin"
+        }
+      ],
+      "pageInfo": {
+        "endCursor": "MA==",
+        "hasNextPage": false,
+        "hasPreviousPage": false,
+        "startCursor": "MA=="
+      }
+    }
+  }
+}

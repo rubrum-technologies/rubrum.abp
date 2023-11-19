@@ -1,0 +1,10 @@
+{
+  "data": {
+    "updateKeycloakRole": {
+      "keycloakRole": {
+        "name": "test-2-role"
+      },
+      "errors": null
+    }
+  }
+}
