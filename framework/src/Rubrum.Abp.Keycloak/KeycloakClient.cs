@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
 using Volo.Abp.DependencyInjection;
@@ -3276,8 +3277,8 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
         request.Method = method;
         request.RequestUri = CreateUri(path);
 
-        using var client = CreateHttpClient();
-        using var response = await client.SendAsync(request, cancellationToken);
+        using var httpClient = CreateHttpClient();
+        using var response = await httpClient.SendAsync(request, cancellationToken);
 
         response.EnsureSuccessStatusCode();
     }
@@ -3300,13 +3301,44 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
         request.Method = method;
         request.RequestUri = CreateUri(path);
 
-        using var client = CreateHttpClient();
-        using var response = await client.SendAsync(request, cancellationToken);
+        using var httpClient = CreateHttpClient();
+        httpClient.DefaultRequestHeaders.Authorization = await GetAuthenticationHeaderAsync();
+        
+        using var response = await httpClient.SendAsync(request, cancellationToken);
 
         response.EnsureSuccessStatusCode();
 
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
         return Serializer.Deserialize<TResult>(json);
+    }
+
+    protected virtual async Task<string> GetAccessTokenAsync(CancellationToken cancellationToken = default)
+    {
+        cancellationToken = CancellationTokenProvider.FallbackToProvider(cancellationToken);
+
+        using var request = new HttpRequestMessage();
+
+        request.Content = new FormUrlEncodedContent(new Dictionary<string, string>
+        {
+            { "grant_type", "password" },
+            { "username", Options.AdminUserName },
+            { "password", Options.AdminPassword },
+            { "client_id", Options.AdminClientId }
+        });
+        request.Method = HttpMethod.Post;
+        request.RequestUri = CreateUri($"/realms/{RealmName}/protocol/openid-connect/token");
+
+        using var httpClient = CreateHttpClient();
+        httpClient.DefaultRequestHeaders.Authorization = await GetAuthenticationHeaderAsync();
+        
+        using var response = await httpClient.SendAsync(request, cancellationToken);
+
+        response.EnsureSuccessStatusCode();
+
+        var json = await response.Content.ReadAsStringAsync(cancellationToken);
+        var result = Serializer.Deserialize<OAuth2Token>(json);
+
+        return result.AccessToken;
     }
 
     protected virtual string SetQuery(string uri, Dictionary<string, object?> queries)
@@ -3335,6 +3367,11 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
         path = path.TrimStart('/').TrimEnd('/');
 
         return new Uri($"{url}/{path}");
+    }
+
+    private async Task<AuthenticationHeaderValue> GetAuthenticationHeaderAsync()
+    {
+        return new AuthenticationHeaderValue("Bearer", await GetAccessTokenAsync());
     }
     
     private Task<TResult> GetAsync<TResult>(
