@@ -2,6 +2,7 @@
 using Rubrum.Abp.Keycloak.Roles;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
+using static Rubrum.Abp.Keycloak.Permissions.KeycloakUserPermissions.Users;
 
 namespace Rubrum.Abp.Keycloak.Users;
 
@@ -23,12 +24,16 @@ public class KeycloakUserAppService : ApplicationService, IKeycloakUserAppServic
 
     public async Task<KeycloakUserDto> GetAsync(string id)
     {
+        await CheckPolicyAsync(Default);
+        
         var user = await KeycloakClient.GetUserByIdAsync(id);
         return UserMapper.Map(user);
     }
 
     public async Task<PagedResultDto<KeycloakUserDto>> GetListAsync(PagedResultRequestDto input)
     {
+        await CheckPolicyAsync(Default);
+
         var users = await KeycloakClient.GetUsersAsync(first: input.SkipCount, max: input.MaxResultCount);
         var totalCount = await KeycloakClient.GetUsersCountAsync();
 
@@ -37,6 +42,8 @@ public class KeycloakUserAppService : ApplicationService, IKeycloakUserAppServic
 
     public async Task<KeycloakUserDto> CreateAsync(CreateKeycloakUserInput input)
     {
+        await CheckPolicyAsync(Create);
+
         var user = new UserRepresentation
         {
             Username = input.UserName,
@@ -56,6 +63,8 @@ public class KeycloakUserAppService : ApplicationService, IKeycloakUserAppServic
 
     public async Task<KeycloakUserDto> UpdateAsync(string id, UpdateKeycloakUserInput input)
     {
+        await CheckPolicyAsync(Update);
+
         var user = await KeycloakClient.GetUserByIdAsync(id);
 
         user.Username = input.UserName;
@@ -71,11 +80,15 @@ public class KeycloakUserAppService : ApplicationService, IKeycloakUserAppServic
 
     public async Task DeleteAsync(string id)
     {
+        await CheckPolicyAsync(Delete);
+
         await KeycloakClient.DeleteUserByIdAsync(id);
     }
 
     public async Task<ListResultDto<KeycloakRoleDto>> GetRolesAsync(string id)
     {
+        await CheckPolicyAsync(Default);
+
         var mappings = await KeycloakClient.GetUserRoleMappingsAsync(id);
         var roles = mappings.RealmMappings ?? new List<RoleRepresentation>();
 
@@ -84,6 +97,8 @@ public class KeycloakUserAppService : ApplicationService, IKeycloakUserAppServic
 
     public async Task<KeycloakUserDto> ChangePasswordAsync(string id, ChangePasswordKeycloakUserInput input)
     {
+        await CheckPolicyAsync(ChangePassword);
+
         var user = await KeycloakClient.GetUserByIdAsync(id);
 
         await KeycloakClient.ResetPasswordAsync(
@@ -95,6 +110,8 @@ public class KeycloakUserAppService : ApplicationService, IKeycloakUserAppServic
 
     public async Task<KeycloakUserDto> ChangeRolesAsync(string id, ChangeRolesKeycloakUserInput input)
     {
+        await CheckPolicyAsync(ChangeRoles);
+
         var roles = await KeycloakClient.GetRolesAsync();
 
         await KeycloakClient.ChangeUserRoleMappingsRealmAsync(
