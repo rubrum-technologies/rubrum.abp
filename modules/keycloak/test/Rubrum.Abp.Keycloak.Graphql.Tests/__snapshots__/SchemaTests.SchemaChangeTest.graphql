@@ -198,6 +198,7 @@ input ChangePasswordInput {
 }
 
 input ChangePasswordKeycloakUserInput {
+  "Minimum length '3',\n Required and not empty"
   password: String!
 }
 
@@ -207,17 +208,21 @@ input ChangeRolesForUserInput {
 }
 
 input ChangeRolesKeycloakUserInput {
+  "Required"
   roleNames: [String!]!
 }
 
 input CreateKeycloakRoleInput {
+  "Required and not empty"
   name: String!
 }
 
 input CreateKeycloakUserInput {
+  "Required and not empty"
   userName: String!
   firstName: String
   lastName: String
+  "Contains email"
   email: String
   phoneNumber: String
   isActive: Boolean
@@ -304,6 +309,7 @@ input StringOperationFilterInput {
 
 input UpdateKeycloakRoleInput {
   id: ID!
+  "Required and not empty"
   name: String!
 }
 
@@ -312,6 +318,7 @@ input UpdateKeycloakUserInput {
   userName: String
   firstName: String
   lastName: String
+  "Contains email"
   email: String
   phoneNumber: String
   isActive: Boolean

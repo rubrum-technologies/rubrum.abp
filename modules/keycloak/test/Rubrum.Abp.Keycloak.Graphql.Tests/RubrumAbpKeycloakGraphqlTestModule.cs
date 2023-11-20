@@ -7,6 +7,7 @@ using Volo.Abp.Modularity;
 
 namespace Rubrum.Abp.Keycloak;
 
+[DependsOn(typeof(RubrumAbpGraphqlFluentValidationModule))]
 [DependsOn(typeof(RubrumAbpGraphqlTestBaseModule))]
 [DependsOn(typeof(RubrumAbpKeycloakTestBaseModule))]
 [DependsOn(typeof(RubrumAbpKeycloakGraphqlModule))]
