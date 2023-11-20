@@ -19,6 +19,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Protobuf Include="..\Rubrum.Abp.PermissionManagement.HttpApi.Grpc\Protos\permission-definition-record-repository.proto" GrpcServices="Client"/>
+    <Protobuf Include="..\Rubrum.Abp.PermissionManagement.HttpApi.Grpc\Protos\permission-grant-repository.proto" GrpcServices="Client"/>
+    <Protobuf Include="..\Rubrum.Abp.PermissionManagement.HttpApi.Grpc\Protos\permission-group-definition-record-repository.proto" GrpcServices="Client"/>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\..\framework\src\Rubrum.Abp.Core\Rubrum.Abp.Core.csproj"/>
   </ItemGroup>
 </Project>

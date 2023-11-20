@@ -19,6 +19,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Protobuf Include="Protos\permission-definition-record-repository.proto" GrpcServices="Server" Generator="MSBuild:Compile"/>
+    <Protobuf Include="Protos\permission-grant-repository.proto" GrpcServices="Server" Generator="MSBuild:Compile"/>
+    <Protobuf Include="Protos\permission-group-definition-record-repository.proto" GrpcServices="Server" Generator="MSBuild:Compile"/>
+    <Content Include="@(Protobuf)"/>
+    <None Remove="@(Protobuf)"/>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\..\framework\src\Rubrum.Abp.Core\Rubrum.Abp.Core.csproj"/>
   </ItemGroup>
 </Project>
