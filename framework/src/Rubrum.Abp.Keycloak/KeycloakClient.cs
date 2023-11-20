@@ -32,9 +32,9 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
 
     protected string RealmName => CurrentKeycloakRealm.RealmName;
 
-    public virtual Task<object> GetBasePathForRetrieveProvidersAsync(CancellationToken cancellationToken = default)
+    public virtual Task<ICollection<AuthenticatorConfigInfoRepresentation>> GetBasePathForRetrieveProvidersAsync(CancellationToken cancellationToken = default)
     {
-        return GetAsync<object>(
+        return GetAsync<ICollection<AuthenticatorConfigInfoRepresentation>>(
             $"/admin/realms/{RealmName}/client-registration-policy/providers",
             cancellationToken);
     }

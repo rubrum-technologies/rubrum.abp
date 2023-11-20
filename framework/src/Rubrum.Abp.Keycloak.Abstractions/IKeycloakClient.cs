@@ -11,7 +11,8 @@ public interface IKeycloakClient
     /// Url: /{realm}/client-registration-policy/providers
     /// </remarks>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    Task<object> GetBasePathForRetrieveProvidersAsync(CancellationToken cancellationToken = default);
+    Task<ICollection<AuthenticatorConfigInfoRepresentation>> GetBasePathForRetrieveProvidersAsync(
+        CancellationToken cancellationToken = default);
 
     #endregion
 
