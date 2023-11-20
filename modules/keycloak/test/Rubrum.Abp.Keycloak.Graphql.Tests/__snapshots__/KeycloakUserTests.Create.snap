@@ -1,0 +1,11 @@
+{
+  "data": {
+    "createKeycloakUser": {
+      "keycloakUser": {
+        "firstName": "Artem",
+        "lastName": "Sharypov"
+      },
+      "errors": null
+    }
+  }
+}

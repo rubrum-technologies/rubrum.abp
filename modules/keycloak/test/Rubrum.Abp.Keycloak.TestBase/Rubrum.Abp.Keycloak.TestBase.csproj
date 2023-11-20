@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\framework\src\Rubrum.Abp.Keycloak\Rubrum.Abp.Keycloak.csproj" />
     <ProjectReference Include="..\..\src\Rubrum.Abp.Keycloak.Domain\Rubrum.Abp.Keycloak.Domain.csproj"/>
   </ItemGroup>
 </Project>
