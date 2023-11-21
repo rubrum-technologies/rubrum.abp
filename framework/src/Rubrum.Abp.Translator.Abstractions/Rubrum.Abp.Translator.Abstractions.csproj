@@ -9,8 +9,4 @@
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Threading" Version="$(AbpPackageVersion)"/>
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Rubrum.Abp.Languages\Rubrum.Abp.Languages.csproj" />
-  </ItemGroup>
 </Project>
