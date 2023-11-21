@@ -23,7 +23,7 @@ public class RubrumAbpKeycloakModule : AbpModule
         });
 
         Configure<RubrumAbpKeycloakOptions>(options => configuration
-            .GetSection("Keycloak")
+            .GetSection("keycloak")
             .Bind(options));
     }
 }
