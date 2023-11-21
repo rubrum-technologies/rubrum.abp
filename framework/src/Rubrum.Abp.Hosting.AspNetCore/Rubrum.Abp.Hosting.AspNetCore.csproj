@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\common.props"/>
+  <Import Project="..\..\..\fody.props"/>
+
+  <PropertyGroup>
+    <RootNamespace>Rubrum.Abp.Hosting</RootNamespace>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.0"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="$(AbpPackageVersion)"/>
+    <PackageReference Include="Volo.Abp.Swashbuckle" Version="$(AbpPackageVersion)"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Rubrum.Abp.Hosting\Rubrum.Abp.Hosting.csproj" />
+  </ItemGroup>
+</Project>

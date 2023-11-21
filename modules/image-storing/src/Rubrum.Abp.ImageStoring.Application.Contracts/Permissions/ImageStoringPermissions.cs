@@ -4,7 +4,7 @@ namespace Rubrum.Abp.ImageStoring.Permissions;
 
 public static class ImageStoringPermissions
 {
-    public const string GroupName = "IgaImageStoring";
+    public const string GroupName = "ImageStoring";
 
     public static string[] GetAll()
     {
