@@ -22,9 +22,9 @@ public class RubrumAbpLanguageManagementApplicationContractsModule : AbpModule
                 .ApplyEntityConfigurationToApi(
                     LanguageManagementModuleExtensionConstants.ModuleName,
                     LanguageManagementModuleExtensionConstants.EntityNames.Language,
-                    getApiTypes: new[] { typeof(LanguageDto) },
-                    createApiTypes: new[] { typeof(CreateLanguageInput) },
-                    updateApiTypes: new[] { typeof(UpdateLanguageInput) }
+                    new[] { typeof(LanguageDto) },
+                    new[] { typeof(CreateLanguageInput) },
+                    new[] { typeof(UpdateLanguageInput) }
                 );
         });
     }

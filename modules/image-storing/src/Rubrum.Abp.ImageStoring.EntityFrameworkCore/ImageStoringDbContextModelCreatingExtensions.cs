@@ -23,7 +23,7 @@ public static class ImageStoringDbContextModelCreatingExtensions
 
             b.ApplyObjectExtensionMappings();
         });
-        
+
         builder.TryConfigureObjectExtensions<ImageStoringDbContext>();
     }
 }

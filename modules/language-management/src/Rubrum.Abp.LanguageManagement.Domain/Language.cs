@@ -20,11 +20,11 @@ public class Language : FullAuditedAggregateRoot<string>, IHasEntityVersion
         Name = name;
     }
 
-    public int EntityVersion { get; protected set; }
-
     public string Name
     {
         get => _name;
         internal set => _name = Check.NotNullOrWhiteSpace(value, nameof(value), MaxNameLenght);
     }
+
+    public int EntityVersion { get; protected set; }
 }

@@ -48,7 +48,7 @@ public class LanguageAppService : ApplicationService, ILanguageAppService
 
         var language = await Manager.CreateAsync(input.Code, input.Name);
         input.MapExtraPropertiesTo(language);
-        
+
         await Repository.InsertAsync(language, true, cancellationToken);
 
         return Mapper.Map(language);

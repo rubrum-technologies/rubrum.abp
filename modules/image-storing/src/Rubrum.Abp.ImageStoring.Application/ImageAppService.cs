@@ -48,9 +48,6 @@ public class ImageAppService : ApplicationService, IImageAppService
         var file = new ImageFile(id, stream.GetStream());
         await _imageContainer.CreateAsync(file, cancellationToken);
 
-        return new ImageInformationDto
-        {
-            Id = id
-        };
+        return new ImageInformationDto { Id = id };
     }
 }
