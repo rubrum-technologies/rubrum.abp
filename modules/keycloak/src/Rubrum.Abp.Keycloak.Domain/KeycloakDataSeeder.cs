@@ -1,11 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 
 namespace Rubrum.Abp.Keycloak;
 
-public class KeycloakDataSeeder : IDataSeedContributor, ITransientDependency
+public class KeycloakDataSeeder : IKeycloakDataSeeder, ITransientDependency
 {
     private readonly RubrumAbpKeycloakClientsOptions _clientsOptions;
     private readonly IKeycloakClient _keycloakClient;
@@ -30,7 +29,7 @@ public class KeycloakDataSeeder : IDataSeedContributor, ITransientDependency
     protected IReadOnlyDictionary<string, KeycloakClientOptions> Apps =>
         _clientsOptions.Apps ?? new Dictionary<string, KeycloakClientOptions>();
 
-    public virtual async Task SeedAsync(DataSeedContext context)
+    public virtual async Task SeedAsync()
     {
         await UpdateRealmSettingsAsync();
         await UpdateAdminUserAsync();
@@ -230,7 +229,7 @@ public class KeycloakDataSeeder : IDataSeedContributor, ITransientDependency
         {
             return;
         }
-        
+
         var client = (await _keycloakClient.GetClientsAsync(swagger.Id))
             .FirstOrDefault();
 
