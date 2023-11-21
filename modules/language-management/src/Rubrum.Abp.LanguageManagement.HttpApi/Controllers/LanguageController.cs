@@ -10,7 +10,7 @@ namespace Rubrum.Abp.LanguageManagement.Controllers;
 
 [Area(ModuleName)]
 [RemoteService(Name = RemoteServiceName)]
-[Route("api/chats/channel")]
+[Route("api/language-management/languages")]
 public class LanguageController : AbpControllerBase, ILanguageAppService
 {
     private readonly ILanguageAppService _service;
