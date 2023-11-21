@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\common.props"/>
+  <Import Project="..\..\..\fody.props"/>
+
+  <PropertyGroup>
+    <RootNamespace>Rubrum.Abp.Hosting</RootNamespace>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="HotChocolate.AspNetCore" Version="$(HotChocolatePackageVersion)"/>
+    <PackageReference Include="HotChocolate.Stitching.Redis" Version="$(HotChocolatePackageVersion)"/>
+    <PackageReference Include="HotChocolate.Fusion" Version="$(HotChocolatePackageVersion)"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Rubrum.Abp.Hosting.AspNetCore\Rubrum.Abp.Hosting.AspNetCore.csproj"/>
+  </ItemGroup>
+</Project>

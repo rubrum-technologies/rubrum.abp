@@ -26,7 +26,7 @@ public class RubrumAbpImageStoringDomainSharedModule : AbpModule
 
         Configure<AbpExceptionLocalizationOptions>(options =>
         {
-            options.MapCodeNamespace("Iga.ImageStoring", typeof(RubrumAbpImageStoringResource));
+            options.MapCodeNamespace("Rubrum.Abp.ImageStoring", typeof(RubrumAbpImageStoringResource));
         });
     }
 }

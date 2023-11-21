@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\common.props"/>
+  <Import Project="..\..\..\fody.props"/>
+
+  <PropertyGroup>
+    <RootNamespace>Rubrum.Abp.Hosting</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Yarp.ReverseProxy" Version="2.1.0"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Rubrum.Abp.Hosting.AspNetCore\Rubrum.Abp.Hosting.AspNetCore.csproj"/>
+  </ItemGroup>
+</Project>
