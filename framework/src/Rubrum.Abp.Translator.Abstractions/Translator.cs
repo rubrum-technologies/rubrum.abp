@@ -1,5 +1,4 @@
-﻿using Rubrum.Abp.Languages;
-using Volo.Abp.DependencyInjection;
+﻿using Volo.Abp.DependencyInjection;
 using Volo.Abp.Threading;
 
 namespace Rubrum.Abp.Translator;
@@ -18,7 +17,7 @@ public class Translator : ITranslator, ITransientDependency
     }
 
     public async Task<TranslateProcessResult> TranslateAsync(
-        Language into,
+        string into,
         string text,
         CancellationToken cancellationToken = default)
     {
@@ -41,8 +40,8 @@ public class Translator : ITranslator, ITransientDependency
     }
 
     public async Task<TranslateProcessResult> TranslateAsync(
-        Language from,
-        Language into,
+        string from,
+        string into,
         string text,
         CancellationToken cancellationToken = default)
     {

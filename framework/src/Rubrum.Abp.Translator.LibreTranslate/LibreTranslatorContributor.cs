@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using Rubrum.Abp.Languages;
 using Volo.Abp.DependencyInjection;
 
 namespace Rubrum.Abp.Translator;
@@ -16,13 +15,18 @@ public class LibreTranslatorContributor : ITranslatorContributor, ITransientDepe
     }
 
     public async Task<TranslateProcessResult> TryTranslateAsync(
-        Language into,
+        string into,
         string text,
         CancellationToken cancellationToken = default)
     {
         try
         {
-            var result = await _client.TranslateAsync(text, "auto", into.Value, cancellationToken);
+            if (!(await CheckSupportLanguageAsync("auto", into)))
+            {
+                return new TranslateProcessResult(text, TranslateProcessState.Unsupported);
+            }
+
+            var result = await _client.TranslateAsync(text, "auto", into, cancellationToken);
             return new TranslateProcessResult(result.Text, TranslateProcessState.Done);
         }
         catch (Exception ex)
@@ -33,14 +37,19 @@ public class LibreTranslatorContributor : ITranslatorContributor, ITransientDepe
     }
 
     public async Task<TranslateProcessResult> TryTranslateAsync(
-        Language from,
-        Language into,
+        string from,
+        string into,
         string text,
         CancellationToken cancellationToken = default)
     {
         try
         {
-            var result = await _client.TranslateAsync(text, from.Value, into.Value, cancellationToken);
+            if (!(await CheckSupportLanguageAsync(from, into)))
+            {
+                return new TranslateProcessResult(text, TranslateProcessState.Unsupported);
+            }
+
+            var result = await _client.TranslateAsync(text, from, into, cancellationToken);
             return new TranslateProcessResult(result.Text, TranslateProcessState.Done);
         }
         catch (Exception ex)
@@ -48,5 +57,18 @@ public class LibreTranslatorContributor : ITranslatorContributor, ITransientDepe
             _logger.LogException(ex);
             return new TranslateProcessResult(text, TranslateProcessState.Unsupported);
         }
+    }
+
+    protected virtual async Task<bool> CheckSupportLanguageAsync(string from, string into)
+    {
+        var languages = await _client.GetLanguagesAsync();
+        var language = languages.FirstOrDefault(x => x.Code == into);
+
+        if (language is null)
+        {
+            return false;
+        }
+
+        return from == "auto" || language.Targets.Any(target => target == from);
     }
 }

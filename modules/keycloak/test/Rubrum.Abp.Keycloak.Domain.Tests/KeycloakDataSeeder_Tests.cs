@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
-using Volo.Abp.Data;
 using Xunit;
 
 namespace Rubrum.Abp.Keycloak;
