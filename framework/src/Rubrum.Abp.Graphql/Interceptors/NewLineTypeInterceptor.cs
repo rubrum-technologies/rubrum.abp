@@ -1,6 +1,5 @@
 ﻿using HotChocolate.Configuration;
 using HotChocolate.Types.Descriptors.Definitions;
-using Rubrum.Abp.Graphql.Extensions;
 
 namespace Rubrum.Abp.Graphql.Interceptors;
 
