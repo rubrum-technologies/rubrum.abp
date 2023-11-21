@@ -8,5 +8,5 @@ namespace Rubrum.Abp.LanguageManagement.EntityFrameworkCore;
 [ConnectionStringName(ConnectionStringName)]
 public interface ILanguageManagementDbContext : IAbpEfCoreDbContext
 {
-    DbSet<Language> Languages { get; }
+    DbSet<SystemLanguage> Languages { get; }
 }

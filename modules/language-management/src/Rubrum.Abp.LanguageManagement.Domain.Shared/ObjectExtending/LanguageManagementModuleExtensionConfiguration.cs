@@ -8,7 +8,7 @@ public class LanguageManagementModuleExtensionConfiguration : ModuleExtensionCon
         Action<EntityExtensionConfiguration> configureAction)
     {
         return this.ConfigureEntity(
-            LanguageManagementModuleExtensionConstants.EntityNames.Language,
+            LanguageManagementModuleExtensionConstants.EntityNames.SystemLanguage,
             configureAction
         );
     }

@@ -6,6 +6,6 @@ public static class LanguageManagementModuleExtensionConstants
 
     public static class EntityNames
     {
-        public const string Language = "Language";
+        public const string SystemLanguage = "SystemLanguage";
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.Modeling;
 using static Rubrum.Abp.LanguageManagement.RubrumAbpLanguageManagementDbProperties;
-using static Rubrum.Abp.LanguageManagement.LanguageConstants;
+using static Rubrum.Abp.LanguageManagement.SystemLanguageConstants;
 
 namespace Rubrum.Abp.LanguageManagement.EntityFrameworkCore;
 
@@ -9,7 +9,7 @@ public static class RubrumAbpLanguageManagementDbContextModelCreatingExtensions
 {
     public static void ConfigureLanguageManagement(this ModelBuilder builder)
     {
-        builder.Entity<Language>(b =>
+        builder.Entity<SystemLanguage>(b =>
         {
             b.ToTable(DbTablePrefix + "Languages", DbSchema);
 

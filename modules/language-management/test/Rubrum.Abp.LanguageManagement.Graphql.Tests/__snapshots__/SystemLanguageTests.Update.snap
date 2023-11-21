@@ -1,0 +1,12 @@
+{
+  "data": {
+    "updateSystemLanguage": {
+      "systemLanguage": {
+        "id": "U3lzdGVtTGFuZ3VhZ2UKZHpo",
+        "code": "zh",
+        "name": "CH"
+      },
+      "errors": null
+    }
+  }
+}

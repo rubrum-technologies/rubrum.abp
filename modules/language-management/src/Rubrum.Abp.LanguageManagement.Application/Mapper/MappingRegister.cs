@@ -6,6 +6,6 @@ public class MappingRegister : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
-        config.NewConfig<Language, LanguageDto>();
+        config.NewConfig<SystemLanguage, SystemLanguageDto>();
     }
 }
