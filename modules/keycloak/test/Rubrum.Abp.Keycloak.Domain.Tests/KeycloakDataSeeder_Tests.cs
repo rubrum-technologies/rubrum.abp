@@ -19,7 +19,7 @@ public class KeycloakDataSeederTests : RubrumAbpKeycloakDomainTestBase
     {
         using var scope = ServiceProvider.CreateScope();
         await scope.ServiceProvider
-            .GetRequiredService<IDataSeeder>()
+            .GetRequiredService<IKeycloakDataSeeder>()
             .SeedAsync();
 
         var clients = (await _keycloakClient.GetClientsAsync()).ToList();
