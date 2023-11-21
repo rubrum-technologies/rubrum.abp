@@ -44,6 +44,11 @@ public class LanguageDataSeedContributor : IDataSeedContributor, ITransientDepen
     {
         var cancellationToken = _cancellationTokenProvider.Token;
 
+        if (await _repository.AnyAsync(cancellationToken))
+        {
+            return;
+        }
+        
         foreach (var (code, name) in Languages)
         {
             var language = await _manager.CreateAsync(code, name);

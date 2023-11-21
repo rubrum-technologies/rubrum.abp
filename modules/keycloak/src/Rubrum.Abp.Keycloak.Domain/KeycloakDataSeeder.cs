@@ -21,12 +21,14 @@ public class KeycloakDataSeeder : IDataSeedContributor, ITransientDependency
         _logger = logger;
     }
 
-    protected IReadOnlyDictionary<string, GatewayOptions> Gateways => _clientsOptions.Gateways;
+    protected IReadOnlyDictionary<string, GatewayOptions> Gateways =>
+        _clientsOptions.Gateways ?? new Dictionary<string, GatewayOptions>();
 
-    protected IReadOnlyDictionary<string, KeycloakClientOptions> Microservices => _clientsOptions.Microservices;
+    protected IReadOnlyDictionary<string, KeycloakClientOptions> Microservices =>
+        _clientsOptions.Microservices ?? new Dictionary<string, KeycloakClientOptions>();
 
-    protected SwaggerClientOptions Swagger => _clientsOptions.Swagger;
-    protected IReadOnlyDictionary<string, KeycloakClientOptions> Apps => _clientsOptions.Apps;
+    protected IReadOnlyDictionary<string, KeycloakClientOptions> Apps =>
+        _clientsOptions.Apps ?? new Dictionary<string, KeycloakClientOptions>();
 
     public virtual async Task SeedAsync(DataSeedContext context)
     {
@@ -222,29 +224,36 @@ public class KeycloakDataSeeder : IDataSeedContributor, ITransientDependency
 
     private async Task CreateSwaggerClientAsync()
     {
-        var client = (await _keycloakClient.GetClientsAsync(Swagger.Id))
+        var swagger = _clientsOptions.Swagger;
+
+        if (swagger is null)
+        {
+            return;
+        }
+        
+        var client = (await _keycloakClient.GetClientsAsync(swagger.Id))
             .FirstOrDefault();
 
         if (client == null)
         {
             client = new ClientRepresentation
             {
-                ClientId = Swagger.Id,
-                Name = Swagger.Name,
+                ClientId = swagger.Id,
+                Name = swagger.Name,
                 Protocol = "openid-connect",
                 Enabled = true,
                 RedirectUris = Microservices
                     .Select(x => $"{x.Value.RootUrl}/swagger/oauth2-redirect.html")
                     .Union(Gateways.Select(x => $"{x.Value.RootUrl}/swagger/oauth2-redirect.html"))
-                    .Union(new[] { Swagger.RootUrl })
+                    .Union(new[] { swagger.RootUrl })
                     .ToList(),
-                Secret = Swagger.Secret,
+                Secret = swagger.Secret,
                 FrontChannelLogout = true,
                 PublicClient = true
             };
 
             await _keycloakClient.CreateClientAsync(client);
-            await AddOptionalClientScopesAsync(Swagger.Id, Swagger);
+            await AddOptionalClientScopesAsync(swagger.Id, swagger);
         }
     }
 
