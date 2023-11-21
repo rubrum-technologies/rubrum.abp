@@ -17,5 +17,5 @@ public static class ImageFormatExtensions
             ImageFormat.WebP => MagickFormat.WebP,
             _ => throw new ArgumentOutOfRangeException(nameof(format), format, null)
         };
-    } 
+    }
 }

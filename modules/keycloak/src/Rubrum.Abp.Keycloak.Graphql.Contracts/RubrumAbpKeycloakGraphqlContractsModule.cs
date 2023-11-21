@@ -7,5 +7,4 @@ namespace Rubrum.Abp.Keycloak;
 [DependsOn(typeof(RubrumAbpKeycloakApplicationContractsModule))]
 public class RubrumAbpKeycloakGraphqlContractsModule : AbpModule
 {
-    
 }

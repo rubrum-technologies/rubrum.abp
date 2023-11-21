@@ -2,8 +2,9 @@
 
 namespace Rubrum.Abp.Keycloak.Users;
 
-public class KeycloakUserMutationType : 
-    EntityMutationType<KeycloakUserDto, string, IKeycloakUserGraphqlService, CreateKeycloakUserInput, UpdateKeycloakUserInput>
+public class KeycloakUserMutationType :
+    EntityMutationType<KeycloakUserDto, string, IKeycloakUserGraphqlService, CreateKeycloakUserInput,
+        UpdateKeycloakUserInput>
 {
     protected override string TypeName => "KeycloakUser";
     protected override string TypeNameSingular => "KeycloakUser";

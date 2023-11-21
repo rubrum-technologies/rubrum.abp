@@ -7,8 +7,8 @@ namespace Rubrum.Abp.Imaging;
 
 public class ImageConverter : IImageConverter, ITransientDependency
 {
-    protected readonly IEnumerable<IImageConverterContributor> ImageConverterContributors;
     protected readonly ICancellationTokenProvider CancellationTokenProvider;
+    protected readonly IEnumerable<IImageConverterContributor> ImageConverterContributors;
 
     public ImageConverter(
         IEnumerable<IImageConverterContributor> imageConverterContributors,
@@ -21,7 +21,7 @@ public class ImageConverter : IImageConverter, ITransientDependency
     public async Task<ImageConvertResult<Stream>> ConvertAsync(
         Stream stream,
         ImageFormat final,
-        ImageFormat? original = null, 
+        ImageFormat? original = null,
         CancellationToken cancellationToken = default)
     {
         Check.NotNull(stream, nameof(stream));
@@ -62,7 +62,7 @@ public class ImageConverter : IImageConverter, ITransientDependency
     public async Task<ImageConvertResult<byte[]>> ConvertAsync(
         byte[] bytes,
         ImageFormat final,
-        ImageFormat? original = null,  
+        ImageFormat? original = null,
         CancellationToken cancellationToken = default)
     {
         Check.NotNull(bytes, nameof(bytes));

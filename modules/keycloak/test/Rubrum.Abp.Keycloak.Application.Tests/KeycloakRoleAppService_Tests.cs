@@ -46,9 +46,9 @@ public class KeycloakRoleAppServiceTests : RubrumAbpKeycloakApplicationTestBase
         var name = Guid.NewGuid().ToString();
 
         var result = await _service.CreateAsync(new CreateKeycloakRoleInput { Name = name });
-        
+
         result.Name.ShouldBe(name);
-        
+
         var roles = await _keycloakClient.GetRolesAsync();
         var role = roles.FirstOrDefault(x => x.Id == result.Id);
 
@@ -63,8 +63,8 @@ public class KeycloakRoleAppServiceTests : RubrumAbpKeycloakApplicationTestBase
         var name = Guid.NewGuid().ToString();
         var result = await CreateRoleAsync();
 
-        result =  await _service.UpdateAsync(result.Id, new UpdateKeycloakRoleInput { Name = name });
-        
+        result = await _service.UpdateAsync(result.Id, new UpdateKeycloakRoleInput { Name = name });
+
         result.Name.ShouldBe(name);
 
         var roles = await _keycloakClient.GetRolesAsync();

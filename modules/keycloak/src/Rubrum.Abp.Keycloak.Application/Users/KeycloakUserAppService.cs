@@ -9,8 +9,8 @@ namespace Rubrum.Abp.Keycloak.Users;
 public class KeycloakUserAppService : ApplicationService, IKeycloakUserAppService
 {
     protected readonly IKeycloakClient KeycloakClient;
-    protected readonly IKeycloakUserMapper UserMapper;
     protected readonly IKeycloakRoleMapper RoleMapper;
+    protected readonly IKeycloakUserMapper UserMapper;
 
     public KeycloakUserAppService(
         IKeycloakClient keycloakClient,
@@ -25,7 +25,7 @@ public class KeycloakUserAppService : ApplicationService, IKeycloakUserAppServic
     public async Task<KeycloakUserDto> GetAsync(string id)
     {
         await CheckPolicyAsync(Default);
-        
+
         var user = await KeycloakClient.GetUserByIdAsync(id);
         return UserMapper.Map(user);
     }

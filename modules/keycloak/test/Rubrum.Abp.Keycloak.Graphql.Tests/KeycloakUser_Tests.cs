@@ -7,9 +7,9 @@ namespace Rubrum.Abp.Keycloak;
 
 public class KeycloakUserTests : RubrumAbpKeycloakGraphqlTestBase
 {
-    private readonly IKeycloakUserGraphqlService _service;
-    private readonly IKeycloakClient _keycloakClient;
     private readonly IIdSerializer _idSerializer;
+    private readonly IKeycloakClient _keycloakClient;
+    private readonly IKeycloakUserGraphqlService _service;
 
     public KeycloakUserTests()
     {
@@ -179,7 +179,7 @@ public class KeycloakUserTests : RubrumAbpKeycloakGraphqlTestBase
               }
               """
         ));
-        
+
         result.MatchSnapshot();
     }
 

@@ -5,5 +5,4 @@ namespace Rubrum.Abp.Keycloak.Users;
 
 public class ChangeRolesKeycloakUserInputType : InputObjectType<ChangeRolesKeycloakUserInput>, IGraphqlType
 {
-    
 }

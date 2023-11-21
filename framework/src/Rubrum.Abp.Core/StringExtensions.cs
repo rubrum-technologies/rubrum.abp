@@ -13,7 +13,7 @@ public static class StringExtensions
             .Replace("\r\n", "\n")
             .Replace("\r", "\n");
     }
-    
+
     public static string ToLowerFirstChar(this string input)
     {
         if (string.IsNullOrEmpty(input))

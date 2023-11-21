@@ -4,7 +4,7 @@ using Volo.Abp.Application.Services;
 
 namespace Rubrum.Abp.Keycloak.Users;
 
-public interface IKeycloakUserAppService : 
+public interface IKeycloakUserAppService :
     ICrudAppService<KeycloakUserDto, string, PagedResultRequestDto, CreateKeycloakUserInput, UpdateKeycloakUserInput>
 {
     Task<ListResultDto<KeycloakRoleDto>> GetRolesAsync(string id);

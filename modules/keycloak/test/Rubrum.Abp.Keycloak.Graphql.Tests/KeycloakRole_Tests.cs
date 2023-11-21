@@ -7,9 +7,9 @@ namespace Rubrum.Abp.Keycloak;
 
 public class KeycloakRoleTests : RubrumAbpKeycloakGraphqlTestBase
 {
-    private readonly IKeycloakRoleGraphqlService _service;
-    private readonly IKeycloakClient _keycloakClient;
     private readonly IIdSerializer _idSerializer;
+    private readonly IKeycloakClient _keycloakClient;
+    private readonly IKeycloakRoleGraphqlService _service;
 
     public KeycloakRoleTests()
     {
@@ -133,7 +133,7 @@ public class KeycloakRoleTests : RubrumAbpKeycloakGraphqlTestBase
         {
             await _service.DeleteAsync(roles.First(x => x.Name == "test-2-role").Id!);
         }
-        
+
         var role = await CreateRoleAsync();
         var id = _idSerializer.Serialize(null, "KeycloakRole", role.Id);
 

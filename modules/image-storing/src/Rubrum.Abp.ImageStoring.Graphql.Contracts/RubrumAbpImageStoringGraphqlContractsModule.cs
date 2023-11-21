@@ -6,5 +6,4 @@ namespace Rubrum.Abp.ImageStoring;
 [DependsOn(typeof(RubrumAbpImageStoringApplicationContractsModule))]
 public class RubrumAbpImageStoringGraphqlContractsModule : AbpModule
 {
-    
 }

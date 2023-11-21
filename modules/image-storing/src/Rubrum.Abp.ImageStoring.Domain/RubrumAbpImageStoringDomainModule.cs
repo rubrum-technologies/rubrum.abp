@@ -13,5 +13,4 @@ namespace Rubrum.Abp.ImageStoring;
 [DependsOn(typeof(RubrumAbpImageStoringDomainSharedModule))]
 public class RubrumAbpImageStoringDomainModule : AbpModule
 {
-    
 }

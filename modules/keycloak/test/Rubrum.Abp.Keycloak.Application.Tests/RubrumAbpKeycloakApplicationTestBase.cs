@@ -2,5 +2,4 @@
 
 public class RubrumAbpKeycloakApplicationTestBase : RubrumAbpKeycloakTestBase<RubrumAbpKeycloakApplicationTestModule>
 {
-    
 }

@@ -1049,7 +1049,7 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
         string? type = null,
         CancellationToken cancellationToken = default)
     {
-        var queries = new Dictionary<string, object?> { { "name", name }, { "parent", parent }, { "type", type }, };
+        var queries = new Dictionary<string, object?> { { "name", name }, { "parent", parent }, { "type", type } };
 
         return GetAsync<ICollection<ComponentRepresentation>>(
             SetQuery($"/admin/realms/{RealmName}/components", queries),
@@ -1061,7 +1061,7 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
         string? type = null,
         CancellationToken cancellationToken = default)
     {
-        var queries = new Dictionary<string, object?> { { "type", type }, };
+        var queries = new Dictionary<string, object?> { { "type", type } };
 
         return GetAsync<ICollection<ComponentRepresentation>>(
             SetQuery($"/admin/realms/{RealmName}/components/{componentId}/sub-component-types", queries),
@@ -3145,7 +3145,7 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
     {
         var queries = new Dictionary<string, object?>
         {
-            { "clientId", clientId }, { "lifespan", lifespan }, { "redirectUri", redirectUri },
+            { "clientId", clientId }, { "lifespan", lifespan }, { "redirectUri", redirectUri }
         };
 
         return PutAsync(
@@ -3272,7 +3272,8 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
         if (value is not null)
         {
             var content = Serializer.Serialize(value);
-            request.Content = new StringContent(content, new MediaTypeHeaderValue("application/json") { CharSet = "utf-8" });
+            request.Content =
+                new StringContent(content, new MediaTypeHeaderValue("application/json") { CharSet = "utf-8" });
         }
 
         request.Method = method;
@@ -3282,7 +3283,7 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
         httpClient.DefaultRequestHeaders.Authorization = await GetAuthenticationHeaderAsync();
 
         using var response = await httpClient.SendAsync(request, cancellationToken);
-        
+
         response.EnsureSuccessStatusCode();
     }
 
@@ -3306,7 +3307,7 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
 
         using var httpClient = CreateHttpClient();
         httpClient.DefaultRequestHeaders.Authorization = await GetAuthenticationHeaderAsync();
-        
+
         using var response = await httpClient.SendAsync(request, cancellationToken);
 
         response.EnsureSuccessStatusCode();
@@ -3374,7 +3375,7 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
     {
         return new AuthenticationHeaderValue("Bearer", await GetAccessTokenAsync());
     }
-    
+
     private Task<TResult> GetAsync<TResult>(
         string path,
         CancellationToken cancellationToken = default)

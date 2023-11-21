@@ -5,7 +5,7 @@ namespace Rubrum.Abp.Keycloak.Roles;
 public class KeycloakRoleGraphqlService : KeycloakRoleAppService, IKeycloakRoleGraphqlService
 {
     public KeycloakRoleGraphqlService(
-        IKeycloakClient keycloakClient, 
+        IKeycloakClient keycloakClient,
         IKeycloakRoleMapper mapper) : base(keycloakClient, mapper)
     {
     }
