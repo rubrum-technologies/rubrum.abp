@@ -1,174 +1,178 @@
 schema {
-    query: Query
-    mutation: Mutation
+  query: Query
+  mutation: Mutation
 }
 
 interface EntityOfString {
-    id: ID!
+  id: ID!
 }
 
 interface Error {
-    message: String!
+  message: String!
+}
+
+interface IHasExtraProperties {
+  extraProperties: JSON
 }
 
 "The node interface is implemented by entities that have a global unique identifier."
 interface Node {
-    id: ID!
+  id: ID!
 }
 
 type BusinessError implements Error {
-    code: String
-    details: String
-    message: String!
+  code: String
+  details: String
+  message: String!
 }
 
 type ChangePasswordPayload {
-    keycloakUser: KeycloakUser
-    errors: [ChangePasswordError!]
+  keycloakUser: KeycloakUser
+  errors: [ChangePasswordError!]
 }
 
 type ChangeRolesForUserPayload {
-    keycloakUser: KeycloakUser
-    errors: [ChangeRolesForUserError!]
+  keycloakUser: KeycloakUser
+  errors: [ChangeRolesForUserError!]
 }
 
 type CreateKeycloakRolePayload {
-    keycloakRole: KeycloakRole
-    errors: [CreateKeycloakRoleError!]
+  keycloakRole: KeycloakRole
+  errors: [CreateKeycloakRoleError!]
 }
 
 type CreateKeycloakUserPayload {
-    keycloakUser: KeycloakUser
-    errors: [CreateKeycloakUserError!]
+  keycloakUser: KeycloakUser
+  errors: [CreateKeycloakUserError!]
 }
 
 type DeleteKeycloakRolePayload {
-    keycloakRole: KeycloakRole
-    errors: [DeleteKeycloakRoleError!]
+  keycloakRole: KeycloakRole
+  errors: [DeleteKeycloakRoleError!]
 }
 
 type DeleteKeycloakUserPayload {
-    keycloakUser: KeycloakUser
-    errors: [DeleteKeycloakUserError!]
+  keycloakUser: KeycloakUser
+  errors: [DeleteKeycloakUserError!]
 }
 
 type EntityNotFoundError implements Error {
-    id: String
-    type: String
-    message: String!
+  id: String
+  type: String
+  message: String!
 }
 
 type KeycloakRole implements EntityOfString & Node {
-    id: ID!
-    name: String!
+  id: ID!
+  name: String!
 }
 
 "A connection to a list of items."
 type KeycloakRolesConnection {
-    "Information to aid in pagination."
-    pageInfo: PageInfo!
-    "A list of edges."
-    edges: [KeycloakRolesEdge!]
-    "A flattened list of the nodes."
-    nodes: [KeycloakRole!]
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [KeycloakRolesEdge!]
+  "A flattened list of the nodes."
+  nodes: [KeycloakRole!]
 }
 
 "An edge in a connection."
 type KeycloakRolesEdge {
-    "A cursor for use in pagination."
-    cursor: String!
-    "The item at the end of the edge."
-    node: KeycloakRole!
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: KeycloakRole!
 }
 
 type KeycloakUser implements EntityOfString & Node {
-    id: ID!
-    userName: String!
-    firstName: String
-    lastName: String
-    email: String
-    emailVerified: Boolean!
-    phoneNumber: String
-    phoneNumberVerified: Boolean!
-    isActive: Boolean!
+  id: ID!
+  userName: String!
+  firstName: String
+  lastName: String
+  email: String
+  emailVerified: Boolean!
+  phoneNumber: String
+  phoneNumberVerified: Boolean!
+  isActive: Boolean!
 }
 
 "A connection to a list of items."
 type KeycloakUsersConnection {
-    "Information to aid in pagination."
-    pageInfo: PageInfo!
-    "A list of edges."
-    edges: [KeycloakUsersEdge!]
-    "A flattened list of the nodes."
-    nodes: [KeycloakUser!]
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [KeycloakUsersEdge!]
+  "A flattened list of the nodes."
+  nodes: [KeycloakUser!]
 }
 
 "An edge in a connection."
 type KeycloakUsersEdge {
-    "A cursor for use in pagination."
-    cursor: String!
-    "The item at the end of the edge."
-    node: KeycloakUser!
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: KeycloakUser!
 }
 
 type Mutation {
-    createKeycloakUser(input: CreateKeycloakUserInput!): CreateKeycloakUserPayload!
-    updateKeycloakUser(input: UpdateKeycloakUserInput!): UpdateKeycloakUserPayload!
-    deleteKeycloakUser(input: DeleteKeycloakUserInput!): DeleteKeycloakUserPayload!
-    createKeycloakRole(input: CreateKeycloakRoleInput!): CreateKeycloakRolePayload!
-    updateKeycloakRole(input: UpdateKeycloakRoleInput!): UpdateKeycloakRolePayload!
-    deleteKeycloakRole(input: DeleteKeycloakRoleInput!): DeleteKeycloakRolePayload!
-    changePassword(input: ChangePasswordInput!): ChangePasswordPayload!
-    changeRolesForUser(input: ChangeRolesForUserInput!): ChangeRolesForUserPayload!
+  createKeycloakUser(input: CreateKeycloakUserInput!): CreateKeycloakUserPayload!
+  updateKeycloakUser(input: UpdateKeycloakUserInput!): UpdateKeycloakUserPayload!
+  deleteKeycloakUser(input: DeleteKeycloakUserInput!): DeleteKeycloakUserPayload!
+  createKeycloakRole(input: CreateKeycloakRoleInput!): CreateKeycloakRolePayload!
+  updateKeycloakRole(input: UpdateKeycloakRoleInput!): UpdateKeycloakRolePayload!
+  deleteKeycloakRole(input: DeleteKeycloakRoleInput!): DeleteKeycloakRolePayload!
+  changePassword(input: ChangePasswordInput!): ChangePasswordPayload!
+  changeRolesForUser(input: ChangeRolesForUserInput!): ChangeRolesForUserPayload!
 }
 
 "Information about pagination in a connection."
 type PageInfo {
-    "Indicates whether more edges exist following the set defined by the clients arguments."
-    hasNextPage: Boolean!
-    "Indicates whether more edges exist prior the set defined by the clients arguments."
-    hasPreviousPage: Boolean!
-    "When paginating backwards, the cursor to continue."
-    startCursor: String
-    "When paginating forwards, the cursor to continue."
-    endCursor: String
+  "Indicates whether more edges exist following the set defined by the clients arguments."
+  hasNextPage: Boolean!
+  "Indicates whether more edges exist prior the set defined by the clients arguments."
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
 }
 
 type Query {
-    "Fetches an object given its ID."
-    node("ID of the object." id: ID!): Node
-    "Lookup nodes by a list of IDs."
-    nodes("The list of node IDs." ids: [ID!]!): [Node]!
-    keycloakUserById(id: ID): KeycloakUser!
-    keycloakUser(where: KeycloakUserFilterInput): KeycloakUser
-    keycloakUsers("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: KeycloakUserFilterInput order: [KeycloakUserSortInput!]): KeycloakUsersConnection
-    keycloakUsersAny(where: KeycloakUserFilterInput): Boolean!
-    keycloakUsersCount(where: KeycloakUserFilterInput): Int!
-    keycloakRoleById(id: ID): KeycloakRole!
-    keycloakRole(where: KeycloakRoleFilterInput): KeycloakRole
-    keycloakRoles("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: KeycloakRoleFilterInput order: [KeycloakRoleSortInput!]): KeycloakRolesConnection
-    keycloakRolesAny(where: KeycloakRoleFilterInput): Boolean!
-    keycloakRolesCount(where: KeycloakRoleFilterInput): Int!
-    keycloakRolesByUserId(id: String!): [KeycloakRole!]!
+  "Fetches an object given its ID."
+  node("ID of the object." id: ID!): Node
+  "Lookup nodes by a list of IDs."
+  nodes("The list of node IDs." ids: [ID!]!): [Node]!
+  keycloakUserById(id: ID): KeycloakUser!
+  keycloakUser(where: KeycloakUserFilterInput): KeycloakUser
+  keycloakUsers("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: KeycloakUserFilterInput order: [KeycloakUserSortInput!]): KeycloakUsersConnection
+  keycloakUsersAny(where: KeycloakUserFilterInput): Boolean!
+  keycloakUsersCount(where: KeycloakUserFilterInput): Int!
+  keycloakRoleById(id: ID): KeycloakRole!
+  keycloakRole(where: KeycloakRoleFilterInput): KeycloakRole
+  keycloakRoles("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: KeycloakRoleFilterInput order: [KeycloakRoleSortInput!]): KeycloakRolesConnection
+  keycloakRolesAny(where: KeycloakRoleFilterInput): Boolean!
+  keycloakRolesCount(where: KeycloakRoleFilterInput): Int!
+  keycloakRolesByUserId(id: String!): [KeycloakRole!]!
 }
 
 type UpdateKeycloakRolePayload {
-    keycloakRole: KeycloakRole
-    errors: [UpdateKeycloakRoleError!]
+  keycloakRole: KeycloakRole
+  errors: [UpdateKeycloakRoleError!]
 }
 
 type UpdateKeycloakUserPayload {
-    keycloakUser: KeycloakUser
-    errors: [UpdateKeycloakUserError!]
+  keycloakUser: KeycloakUser
+  errors: [UpdateKeycloakUserError!]
 }
 
 type ValidationError implements Error {
-    message: String!
-    results: [ValidationResult!]!
+  message: String!
+  results: [ValidationResult!]!
 }
 
 type ValidationResult {
-    errorMessage: String
+  errorMessage: String
 }
 
 union ChangePasswordError = ValidationError | BusinessError | EntityNotFoundError
@@ -188,151 +192,151 @@ union UpdateKeycloakRoleError = ValidationError | BusinessError | EntityNotFound
 union UpdateKeycloakUserError = ValidationError | BusinessError | EntityNotFoundError
 
 input BooleanOperationFilterInput {
-    eq: Boolean
-    neq: Boolean
+  eq: Boolean
+  neq: Boolean
 }
 
 input ChangePasswordInput {
-    id: ID!
-    password: String!
+  id: ID!
+  password: String!
 }
 
 input ChangePasswordKeycloakUserInput {
-    "Minimum length '3',\n Required and not empty"
-    password: String!
+  "Minimum length '3',\n Required and not empty"
+  password: String!
 }
 
 input ChangeRolesForUserInput {
-    id: ID!
-    roleNames: [String!]!
+  id: ID!
+  roleNames: [String!]!
 }
 
 input ChangeRolesKeycloakUserInput {
-    "Required"
-    roleNames: [String!]!
+  "Required"
+  roleNames: [String!]!
 }
 
 input CreateKeycloakRoleInput {
-    "Required and not empty"
-    name: String!
+  "Required and not empty"
+  name: String!
 }
 
 input CreateKeycloakUserInput {
-    "Required and not empty"
-    userName: String!
-    firstName: String
-    lastName: String
-    "Contains email"
-    email: String
-    phoneNumber: String
-    isActive: Boolean
-    roleNames: [String!]
+  "Required and not empty"
+  userName: String!
+  firstName: String
+  lastName: String
+  "Contains email"
+  email: String
+  phoneNumber: String
+  isActive: Boolean
+  roleNames: [String!]
 }
 
 input DateOnlyOperationFilterInput {
-    and: [DateOnlyOperationFilterInput!]
-    or: [DateOnlyOperationFilterInput!]
-    eq: Date
-    neq: Date
-    in: [Date!]
-    nin: [Date!]
-    gt: Date
-    ngt: Date
-    gte: Date
-    ngte: Date
-    lt: Date
-    nlt: Date
-    lte: Date
-    nlte: Date
+  and: [DateOnlyOperationFilterInput!]
+  or: [DateOnlyOperationFilterInput!]
+  eq: Date
+  neq: Date
+  in: [Date!]
+  nin: [Date!]
+  gt: Date
+  ngt: Date
+  gte: Date
+  ngte: Date
+  lt: Date
+  nlt: Date
+  lte: Date
+  nlte: Date
 }
 
 input DeleteKeycloakRoleInput {
-    id: ID
+  id: ID
 }
 
 input DeleteKeycloakUserInput {
-    id: ID
+  id: ID
 }
 
 input KeycloakRoleFilterInput {
-    and: [KeycloakRoleFilterInput!]
-    or: [KeycloakRoleFilterInput!]
-    name: StringOperationFilterInput
-    id: StringOperationFilterInput
+  and: [KeycloakRoleFilterInput!]
+  or: [KeycloakRoleFilterInput!]
+  name: StringOperationFilterInput
+  id: StringOperationFilterInput
 }
 
 input KeycloakRoleSortInput {
-    name: SortEnumType
-    id: SortEnumType
+  name: SortEnumType
+  id: SortEnumType
 }
 
 input KeycloakUserFilterInput {
-    and: [KeycloakUserFilterInput!]
-    or: [KeycloakUserFilterInput!]
-    userName: StringOperationFilterInput
-    firstName: StringOperationFilterInput
-    lastName: StringOperationFilterInput
-    email: StringOperationFilterInput
-    emailVerified: BooleanOperationFilterInput
-    phoneNumber: StringOperationFilterInput
-    phoneNumberVerified: BooleanOperationFilterInput
-    isActive: BooleanOperationFilterInput
-    id: StringOperationFilterInput
+  and: [KeycloakUserFilterInput!]
+  or: [KeycloakUserFilterInput!]
+  userName: StringOperationFilterInput
+  firstName: StringOperationFilterInput
+  lastName: StringOperationFilterInput
+  email: StringOperationFilterInput
+  emailVerified: BooleanOperationFilterInput
+  phoneNumber: StringOperationFilterInput
+  phoneNumberVerified: BooleanOperationFilterInput
+  isActive: BooleanOperationFilterInput
+  id: StringOperationFilterInput
 }
 
 input KeycloakUserSortInput {
-    userName: SortEnumType
-    firstName: SortEnumType
-    lastName: SortEnumType
-    email: SortEnumType
-    emailVerified: SortEnumType
-    phoneNumber: SortEnumType
-    phoneNumberVerified: SortEnumType
-    isActive: SortEnumType
-    id: SortEnumType
+  userName: SortEnumType
+  firstName: SortEnumType
+  lastName: SortEnumType
+  email: SortEnumType
+  emailVerified: SortEnumType
+  phoneNumber: SortEnumType
+  phoneNumberVerified: SortEnumType
+  isActive: SortEnumType
+  id: SortEnumType
 }
 
 input StringOperationFilterInput {
-    and: [StringOperationFilterInput!]
-    or: [StringOperationFilterInput!]
-    eq: String
-    neq: String
-    contains: String
-    ncontains: String
-    in: [String]
-    nin: [String]
-    startsWith: String
-    nstartsWith: String
-    endsWith: String
-    nendsWith: String
+  and: [StringOperationFilterInput!]
+  or: [StringOperationFilterInput!]
+  eq: String
+  neq: String
+  contains: String
+  ncontains: String
+  in: [String]
+  nin: [String]
+  startsWith: String
+  nstartsWith: String
+  endsWith: String
+  nendsWith: String
 }
 
 input UpdateKeycloakRoleInput {
-    id: ID!
-    "Required and not empty"
-    name: String!
+  id: ID!
+  "Required and not empty"
+  name: String!
 }
 
 input UpdateKeycloakUserInput {
-    id: ID!
-    userName: String
-    firstName: String
-    lastName: String
-    "Contains email"
-    email: String
-    phoneNumber: String
-    isActive: Boolean
+  id: ID!
+  userName: String
+  firstName: String
+  lastName: String
+  "Contains email"
+  email: String
+  phoneNumber: String
+  isActive: Boolean
 }
 
 enum ApplyPolicy {
-    BEFORE_RESOLVER
-    AFTER_RESOLVER
-    VALIDATION
+  BEFORE_RESOLVER
+  AFTER_RESOLVER
+  VALIDATION
 }
 
 enum SortEnumType {
-    ASC
-    DESC
+  ASC
+  DESC
 }
 
 directive @allowAnonymous repeatable on FIELD_DEFINITION
@@ -341,3 +345,5 @@ directive @authorize("The name of the authorization policy that determines acces
 
 "The `Date` scalar represents an ISO-8601 compliant date type."
 scalar Date
+
+scalar JSON

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.Modeling;
-using static Rubrum.Abp.Data.RubrumAbpCommonDbProperties;
+using static Rubrum.Abp.LanguageManagement.RubrumAbpLanguageManagementDbProperties;
 using static Rubrum.Abp.LanguageManagement.LanguageConstants;
 
 namespace Rubrum.Abp.LanguageManagement.EntityFrameworkCore;

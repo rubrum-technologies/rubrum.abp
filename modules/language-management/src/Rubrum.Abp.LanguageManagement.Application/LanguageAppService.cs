@@ -2,6 +2,7 @@
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
+using Volo.Abp.ObjectExtending;
 using Volo.Abp.Threading;
 
 namespace Rubrum.Abp.LanguageManagement;
@@ -46,6 +47,8 @@ public class LanguageAppService : ApplicationService, ILanguageAppService
         var cancellationToken = CancellationTokenProvider.Token;
 
         var language = await Manager.CreateAsync(input.Code, input.Name);
+        input.MapExtraPropertiesTo(language);
+        
         await Repository.InsertAsync(language, true, cancellationToken);
 
         return Mapper.Map(language);
@@ -56,6 +59,8 @@ public class LanguageAppService : ApplicationService, ILanguageAppService
         var cancellationToken = CancellationTokenProvider.Token;
 
         var language = await Repository.GetAsync(id, true, cancellationToken);
+        input.MapExtraPropertiesTo(language);
+
         await Manager.ChangeNameAsync(language, input.Name);
         await Repository.UpdateAsync(language, true, cancellationToken);
 

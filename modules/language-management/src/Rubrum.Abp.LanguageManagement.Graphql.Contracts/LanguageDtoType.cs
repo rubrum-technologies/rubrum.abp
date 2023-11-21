@@ -8,8 +8,10 @@ public class LanguageDtoType : ObjectType<LanguageDto>, IGraphqlType
 {
     protected override void Configure(IObjectTypeDescriptor<LanguageDto> descriptor)
     {
-        descriptor.Entity<LanguageDto, string>();
-        descriptor.FullAudited();
+        descriptor
+            .Entity<LanguageDto, string>()
+            .ExtraProperties()
+            .FullAudited();
 
         descriptor
             .Field("code")

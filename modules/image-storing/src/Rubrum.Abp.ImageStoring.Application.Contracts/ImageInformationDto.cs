@@ -1,3 +1,7 @@
-﻿namespace Rubrum.Abp.ImageStoring;
+﻿using Volo.Abp.Application.Dtos;
 
-public record ImageInformationDto(Guid Id);
+namespace Rubrum.Abp.ImageStoring;
+
+public class ImageInformationDto : ExtensibleEntityDto<Guid>
+{
+}

@@ -1,4 +1,5 @@
 ﻿using Volo.Abp;
+using Volo.Abp.Auditing;
 using Volo.Abp.Domain.Entities.Auditing;
 using static Rubrum.Abp.LanguageManagement.LanguageConstants;
 
@@ -6,7 +7,7 @@ using static Rubrum.Abp.LanguageManagement.LanguageConstants;
 
 namespace Rubrum.Abp.LanguageManagement;
 
-public class Language : FullAuditedAggregateRoot<string>
+public class Language : FullAuditedAggregateRoot<string>, IHasEntityVersion
 {
     private string _name;
 
@@ -18,6 +19,8 @@ public class Language : FullAuditedAggregateRoot<string>
     {
         Name = name;
     }
+
+    public int EntityVersion { get; protected set; }
 
     public string Name
     {

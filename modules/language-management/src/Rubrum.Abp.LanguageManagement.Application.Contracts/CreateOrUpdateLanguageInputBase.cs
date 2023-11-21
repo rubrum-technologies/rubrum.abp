@@ -1,6 +1,8 @@
-﻿namespace Rubrum.Abp.LanguageManagement;
+﻿using Volo.Abp.ObjectExtending;
 
-public abstract class CreateOrUpdateLanguageInputBase
+namespace Rubrum.Abp.LanguageManagement;
+
+public abstract class CreateOrUpdateLanguageInputBase : ExtensibleObject
 {
     public required string Name { get; init; }
 }

@@ -1,5 +1,6 @@
 ﻿using HotChocolate.Types;
 using Rubrum.Abp.Graphql.Application.Inputs;
+using Rubrum.Abp.Graphql.Types.Ddd;
 
 namespace Rubrum.Abp.Graphql.Types;
 
@@ -7,6 +8,6 @@ public class UpdateCountryInputType : InputObjectType<UpdateCountryInput>, IGrap
 {
     protected override void Configure(IInputObjectTypeDescriptor<UpdateCountryInput> descriptor)
     {
-        descriptor.AddFieldKey<UpdateCountryInput, UuidType>(CountryConstants.TypeName);
+        descriptor.UpdateEntity<UpdateCountryInput, UuidType>(CountryConstants.TypeName);
     }
 }

@@ -7,7 +7,9 @@ using Rubrum.Abp.Graphql.Filters.DateOnly;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Auditing;
+using Volo.Abp.Data;
 using Volo.Abp.MultiTenancy;
+using Volo.Abp.ObjectExtending;
 
 namespace Rubrum.Abp.Graphql.Types.Ddd;
 
@@ -64,6 +66,19 @@ public static class AbpTypeExtensions
         return descriptor;
     }
 
+    public static IInputObjectTypeDescriptor<TInput> UpdateEntity<TInput, TKey>(
+        this IInputObjectTypeDescriptor<TInput> descriptor,
+        string typeName)
+        where TKey : IType
+    {
+        descriptor
+            .Field("id")
+            .Type<NonNullType<TKey>>()
+            .ID(typeName);
+
+        return descriptor;
+    }
+
     public static IFilterInputTypeDescriptor<TEntityDto> Entity<TEntityDto, TKey>(
         this IFilterInputTypeDescriptor<TEntityDto> descriptor)
         where TEntityDto : IEntityDto<TKey>
@@ -82,6 +97,55 @@ public static class AbpTypeExtensions
         return descriptor;
     }
 
+    public static IInterfaceTypeDescriptor<TEntityDto> ExtraProperties<TEntityDto>(
+        this IInterfaceTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : ExtensibleObject
+    {
+        descriptor.Implements<HasExtraPropertiesType>();
+        descriptor.Ignore(x => x.Validate(default!));
+        
+        return descriptor;
+    }
+
+    public static IObjectTypeDescriptor<TEntityDto> ExtraProperties<TEntityDto>(this IObjectTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : ExtensibleObject
+    {
+        descriptor.Implements<HasExtraPropertiesType>();
+        
+        descriptor
+            .Field(x => x.ExtraProperties)
+            .Type<JsonType>();
+
+        descriptor.Ignore(x => x.Validate(default!));
+        
+        return descriptor;
+    }
+
+    public static IInputObjectTypeDescriptor<TEntityDto> ExtraProperties<TEntityDto>(
+        this IInputObjectTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : ExtensibleObject
+    {
+        descriptor.Ignore(x=>x.ExtraProperties);
+        return descriptor;
+    }
+    
+    public static IFilterInputTypeDescriptor<TEntityDto> ExtraProperties<TEntityDto>(this IFilterInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : ExtensibleObject
+    {
+        descriptor.Ignore(x => x.ExtraProperties);
+        
+        return descriptor;
+    }
+
+    public static ISortInputTypeDescriptor<TEntityDto> ExtraProperties<TEntityDto>(this ISortInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : ExtensibleObject
+    {
+        descriptor.Ignore(x => x.ExtraProperties);
+        
+        return descriptor;
+    }
+
+
     public static IInterfaceTypeDescriptor<TEntityDto> MayHaveCreator<TEntityDto>(
         this IInterfaceTypeDescriptor<TEntityDto> descriptor)
         where TEntityDto : IMayHaveCreator
@@ -98,7 +162,7 @@ public static class AbpTypeExtensions
         descriptor
             .Field(x => x.CreatorId)
             .IsProjected()
-            .ID("IdentityUser");
+            .ID();
         return descriptor;
     }
 
@@ -258,7 +322,7 @@ public static class AbpTypeExtensions
         descriptor
             .Field(x => x.LastModifierId)
             .IsProjected()
-            .ID("IdentityUser");
+            .ID();
         return descriptor;
     }
 
@@ -391,7 +455,7 @@ public static class AbpTypeExtensions
         descriptor
             .Field(x => x.DeleterId)
             .IsProjected()
-            .ID("IdentityUser");
+            .ID();
         return descriptor;
     }
 
