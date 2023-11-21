@@ -1,0 +1,12 @@
+{
+  "data": {
+    "createSystemLanguage": {
+      "systemLanguage": {
+        "id": "U3lzdGVtTGFuZ3VhZ2UKZHRlc3Q=",
+        "code": "test",
+        "name": "Test"
+      },
+      "errors": null
+    }
+  }
+}

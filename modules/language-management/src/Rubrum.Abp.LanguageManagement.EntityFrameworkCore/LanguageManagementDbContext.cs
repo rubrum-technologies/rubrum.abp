@@ -12,7 +12,7 @@ public class LanguageManagementDbContext : AbpDbContext<LanguageManagementDbCont
     {
     }
 
-    public DbSet<Language> Languages => Set<Language>();
+    public DbSet<SystemLanguage> Languages => Set<SystemLanguage>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

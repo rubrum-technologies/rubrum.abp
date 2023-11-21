@@ -5,9 +5,9 @@ using Rubrum.Abp.LanguageManagement.Mapper.Interfaces;
 
 namespace Rubrum.Abp.LanguageManagement.Mapper.Interfaces
 {
-    public partial class LanguageMapper : ILanguageMapper
+    public partial class SystemLanguageMapper : ISystemLanguageMapper
     {
-        public Expression<Func<Language, LanguageDto>> Expression => p1 => new LanguageDto()
+        public Expression<Func<SystemLanguage, SystemLanguageDto>> Expression => p1 => new SystemLanguageDto()
         {
             Name = p1.Name,
             IsDeleted = p1.IsDeleted,
@@ -19,9 +19,9 @@ namespace Rubrum.Abp.LanguageManagement.Mapper.Interfaces
             CreatorId = p1.CreatorId,
             Id = p1.Id
         };
-        public LanguageDto Map(Language p2)
+        public SystemLanguageDto Map(SystemLanguage p2)
         {
-            return p2 == null ? null : new LanguageDto()
+            return p2 == null ? null : new SystemLanguageDto()
             {
                 Name = p2.Name,
                 IsDeleted = p2.IsDeleted,
