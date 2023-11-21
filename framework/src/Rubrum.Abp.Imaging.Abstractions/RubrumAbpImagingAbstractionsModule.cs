@@ -6,5 +6,4 @@ namespace Rubrum.Abp.Imaging;
 [DependsOn(typeof(AbpImagingAbstractionsModule))]
 public class RubrumAbpImagingAbstractionsModule : AbpModule
 {
-    
 }

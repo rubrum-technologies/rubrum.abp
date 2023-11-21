@@ -6,7 +6,7 @@
     <RootNamespace>Rubrum.Abp.Keycloak</RootNamespace>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <PackageReference Include="Mapster" Version="$(MapsterPackageVersion)"/>
   </ItemGroup>

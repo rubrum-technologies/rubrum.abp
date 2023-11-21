@@ -16,7 +16,7 @@ public class RubrumAbpGraphqlTestBaseModule : AbpModule
     {
         CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
         CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
-        
+
         context.Services.AddSingleton(sp =>
             new RequestExecutorProxy(sp.GetRequiredService<IRequestExecutorResolver>(), "_Default"));
     }

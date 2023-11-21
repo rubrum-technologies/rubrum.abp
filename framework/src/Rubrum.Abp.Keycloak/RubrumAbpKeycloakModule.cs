@@ -16,7 +16,7 @@ public class RubrumAbpKeycloakModule : AbpModule
         var configuration = context.Services.GetConfiguration();
 
         context.Services.AddSingleton<ICurrentKeycloakRealmAccessor>(AsyncLocalCurrentKeycloakRealmAccessor.Instance);
-        
+
         Configure<AbpSystemTextJsonSerializerOptions>(options =>
         {
             options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;

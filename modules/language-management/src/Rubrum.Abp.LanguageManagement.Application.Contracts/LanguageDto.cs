@@ -2,7 +2,7 @@
 
 namespace Rubrum.Abp.LanguageManagement;
 
-public class LanguageDto : FullAuditedEntityDto<string>
+public class LanguageDto : ExtensibleFullAuditedEntityDto<string>
 {
     public required string Name { get; init; }
 }

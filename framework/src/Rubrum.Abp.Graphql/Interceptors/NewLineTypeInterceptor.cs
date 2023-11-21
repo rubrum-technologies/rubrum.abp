@@ -34,7 +34,7 @@ public class NewLineTypeInterceptor : TypeInterceptor
                 }
             }
         }
-        
+
         if (definition is InputObjectTypeDefinition inputType)
         {
             foreach (var field in inputType.Fields)

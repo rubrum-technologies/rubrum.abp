@@ -41,13 +41,13 @@ public class ImageAppService : ApplicationService, IImageAppService
     public async Task<ImageInformationDto> UploadAsync(IRemoteStreamContent stream)
     {
         await CheckPolicyAsync(ImageStoringPermissions.Images.Upload);
-        
+
         var cancellationToken = _cancellationTokenProvider.Token;
 
         var id = GuidGenerator.Create();
         var file = new ImageFile(id, stream.GetStream());
         await _imageContainer.CreateAsync(file, cancellationToken);
 
-        return new ImageInformationDto(id);
+        return new ImageInformationDto { Id = id };
     }
 }

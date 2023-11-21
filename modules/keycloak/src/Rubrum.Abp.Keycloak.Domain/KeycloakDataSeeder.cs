@@ -7,8 +7,8 @@ namespace Rubrum.Abp.Keycloak;
 
 public class KeycloakDataSeeder : IDataSeedContributor, ITransientDependency
 {
-    private readonly IKeycloakClient _keycloakClient;
     private readonly RubrumAbpKeycloakClientsOptions _clientsOptions;
+    private readonly IKeycloakClient _keycloakClient;
     private readonly ILogger<KeycloakDataSeeder> _logger;
 
     public KeycloakDataSeeder(
@@ -123,7 +123,7 @@ public class KeycloakDataSeeder : IDataSeedContributor, ITransientDependency
                     {
                         { "consent.screen.text", scopeName },
                         { "display.on.consent.screen", "true" },
-                        { "include.in.token.scope", "true" },
+                        { "include.in.token.scope", "true" }
                     },
                 ProtocolMappers = new List<ProtocolMapperRepresentation>
                 {

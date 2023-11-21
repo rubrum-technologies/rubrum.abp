@@ -6,5 +6,4 @@ public interface IKeycloakRoleGraphqlService :
     IKeycloakRoleAppService,
     ICrudGraphqlService<KeycloakRoleDto, string, CreateKeycloakRoleInput, UpdateKeycloakRoleInput>
 {
-    
 }

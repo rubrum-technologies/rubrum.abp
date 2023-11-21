@@ -7,12 +7,13 @@ namespace Rubrum.Abp.Imaging.MagickNet;
 
 public class ImageConverterTests : ImagingMagickNetTestBase
 {
-    private readonly IImageConverter _imageConverter;
-    private readonly IVirtualFileProvider _virtualFileProvider;
-
-    private static readonly string[] Files = {
+    private static readonly string[] Files =
+    {
         "/Files/1.svg", "/Files/2.jpeg", "/Files/3.jpg", "/Files/4.tif", "/Files/5.png", "/Files/6.gif"
     };
+
+    private readonly IImageConverter _imageConverter;
+    private readonly IVirtualFileProvider _virtualFileProvider;
 
     public ImageConverterTests()
     {
@@ -32,7 +33,7 @@ public class ImageConverterTests : ImagingMagickNetTestBase
                 var result = await _imageConverter.ConvertAsync(stream, format);
 
                 result.State.ShouldBe(ImageProcessState.Done);
-                
+
                 var bytes = await result.Result.GetAllBytesAsync();
                 bytes.Length.ShouldBeGreaterThan(0);
             }

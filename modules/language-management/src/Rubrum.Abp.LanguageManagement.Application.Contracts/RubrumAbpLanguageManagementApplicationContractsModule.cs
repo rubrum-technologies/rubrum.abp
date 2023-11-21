@@ -1,6 +1,9 @@
-﻿using Volo.Abp.Application;
+﻿using Rubrum.Abp.LanguageManagement.ObjectExtending;
+using Volo.Abp.Application;
 using Volo.Abp.Authorization;
 using Volo.Abp.Modularity;
+using Volo.Abp.ObjectExtending.Modularity;
+using Volo.Abp.Threading;
 
 namespace Rubrum.Abp.LanguageManagement;
 
@@ -9,4 +12,20 @@ namespace Rubrum.Abp.LanguageManagement;
 [DependsOn(typeof(RubrumAbpLanguageManagementDomainSharedModule))]
 public class RubrumAbpLanguageManagementApplicationContractsModule : AbpModule
 {
+    private static readonly OneTimeRunner OneTimeRunner = new();
+
+    public override void PostConfigureServices(ServiceConfigurationContext context)
+    {
+        OneTimeRunner.Run(() =>
+        {
+            ModuleExtensionConfigurationHelper
+                .ApplyEntityConfigurationToApi(
+                    LanguageManagementModuleExtensionConstants.ModuleName,
+                    LanguageManagementModuleExtensionConstants.EntityNames.Language,
+                    new[] { typeof(LanguageDto) },
+                    new[] { typeof(CreateLanguageInput) },
+                    new[] { typeof(UpdateLanguageInput) }
+                );
+        });
+    }
 }

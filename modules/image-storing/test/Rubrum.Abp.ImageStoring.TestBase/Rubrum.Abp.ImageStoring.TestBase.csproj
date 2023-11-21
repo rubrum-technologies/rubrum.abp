@@ -10,7 +10,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="$(MicrosoftPackageVersion)"/>
   </ItemGroup>
-  
+
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)"/>
     <PackageReference Include="NSubstitute" Version="$(NSubstitutePackageVersion)"/>
@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\framework\src\Rubrum.Abp.Imaging.MagickNet\Rubrum.Abp.Imaging.MagickNet.csproj" />
+    <ProjectReference Include="..\..\..\..\framework\src\Rubrum.Abp.Imaging.MagickNet\Rubrum.Abp.Imaging.MagickNet.csproj"/>
     <ProjectReference Include="..\..\src\Rubrum.Abp.ImageStoring.Domain\Rubrum.Abp.ImageStoring.Domain.csproj"/>
   </ItemGroup>
 

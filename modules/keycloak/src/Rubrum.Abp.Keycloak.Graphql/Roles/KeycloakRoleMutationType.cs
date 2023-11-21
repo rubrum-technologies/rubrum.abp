@@ -3,7 +3,8 @@
 namespace Rubrum.Abp.Keycloak.Roles;
 
 public class KeycloakRoleMutationType :
-    EntityMutationType<KeycloakRoleDto, string, IKeycloakRoleGraphqlService, CreateKeycloakRoleInput, UpdateKeycloakRoleInput>
+    EntityMutationType<KeycloakRoleDto, string, IKeycloakRoleGraphqlService, CreateKeycloakRoleInput,
+        UpdateKeycloakRoleInput>
 {
     protected override string TypeName => "KeycloakRole";
     protected override string TypeNameSingular => "KeycloakRole";

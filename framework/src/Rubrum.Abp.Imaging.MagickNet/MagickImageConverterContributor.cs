@@ -12,7 +12,7 @@ public class MagickImageConverterContributor : IImageConverterContributor, ITran
         ImageFormat? original = null,
         CancellationToken cancellationToken = default)
     {
-        var memoryStream = await stream.CreateMemoryStreamAsync(cancellationToken: cancellationToken);
+        var memoryStream = await stream.CreateMemoryStreamAsync(cancellationToken);
 
         try
         {
@@ -20,7 +20,7 @@ public class MagickImageConverterContributor : IImageConverterContributor, ITran
 
             return new ImageConvertResult<Stream>(result, ImageProcessState.Done);
         }
-        catch(MagickMissingDelegateErrorException)
+        catch (MagickMissingDelegateErrorException)
         {
             await memoryStream.DisposeAsync();
             return new ImageConvertResult<Stream>(stream, ImageProcessState.Unsupported);
@@ -45,7 +45,7 @@ public class MagickImageConverterContributor : IImageConverterContributor, ITran
             var result = await ConvertAsync(memoryStream, final, original, cancellationToken);
 
             return new ImageConvertResult<byte[]>(
-                await result.GetAllBytesAsync(cancellationToken: cancellationToken),
+                await result.GetAllBytesAsync(cancellationToken),
                 ImageProcessState.Done);
         }
         catch (MagickMissingDelegateErrorException)

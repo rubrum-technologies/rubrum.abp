@@ -15,12 +15,15 @@ public static class ImageStoringDbContextModelCreatingExtensions
         {
             b.ToTable(DbTablePrefix + "Images", DbSchema);
 
-            b.ConfigureFullAuditedAggregateRoot();
-            b.ApplyObjectExtensionMappings();
+            b.ConfigureByConvention();
 
             b.Ignore(x => x.FileName);
 
             b.HasIndex(x => x.Tag);
+
+            b.ApplyObjectExtensionMappings();
         });
+
+        builder.TryConfigureObjectExtensions<ImageStoringDbContext>();
     }
 }

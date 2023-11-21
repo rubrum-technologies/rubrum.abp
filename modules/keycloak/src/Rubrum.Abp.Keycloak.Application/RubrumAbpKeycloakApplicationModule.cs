@@ -10,5 +10,4 @@ namespace Rubrum.Abp.Keycloak;
 [DependsOn(typeof(RubrumAbpKeycloakDomainModule))]
 public class RubrumAbpKeycloakApplicationModule : AbpModule
 {
-    
 }

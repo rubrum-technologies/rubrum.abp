@@ -11,6 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Rubrum.Abp.Imaging.Abstractions\Rubrum.Abp.Imaging.Abstractions.csproj" />
+    <ProjectReference Include="..\Rubrum.Abp.Imaging.Abstractions\Rubrum.Abp.Imaging.Abstractions.csproj"/>
   </ItemGroup>
 </Project>

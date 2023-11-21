@@ -1,5 +1,6 @@
 ﻿using HotChocolate.Types;
 using Rubrum.Abp.Graphql.Types;
+using Rubrum.Abp.Graphql.Types.Ddd;
 
 namespace Rubrum.Abp.Keycloak.Roles;
 
@@ -7,6 +8,6 @@ public class UpdateKeycloakRoleInputType : InputObjectType<UpdateKeycloakRoleInp
 {
     protected override void Configure(IInputObjectTypeDescriptor<UpdateKeycloakRoleInput> descriptor)
     {
-        descriptor.AddFieldKey<UpdateKeycloakRoleInput, StringType>("KeycloakRole");
+        descriptor.UpdateEntity<UpdateKeycloakRoleInput, StringType>("KeycloakRole");
     }
 }

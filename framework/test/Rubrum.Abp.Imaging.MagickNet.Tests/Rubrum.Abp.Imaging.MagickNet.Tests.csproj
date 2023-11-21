@@ -6,7 +6,7 @@
     <RootNamespace>Rubrum.Abp.Imaging.MagickNet</RootNamespace>
     <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="$(MicrosoftPackageVersion)"/>
   </ItemGroup>
@@ -27,9 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Rubrum.Abp.Imaging.MagickNet\Rubrum.Abp.Imaging.MagickNet.csproj" />
+    <ProjectReference Include="..\..\src\Rubrum.Abp.Imaging.MagickNet\Rubrum.Abp.Imaging.MagickNet.csproj"/>
   </ItemGroup>
-  
+
   <ItemGroup>
     <EmbeddedResource Include="Files\**\*"/>
     <Content Remove="Files\**\*"/>

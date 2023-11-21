@@ -17,11 +17,11 @@ public class KeycloakRoleAppService : ApplicationService, IKeycloakRoleAppServic
         KeycloakClient = keycloakClient;
         Mapper = mapper;
     }
-    
+
     public async Task<KeycloakRoleDto> GetAsync(string id)
     {
         await CheckPolicyAsync(Default);
-        
+
         var role = await KeycloakClient.GetRoleByIdAsync(id);
         return Mapper.Map(role);
     }
@@ -60,7 +60,7 @@ public class KeycloakRoleAppService : ApplicationService, IKeycloakRoleAppServic
         role.Name = input.Name;
 
         await KeycloakClient.UpdateRoleByIdAsync(id, role);
-        
+
         return Mapper.Map(role);
     }
 

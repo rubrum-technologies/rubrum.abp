@@ -7,9 +7,9 @@ namespace Rubrum.Abp.ImageStoring;
 
 public class ImageContainer : IImageContainer, ITransientDependency
 {
+    private readonly IImageBlobContainerFactory _imageBlobContainerFactory;
     private readonly IImageConverter _imageConverter;
     private readonly IImageInformationRepository _imageRepository;
-    private readonly IImageBlobContainerFactory _imageBlobContainerFactory;
 
     public ImageContainer(
         IImageConverter imageConverter,
