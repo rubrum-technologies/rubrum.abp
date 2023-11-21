@@ -1,0 +1,112 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "Rubrum.Abp.PermissionManagement.HttpApi.Grpc";
+
+package PermissionManagement;
+
+service PermissionGrantRepositoryGrpc {
+    rpc Get (PermissionGrantGetRequest) returns (PermissionGrantResponse);
+    rpc Find (PermissionGrantFindRequest) returns (PermissionGrantResponse);
+    rpc FindByName (PermissionGrantFindByNameRequest) returns (PermissionGrantResponse);
+    rpc GetList (PermissionGrantListRequest) returns (PermissionGrantListResponse);
+    rpc GetListByProvider (PermissionGrantListByProviderRequest) returns (PermissionGrantListResponse);
+    rpc GetListByNames (PermissionGrantListByNamesRequest) returns (PermissionGrantListResponse);
+    rpc GetPagedList (PermissionGrantPagedListRequest) returns (PermissionGrantListResponse);
+    rpc GetCount (google.protobuf.Empty) returns (PermissionGrantCountResponse);
+    rpc Insert (PermissionGrantInsertRequest) returns (PermissionGrantResponse);
+    rpc InsertMany (PermissionGrantInsertManyRequest) returns (PermissionGrantListResponse);
+    rpc Update (PermissionGrantUpdateRequest) returns (PermissionGrantResponse);
+    rpc UpdateMany (PermissionGrantUpdateManyRequest) returns (PermissionGrantListResponse);
+    rpc Delete (PermissionGrantDeleteRequest) returns (google.protobuf.Empty);
+    rpc DeleteMany (PermissionGrantDeleteManyRequest) returns (google.protobuf.Empty);
+}
+
+message PermissionGrantGetRequest {
+    string id = 1;
+    bool include_details = 2;
+}
+
+message PermissionGrantFindRequest {
+    string id = 1;
+    bool include_details = 2;
+}
+
+message PermissionGrantFindByNameRequest {
+    string name = 1;
+    string provider_name = 2;
+    string provider_key = 3;
+}
+
+message PermissionGrantListRequest {
+    bool include_details = 1;
+}
+
+message PermissionGrantListByProviderRequest {
+    string provider_name = 1;
+    string provider_key = 2;
+}
+
+message PermissionGrantListByNamesRequest {
+    repeated string names = 1;
+    string provider_name = 2;
+    string provider_key = 3;
+}
+
+message PermissionGrantPagedListRequest {
+    int32 skip_count = 1;
+    int32 max_result_count = 2;
+    google.protobuf.StringValue sorting = 3;
+    bool include_details = 4;
+}
+
+message PermissionGrantInsertRequest {
+    string id = 1;
+    google.protobuf.StringValue tenant_id = 2;
+    string name = 3;
+    string provider_name = 4;
+    string provider_key = 5;
+}
+
+message PermissionGrantInsertManyRequest {
+    repeated PermissionGrantInsertRequest inputs = 1;
+}
+
+message PermissionGrantUpdateRequest {
+    string id = 1;
+    google.protobuf.StringValue tenant_id = 2;
+    string name = 3;
+    string provider_name = 4;
+    string provider_key = 5;
+    bool is_granted = 6;
+}
+
+message PermissionGrantUpdateManyRequest {
+    repeated PermissionGrantUpdateRequest inputs = 1;
+}
+
+message PermissionGrantDeleteRequest {
+    string id = 1;
+}
+
+message PermissionGrantDeleteManyRequest {
+    repeated PermissionGrantDeleteRequest ids = 1;
+}
+
+message PermissionGrantResponse {
+    string id = 1;
+    google.protobuf.StringValue tenant_id = 2;
+    string name = 3;
+    string provider_name = 4;
+    string provider_key = 5;
+}
+
+message PermissionGrantListResponse {
+    repeated PermissionGrantResponse entities = 1;
+}
+
+message PermissionGrantCountResponse {
+    int64 count = 1;
+}

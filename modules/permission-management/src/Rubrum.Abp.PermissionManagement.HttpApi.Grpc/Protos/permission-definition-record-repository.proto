@@ -1,0 +1,114 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "Rubrum.Abp.PermissionManagement.HttpApi.Grpc";
+
+package PermissionManagement;
+
+service PermissionDefinitionRecordRepositoryGrpc {
+    rpc Get (PermissionDefinitionRecordGetRequest) returns (PermissionDefinitionRecordResponse);
+    rpc Find (PermissionDefinitionRecordFindRequest) returns (PermissionDefinitionRecordResponse);
+    rpc FindByName (PermissionDefinitionRecordFindByNameRequest) returns (PermissionDefinitionRecordResponse);
+    rpc GetList (PermissionDefinitionRecordListRequest) returns (PermissionDefinitionRecordListResponse);
+    rpc GetPagedList (PermissionDefinitionRecordPagedListRequest) returns (PermissionDefinitionRecordListResponse);
+    rpc GetCount (google.protobuf.Empty) returns (PermissionDefinitionRecordCountResponse);
+    rpc Insert (PermissionDefinitionRecordInsertRequest) returns (PermissionDefinitionRecordResponse);
+    rpc InsertMany (PermissionDefinitionRecordInsertManyRequest) returns (PermissionDefinitionRecordListResponse);
+    rpc Update (PermissionDefinitionRecordUpdateRequest) returns (PermissionDefinitionRecordResponse);
+    rpc UpdateMany (PermissionDefinitionRecordUpdateManyRequest) returns (PermissionDefinitionRecordListResponse);
+    rpc Delete (PermissionDefinitionRecordDeleteRequest) returns (google.protobuf.Empty);
+    rpc DeleteMany (PermissionDefinitionRecordDeleteManyRequest) returns (google.protobuf.Empty);
+}
+
+message PermissionDefinitionRecordGetRequest {
+    string id = 1;
+    bool include_details = 2;
+}
+
+message PermissionDefinitionRecordFindRequest {
+    string id = 1;
+    bool include_details = 2;
+}
+
+message PermissionDefinitionRecordFindByNameRequest {
+    string name = 1;
+}
+
+message PermissionDefinitionRecordListRequest {
+    bool include_details = 1;
+}
+
+message PermissionDefinitionRecordPagedListRequest {
+    int32 skip_count = 1;
+    int32 max_result_count = 2;
+    google.protobuf.StringValue sorting = 3;
+    bool include_details = 4;
+}
+
+message PermissionDefinitionRecordInsertRequest {
+    string id = 1;
+    string group_name = 2;
+    string name = 3;
+    google.protobuf.StringValue parent_name = 4;
+    string display_name = 5;
+    bool is_enabled = 6;
+    MultiTenancySidesGrpc multi_tenancy_side = 7;
+    google.protobuf.StringValue providers = 8;
+    google.protobuf.StringValue state_checkers = 9;
+}
+
+message PermissionDefinitionRecordInsertManyRequest {
+    repeated PermissionDefinitionRecordInsertRequest inputs = 1;
+}
+
+message PermissionDefinitionRecordUpdateRequest {
+    string id = 1;
+    string group_name = 2;
+    string name = 3;
+    google.protobuf.StringValue parent_name = 4;
+    string display_name = 5;
+    bool is_enabled = 6;
+    MultiTenancySidesGrpc multi_tenancy_side = 7;
+    google.protobuf.StringValue providers = 8;
+    google.protobuf.StringValue state_checkers = 9;
+}
+
+message PermissionDefinitionRecordUpdateManyRequest {
+    repeated PermissionDefinitionRecordUpdateRequest inputs = 1;
+}
+
+message PermissionDefinitionRecordDeleteRequest {
+    string id = 1;
+}
+
+message PermissionDefinitionRecordDeleteManyRequest {
+    repeated PermissionDefinitionRecordDeleteRequest ids = 1;
+}
+
+message PermissionDefinitionRecordListResponse {
+    repeated PermissionDefinitionRecordResponse entities = 1;
+}
+
+message PermissionDefinitionRecordCountResponse {
+    int64 count = 1;
+}
+
+message PermissionDefinitionRecordResponse {
+    string id = 1;
+    string group_name = 2;
+    string name = 3;
+    google.protobuf.StringValue parent_name = 4;
+    string display_name = 5;
+    bool is_enabled = 6;
+    MultiTenancySidesGrpc multi_tenancy_side = 7;
+    google.protobuf.StringValue providers = 8;
+    google.protobuf.StringValue state_checkers = 9;
+}
+
+enum MultiTenancySidesGrpc {
+    MULTI_TENANCY_SIDES_GRPC_TENANT = 0;
+    MULTI_TENANCY_SIDES_GRPC_HOST = 1;
+    MULTI_TENANCY_SIDES_GRPC_BOTH = 2;
+}

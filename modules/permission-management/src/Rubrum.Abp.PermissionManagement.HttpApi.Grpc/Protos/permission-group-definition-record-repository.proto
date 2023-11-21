@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "Rubrum.Abp.PermissionManagement.HttpApi.Grpc";
+
+package PermissionManagement;
+
+service PermissionGroupDefinitionRecordRepositoryGrpc {
+    rpc Get (PermissionGroupDefinitionRecordGetRequest) returns (PermissionGroupDefinitionRecordResponse);
+    rpc Find (PermissionGroupDefinitionRecordFindRequest) returns (PermissionGroupDefinitionRecordResponse);
+    rpc GetList (PermissionGroupDefinitionRecordListRequest) returns (PermissionGroupDefinitionRecordListResponse);
+    rpc GetPagedList (PermissionGroupDefinitionRecordPagedListRequest) returns (PermissionGroupDefinitionRecordListResponse);
+    rpc GetCount (google.protobuf.Empty) returns (PermissionGroupDefinitionRecordCountResponse);
+    rpc Insert (PermissionGroupDefinitionRecordInsertRequest) returns (PermissionGroupDefinitionRecordResponse);
+    rpc InsertMany (PermissionGroupDefinitionRecordInsertManyRequest) returns (PermissionGroupDefinitionRecordListResponse);
+    rpc Update (PermissionGroupDefinitionRecordUpdateRequest) returns (PermissionGroupDefinitionRecordResponse);
+    rpc UpdateMany (PermissionGroupDefinitionRecordUpdateManyRequest) returns (PermissionGroupDefinitionRecordListResponse);
+    rpc Delete (PermissionGroupDefinitionRecordDeleteRequest) returns (google.protobuf.Empty);
+    rpc DeleteMany (PermissionGroupDefinitionRecordDeleteManyRequest) returns (google.protobuf.Empty);
+}
+
+message PermissionGroupDefinitionRecordGetRequest {
+    string id = 1;
+    bool include_details = 2;
+}
+
+message PermissionGroupDefinitionRecordFindRequest {
+    string id = 1;
+    bool include_details = 2;
+}
+
+message PermissionGroupDefinitionRecordListRequest {
+    bool include_details = 1;
+}
+
+message PermissionGroupDefinitionRecordPagedListRequest {
+    int32 skip_count = 1;
+    int32 max_result_count = 2;
+    google.protobuf.StringValue sorting = 3;
+    bool include_details = 4;
+}
+
+message PermissionGroupDefinitionRecordInsertRequest {
+    string id = 1;
+    string name = 2;
+    string display_name = 3;
+}
+
+message PermissionGroupDefinitionRecordInsertManyRequest {
+    repeated PermissionGroupDefinitionRecordInsertRequest inputs = 1;
+}
+
+message PermissionGroupDefinitionRecordUpdateRequest {
+    string id = 1;
+    string name = 2;
+    string display_name = 3;
+}
+
+message PermissionGroupDefinitionRecordUpdateManyRequest {
+    repeated PermissionGroupDefinitionRecordUpdateRequest inputs = 1;
+}
+
+message PermissionGroupDefinitionRecordDeleteRequest {
+    string id = 1;
+}
+
+message PermissionGroupDefinitionRecordDeleteManyRequest {
+    repeated PermissionGroupDefinitionRecordDeleteRequest ids = 1;
+}
+
+message PermissionGroupDefinitionRecordListResponse {
+    repeated PermissionGroupDefinitionRecordResponse entities = 1;
+}
+
+message PermissionGroupDefinitionRecordCountResponse {
+    int64 count = 1;
+}
+
+message PermissionGroupDefinitionRecordResponse {
+    string id = 1;
+    string name = 2;
+    string display_name = 3;
+}
