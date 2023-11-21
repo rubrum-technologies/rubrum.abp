@@ -11,7 +11,7 @@ public static class RubrumAbpLanguageManagementDbContextModelCreatingExtensions
     {
         builder.Entity<SystemLanguage>(b =>
         {
-            b.ToTable(DbTablePrefix + "Languages", DbSchema);
+            b.ToTable(DbTablePrefix + "SystemLanguages", DbSchema);
 
             b.ConfigureByConvention();
 
