@@ -17,7 +17,7 @@ public class CurrentKeycloakRealm : ICurrentKeycloakRealm, ITransientDependency
         _options = options.Value;
     }
 
-    public string RealmName => _accessor.Current?.RealmName ?? _options.DefaultRealmName;
+    public string RealmName => _accessor.Current?.RealmName ?? _options.DefaultRealmName ?? "master";
 
     public IDisposable Change(string realmName)
     {
