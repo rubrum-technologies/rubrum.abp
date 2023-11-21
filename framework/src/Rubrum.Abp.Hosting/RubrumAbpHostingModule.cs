@@ -4,7 +4,7 @@ using Volo.Abp.Modularity;
 namespace Rubrum.Abp.Hosting;
 
 [DependsOn(typeof(AbpAutofacModule))]
-public class RubrumAbpHostingModule
+public class RubrumAbpHostingModule : AbpModule
 {
     
 }
