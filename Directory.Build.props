@@ -77,6 +77,9 @@
 
     <!-- FluentValidation https://www.nuget.org/packages/FluentValidation -->
     <FluentValidationPackageVersion>11.8.0</FluentValidationPackageVersion>
+    
+    <!-- ArdalisSmart https://www.nuget.org/packages/Ardalis.SmartEnum --> 
+    <ArdalisSmartEnumPackageVersion>7.0.0</ArdalisSmartEnumPackageVersion>
 
     <IsTestProject
       Condition="$(MSBuildProjectFullPath.Contains('test')) and ($(MSBuildProjectName.EndsWith('.Tests')) or $(MSBuildProjectName.EndsWith('.TestBase')))">

@@ -154,6 +154,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Imaging.MagickNe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Imaging.MagickNet.Tests", "framework\test\Rubrum.Abp.Imaging.MagickNet.Tests\Rubrum.Abp.Imaging.MagickNet.Tests.csproj", "{CC5C5BD3-5730-421D-8C87-A61B2CBB8FB9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Translator.Abstractions", "framework\src\Rubrum.Abp.Translator.Abstractions\Rubrum.Abp.Translator.Abstractions.csproj", "{7A76982A-E833-41A3-9C36-69B8835A2D0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Languages", "framework\src\Rubrum.Abp.Languages\Rubrum.Abp.Languages.csproj", "{8842A197-FBDE-4947-8F79-7E40902269B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Translator.LibreTranslate", "framework\src\Rubrum.Abp.Translator.LibreTranslate\Rubrum.Abp.Translator.LibreTranslate.csproj", "{64110C10-F83E-4238-B462-A73C57668F26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -235,6 +241,9 @@ Global
 		{4DCCEE1B-FBDE-4414-A6F7-C85FECAC191D} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
 		{F0D65A4E-82CA-40F9-A9CC-DB8BA0F0FF30} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
 		{CC5C5BD3-5730-421D-8C87-A61B2CBB8FB9} = {545294C3-2CC7-4F40-8FE2-7C49D898FD55}
+		{7A76982A-E833-41A3-9C36-69B8835A2D0D} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
+		{8842A197-FBDE-4947-8F79-7E40902269B2} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
+		{64110C10-F83E-4238-B462-A73C57668F26} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4B66683B-4CA4-430A-9DBB-8A190FE25F86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -481,5 +490,17 @@ Global
 		{CC5C5BD3-5730-421D-8C87-A61B2CBB8FB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC5C5BD3-5730-421D-8C87-A61B2CBB8FB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC5C5BD3-5730-421D-8C87-A61B2CBB8FB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A76982A-E833-41A3-9C36-69B8835A2D0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A76982A-E833-41A3-9C36-69B8835A2D0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A76982A-E833-41A3-9C36-69B8835A2D0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A76982A-E833-41A3-9C36-69B8835A2D0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8842A197-FBDE-4947-8F79-7E40902269B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8842A197-FBDE-4947-8F79-7E40902269B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8842A197-FBDE-4947-8F79-7E40902269B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8842A197-FBDE-4947-8F79-7E40902269B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64110C10-F83E-4238-B462-A73C57668F26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64110C10-F83E-4238-B462-A73C57668F26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64110C10-F83E-4238-B462-A73C57668F26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64110C10-F83E-4238-B462-A73C57668F26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

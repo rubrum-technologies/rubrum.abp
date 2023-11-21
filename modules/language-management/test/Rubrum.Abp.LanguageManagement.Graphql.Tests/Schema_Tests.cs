@@ -2,7 +2,6 @@
 using HotChocolate.Execution;
 using HotChocolate.Execution.Configuration;
 using Xunit;
-using Rubrum.Abp.Graphql;
 
 namespace Rubrum.Abp.LanguageManagement;
 
