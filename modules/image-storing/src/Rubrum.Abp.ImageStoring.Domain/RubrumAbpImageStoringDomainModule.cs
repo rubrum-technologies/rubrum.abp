@@ -1,4 +1,6 @@
-﻿using Rubrum.Abp.Data;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Rubrum.Abp.Data;
 using Rubrum.Abp.ImageStoring.ObjectExtending;
 using Rubrum.Abp.Imaging;
 using Volo.Abp.BlobStoring;
@@ -28,5 +30,9 @@ public class RubrumAbpImageStoringDomainModule : AbpModule
                 typeof(ImageInformation)
             );
         });
+
+        var configuration = context.Services.GetConfiguration();
+        
+        Configure<RubrumAbpImageStoringOptions>(options => configuration.GetSection("ImageStoring").Bind(options));
     }
 }
