@@ -229,7 +229,7 @@ input DateTimeOperationFilterInput {
 }
 
 input DeleteSystemLanguageInput {
-  id: ID
+  id: ID!
 }
 
 input IdOperationFilterInput {
