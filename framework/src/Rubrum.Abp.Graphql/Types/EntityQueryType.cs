@@ -18,46 +18,59 @@ public abstract class EntityQueryType<TEntityDto, TKey, TService> :
     protected abstract string TypeNameSingular { get; }
     protected abstract string TypeNameInPlural { get; }
 
-    protected virtual string FieldNameGetById => $"{TypeNameSingular.ToLowerFirstChar()}ById";
-    protected virtual string FieldNameGet => TypeNameSingular.ToLowerFirstChar();
-    protected virtual string FieldNameGetList => $"{TypeNameInPlural.ToLowerFirstChar()}";
-    protected virtual string FieldNameAny => $"{TypeNameInPlural.ToLowerFirstChar()}Any";
-    protected virtual string FieldNameCount => $"{TypeNameInPlural.ToLowerFirstChar()}Count";
+    protected virtual string FieldNameForGetById => $"{TypeNameSingular.ToLowerFirstChar()}ById";
+    protected virtual string FieldNameForGet => TypeNameSingular.ToLowerFirstChar();
+    protected virtual string FieldNameForGetList => $"{TypeNameInPlural.ToLowerFirstChar()}";
+    protected virtual string FieldNameForAll => $"{TypeNameInPlural.ToLowerFirstChar()}All";
+    protected virtual string FieldNameForAny => $"{TypeNameInPlural.ToLowerFirstChar()}Any";
+    protected virtual string FieldNameForCount => $"{TypeNameInPlural.ToLowerFirstChar()}Count";
+
+    protected virtual bool IsAddFieldByAll => false;
 
     protected override void Configure(IObjectTypeDescriptor descriptor)
     {
         descriptor.Name(OperationTypeNames.Query);
 
         descriptor
-            .Field(FieldNameGetById)
+            .Field(FieldNameForGetById)
             .UseUnitOfWork()
             .Argument("id", x => x.Type(typeof(TKey)).ID(TypeName))
             .ResolveWith<Resolves>(x => x.GetByIdAsync(default!, default!, default!));
 
         descriptor
-            .Field(FieldNameGet)
+            .Field(FieldNameForGet)
             .UseUnitOfWork()
             .UseFirstOrDefault()
             .UseFiltering<FilterInputType<TEntityDto>>()
             .ResolveWith<Resolves>(x => x.GetQueryableAsync(default!));
 
         descriptor
-            .Field(FieldNameGetList)
+            .Field(FieldNameForGetList)
             .UseUnitOfWork()
             .UsePaging()
             .UseFiltering<FilterInputType<TEntityDto>>()
             .UseSorting<SortInputType<TEntityDto>>()
             .ResolveWith<Resolves>(x => x.GetQueryableAsync(default!));
 
+        if (IsAddFieldByAll)
+        {
+            descriptor
+                .Field(FieldNameForAll)
+                .UseUnitOfWork()
+                .UseFiltering<FilterInputType<TEntityDto>>()
+                .UseSorting<SortInputType<TEntityDto>>()
+                .ResolveWith<Resolves>(x => x.GetQueryableAsync(default!));
+        }
+        
         descriptor
-            .Field(FieldNameAny)
+            .Field(FieldNameForAny)
             .UseUnitOfWork()
             .UseAny()
             .UseFiltering<FilterInputType<TEntityDto>>()
             .ResolveWith<Resolves>(x => x.GetQueryableAsync(default!));
 
         descriptor
-            .Field(FieldNameCount)
+            .Field(FieldNameForCount)
             .UseUnitOfWork()
             .UseCount()
             .UseFiltering<FilterInputType<TEntityDto>>()

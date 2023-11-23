@@ -8,4 +8,6 @@ public class CityQueryType : EntityQueryType<CityDto, int, ICityGraphqlService>
     protected override string TypeName => "City";
     protected override string TypeNameSingular => "City";
     protected override string TypeNameInPlural => "Cities";
+
+    protected override bool IsAddFieldByAll => true;
 }

@@ -14,6 +14,19 @@ namespace Rubrum.Abp.Graphql.Types.Ddd;
 
 public static class AbpTypeExtensions
 {
+    public static IInputObjectTypeDescriptor<TInput> AddFieldKey<TInput, TKey>(
+        this IInputObjectTypeDescriptor<TInput> descriptor,
+        string typeName,
+        string? fieldName = null) where TKey : notnull
+    {
+        descriptor
+            .Field(fieldName ?? "id")
+            .Type<NonNullType<InputObjectType<TKey>>>()
+            .ID(typeName);
+
+        return descriptor;
+    }
+
     public static IInterfaceTypeDescriptor<TEntityDto> Entity<TEntityDto, TKey>(
         this IInterfaceTypeDescriptor<TEntityDto> descriptor)
         where TKey : notnull
@@ -61,19 +74,6 @@ public static class AbpTypeExtensions
                 var service = context.Service<IAbpDataLoader<TEntityDto, TKey>>();
                 return await service.LoadAsync(id, context.RequestAborted);
             });
-
-        return descriptor;
-    }
-
-    public static IInputObjectTypeDescriptor<TInput> UpdateEntity<TInput, TKey>(
-        this IInputObjectTypeDescriptor<TInput> descriptor,
-        string typeName)
-        where TKey : IType
-    {
-        descriptor
-            .Field("id")
-            .Type<NonNullType<TKey>>()
-            .ID(typeName);
 
         return descriptor;
     }
