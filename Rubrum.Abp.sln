@@ -170,6 +170,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Hosting.AspNetCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Hosting.AspNetCore.Microservice.Graphql", "framework\src\Rubrum.Abp.Hosting.AspNetCore.Microservice.Graphql\Rubrum.Abp.Hosting.AspNetCore.Microservice.Graphql.csproj", "{F5106486-D2E9-46A2-8FEA-C56A5B557B05}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.ImageStoring.Graphql", "modules\image-storing\src\Rubrum.Abp.ImageStoring.Graphql\Rubrum.Abp.ImageStoring.Graphql.csproj", "{719541D3-326B-408E-8A99-292F99F09434}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -259,6 +261,7 @@ Global
 		{06B268FE-AD6A-45DB-AE8A-4EEC2DBE9D13} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
 		{DADC3AB3-5191-4E82-AC61-2A9EC34CB703} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
 		{F5106486-D2E9-46A2-8FEA-C56A5B557B05} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
+		{719541D3-326B-408E-8A99-292F99F09434} = {5E4351F5-94E0-48B6-ADD1-EBE8390B1BE1}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4B66683B-4CA4-430A-9DBB-8A190FE25F86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -537,5 +540,9 @@ Global
 		{F5106486-D2E9-46A2-8FEA-C56A5B557B05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5106486-D2E9-46A2-8FEA-C56A5B557B05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5106486-D2E9-46A2-8FEA-C56A5B557B05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{719541D3-326B-408E-8A99-292F99F09434}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{719541D3-326B-408E-8A99-292F99F09434}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{719541D3-326B-408E-8A99-292F99F09434}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{719541D3-326B-408E-8A99-292F99F09434}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
