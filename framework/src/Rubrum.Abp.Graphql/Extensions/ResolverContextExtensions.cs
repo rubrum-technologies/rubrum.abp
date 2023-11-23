@@ -5,12 +5,18 @@ namespace Rubrum.Abp.Graphql.Extensions;
 
 public static class ResolverContextExtensions
 {
-    public static TKey GetFiledKeyForInput<TKey>(this IResolverContext context)
+    public static ObjectFieldNode GetFiledForInput(this IResolverContext context, string fieldName)
+    {
+        var input = context.ArgumentLiteral<ObjectValueNode>("input");
+        return input.Fields.Single(x => x.Name.Value == fieldName);
+    }
+    
+    public static TKey GetFiledKeyForInput<TKey>(this IResolverContext context, string? fieldName = null)
         where TKey : notnull
     {
+        var key = context.GetFiledForInput(fieldName ?? "id");
+        
         var idSerializer = context.Service<IIdSerializer>();
-        var input = context.ArgumentLiteral<ObjectValueNode>("input");
-        var key = input.Fields.Single(x => x.Name.Value == "id");
         return (TKey)idSerializer.Deserialize((string)key.Value.Value!).Value;
     }
 }

@@ -41,7 +41,7 @@ public abstract class EntityMutationType<TEntityDto, TKey, TService, TCreateInpu
                 var service = context.Service<TService>();
                 return service.CreateAsync(context.ArgumentValue<TCreateInput>("input"));
             })
-            .Type(typeof(TEntityDto));
+            .Type<NonNullType<ObjectType<TEntityDto>>>();
 
         descriptor
             .Field(FieldNameUpdate)
@@ -57,11 +57,11 @@ public abstract class EntityMutationType<TEntityDto, TKey, TService, TCreateInpu
 
                 return service.UpdateAsync(id, input);
             })
-            .Type(typeof(TEntityDto));
+            .Type<NonNullType<ObjectType<TEntityDto>>>();
 
         descriptor
             .Field(FieldNameDelete)
-            .Argument("id", a => a.Type(typeof(TKey)).ID(TypeName))
+            .Argument("id", a => a.Type<NonNullType<InputObjectType<TKey>>>().ID(TypeName))
             .UseUnitOfWork()
             .UseAbpError()
             .UseMutationConvention()
@@ -75,6 +75,6 @@ public abstract class EntityMutationType<TEntityDto, TKey, TService, TCreateInpu
                 await service.DeleteAsync(id);
                 return entity;
             })
-            .Type(typeof(TEntityDto));
+            .Type<NonNullType<ObjectType<TEntityDto>>>();
     }
 }
