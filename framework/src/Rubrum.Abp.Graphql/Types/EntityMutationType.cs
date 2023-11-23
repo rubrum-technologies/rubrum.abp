@@ -2,6 +2,7 @@
 using HotChocolate.Resolvers;
 using Rubrum.Abp.Graphql.Data;
 using Rubrum.Abp.Graphql.DataLoader;
+using Rubrum.Abp.Graphql.Extensions;
 using Rubrum.Abp.Graphql.Services;
 using Rubrum.Abp.Graphql.Validation;
 using Volo.Abp.Application.Dtos;
@@ -50,7 +51,7 @@ public abstract class EntityMutationType<TEntityDto, TKey, TService, TCreateInpu
             .UseMutationConvention()
             .Resolve(context =>
             {
-                var id = GetKeyFromUpdateInput(context);
+                var id = context.GetFiledKeyForInput<TKey>();
                 var input = context.ArgumentValue<TUpdateInput>("input");
                 var service = context.Service<TService>();
 
@@ -75,13 +76,5 @@ public abstract class EntityMutationType<TEntityDto, TKey, TService, TCreateInpu
                 return entity;
             })
             .Type(typeof(TEntityDto));
-    }
-
-    private static TKey GetKeyFromUpdateInput(IResolverContext context)
-    {
-        var idSerializer = context.Service<IIdSerializer>();
-        var input = context.ArgumentLiteral<ObjectValueNode>("input");
-        var key = input.Fields.Single(x => x.Name.Value == "id");
-        return (TKey)idSerializer.Deserialize((string)key.Value.Value!).Value;
     }
 }
