@@ -34,7 +34,7 @@ public class KeycloakUserAppServiceTests : RubrumAbpKeycloakApplicationTestBase
     [Fact]
     public async Task GetListAsync()
     {
-        var users = await _keycloakClient.GetUsersAsync();
+        var users = await _keycloakClient.GetUsersAsync(max: 1000);
         var result = await _service.GetListAsync(new PagedResultRequestDto { SkipCount = 0, MaxResultCount = 1000 });
 
         users.Count.ShouldBe(result.Items.Count);
