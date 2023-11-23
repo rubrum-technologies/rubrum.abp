@@ -10,7 +10,7 @@ public class UpdateSystemLanguageInputType : InputObjectType<UpdateSystemLanguag
     protected override void Configure(IInputObjectTypeDescriptor<UpdateSystemLanguageInput> descriptor)
     {
         descriptor
-            .UpdateEntity<UpdateSystemLanguageInput, StringType>(TypeName)
+            .AddFieldKey<UpdateSystemLanguageInput, string>(TypeName)
             .ExtraProperties();
     }
 }
