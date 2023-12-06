@@ -190,9 +190,9 @@ input ComparableDateTimeOperationFilterInput {
 }
 
 input CreateSystemLanguageInput {
-  "Maximum length '5',\n Required and not empty"
+  "Maximum length '5',\nRequired and not empty"
   code: String!
-  "Maximum length '30',\n Required and not empty"
+  "Maximum length '30',\nRequired and not empty"
   name: String!
 }
 
@@ -284,7 +284,7 @@ input SystemLanguageSortInput {
 
 input UpdateSystemLanguageInput {
   id: ID!
-  "Maximum length '30',\n Required and not empty"
+  "Maximum length '30',\nRequired and not empty"
   name: String!
 }
 

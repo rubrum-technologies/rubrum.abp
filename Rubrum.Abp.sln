@@ -172,6 +172,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Hosting.AspNetCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.ImageStoring.Graphql", "modules\image-storing\src\Rubrum.Abp.ImageStoring.Graphql\Rubrum.Abp.ImageStoring.Graphql.csproj", "{719541D3-326B-408E-8A99-292F99F09434}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Ddd.HumanFriendly", "framework\src\Rubrum.Abp.Ddd.HumanFriendly\Rubrum.Abp.Ddd.HumanFriendly.csproj", "{DD33EA4C-279E-4DFB-830E-B88068ECBF8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.EntityFrameworkCore.HumanFriendly", "framework\src\Rubrum.Abp.EntityFrameworkCore.HumanFriendly\Rubrum.Abp.EntityFrameworkCore.HumanFriendly.csproj", "{FCC453BA-F6C6-4710-AF9B-12DA15D81491}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -262,6 +266,8 @@ Global
 		{DADC3AB3-5191-4E82-AC61-2A9EC34CB703} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
 		{F5106486-D2E9-46A2-8FEA-C56A5B557B05} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
 		{719541D3-326B-408E-8A99-292F99F09434} = {5E4351F5-94E0-48B6-ADD1-EBE8390B1BE1}
+		{DD33EA4C-279E-4DFB-830E-B88068ECBF8B} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
+		{FCC453BA-F6C6-4710-AF9B-12DA15D81491} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4B66683B-4CA4-430A-9DBB-8A190FE25F86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -544,5 +550,13 @@ Global
 		{719541D3-326B-408E-8A99-292F99F09434}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{719541D3-326B-408E-8A99-292F99F09434}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{719541D3-326B-408E-8A99-292F99F09434}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD33EA4C-279E-4DFB-830E-B88068ECBF8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD33EA4C-279E-4DFB-830E-B88068ECBF8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD33EA4C-279E-4DFB-830E-B88068ECBF8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD33EA4C-279E-4DFB-830E-B88068ECBF8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCC453BA-F6C6-4710-AF9B-12DA15D81491}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCC453BA-F6C6-4710-AF9B-12DA15D81491}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCC453BA-F6C6-4710-AF9B-12DA15D81491}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCC453BA-F6C6-4710-AF9B-12DA15D81491}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

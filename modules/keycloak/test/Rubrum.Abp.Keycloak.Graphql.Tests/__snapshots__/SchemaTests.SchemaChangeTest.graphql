@@ -202,7 +202,7 @@ input ChangePasswordInput {
 }
 
 input ChangePasswordKeycloakUserInput {
-  "Minimum length '3',\n Required and not empty"
+  "Minimum length '3',\nRequired and not empty"
   password: String!
 }
 
