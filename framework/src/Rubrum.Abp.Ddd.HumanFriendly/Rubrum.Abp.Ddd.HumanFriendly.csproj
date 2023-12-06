@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\common.props"/>
+  <Import Project="..\..\..\fody.props"/>
+
+  <PropertyGroup>
+    <RootNamespace>Rubrum.Abp.Ddd.HumanFriendly</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Domain.Shared" Version="$(AbpPackageVersion)"/>
+  </ItemGroup>
+</Project>

@@ -1,92 +1,92 @@
 schema {
-    query: Query
+  query: Query
 }
 
 interface EntityOfGuid {
-    id: ID!
+  id: ID!
 }
 
 interface IHasExtraProperties {
-    extraProperties: JSON
+  extraProperties: JSON
 }
 
 "The node interface is implemented by entities that have a global unique identifier."
 interface Node {
-    id: ID!
+  id: ID!
 }
 
 type Country implements EntityOfGuid & Node {
-    id: ID!
-    translation(culture: String): CountryTranslation
-    translations(where: CountryTranslationFilterInput order: [CountryTranslationSortInput!]): [CountryTranslation!]!
+  id: ID!
+  translation(culture: String): CountryTranslation
+  translations(where: CountryTranslationFilterInput order: [CountryTranslationSortInput!]): [CountryTranslation!]!
 }
 
 type CountryTranslation {
-    name: String!
-    language: String!
+  name: String!
+  language: String!
 }
 
 type Query {
-    "Fetches an object given its ID."
-    node("ID of the object." id: ID!): Node
-    "Lookup nodes by a list of IDs."
-    nodes("The list of node IDs." ids: [ID!]!): [Node]!
-    country: Country!
+  "Fetches an object given its ID."
+  node("ID of the object." id: ID!): Node
+  "Lookup nodes by a list of IDs."
+  nodes("The list of node IDs." ids: [ID!]!): [Node]!
+  country: Country!
 }
 
 input CountryTranslationFilterInput {
-    and: [CountryTranslationFilterInput!]
-    or: [CountryTranslationFilterInput!]
-    name: StringOperationFilterInput
-    language: StringOperationFilterInput
+  and: [CountryTranslationFilterInput!]
+  or: [CountryTranslationFilterInput!]
+  name: StringOperationFilterInput
+  language: StringOperationFilterInput
 }
 
 input CountryTranslationSortInput {
-    name: SortEnumType
-    language: SortEnumType
+  name: SortEnumType
+  language: SortEnumType
 }
 
 input DateOnlyOperationFilterInput {
-    and: [DateOnlyOperationFilterInput!]
-    or: [DateOnlyOperationFilterInput!]
-    eq: Date
-    neq: Date
-    in: [Date!]
-    nin: [Date!]
-    gt: Date
-    ngt: Date
-    gte: Date
-    ngte: Date
-    lt: Date
-    nlt: Date
-    lte: Date
-    nlte: Date
+  and: [DateOnlyOperationFilterInput!]
+  or: [DateOnlyOperationFilterInput!]
+  eq: Date
+  neq: Date
+  in: [Date!]
+  nin: [Date!]
+  gt: Date
+  ngt: Date
+  gte: Date
+  ngte: Date
+  lt: Date
+  nlt: Date
+  lte: Date
+  nlte: Date
 }
 
 input StringOperationFilterInput {
-    and: [StringOperationFilterInput!]
-    or: [StringOperationFilterInput!]
-    eq: String
-    neq: String
-    contains: String
-    ncontains: String
-    in: [String]
-    nin: [String]
-    startsWith: String
-    nstartsWith: String
-    endsWith: String
-    nendsWith: String
+  and: [StringOperationFilterInput!]
+  or: [StringOperationFilterInput!]
+  eq: String
+  neq: String
+  contains: String
+  ncontains: String
+  in: [String]
+  nin: [String]
+  startsWith: String
+  nstartsWith: String
+  endsWith: String
+  nendsWith: String
 }
 
 enum ApplyPolicy {
-    BEFORE_RESOLVER
-    AFTER_RESOLVER
-    VALIDATION
+  BEFORE_RESOLVER
+  AFTER_RESOLVER
+  VALIDATION
 }
 
 enum SortEnumType {
-    ASC
-    DESC
+  ASC
+  DESC
 }
 
 directive @allowAnonymous repeatable on FIELD_DEFINITION
