@@ -62,9 +62,9 @@ public class ImageContainer : IImageContainer, ITransientDependency
         return new ImageFile(information, stream);
     }
 
-    public async Task<bool> ExistsAsync(Guid id, CancellationToken cancellationToken = default)
+    public Task<bool> ExistsAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return await _imageRepository.AnyAsync(x => x.Id == id, cancellationToken);
+        return _imageRepository.AnyAsync(x => x.Id == id, cancellationToken);
     }
 
     public async Task<ImageInformation> CreateAsync(ImageFile file, CancellationToken cancellationToken = default)
@@ -112,6 +112,15 @@ public class ImageContainer : IImageContainer, ITransientDependency
         blobContainer = await _imageBlobContainerFactory.CreateAsync(information);
 
         await blobContainer.SaveAsync(information.FileName, file.Stream, true, cancellationToken);
+        await _imageRepository.UpdateAsync(information, true, cancellationToken);
+    }
+
+    public async Task MarkAsPermanentAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        var information = await _imageRepository.GetAsync(id, true, cancellationToken);
+        
+        information.IsDisposable = false;
+        
         await _imageRepository.UpdateAsync(information, true, cancellationToken);
     }
 

@@ -22,7 +22,7 @@ public class ImageInformation : FullAuditedAggregateRoot<Guid>, IHasEntityVersio
     /// </remarks>
     public string? Tag { get; internal set; }
     
-    public bool IsDisposable { get; set; }
+    public bool IsDisposable { get; internal set; }
 
     public string FileName => $"{Id}.webp";
     public int EntityVersion { get; protected set; }

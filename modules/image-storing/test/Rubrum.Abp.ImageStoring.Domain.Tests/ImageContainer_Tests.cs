@@ -111,6 +111,25 @@ public class ImageContainerTests : ImageStoringDomainTestBase
     }
 
     [Fact]
+    public async Task MarkAsPermanentAsync()
+    {
+        var jpeg = _virtualFileProvider.GetFileInfo("/Files/2.jpeg");
+        var jpegId = Guid.NewGuid();
+        await _imageContainer.CreateAsync(new ImageFile(jpegId, jpeg.CreateReadStream(), "test", true));
+
+        var jpegStream = await _imageContainer.GetOrNullAsync(jpegId);
+        jpegStream.ShouldNotBeNull();
+        jpegStream.Information.ShouldNotBeNull();
+        jpegStream.Information.IsDisposable.ShouldBeTrue();
+
+        await _imageContainer.MarkAsPermanentAsync(jpegId);
+
+        var image = await _imageContainer.GetAsync(jpegId);
+        image.ShouldNotBeNull();
+        image.Information.IsDisposable.ShouldBeFalse();
+    }
+
+    [Fact]
     public async Task DeleteAsync()
     {
         await WithUnitOfWorkAsync(async () =>

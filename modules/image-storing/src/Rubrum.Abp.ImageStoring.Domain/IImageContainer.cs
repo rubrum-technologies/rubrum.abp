@@ -9,5 +9,6 @@ public interface IImageContainer
     Task<ImageInformation> CreateAsync(ImageFile file, CancellationToken cancellationToken = default);
     Task UpdateAsync(Guid id, Stream stream, CancellationToken cancellationToken = default);
     Task UpdateTagAsync(Guid id, string? tag, CancellationToken cancellationToken = default);
+    Task MarkAsPermanentAsync(Guid id, CancellationToken cancellationToken = default);
     Task DeleteAsync(Guid id, CancellationToken cancellationToken = default);
 }
