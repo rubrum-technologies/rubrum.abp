@@ -8,13 +8,14 @@ public class ImageFile
         Stream = stream;
     }
 
-    public ImageFile(Guid id, Stream stream, string? tag = null, bool isDisposable = false)
+    public ImageFile(Guid id, Stream stream, string? fileName = null, string? tag = null, bool isDisposable = false)
     {
         Information = new ImageInformation(id, tag)
         {
+            FileName = fileName,
             IsDisposable = isDisposable
         };
-        
+
         Stream = stream;
     }
 

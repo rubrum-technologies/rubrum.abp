@@ -17,7 +17,7 @@ public static class ImageStoringDbContextModelCreatingExtensions
 
             b.ConfigureByConvention();
 
-            b.Ignore(x => x.FileName);
+            b.Ignore(x => x.SystemFileName);
 
             b.HasIndex(x => x.Tag);
 

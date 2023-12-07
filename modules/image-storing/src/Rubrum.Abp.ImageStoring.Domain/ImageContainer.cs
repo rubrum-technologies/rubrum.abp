@@ -25,7 +25,7 @@ public class ImageContainer : IImageContainer, ITransientDependency
     {
         var information = await _imageRepository.GetAsync(id, true, cancellationToken);
         var blobContainer = await _imageBlobContainerFactory.CreateAsync(information);
-        var stream = await blobContainer.GetAsync(information.FileName, cancellationToken);
+        var stream = await blobContainer.GetAsync(information.SystemFileName, cancellationToken);
 
         return new ImageFile(information, stream);
     }
@@ -40,7 +40,7 @@ public class ImageContainer : IImageContainer, ITransientDependency
         foreach (var information in images)
         {
             var blobContainer = await _imageBlobContainerFactory.CreateAsync(information);
-            var stream = await blobContainer.GetAsync(information.FileName, cancellationToken);
+            var stream = await blobContainer.GetAsync(information.SystemFileName, cancellationToken);
             streams.Add(new ImageFile(information, stream));
         }
 
@@ -57,7 +57,7 @@ public class ImageContainer : IImageContainer, ITransientDependency
         }
 
         var blobContainer = await _imageBlobContainerFactory.CreateAsync(information);
-        var stream = await blobContainer.GetAsync(information.FileName, cancellationToken);
+        var stream = await blobContainer.GetAsync(information.SystemFileName, cancellationToken);
 
         return new ImageFile(information, stream);
     }
@@ -74,7 +74,7 @@ public class ImageContainer : IImageContainer, ITransientDependency
 
         await using var stream = await CreateImageAsync(file.Stream);
         await blobContainer.SaveAsync(
-            information.FileName,
+            information.SystemFileName,
             stream,
             true,
             cancellationToken);
@@ -92,7 +92,7 @@ public class ImageContainer : IImageContainer, ITransientDependency
         var blobContainer = await _imageBlobContainerFactory.CreateAsync(information);
 
         await blobContainer.SaveAsync(
-            information.FileName,
+            information.SystemFileName,
             await CreateImageAsync(stream),
             true,
             cancellationToken);
@@ -105,13 +105,13 @@ public class ImageContainer : IImageContainer, ITransientDependency
         var information = file.Information;
 
         var blobContainer = await _imageBlobContainerFactory.CreateAsync(information);
-        await blobContainer.DeleteAsync(information.FileName, cancellationToken);
+        await blobContainer.DeleteAsync(information.SystemFileName, cancellationToken);
 
         information.Tag = tag;
 
         blobContainer = await _imageBlobContainerFactory.CreateAsync(information);
 
-        await blobContainer.SaveAsync(information.FileName, file.Stream, true, cancellationToken);
+        await blobContainer.SaveAsync(information.SystemFileName, file.Stream, true, cancellationToken);
         await _imageRepository.UpdateAsync(information, true, cancellationToken);
     }
 
@@ -130,7 +130,7 @@ public class ImageContainer : IImageContainer, ITransientDependency
         var blobContainer = await _imageBlobContainerFactory.CreateAsync(information);
 
         await _imageRepository.DeleteAsync(information, true, cancellationToken);
-        await blobContainer.DeleteAsync(information.FileName, cancellationToken);
+        await blobContainer.DeleteAsync(information.SystemFileName, cancellationToken);
     }
 
     protected virtual async Task<Stream> CreateImageAsync(Stream stream)

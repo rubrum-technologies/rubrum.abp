@@ -4,7 +4,12 @@
 
   <PropertyGroup>
     <RootNamespace>Rubrum.Abp.ImageStoring</RootNamespace>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Mapster" Version="$(MapsterPackageVersion)"/>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Ddd.Application" Version="$(AbpPackageVersion)"/>
@@ -14,4 +19,12 @@
     <ProjectReference Include="..\Rubrum.Abp.ImageStoring.Application.Contracts\Rubrum.Abp.ImageStoring.Application.Contracts.csproj"/>
     <ProjectReference Include="..\Rubrum.Abp.ImageStoring.Domain\Rubrum.Abp.ImageStoring.Domain.csproj"/>
   </ItemGroup>
+
+  <Target Name="Mapster">
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet build"/>
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet tool restore"/>
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster model -a &quot;$(TargetDir)$(ProjectName).dll&quot; -o &quot;Mapper/Generated&quot;"/>
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster extension -a &quot;$(TargetDir)$(ProjectName).dll&quot; -o &quot;Mapper/Generated&quot;"/>
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster mapper -a &quot;$(TargetDir)$(ProjectName).dll&quot; -o &quot;Mapper/Generated&quot;"/>
+  </Target>
 </Project>

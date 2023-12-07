@@ -1,4 +1,5 @@
-﻿using Rubrum.Abp.ImageStoring.Permissions;
+﻿using Rubrum.Abp.ImageStoring.Mapper.Interfaces;
+using Rubrum.Abp.ImageStoring.Permissions;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Content;
@@ -8,14 +9,17 @@ namespace Rubrum.Abp.ImageStoring;
 
 public class ImageAppService : ApplicationService, IImageAppService
 {
-    private readonly ICancellationTokenProvider _cancellationTokenProvider;
     private readonly IImageContainer _imageContainer;
+    private readonly IImageMapper _mapper;
+    private readonly ICancellationTokenProvider _cancellationTokenProvider;
 
     public ImageAppService(
         IImageContainer imageContainer,
+        IImageMapper mapper,
         ICancellationTokenProvider cancellationTokenProvider)
     {
         _imageContainer = imageContainer;
+        _mapper = mapper;
         _cancellationTokenProvider = cancellationTokenProvider;
     }
 
@@ -27,7 +31,7 @@ public class ImageAppService : ApplicationService, IImageAppService
 
         return file is null
             ? null
-            : new RemoteStreamContent(file.Stream, file.Information.FileName, "image/webp");
+            : new RemoteStreamContent(file.Stream, file.Information.SystemFileName, "image/webp");
     }
 
     public async Task UploadAsync(Guid id, IRemoteStreamContent file)
@@ -46,10 +50,10 @@ public class ImageAppService : ApplicationService, IImageAppService
         var cancellationToken = _cancellationTokenProvider.Token;
 
         var id = GuidGenerator.Create();
-        var file = new ImageFile(id, input.Content.GetStream(), input.Tag, input.IsDisposable);
+        var file = new ImageFile(id, input.Content.GetStream(), input.Content.FileName, input.Tag, input.IsDisposable);
         await _imageContainer.CreateAsync(file, cancellationToken);
 
-        return new ImageInformationDto { Id = id, Tag = file.Information.Tag };
+        return _mapper.Map(file);
     }
 
     public async Task<ListResultDto<ImageInformationDto>> UploadAsync(UploadImagesInput input)
@@ -62,10 +66,10 @@ public class ImageAppService : ApplicationService, IImageAppService
         foreach (var content in input.Contents)
         {
             var id = GuidGenerator.Create();
-            var file = new ImageFile(id, content.GetStream(), input.Tag, input.IsDisposable);
+            var file = new ImageFile(id, content.GetStream(), content.FileName, input.Tag, input.IsDisposable);
             await _imageContainer.CreateAsync(file, cancellationToken);
 
-            result.Add(new ImageInformationDto { Id = id, Tag = file.Information.Tag });
+            result.Add(_mapper.Map(file));
         }
 
         return new ListResultDto<ImageInformationDto>(result);

@@ -14,6 +14,8 @@ public class ImageInformation : FullAuditedAggregateRoot<Guid>, IHasEntityVersio
         Tag = tag;
     }
 
+    public string? FileName { get; init; }
+    
     /// <summary>
     /// Признак группировки
     /// </summary>
@@ -24,6 +26,7 @@ public class ImageInformation : FullAuditedAggregateRoot<Guid>, IHasEntityVersio
     
     public bool IsDisposable { get; internal set; }
 
-    public string FileName => $"{Id}.webp";
-    public int EntityVersion { get; protected set; }
+    public string SystemFileName => $"{Id}.webp";
+    
+    public int EntityVersion { get; protected init; }
 }

@@ -21,6 +21,10 @@
     <ProjectReference Include="..\Rubrum.Abp.LanguageManagement.Domain\Rubrum.Abp.LanguageManagement.Domain.csproj"/>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Mapper\Generated\" />
+  </ItemGroup>
+
   <Target Name="Mapster">
     <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet build"/>
     <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet tool restore"/>

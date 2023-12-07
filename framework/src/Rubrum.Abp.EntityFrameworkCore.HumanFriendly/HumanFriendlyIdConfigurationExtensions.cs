@@ -9,6 +9,8 @@ public static class HumanFriendlyIdConfigurationExtensions
     {
         if (builder.Metadata.ClrType.IsAssignableTo<IHumanFriendlyId>())
         {
+            builder.HasIndex(nameof(IHumanFriendlyId.HumanFriendlyId));
+            
             builder.Property(nameof(IHumanFriendlyId.HumanFriendlyId))
                 .ValueGeneratedOnAdd()
                 .IsRequired();

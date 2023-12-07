@@ -1,4 +1,5 @@
 ﻿using GreenDonut;
+using Rubrum.Abp.ImageStoring.Mapper.Interfaces;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Linq;
 
@@ -11,16 +12,19 @@ public class ImagesByTagDataLoader :
 {
     private readonly IImageInformationRepository _imageRepository;
     private readonly IAsyncQueryableExecuter _asyncExecuter;
+    private readonly IImageMapper _mapper;
 
     public ImagesByTagDataLoader(
         IBatchScheduler batchScheduler,
         IImageInformationRepository imageRepository,
         IAsyncQueryableExecuter asyncExecuter,
+        IImageMapper mapper,
         DataLoaderOptions? options = null)
         : base(batchScheduler, options)
     {
         _imageRepository = imageRepository;
         _asyncExecuter = asyncExecuter;
+        _mapper = mapper;
     }
 
     protected override async Task<ILookup<string, ImageInformationDto>> LoadGroupedBatchAsync(
@@ -28,11 +32,10 @@ public class ImagesByTagDataLoader :
         CancellationToken cancellationToken)
     {
         var query = (await _imageRepository.GetQueryableAsync())
-            .Where(x => keys.Contains(x.Tag))
-            .Select(x => new ImageInformationDto { Id = x.Id, Tag = x.Tag });
+            .Where(x => keys.Contains(x.Tag));
 
         var result = await _asyncExecuter.ToListAsync(query, cancellationToken);
 
-        return result.ToLookup(x => x.Tag!, x => x);
+        return result.Select(_mapper.Map).ToLookup(x => x.Tag!, x => x);
     }
 }
