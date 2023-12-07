@@ -8,9 +8,13 @@ public class ImageFile
         Stream = stream;
     }
 
-    public ImageFile(Guid id, Stream stream, string? tag = null)
+    public ImageFile(Guid id, Stream stream, string? tag = null, bool isDisposable = false)
     {
-        Information = new ImageInformation(id, tag);
+        Information = new ImageInformation(id, tag)
+        {
+            IsDisposable = isDisposable
+        };
+        
         Stream = stream;
     }
 

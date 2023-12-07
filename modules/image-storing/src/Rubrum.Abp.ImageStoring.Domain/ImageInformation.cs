@@ -21,6 +21,8 @@ public class ImageInformation : FullAuditedAggregateRoot<Guid>, IHasEntityVersio
     /// Можно использовать в качестве идентификатора сущности с которой связанна данная группа
     /// </remarks>
     public string? Tag { get; internal set; }
+    
+    public bool IsDisposable { get; set; }
 
     public string FileName => $"{Id}.webp";
     public int EntityVersion { get; protected set; }

@@ -34,8 +34,8 @@ public class ImageController : AbpControllerBase, IImageAppService
     }
 
     [HttpPost]
-    public async Task<ImageInformationDto> UploadAsync(IRemoteStreamContent file)
+    public async Task<ImageInformationDto> UploadAsync(IRemoteStreamContent file, UploadImageInput input)
     {
-        return await _service.UploadAsync(file);
+        return await _service.UploadAsync(file, input);
     }
 }
