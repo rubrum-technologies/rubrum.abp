@@ -46,4 +46,11 @@ public class ImageController : AbpControllerBase, IImageAppService
     {
         return await _service.UploadAsync(input);
     }
+
+    [HttpDelete]
+    [Route("{id:guid}")]
+    public Task DeleteAsync(Guid id)
+    {
+        return _service.DeleteAsync(id);
+    }
 }
