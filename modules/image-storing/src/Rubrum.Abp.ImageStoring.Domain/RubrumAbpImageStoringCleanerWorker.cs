@@ -14,7 +14,7 @@ public class RubrumAbpImageStoringCleanerWorker : AsyncPeriodicBackgroundWorkerB
         timer,
         serviceScopeFactory)
     {
-        timer.Period = 60 * 60 * 5;
+        timer.Period = 300000;
     }
 
     protected override async Task DoWorkAsync(PeriodicBackgroundWorkerContext workerContext)

@@ -22,29 +22,29 @@ public class ImageController : AbpControllerBase, IImageAppService
 
     [HttpGet]
     [Route("{id:guid}")]
-    public async Task<IRemoteStreamContent?> DownloadAsync(Guid id)
+    public Task<IRemoteStreamContent?> DownloadAsync(Guid id)
     {
-        return await _service.DownloadAsync(id);
+        return _service.DownloadAsync(id);
     }
 
     [HttpPut]
     [Route("{id:guid}")]
-    public async Task UploadAsync(Guid id, IRemoteStreamContent file)
+    public Task UploadAsync(Guid id, IRemoteStreamContent file)
     {
-        await _service.UploadAsync(id, file);
+        return _service.UploadAsync(id, file);
     }
 
     [HttpPost]
-    public async Task<ImageInformationDto> UploadAsync(UploadImageInput input)
+    public Task<ImageInformationDto> UploadAsync([FromForm] UploadImageInput input)
     {
-        return await _service.UploadAsync(input);
+        return _service.UploadAsync(input);
     }
 
     [HttpPost]
     [Route("many")]
-    public async Task<ListResultDto<ImageInformationDto>> UploadAsync(UploadImagesInput input)
+    public Task<ListResultDto<ImageInformationDto>> UploadAsync([FromForm] UploadImagesInput input)
     {
-        return await _service.UploadAsync(input);
+        return _service.UploadAsync(input);
     }
 
     [HttpDelete]
