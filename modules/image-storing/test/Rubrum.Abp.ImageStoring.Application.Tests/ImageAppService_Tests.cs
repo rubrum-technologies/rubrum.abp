@@ -102,6 +102,44 @@ public class ImageAppServiceTests : ImageStoringApplicationTestBase
     }
 
     [Fact]
+    public async Task UploadAsync()
+    {
+        var jpgFile = _virtualFileProvider.GetFileInfo("/Files/3.jpg");
+
+        var result = await _imageAppService.UploadAsync(new UploadImageInput
+        {
+            Content = new RemoteStreamContent(jpgFile.CreateReadStream())
+        });
+
+        result.ShouldNotBeNull();
+    }
+
+    [Fact]
+    public async Task UploadManyAsync()
+    {
+        var jpegFile = _virtualFileProvider.GetFileInfo("/Files/2.jpeg");
+        var jpgFile = _virtualFileProvider.GetFileInfo("/Files/3.jpg");
+        var tifFile = _virtualFileProvider.GetFileInfo("/Files/4.tif");
+        var pngFile = _virtualFileProvider.GetFileInfo("/Files/5.png");
+        var gifFile = _virtualFileProvider.GetFileInfo("/Files/6.gif");
+        
+        var result = await _imageAppService.UploadAsync(new UploadImagesInput
+        {
+            Contents = new []
+            {
+                new RemoteStreamContent(jpegFile.CreateReadStream()),
+                new RemoteStreamContent(jpgFile.CreateReadStream()),
+                new RemoteStreamContent(tifFile.CreateReadStream()),
+                new RemoteStreamContent(pngFile.CreateReadStream()),
+                new RemoteStreamContent(gifFile.CreateReadStream()),
+            }
+        });
+
+        result.ShouldNotBeNull();
+        result.Items.Count.ShouldBe(5);
+    }
+    
+    [Fact]
     public async Task CreateAsync_Does_Not_Support_File_Extension()
     {
         await Assert.ThrowsAsync<NotSupportImageException>(async () =>
