@@ -6,7 +6,8 @@ using Volo.Abp.Uow;
 
 namespace Rubrum.Abp.ImageStoring;
 
-public class ImageUrlsByTagDataLoader : GroupedDataLoader<string, string>,
+public class ImageUrlsByTagDataLoader : 
+    GroupedDataLoader<string, string>,
     IImageUrlsByTagDataLoader,
     IScopedDependency
 {

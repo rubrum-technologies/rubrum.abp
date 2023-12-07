@@ -49,7 +49,7 @@ public class ImageAppService : ApplicationService, IImageAppService
         var file = new ImageFile(id, input.Content.GetStream(), input.Tag, input.IsDisposable);
         await _imageContainer.CreateAsync(file, cancellationToken);
 
-        return new ImageInformationDto { Id = id };
+        return new ImageInformationDto { Id = id, Tag = file.Information.Tag };
     }
 
     public async Task<ListResultDto<ImageInformationDto>> UploadAsync(UploadImagesInput input)
@@ -65,7 +65,7 @@ public class ImageAppService : ApplicationService, IImageAppService
             var file = new ImageFile(id, content.GetStream(), input.Tag, input.IsDisposable);
             await _imageContainer.CreateAsync(file, cancellationToken);
 
-            result.Add(new ImageInformationDto { Id = id });
+            result.Add(new ImageInformationDto { Id = id, Tag = file.Information.Tag });
         }
 
         return new ListResultDto<ImageInformationDto>(result);
