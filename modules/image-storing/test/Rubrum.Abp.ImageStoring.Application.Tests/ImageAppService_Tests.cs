@@ -59,7 +59,8 @@ public class ImageAppServiceTests : ImageStoringApplicationTestBase
                 new RemoteStreamContent(
                     file.CreateReadStream(),
                     string.Empty,
-                    contentType));
+                    contentType),
+                new UploadImageInput());
             var svgStream = await _imageContainer.GetAsync(image.Id);
             svgStream.ShouldNotBeNull();
             svgStream.Information.EntityVersion.ShouldBe(0);
@@ -106,7 +107,9 @@ public class ImageAppServiceTests : ImageStoringApplicationTestBase
         {
             var file = _virtualFileProvider.GetFileInfo("/Files/test.md");
 
-            await _imageAppService.UploadAsync(new RemoteStreamContent(file.CreateReadStream()));
+            await _imageAppService.UploadAsync(
+                new RemoteStreamContent(file.CreateReadStream()),
+                new UploadImageInput());
         });
     }
 }

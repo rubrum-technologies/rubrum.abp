@@ -38,14 +38,14 @@ public class ImageAppService : ApplicationService, IImageAppService
         await _imageContainer.UpdateAsync(id, file.GetStream(), cancellationToken);
     }
 
-    public async Task<ImageInformationDto> UploadAsync(IRemoteStreamContent stream)
+    public async Task<ImageInformationDto> UploadAsync(IRemoteStreamContent stream, UploadImageInput input)
     {
         await CheckPolicyAsync(ImageStoringPermissions.Images.Upload);
 
         var cancellationToken = _cancellationTokenProvider.Token;
 
         var id = GuidGenerator.Create();
-        var file = new ImageFile(id, stream.GetStream());
+        var file = new ImageFile(id, stream.GetStream(), input.Tag, input.IsDisposable);
         await _imageContainer.CreateAsync(file, cancellationToken);
 
         return new ImageInformationDto { Id = id };
