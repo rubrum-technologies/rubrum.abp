@@ -55,12 +55,13 @@ public class ImageAppServiceTests : ImageStoringApplicationTestBase
 
         async Task TestAsync(IFileInfo file, string contentType)
         {
-            var image = await _imageAppService.UploadAsync(
-                new RemoteStreamContent(
+            var image = await _imageAppService.UploadAsync(new UploadImageInput
+            {
+                Content = new RemoteStreamContent(
                     file.CreateReadStream(),
                     string.Empty,
-                    contentType),
-                new UploadImageInput());
+                    contentType)
+            });
             var svgStream = await _imageContainer.GetAsync(image.Id);
             svgStream.ShouldNotBeNull();
             svgStream.Information.EntityVersion.ShouldBe(0);
@@ -107,9 +108,10 @@ public class ImageAppServiceTests : ImageStoringApplicationTestBase
         {
             var file = _virtualFileProvider.GetFileInfo("/Files/test.md");
 
-            await _imageAppService.UploadAsync(
-                new RemoteStreamContent(file.CreateReadStream()),
-                new UploadImageInput());
+            await _imageAppService.UploadAsync(new UploadImageInput
+            {
+                Content = new RemoteStreamContent(file.CreateReadStream()),
+            });
         });
     }
 }

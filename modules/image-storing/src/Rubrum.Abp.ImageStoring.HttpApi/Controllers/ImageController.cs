@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Volo.Abp;
+using Volo.Abp.Application.Dtos;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Content;
 using static Rubrum.Abp.ImageStoring.ImageStoringRemoteServiceConstants;
@@ -34,8 +35,15 @@ public class ImageController : AbpControllerBase, IImageAppService
     }
 
     [HttpPost]
-    public async Task<ImageInformationDto> UploadAsync(IRemoteStreamContent file, UploadImageInput input)
+    public async Task<ImageInformationDto> UploadAsync(UploadImageInput input)
     {
-        return await _service.UploadAsync(file, input);
+        return await _service.UploadAsync(input);
+    }
+
+    [HttpPost]
+    [Route("many")]
+    public async Task<ListResultDto<ImageInformationDto>> UploadAsync(UploadImagesInput input)
+    {
+        return await _service.UploadAsync(input);
     }
 }
