@@ -33,11 +33,11 @@ public class ImageStoringTestBaseDataSeedContributor : IDataSeedContributor, ITr
         var png = _virtualFileProvider.GetFileInfo("/Files/5.png");
         var gif = _virtualFileProvider.GetFileInfo("/Files/6.gif");
 
-        await _imageContainer.CreateAsync(new ImageFile(SvgId, svg.CreateReadStream(), ImageTag), cancellationToken);
-        await _imageContainer.CreateAsync(new ImageFile(JpegId, jpeg.CreateReadStream()), cancellationToken);
-        await _imageContainer.CreateAsync(new ImageFile(JpgId, jpg.CreateReadStream(), ImageTag), cancellationToken);
-        await _imageContainer.CreateAsync(new ImageFile(TifId, tif.CreateReadStream()), cancellationToken);
-        await _imageContainer.CreateAsync(new ImageFile(PngId, png.CreateReadStream(), ImageTag), cancellationToken);
-        await _imageContainer.CreateAsync(new ImageFile(GifId, gif.CreateReadStream()), cancellationToken);
+        await _imageContainer.CreateAsync(new ImageFile(SvgId, svg.CreateReadStream(), "1.svg",ImageTag), cancellationToken);
+        await _imageContainer.CreateAsync(new ImageFile(JpegId, jpeg.CreateReadStream(), "2.jpeg"), cancellationToken);
+        await _imageContainer.CreateAsync(new ImageFile(JpgId, jpg.CreateReadStream(), "3.jpg", ImageTag), cancellationToken);
+        await _imageContainer.CreateAsync(new ImageFile(TifId, tif.CreateReadStream(), "4.tif"), cancellationToken);
+        await _imageContainer.CreateAsync(new ImageFile(PngId, png.CreateReadStream(), "5.png", ImageTag), cancellationToken);
+        await _imageContainer.CreateAsync(new ImageFile(GifId, gif.CreateReadStream() ,"6.gif"), cancellationToken);
     }
 }
