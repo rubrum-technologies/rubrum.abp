@@ -10,4 +10,5 @@ public interface IImageAppService : IApplicationService
     Task UploadAsync(Guid id, IRemoteStreamContent file);
     Task<ImageInformationDto> UploadAsync(UploadImageInput input);
     Task<ListResultDto<ImageInformationDto>> UploadAsync(UploadImagesInput input);
+    Task DeleteAsync(Guid id);
 }

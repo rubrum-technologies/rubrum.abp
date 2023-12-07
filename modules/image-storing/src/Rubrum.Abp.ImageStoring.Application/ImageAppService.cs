@@ -74,4 +74,11 @@ public class ImageAppService : ApplicationService, IImageAppService
 
         return new ListResultDto<ImageInformationDto>(result);
     }
+
+    public Task DeleteAsync(Guid id)
+    {
+        var cancellationToken = _cancellationTokenProvider.Token;
+
+        return _imageContainer.DeleteAsync(id, cancellationToken);
+    }
 }
