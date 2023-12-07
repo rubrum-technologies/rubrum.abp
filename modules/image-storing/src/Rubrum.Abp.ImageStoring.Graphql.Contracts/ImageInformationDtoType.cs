@@ -10,6 +10,7 @@ public class ImageInformationDtoType : ObjectType<ImageInformationDto>, IGraphql
     {
         descriptor.Entity<ImageInformationDto, Guid>();
         descriptor.FullAudited();
+        descriptor.ExtraProperties();
         
         descriptor
             .Field("url")
