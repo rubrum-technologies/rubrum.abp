@@ -50,7 +50,8 @@ public class ImageAppService : ApplicationService, IImageAppService
         var cancellationToken = _cancellationTokenProvider.Token;
 
         var id = GuidGenerator.Create();
-        var file = new ImageFile(id, input.Content.GetStream(), input.Content.FileName, input.Tag, input.IsDisposable);
+        var bytes = await input.Content.GetStream().GetAllBytesAsync(cancellationToken);
+        var file = new ImageFile(id, bytes, input.Content.FileName, input.Tag, input.IsDisposable);
         await _imageContainer.CreateAsync(file, cancellationToken);
 
         return _mapper.Map(file);
@@ -66,7 +67,8 @@ public class ImageAppService : ApplicationService, IImageAppService
         foreach (var content in input.Contents)
         {
             var id = GuidGenerator.Create();
-            var file = new ImageFile(id, content.GetStream(), content.FileName, input.Tag, input.IsDisposable);
+            var bytes = await content.GetStream().GetAllBytesAsync(cancellationToken);
+            var file = new ImageFile(id, bytes, content.FileName, input.Tag, input.IsDisposable);
             await _imageContainer.CreateAsync(file, cancellationToken);
 
             result.Add(_mapper.Map(file));

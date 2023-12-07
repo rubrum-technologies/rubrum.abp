@@ -10,13 +10,14 @@ public class ImageFile
 
     public ImageFile(Guid id, Stream stream, string? fileName = null, string? tag = null, bool isDisposable = false)
     {
-        Information = new ImageInformation(id, tag)
-        {
-            FileName = fileName,
-            IsDisposable = isDisposable
-        };
+        Information = new ImageInformation(id, tag) { FileName = fileName, IsDisposable = isDisposable };
 
         Stream = stream;
+    }
+
+    public ImageFile(Guid id, byte[] bytes, string? fileName = null, string? tag = null, bool isDisposable = false)
+        : this(id, new MemoryStream(bytes), fileName, tag, isDisposable)
+    {
     }
 
     public ImageInformation Information { get; }
