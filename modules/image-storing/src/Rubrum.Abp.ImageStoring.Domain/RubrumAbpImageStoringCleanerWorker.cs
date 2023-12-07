@@ -3,12 +3,13 @@ using Microsoft.Extensions.Options;
 using Volo.Abp.BackgroundWorkers;
 using Volo.Abp.Linq;
 using Volo.Abp.Threading;
+using Volo.Abp.Uow;
 
 namespace Rubrum.Abp.ImageStoring;
 
-public class RubrumAbpImageStoringClearingWorker : AsyncPeriodicBackgroundWorkerBase
+public class RubrumAbpImageStoringCleanerWorker : AsyncPeriodicBackgroundWorkerBase
 {
-    public RubrumAbpImageStoringClearingWorker(AbpAsyncTimer timer, IServiceScopeFactory serviceScopeFactory) : base(
+    public RubrumAbpImageStoringCleanerWorker(AbpAsyncTimer timer, IServiceScopeFactory serviceScopeFactory) : base(
         timer,
         serviceScopeFactory)
     {
@@ -22,11 +23,13 @@ public class RubrumAbpImageStoringClearingWorker : AsyncPeriodicBackgroundWorker
 
         var cancellationTokenProvider = serviceProvider.GetRequiredService<ICancellationTokenProvider>();
         var options = serviceProvider.GetRequiredService<IOptions<RubrumAbpImageStoringOptions>>().Value;
+        var unitOfWorkManager = serviceProvider.GetRequiredService<IUnitOfWorkManager>();
         var repository = serviceProvider.GetRequiredService<IImageInformationRepository>();
         var asyncExecuter = serviceProvider.GetRequiredService<IAsyncQueryableExecuter>();
         var imageContainer = serviceProvider.GetRequiredService<IImageContainer>();
         var dateTime = DateTime.Now.AddSeconds(-options.Lifetime);
 
+        using var uow = unitOfWorkManager.Begin(true, true);
         using (cancellationTokenProvider.Use(cancellationToken))
         {
             var query = (await repository.GetQueryableAsync())
@@ -38,5 +41,7 @@ public class RubrumAbpImageStoringClearingWorker : AsyncPeriodicBackgroundWorker
                 await imageContainer.DeleteAsync(id, cancellationToken);
             }
         }
+
+        await uow.CompleteAsync(cancellationToken);
     }
 }

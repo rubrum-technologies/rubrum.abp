@@ -41,6 +41,6 @@ public class RubrumAbpImageStoringDomainModule : AbpModule
 
     public override async Task OnApplicationInitializationAsync(ApplicationInitializationContext context)
     {
-        await context.AddBackgroundWorkerAsync<RubrumAbpImageStoringClearingWorker>();
+        await context.AddBackgroundWorkerAsync<RubrumAbpImageStoringCleanerWorker>();
     }
 }
