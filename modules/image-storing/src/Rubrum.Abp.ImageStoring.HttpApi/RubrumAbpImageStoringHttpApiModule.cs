@@ -27,5 +27,11 @@ public class RubrumAbpImageStoringHttpApiModule : AbpModule
                 .Get<RubrumAbpImageStoringResource>()
                 .AddBaseTypes(typeof(AbpUiResource));
         });
+        
+        Configure<AbpAspNetCoreMvcOptions>(options =>
+        {
+            options.ConventionalControllers.FormBodyBindingIgnoredTypes.Add(typeof(UploadImageInput));
+            options.ConventionalControllers.FormBodyBindingIgnoredTypes.Add(typeof(UploadImagesInput));
+        });
     }
 }
