@@ -7,4 +7,5 @@ public class SystemLanguageQueryType : EntityQueryType<SystemLanguageDto, string
     protected override string TypeName => SystemLanguageConstants.TypeName;
     protected override string TypeNameSingular => "SystemLanguage";
     protected override string TypeNameInPlural => "SystemLanguages";
+    protected override bool IsAddFieldByAll => true;
 }
