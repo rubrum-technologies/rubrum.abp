@@ -5,6 +5,7 @@
         "Keycloak",
         "keypair",
         "Magick",
+        "Protobuf",
         "registrators",
         "Rubrum",
         "Shouldly",
