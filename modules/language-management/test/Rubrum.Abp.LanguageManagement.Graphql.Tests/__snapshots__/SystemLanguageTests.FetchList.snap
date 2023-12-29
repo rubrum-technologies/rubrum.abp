@@ -5,12 +5,12 @@
         {
           "id": "U3lzdGVtTGFuZ3VhZ2UKZGFy",
           "code": "ar",
-          "name": "\u0627\u064E\u0644\u0652\u0639\u064E\u0631\u064E\u0628\u0650\u064A\u064E\u0651\u0629\u064F"
+          "name": "اَلْعَرَبِيَّةُ"
         },
         {
           "id": "U3lzdGVtTGFuZ3VhZ2UKZHpo",
           "code": "zh",
-          "name": "\u6C49\u8BED"
+          "name": "汉语"
         },
         {
           "id": "U3lzdGVtTGFuZ3VhZ2UKZGVu",
@@ -20,7 +20,7 @@
         {
           "id": "U3lzdGVtTGFuZ3VhZ2UKZGZy",
           "code": "fr",
-          "name": "Fran\u00E7ais"
+          "name": "Français"
         },
         {
           "id": "U3lzdGVtTGFuZ3VhZ2UKZGRl",
@@ -30,12 +30,12 @@
         {
           "id": "U3lzdGVtTGFuZ3VhZ2UKZGd1",
           "code": "gu",
-          "name": "\u0939\u093F\u0928\u094D\u0926\u0940"
+          "name": "हिन्दी"
         },
         {
           "id": "U3lzdGVtTGFuZ3VhZ2UKZGJu",
           "code": "bn",
-          "name": "\u09AC\u09BE\u0982\u09B2\u09BE"
+          "name": "বাংলা"
         },
         {
           "id": "U3lzdGVtTGFuZ3VhZ2UKZGl0",
@@ -45,12 +45,12 @@
         {
           "id": "U3lzdGVtTGFuZ3VhZ2UKZGph",
           "code": "ja",
-          "name": "\u65E5\u672C\u8A9E"
+          "name": "日本語"
         },
         {
           "id": "U3lzdGVtTGFuZ3VhZ2UKZGtv",
           "code": "ko",
-          "name": "\uD55C\uAD6D\uC5B4"
+          "name": "한국어"
         }
       ],
       "pageInfo": {

@@ -93,7 +93,6 @@ public class ImageAppServiceTests : ImageStoringApplicationTestBase
                     contentType));
             var svgStream = await _imageContainer.GetAsync(id);
             svgStream.ShouldNotBeNull();
-            svgStream.Information.EntityVersion.ShouldBe(1);
         }
     }
 

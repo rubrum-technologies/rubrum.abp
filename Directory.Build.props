@@ -1,10 +1,10 @@
 <Project>
   <PropertyGroup>
     <!-- All Microsoft packages -->
-    <MicrosoftPackageVersion>7.0.*</MicrosoftPackageVersion>
+    <MicrosoftPackageVersion>8.0.*</MicrosoftPackageVersion>
 
     <!-- Microsoft.NET.Test.Sdk https://www.nuget.org/packages/Microsoft.NET.Test.Sdk -->
-    <MicrosoftNETTestSdkPackageVersion>17.7.*</MicrosoftNETTestSdkPackageVersion>
+    <MicrosoftNETTestSdkPackageVersion>17.8.*</MicrosoftNETTestSdkPackageVersion>
 
     <!-- NSubstitute  https://www.nuget.org/packages/NSubstitute -->
     <NSubstitutePackageVersion>5.1.*</NSubstitutePackageVersion>
@@ -13,73 +13,67 @@
     <ShouldlyPackageVersion>4.2.*</ShouldlyPackageVersion>
 
     <!-- xunit https://www.nuget.org/packages/xUnit -->
-    <xUnitPackageVersion>2.5.*</xUnitPackageVersion>
+    <xUnitPackageVersion>2.6.*</xUnitPackageVersion>
 
     <!-- xunit.extensibility.execution https://www.nuget.org/packages/xunit.extensibility.execution -->
-    <xUnitExtensibilityExecutionPackageVersion>2.5.*</xUnitExtensibilityExecutionPackageVersion>
+    <xUnitExtensibilityExecutionPackageVersion>2.6.*</xUnitExtensibilityExecutionPackageVersion>
 
     <!-- xunit.runner.visualstudio https://www.nuget.org/packages/xunit.runner.visualstudio -->
     <xUnitRunnerVisualstudioPackageVersion>2.5.*</xUnitRunnerVisualstudioPackageVersion>
 
     <!-- Microsoft.CodeAnalysis https://www.nuget.org/packages/Microsoft.CodeAnalysis -->
-    <MicrosoftCodeAnalysisPackageVersion>4.7.*</MicrosoftCodeAnalysisPackageVersion>
+    <MicrosoftCodeAnalysisPackageVersion>4.8.*</MicrosoftCodeAnalysisPackageVersion>
 
     <!-- NUglify https://www.nuget.org/packages/NUglify -->
-    <NUglifyPackageVersion>1.20.*</NUglifyPackageVersion>
+    <NUglifyPackageVersion>1.21.*</NUglifyPackageVersion>
 
     <!-- Polly https://www.nuget.org/packages/Polly -->
-    <PollyPackageVersion>7.2.*</PollyPackageVersion>
+    <PollyPackageVersion>8.2.*</PollyPackageVersion>
 
     <!-- All Abp packages https://github.com/abpframework/abp -->
-    <AbpPackageVersion>7.4.0</AbpPackageVersion>
+    <AbpPackageVersion>8.0.*</AbpPackageVersion>
 
     <!-- Npgsql https://www.nuget.org/packages/Npgsql -->
-    <NpgsqlPackageVersion>7.0.*</NpgsqlPackageVersion>
+    <NpgsqlPackageVersion>8.0.*</NpgsqlPackageVersion>
 
     <!-- Graphql Platform https://github.com/ChilliCream/graphql-platform -->
-    <HotChocolatePackageVersion>13.5.*</HotChocolatePackageVersion>
+    <HotChocolatePackageVersion>13.8.*</HotChocolatePackageVersion>
 
     <!-- MediatR https://www.nuget.org/packages/MediatR -->
-    <MediatRPackageVersion>12.1.*</MediatRPackageVersion>
+    <MediatRPackageVersion>12.2.*</MediatRPackageVersion>
 
     <!-- MediatR Contracts https://www.nuget.org/packages/MediatR.Contracts -->
     <MediatRContractsPackageVersion>2.0.*</MediatRContractsPackageVersion>
 
     <!-- Google Protobuf https://www.nuget.org/packages/Google.Protobuf -->
-    <GoogleProtobufPackageVersion>3.24.*</GoogleProtobufPackageVersion>
+    <GoogleProtobufPackageVersion>3.25.*</GoogleProtobufPackageVersion>
 
     <!-- Google Protobuf Tools https://www.nuget.org/packages/Google.Protobuf.Tools -->
-    <GoogleProtobufToolsPackageVersion>3.24.*</GoogleProtobufToolsPackageVersion>
+    <GoogleProtobufToolsPackageVersion>3.25.*</GoogleProtobufToolsPackageVersion>
 
     <!-- Grpc https://www.nuget.org/packages/Grpc.Core -->
     <GrpcCorePackageVersion>2.46.*</GrpcCorePackageVersion>
 
     <!-- Grpc AspNetCore Server https://www.nuget.org/packages/Grpc.AspNetCore.Server -->
-    <GrpcAspNetCoreServerPackageVersion>2.57.*</GrpcAspNetCoreServerPackageVersion>
+    <GrpcAspNetCoreServerPackageVersion>2.59.*</GrpcAspNetCoreServerPackageVersion>
 
     <!-- Grpc Net ClientFactory https://www.nuget.org/packages/Grpc.Net.ClientFactory -->
-    <GrpcNetClientFactoryPackageVersion>2.57.*</GrpcNetClientFactoryPackageVersion>
+    <GrpcNetClientFactoryPackageVersion>2.59.*</GrpcNetClientFactoryPackageVersion>
 
     <!-- Grpc Tools https://www.nuget.org/packages/Grpc.Tools -->
-    <GrpcToolsPackageVersion>2.58.*</GrpcToolsPackageVersion>
+    <GrpcToolsPackageVersion>2.60.*</GrpcToolsPackageVersion>
 
     <!-- Mapster Core https://www.nuget.org/packages/Mapster.Core -->
-    <MapsterCorePackageVersion>1.2.1</MapsterCorePackageVersion>
+    <MapsterCorePackageVersion>1.2.*</MapsterCorePackageVersion>
 
     <!-- Mapster https://www.nuget.org/packages/Mapster -->
-    <MapsterPackageVersion>7.4.0</MapsterPackageVersion>
-
-    <!-- MediatR https://www.nuget.org/packages/MediatR -->
-    <MediatRPackageVersion>12.1.*</MediatRPackageVersion>
-
-    <!-- MediatR Contracts https://www.nuget.org/packages/MediatR.Contracts -->
-    <MediatRContractsPackageVersion>2.0.*</MediatRContractsPackageVersion>
+    <MapsterPackageVersion>7.4.*</MapsterPackageVersion>
 
     <!-- FluentValidation https://www.nuget.org/packages/FluentValidation -->
-    <FluentValidationPackageVersion>11.8.0</FluentValidationPackageVersion>
+    <FluentValidationPackageVersion>11.9.*</FluentValidationPackageVersion>
     
     <!-- ArdalisSmart https://www.nuget.org/packages/Ardalis.SmartEnum --> 
-    <ArdalisSmartEnumPackageVersion>7.0.0</ArdalisSmartEnumPackageVersion>
+    <ArdalisSmartEnumPackageVersion>7.0.*</ArdalisSmartEnumPackageVersion>
 
     <IsTestProject
       Condition="$(MSBuildProjectFullPath.Contains('test')) and ($(MSBuildProjectName.EndsWith('.Tests')) or $(MSBuildProjectName.EndsWith('.TestBase')))">
