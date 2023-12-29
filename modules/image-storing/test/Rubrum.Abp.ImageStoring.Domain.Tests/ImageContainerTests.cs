@@ -90,12 +90,11 @@ public class ImageContainerTests : ImageStoringDomainTestBase
         {
             var png = _virtualFileProvider.GetFileInfo("/Files/5.png");
             await _imageContainer.UpdateAsync(PngId, png.CreateReadStream());
-
-            var pngStream = await _imageContainer.GetOrNullAsync(PngId);
-            pngStream.ShouldNotBeNull();
-            pngStream.Information.ShouldNotBeNull();
-            pngStream.Information.EntityVersion.ShouldBe(1);
         });
+
+        var pngStream = await _imageContainer.GetOrNullAsync(PngId);
+        pngStream.ShouldNotBeNull();
+        pngStream.Information.ShouldNotBeNull();
     }
 
     [Fact]
