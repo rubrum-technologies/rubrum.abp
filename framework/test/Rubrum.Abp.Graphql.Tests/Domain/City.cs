@@ -7,14 +7,15 @@ namespace Rubrum.Abp.Graphql.Domain;
 
 public class City : FullAuditedAggregateRoot<int>
 {
-    private City()
-    {
-    }
-
-    public City(int id, Guid countryId, string name) : base(id)
+    public City(int id, Guid countryId, string name)
+        : base(id)
     {
         CountryId = countryId;
         Name = Check.NotNullOrWhiteSpace(name, nameof(name));
+    }
+
+    private City()
+    {
     }
 
     public Guid CountryId { get; set; }

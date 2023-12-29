@@ -97,7 +97,10 @@ public class KeycloakUserAppServiceTests : RubrumAbpKeycloakApplicationTestBase
             result.Id,
             new UpdateKeycloakUserInput
             {
-                FirstName = firstName, LastName = lastName, Email = email, IsActive = false
+                FirstName = firstName,
+                LastName = lastName,
+                Email = email,
+                IsActive = false
             });
 
         result.ShouldNotBeNull();
@@ -131,6 +134,8 @@ public class KeycloakUserAppServiceTests : RubrumAbpKeycloakApplicationTestBase
     {
         var result = await CreateUserAsync();
 
+        result.ShouldNotBeNull();
+
         await _service.ChangePasswordAsync(result.Id, new ChangePasswordKeycloakUserInput { Password = "sagoiadg" });
     }
 
@@ -144,7 +149,7 @@ public class KeycloakUserAppServiceTests : RubrumAbpKeycloakApplicationTestBase
         var mappings = await _keycloakClient.GetUserRoleMappingsAsync(result.Id);
 
         mappings.RealmMappings.ShouldNotBeNull();
-        mappings.RealmMappings.Any(x => x.Name == "admin").ShouldBeTrue();
+        mappings.RealmMappings.Exists(x => x.Name == "admin").ShouldBeTrue();
     }
 
     private async Task<KeycloakUserDto> CreateUserAsync()

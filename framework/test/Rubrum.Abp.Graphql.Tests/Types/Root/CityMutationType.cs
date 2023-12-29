@@ -7,6 +7,8 @@ namespace Rubrum.Abp.Graphql.Types.Root;
 public class CityMutationType : EntityMutationType<CityDto, int, ICityGraphqlService, CreateCityInput, UpdateCityInput>
 {
     protected override string TypeName => "City";
+
     protected override string TypeNameSingular => "City";
+
     protected override string TypeNameInPlural => "Cities";
 }

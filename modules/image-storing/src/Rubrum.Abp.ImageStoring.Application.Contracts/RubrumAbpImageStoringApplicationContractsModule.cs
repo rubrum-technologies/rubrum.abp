@@ -22,8 +22,7 @@ public class RubrumAbpImageStoringApplicationContractsModule : AbpModule
                 .ApplyEntityConfigurationToApi(
                     ImageStoringModuleExtensionConstants.ModuleName,
                     ImageStoringModuleExtensionConstants.EntityNames.ImageInformation,
-                    new[] { typeof(ImageInformationDto) }
-                );
+                    new[] { typeof(ImageInformationDto) });
         });
     }
 }

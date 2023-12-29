@@ -7,7 +7,8 @@ namespace Rubrum.Abp.Graphql.Services;
 
 public class CityGraphqlService : CityAppService, ICityGraphqlService
 {
-    public CityGraphqlService(IRepository<City, int> repository) : base(repository)
+    public CityGraphqlService(IRepository<City, int> repository)
+        : base(repository)
     {
     }
 

@@ -13,8 +13,7 @@ public class RubrumAbpImageStoringHttpApiClientModule : AbpModule
     {
         context.Services.AddStaticHttpClientProxies(
             typeof(RubrumAbpImageStoringApplicationContractsModule).Assembly,
-            ImageStoringRemoteServiceConstants.RemoteServiceName
-        );
+            ImageStoringRemoteServiceConstants.RemoteServiceName);
 
         Configure<AbpVirtualFileSystemOptions>(options =>
         {

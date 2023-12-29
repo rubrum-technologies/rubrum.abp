@@ -1,6 +1,7 @@
 ﻿using CookieCrumble;
 using HotChocolate.Types.Relay;
 using Rubrum.Abp.Keycloak.Users;
+using Shouldly;
 using Xunit;
 
 namespace Rubrum.Abp.Keycloak;
@@ -31,8 +32,9 @@ public class KeycloakUserTests : RubrumAbpKeycloakGraphqlTestBase
                       userName
                   }
               }
-              """
-        ));
+              """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -47,8 +49,9 @@ public class KeycloakUserTests : RubrumAbpKeycloakGraphqlTestBase
                     userName
                 }
             }
-            """
-        ));
+            """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -71,8 +74,9 @@ public class KeycloakUserTests : RubrumAbpKeycloakGraphqlTestBase
                     }
                 }
             }
-            """
-        ));
+            """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -85,8 +89,9 @@ public class KeycloakUserTests : RubrumAbpKeycloakGraphqlTestBase
             query {
                 keycloakUsersAny(where: { userName: { eq: "admin" } })
             }
-            """
-        ));
+            """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -99,8 +104,9 @@ public class KeycloakUserTests : RubrumAbpKeycloakGraphqlTestBase
               query {
                   keycloakUsersCount(where: { userName: { eq: "admin" } })
               }
-            """
-        ));
+            """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -123,8 +129,9 @@ public class KeycloakUserTests : RubrumAbpKeycloakGraphqlTestBase
                       }
                   }
               }
-              """
-        ));
+              """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -150,8 +157,9 @@ public class KeycloakUserTests : RubrumAbpKeycloakGraphqlTestBase
                       }
                   }
               }
-              """
-        ));
+              """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -177,8 +185,9 @@ public class KeycloakUserTests : RubrumAbpKeycloakGraphqlTestBase
                       }
                   }
               }
-              """
-        ));
+              """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -204,8 +213,9 @@ public class KeycloakUserTests : RubrumAbpKeycloakGraphqlTestBase
                       }
                   }
               }
-              """
-        ));
+              """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -231,8 +241,9 @@ public class KeycloakUserTests : RubrumAbpKeycloakGraphqlTestBase
                       }
                   }
               }
-              """
-        ));
+              """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }

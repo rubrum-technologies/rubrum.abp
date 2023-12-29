@@ -1,0 +1,29 @@
+{
+    "cSpell.words": [
+        "Autofac",
+        "Dtos",
+        "Keycloak",
+        "keypair",
+        "Magick",
+        "registrators",
+        "Rubrum",
+        "Shouldly",
+        "userinfo",
+        "Volo",
+        "Xunit",
+        "Yarp"
+    ],
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.formatOnSaveMode": "file",
+    "files.autoSave": "onFocusChange",
+    "omnisharp.enableEditorConfigSupport": true,
+    "dotnet.server.useOmnisharp": true,
+    "razor.languageServer.debug": true,
+    "[csharp]": {
+        "editor.defaultFormatter": "ms-dotnettools.csharp"
+    },
+    "omnisharp.organizeImportsOnFormat": true,
+    "editor.fontSize": 16,
+    "editor.tabSize": 4
+}

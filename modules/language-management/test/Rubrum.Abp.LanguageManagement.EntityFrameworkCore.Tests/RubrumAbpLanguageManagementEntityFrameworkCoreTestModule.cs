@@ -47,7 +47,7 @@ public class RubrumAbpLanguageManagementEntityFrameworkCoreTestModule : AbpModul
         });
     }
 
-    private static SqliteConnection CreateDatabaseAndGetConnection()
+    private SqliteConnection CreateDatabaseAndGetConnection()
     {
         var connection = new SqliteConnection("Data Source=:memory:");
         connection.Open();

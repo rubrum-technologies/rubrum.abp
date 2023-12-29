@@ -12,7 +12,8 @@ public class CountryAppService :
     CrudAppService<Country, CountryDto, Guid, PagedAndSortedResultRequestDto, CreateCountryInput, UpdateCountryInput>,
     ICountryAppService
 {
-    public CountryAppService(IRepository<Country, Guid> repository) : base(repository)
+    public CountryAppService(IRepository<Country, Guid> repository)
+        : base(repository)
     {
     }
 

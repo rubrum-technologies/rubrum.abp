@@ -10,6 +10,7 @@ public class AddressClaimSet
     public string? StreetAddress { get; set; }
 
     public string? Locality { get; set; }
+
     public string? Region { get; set; }
 
     [JsonPropertyName("postal_code")]

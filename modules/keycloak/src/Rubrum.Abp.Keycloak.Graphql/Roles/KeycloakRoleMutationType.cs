@@ -7,6 +7,8 @@ public class KeycloakRoleMutationType :
         UpdateKeycloakRoleInput>
 {
     protected override string TypeName => "KeycloakRole";
+
     protected override string TypeNameSingular => "KeycloakRole";
+
     protected override string TypeNameInPlural => "KeycloakRoles";
 }

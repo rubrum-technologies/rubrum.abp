@@ -27,11 +27,6 @@ public static class MultilingualObjectExtensions
     {
         var translation = FindTranslation(obj, culture);
 
-        if (translation is null)
-        {
-            throw new InvalidOperationException();
-        }
-
-        return translation;
+        return translation ?? throw new InvalidOperationException();
     }
 }

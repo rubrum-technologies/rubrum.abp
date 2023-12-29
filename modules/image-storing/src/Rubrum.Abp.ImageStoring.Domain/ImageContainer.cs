@@ -118,9 +118,9 @@ public class ImageContainer : IImageContainer, ITransientDependency
     public async Task MarkAsPermanentAsync(Guid id, CancellationToken cancellationToken = default)
     {
         var information = await _imageRepository.GetAsync(id, true, cancellationToken);
-        
+
         information.IsDisposable = false;
-        
+
         await _imageRepository.UpdateAsync(information, true, cancellationToken);
     }
 

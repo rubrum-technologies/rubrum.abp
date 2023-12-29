@@ -51,8 +51,6 @@ public class ImageAppServiceTests : ImageStoringApplicationTestBase
         await TestAsync(pngFile, "image/png");
         await TestAsync(gifFile, "image/gif");
 
-        return;
-
         async Task TestAsync(IFileInfo file, string contentType)
         {
             var image = await _imageAppService.UploadAsync(new UploadImageInput
@@ -84,8 +82,6 @@ public class ImageAppServiceTests : ImageStoringApplicationTestBase
         await TestAsync(JpgId, tifFile, "image/tiff");
         await TestAsync(JpegId, pngFile, "image/png");
         await TestAsync(SvgId, gifFile, "image/gif");
-
-        return;
 
         async Task TestAsync(Guid id, IFileInfo file, string contentType)
         {
@@ -122,10 +118,10 @@ public class ImageAppServiceTests : ImageStoringApplicationTestBase
         var tifFile = _virtualFileProvider.GetFileInfo("/Files/4.tif");
         var pngFile = _virtualFileProvider.GetFileInfo("/Files/5.png");
         var gifFile = _virtualFileProvider.GetFileInfo("/Files/6.gif");
-        
+
         var result = await _imageAppService.UploadAsync(new UploadImagesInput
         {
-            Contents = new []
+            Contents = new[]
             {
                 new RemoteStreamContent(jpegFile.CreateReadStream()),
                 new RemoteStreamContent(jpgFile.CreateReadStream()),
@@ -138,7 +134,7 @@ public class ImageAppServiceTests : ImageStoringApplicationTestBase
         result.ShouldNotBeNull();
         result.Items.Count.ShouldBe(5);
     }
-    
+
     [Fact]
     public async Task CreateAsync_Does_Not_Support_File_Extension()
     {

@@ -7,9 +7,6 @@ namespace Rubrum.Abp.Imaging;
 
 public class ImageConverter : IImageConverter, ITransientDependency
 {
-    protected readonly ICancellationTokenProvider CancellationTokenProvider;
-    protected readonly IEnumerable<IImageConverterContributor> ImageConverterContributors;
-
     public ImageConverter(
         IEnumerable<IImageConverterContributor> imageConverterContributors,
         ICancellationTokenProvider cancellationTokenProvider)
@@ -17,6 +14,10 @@ public class ImageConverter : IImageConverter, ITransientDependency
         ImageConverterContributors = imageConverterContributors;
         CancellationTokenProvider = cancellationTokenProvider;
     }
+
+    protected IEnumerable<IImageConverterContributor> ImageConverterContributors { get; }
+
+    protected ICancellationTokenProvider CancellationTokenProvider { get; }
 
     public async Task<ImageConvertResult<Stream>> ConvertAsync(
         Stream stream,
@@ -41,7 +42,8 @@ public class ImageConverter : IImageConverter, ITransientDependency
 
         foreach (var imageConverterContributor in ImageConverterContributors)
         {
-            var result = await imageConverterContributor.TryConvertAsync(stream,
+            var result = await imageConverterContributor.TryConvertAsync(
+                stream,
                 final,
                 original,
                 CancellationTokenProvider.FallbackToProvider(cancellationToken));
@@ -69,7 +71,8 @@ public class ImageConverter : IImageConverter, ITransientDependency
 
         foreach (var imageConverterContributor in ImageConverterContributors)
         {
-            var result = await imageConverterContributor.TryConvertAsync(bytes,
+            var result = await imageConverterContributor.TryConvertAsync(
+                bytes,
                 final,
                 original,
                 CancellationTokenProvider.FallbackToProvider(cancellationToken));

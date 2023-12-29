@@ -6,5 +6,4 @@ namespace Rubrum.Abp.Ddd.HumanFriendly;
 [DependsOn(typeof(AbpDddDomainSharedModule))]
 public class RubrumAbpDddHumanFriendlyModule : AbpModule
 {
-    
 }

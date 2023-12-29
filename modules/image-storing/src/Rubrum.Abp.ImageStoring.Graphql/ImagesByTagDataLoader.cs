@@ -36,7 +36,7 @@ public class ImagesByTagDataLoader :
         CancellationToken cancellationToken)
     {
         using var uow = _unitOfWorkManager.Begin(true);
-        
+
         var query = (await _imageRepository.GetQueryableAsync())
             .Where(x => keys.Contains(x.Tag));
 

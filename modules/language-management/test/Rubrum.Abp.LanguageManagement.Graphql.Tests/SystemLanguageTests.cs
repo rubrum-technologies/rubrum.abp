@@ -1,16 +1,15 @@
 ﻿using CookieCrumble;
 using HotChocolate.Types.Relay;
-using Rubrum.Abp.Graphql.Types;
+using Shouldly;
 using Xunit;
-using static Rubrum.Abp.Graphql.RubrumAbpGraphqlTestConstants;
 
-namespace Rubrum.Abp.Graphql;
+namespace Rubrum.Abp.LanguageManagement;
 
-public class CountryTests : RubrumAbpGraphqlTestBase
+public class SystemLanguageTests : LanguageManagementGraphqlTestBase
 {
     private readonly IIdSerializer _idSerializer;
 
-    public CountryTests()
+    public SystemLanguageTests()
     {
         _idSerializer = GetRequiredService<IIdSerializer>();
     }
@@ -18,18 +17,20 @@ public class CountryTests : RubrumAbpGraphqlTestBase
     [Fact]
     public async Task FetchById()
     {
-        var id = _idSerializer.Serialize(null, CountryConstants.TypeName, CountryId);
+        var id = _idSerializer.Serialize(null, SystemLanguageConstants.TypeName, "ru");
 
         await using var result = await ExecuteRequestAsync(b => b.SetQuery(
             $$"""
               query {
-                  countryById(id: "{{id}}") {
+                  systemLanguageById(id: "{{id}}") {
                       id
+                      code
                       name
                   }
               }
-              """
-        ));
+              """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -37,18 +38,20 @@ public class CountryTests : RubrumAbpGraphqlTestBase
     [Fact]
     public async Task Fetch()
     {
-        var id = _idSerializer.Serialize(null, CountryConstants.TypeName, CountryId);
+        var id = _idSerializer.Serialize(null, SystemLanguageConstants.TypeName, "en");
 
         await using var result = await ExecuteRequestAsync(b => b.SetQuery(
             $$"""
               query {
-                  country(where: { id: { eq: "{{id}}" } }) {
+                  systemLanguage(where: { id: { eq: "{{id}}" } }) {
                       id
+                      code
                       name
                   }
               }
-              """
-        ));
+              """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -59,9 +62,10 @@ public class CountryTests : RubrumAbpGraphqlTestBase
         await using var result = await ExecuteRequestAsync(b => b.SetQuery(
             """
             query {
-                countries {
+                systemLanguages {
                     nodes {
                       id
+                      code
                       name
                     }
                     pageInfo {
@@ -72,8 +76,9 @@ public class CountryTests : RubrumAbpGraphqlTestBase
                     }
                 }
             }
-            """
-        ));
+            """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -84,10 +89,11 @@ public class CountryTests : RubrumAbpGraphqlTestBase
         await using var result = await ExecuteRequestAsync(b => b.SetQuery(
             """
             query {
-                countriesAny(where: { name: { eq: "USA" } })
+                systemLanguagesAny(where: { name: { eq: "Русский" } })
             }
-            """
-        ));
+            """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -98,10 +104,11 @@ public class CountryTests : RubrumAbpGraphqlTestBase
         await using var result = await ExecuteRequestAsync(b => b.SetQuery(
             """
             query {
-                countriesCount
+                systemLanguagesCount
             }
-            """
-        ));
+            """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -112,8 +119,10 @@ public class CountryTests : RubrumAbpGraphqlTestBase
         await using var result = await ExecuteRequestAsync(b => b.SetQuery(
             """
             mutation {
-                createCountry (input: { name: "USA" }) {
-                    country {
+                createSystemLanguage (input: { code: "test", name: "Test" }) {
+                    systemLanguage {
+                        id
+                        code
                         name
                     }
                     errors {
@@ -123,8 +132,9 @@ public class CountryTests : RubrumAbpGraphqlTestBase
                     }
                 }
             }
-            """
-        ));
+            """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -132,13 +142,14 @@ public class CountryTests : RubrumAbpGraphqlTestBase
     [Fact]
     public async Task Update()
     {
-        var id = _idSerializer.Serialize(null, CountryConstants.TypeName, CountryId);
+        var id = _idSerializer.Serialize(null, SystemLanguageConstants.TypeName, "zh");
         await using var result = await ExecuteRequestAsync(b => b.SetQuery(
             $$"""
               mutation {
-                  updateCountry (input: { id: "{{id}}", name: "USA" }) {
-                      country {
+                  updateSystemLanguage (input: { id: "{{id}}", name: "CH" }) {
+                      systemLanguage {
                           id
+                          code
                           name
                       }
                       errors {
@@ -148,8 +159,9 @@ public class CountryTests : RubrumAbpGraphqlTestBase
                       }
                   }
               }
-              """
-        ));
+              """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -157,13 +169,14 @@ public class CountryTests : RubrumAbpGraphqlTestBase
     [Fact]
     public async Task Delete()
     {
-        var id = _idSerializer.Serialize(null, CountryConstants.TypeName, CountryId);
+        var id = _idSerializer.Serialize(null, SystemLanguageConstants.TypeName, "gu");
         await using var result = await ExecuteRequestAsync(b => b.SetQuery(
             $$"""
               mutation {
-                  deleteCountry (input: { id: "{{id}}" }) {
-                      country {
+                  deleteSystemLanguage (input: { id: "{{id}}" }) {
+                      systemLanguage {
                           id
+                          code
                           name
                       }
                       errors {
@@ -173,8 +186,9 @@ public class CountryTests : RubrumAbpGraphqlTestBase
                       }
                   }
               }
-              """
-        ));
+              """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }

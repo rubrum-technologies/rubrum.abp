@@ -6,7 +6,7 @@ public interface ITranslatorContributor
         string into,
         string text,
         CancellationToken cancellationToken = default);
-    
+
     Task<TranslateProcessResult> TryTranslateAsync(
         string from,
         string into,

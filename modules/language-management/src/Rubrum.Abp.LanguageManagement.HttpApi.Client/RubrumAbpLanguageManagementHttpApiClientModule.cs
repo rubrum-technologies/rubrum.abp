@@ -13,8 +13,7 @@ public class RubrumAbpLanguageManagementHttpApiClientModule : AbpModule
     {
         context.Services.AddStaticHttpClientProxies(
             typeof(RubrumAbpLanguageManagementApplicationContractsModule).Assembly,
-            LanguageManagementRemoteServiceConstants.RemoteServiceName
-        );
+            LanguageManagementRemoteServiceConstants.RemoteServiceName);
 
         Configure<AbpVirtualFileSystemOptions>(options =>
         {

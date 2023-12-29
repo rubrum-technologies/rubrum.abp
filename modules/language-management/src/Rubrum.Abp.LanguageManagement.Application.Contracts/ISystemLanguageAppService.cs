@@ -8,5 +8,6 @@ public interface ISystemLanguageAppService :
     IDeleteAppService<string>
 {
     Task<SystemLanguageDto> GetAsync(string id);
+
     Task<ListResultDto<SystemLanguageDto>> GetListAsync();
 }

@@ -17,7 +17,8 @@ public static class AbpTypeExtensions
     public static IInputObjectTypeDescriptor<TInput> AddFieldKey<TInput, TKey>(
         this IInputObjectTypeDescriptor<TInput> descriptor,
         string typeName,
-        string? fieldName = null) where TKey : notnull
+        string? fieldName = null)
+        where TKey : notnull
     {
         descriptor
             .Field(fieldName ?? "id")
@@ -146,7 +147,6 @@ public static class AbpTypeExtensions
 
         return descriptor;
     }
-
 
     public static IInterfaceTypeDescriptor<TEntityDto> MayHaveCreator<TEntityDto>(
         this IInterfaceTypeDescriptor<TEntityDto> descriptor)
@@ -515,7 +515,6 @@ public static class AbpTypeExtensions
         descriptor.ModificationAudited();
         return descriptor;
     }
-
 
     public static IInterfaceTypeDescriptor<TEntityDto> FullAudited<TEntityDto>(
         this IInterfaceTypeDescriptor<TEntityDto> descriptor)

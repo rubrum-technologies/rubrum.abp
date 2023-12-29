@@ -5,14 +5,23 @@ namespace Rubrum.Abp.Keycloak;
 public class IdToken
 {
     public string? Jti { get; set; }
+
     public long? Exp { get; set; }
+
     public long? Nbf { get; set; }
+
     public long? Iat { get; set; }
+
     public string? Iss { get; set; }
+
     public string? Sub { get; set; }
+
     public string? Typ { get; set; }
+
     public string? Azp { get; set; }
+
     public Dictionary<string, object>? OtherClaims { get; set; }
+
     public string? Nonce { get; set; }
 
     [JsonPropertyName("auth_time")]
@@ -44,16 +53,22 @@ public class IdToken
     public string? PreferredUsername { get; set; }
 
     public string? Profile { get; set; }
+
     public string? Picture { get; set; }
+
     public string? Website { get; set; }
+
     public string? Email { get; set; }
 
     [JsonPropertyName("email_verified")]
     public bool? EmailVerified { get; set; }
 
     public string? Gender { get; set; }
+
     public string? Birthdate { get; set; }
+
     public string? Zoneinfo { get; set; }
+
     public string? Locale { get; set; }
 
     [JsonPropertyName("phone_number")]

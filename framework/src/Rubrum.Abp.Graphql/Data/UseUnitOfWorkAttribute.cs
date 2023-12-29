@@ -12,7 +12,7 @@ public class UseUnitOfWorkAttribute : ObjectFieldDescriptorAttribute
     }
 
     protected override void OnConfigure(
-        IDescriptorContext descriptorContext,
+        IDescriptorContext context,
         IObjectFieldDescriptor descriptor,
         MemberInfo member)
     {

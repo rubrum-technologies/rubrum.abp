@@ -10,12 +10,6 @@ namespace Rubrum.Abp.Keycloak;
 
 public class KeycloakClient : IKeycloakClient, ITransientDependency
 {
-    protected readonly ICancellationTokenProvider CancellationTokenProvider;
-    protected readonly ICurrentKeycloakRealm CurrentKeycloakRealm;
-    protected readonly IHttpClientFactory HttpClientFactory;
-    protected readonly RubrumAbpKeycloakOptions Options;
-    protected readonly IJsonSerializer Serializer;
-
     public KeycloakClient(
         IHttpClientFactory httpClientFactory,
         ICurrentKeycloakRealm currentKeycloakRealm,
@@ -29,6 +23,16 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
         CancellationTokenProvider = cancellationTokenProvider;
         Options = options.Value;
     }
+
+    protected IHttpClientFactory HttpClientFactory { get; }
+
+    protected ICurrentKeycloakRealm CurrentKeycloakRealm { get; }
+
+    protected RubrumAbpKeycloakOptions Options { get; }
+
+    protected IJsonSerializer Serializer { get; }
+
+    protected ICancellationTokenProvider CancellationTokenProvider { get; }
 
     protected string RealmName => CurrentKeycloakRealm.RealmName;
 
@@ -667,7 +671,8 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
         var queries = new Dictionary<string, object?> { { "scope", scope }, { "userId", userId } };
 
         return GetAsync<AccessToken>(
-            SetQuery($"/admin/realms/{RealmName}/clients/{clientId}/evaluate-scopes/generate-example-access-token",
+            SetQuery(
+                $"/admin/realms/{RealmName}/clients/{clientId}/evaluate-scopes/generate-example-access-token",
                 queries),
             cancellationToken);
     }
@@ -681,12 +686,13 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
         var queries = new Dictionary<string, object?> { { "scope", scope }, { "userId", userId } };
 
         return GetAsync<IdToken>(
-            SetQuery($"/admin/realms/{RealmName}/clients/{clientId}/evaluate-scopes/generate-example-id-token",
+            SetQuery(
+                $"/admin/realms/{RealmName}/clients/{clientId}/evaluate-scopes/generate-example-id-token",
                 queries),
             cancellationToken);
     }
 
-    public virtual Task<Dictionary<string, object>> GetGenerateExampleUserinfoAsync(
+    public virtual Task<Dictionary<string, object>> GetGenerateExampleUserInfoAsync(
         string clientId,
         string? scope = null,
         string? userId = null,
@@ -695,7 +701,8 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
         var queries = new Dictionary<string, object?> { { "scope", scope }, { "userId", userId } };
 
         return GetAsync<Dictionary<string, object>>(
-            SetQuery($"/admin/realms/{RealmName}/clients/{clientId}/evaluate-scopes/generate-example-userinfo",
+            SetQuery(
+                $"/admin/realms/{RealmName}/clients/{clientId}/evaluate-scopes/generate-example-userinfo",
                 queries),
             cancellationToken);
     }
@@ -904,6 +911,15 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
     {
         return DeleteAsync(
             $"/admin/realms/{RealmName}/client-scopes/{clientId}",
+            cancellationToken);
+    }
+
+    public virtual Task DeleteDefaultClientScopeAsync(
+        string clientScopeId,
+        CancellationToken cancellationToken = default)
+    {
+        return DeleteAsync(
+            $"/admin/realms/{RealmName}/clients/{clientScopeId}/default-client-scopes/{clientScopeId}",
             cancellationToken);
     }
 
@@ -1231,15 +1247,6 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
             cancellationToken);
     }
 
-    public virtual Task<ICollection<IdentityProviderRepresentation>> GetIdentityProvidersAsync(
-        string providerId,
-        CancellationToken cancellationToken = default)
-    {
-        return GetAsync<ICollection<IdentityProviderRepresentation>>(
-            $"/admin/realms/{RealmName}/identity-provider/providers/{providerId}",
-            cancellationToken);
-    }
-
     public virtual Task<IdentityProviderRepresentation> GetIdentityProviderAsync(
         string alias,
         CancellationToken cancellationToken = default)
@@ -1259,10 +1266,28 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
     }
 
     public virtual Task<ICollection<IdentityProviderRepresentation>> GetIdentityProvidersAsync(
+        string providerId,
+        CancellationToken cancellationToken = default)
+    {
+        return GetAsync<ICollection<IdentityProviderRepresentation>>(
+            $"/admin/realms/{RealmName}/identity-provider/providers/{providerId}",
+            cancellationToken);
+    }
+
+    public virtual Task<ICollection<IdentityProviderRepresentation>> GetIdentityProvidersAsync(
         CancellationToken cancellationToken = default)
     {
         return GetAsync<ICollection<IdentityProviderRepresentation>>(
             $"/admin/realms/{RealmName}/identity-provider/instances",
+            cancellationToken);
+    }
+
+    public virtual Task<ICollection<IdentityProviderMapperRepresentation>> GetIdentityProviderMappersAsync(
+        string alias,
+        CancellationToken cancellationToken = default)
+    {
+        return GetAsync<ICollection<IdentityProviderMapperRepresentation>>(
+            $"/admin/realms/{RealmName}/identity-provider/instances/{alias}/mappers",
             cancellationToken);
     }
 
@@ -1281,15 +1306,6 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
     {
         return GetAsync<Dictionary<string, IdentityProviderMapperTypeRepresentation>>(
             $"/admin/realms/{RealmName}/identity-provider/instances/{alias}/mapper-types",
-            cancellationToken);
-    }
-
-    public virtual Task<ICollection<IdentityProviderMapperRepresentation>> GetIdentityProviderMappersAsync(
-        string alias,
-        CancellationToken cancellationToken = default)
-    {
-        return GetAsync<ICollection<IdentityProviderMapperRepresentation>>(
-            $"/admin/realms/{RealmName}/identity-provider/instances/{alias}/mappers",
             cancellationToken);
     }
 
@@ -1483,7 +1499,6 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
             protocolMapperRepresentations,
             cancellationToken);
     }
-
 
     public virtual Task CreateClientScopeMultipleProtocolMappersAsync(
         string clientId,
@@ -1884,7 +1899,7 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
         return PutAsync($"/admin/realms/{RealmName}", realmRepresentation, cancellationToken);
     }
 
-    public virtual Task UpdateDefaultClientScopeAsync(
+    public virtual Task UpdateDefaultDefaultClientScopeAsync(
         string clientScopeId,
         CancellationToken cancellationToken = default)
     {
@@ -1966,15 +1981,6 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
     public virtual Task DeleteRealmAsync(string realmName, CancellationToken cancellationToken = default)
     {
         return DeleteAsync($"/admin/realms/{realmName}", cancellationToken);
-    }
-
-    public virtual Task DeleteDefaultClientScopeAsync(
-        string clientScopeId,
-        CancellationToken cancellationToken = default)
-    {
-        return DeleteAsync(
-            $"/admin/realms/{RealmName}/clients/{clientScopeId}/default-client-scopes/{clientScopeId}",
-            cancellationToken);
     }
 
     public virtual Task DeleteDefaultGroupAsync(string groupId, CancellationToken cancellationToken = default)
@@ -2595,7 +2601,8 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
         var queries = new Dictionary<string, object?> { { "briefRepresentation", briefRepresentation } };
 
         return GetAsync<ICollection<RoleRepresentation>>(
-            SetQuery($"/admin/realms/{RealmName}/clients/{clientId}/scope-mappings/clients/{client}/composite",
+            SetQuery(
+                $"/admin/realms/{RealmName}/clients/{clientId}/scope-mappings/clients/{client}/composite",
                 queries),
             cancellationToken);
     }
@@ -2668,7 +2675,8 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
         var queries = new Dictionary<string, object?> { { "briefRepresentation", briefRepresentation } };
 
         return GetAsync<ICollection<RoleRepresentation>>(
-            SetQuery($"/admin/realms/{RealmName}/client-scopes/{clientId}/scope-mappings/clients/{client}/composite",
+            SetQuery(
+                $"/admin/realms/{RealmName}/client-scopes/{clientId}/scope-mappings/clients/{client}/composite",
                 queries),
             cancellationToken);
     }
@@ -2741,7 +2749,8 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
         var queries = new Dictionary<string, object?> { { "briefRepresentation", briefRepresentation } };
 
         return GetAsync<ICollection<RoleRepresentation>>(
-            SetQuery($"/admin/realms/{RealmName}/client-templates/{clientId}/scope-mappings/clients/{client}/composite",
+            SetQuery(
+                $"/admin/realms/{RealmName}/client-templates/{clientId}/scope-mappings/clients/{client}/composite",
                 queries),
             cancellationToken);
     }
@@ -3242,7 +3251,8 @@ public class KeycloakClient : IKeycloakClient, ITransientDependency
         string provider,
         CancellationToken cancellationToken = default)
     {
-        return DeleteAsync($"/admin/realms/{RealmName}/users/{userId}/federated-identity/{provider}",
+        return DeleteAsync(
+            $"/admin/realms/{RealmName}/users/{userId}/federated-identity/{provider}",
             cancellationToken);
     }
 

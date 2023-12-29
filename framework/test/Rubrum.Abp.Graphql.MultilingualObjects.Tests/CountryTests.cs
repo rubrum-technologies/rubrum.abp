@@ -1,4 +1,5 @@
 ﻿using CookieCrumble;
+using Shouldly;
 using Xunit;
 
 namespace Rubrum.Abp.Graphql.MultilingualObjects;
@@ -23,8 +24,9 @@ public class CountryTests : MultilingualObjectsTestBase
                     }
                 }
             }
-            """
-        ));
+            """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -47,8 +49,9 @@ public class CountryTests : MultilingualObjectsTestBase
                     }
                 }
             }
-            """
-        ));
+            """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -71,8 +74,9 @@ public class CountryTests : MultilingualObjectsTestBase
                     }
                 }
             }
-            """
-        ));
+            """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }

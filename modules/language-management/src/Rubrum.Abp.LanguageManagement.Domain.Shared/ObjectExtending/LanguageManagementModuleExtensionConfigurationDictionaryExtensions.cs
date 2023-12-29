@@ -10,7 +10,6 @@ public static class LanguageManagementModuleExtensionConfigurationDictionaryExte
     {
         return modules.ConfigureModule(
             LanguageManagementModuleExtensionConstants.ModuleName,
-            configureAction
-        );
+            configureAction);
     }
 }

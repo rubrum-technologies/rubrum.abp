@@ -7,9 +7,6 @@ namespace Rubrum.Abp.Keycloak.Roles;
 
 public class KeycloakRoleAppService : ApplicationService, IKeycloakRoleAppService
 {
-    protected readonly IKeycloakClient KeycloakClient;
-    protected readonly IKeycloakRoleMapper Mapper;
-
     public KeycloakRoleAppService(
         IKeycloakClient keycloakClient,
         IKeycloakRoleMapper mapper)
@@ -17,6 +14,10 @@ public class KeycloakRoleAppService : ApplicationService, IKeycloakRoleAppServic
         KeycloakClient = keycloakClient;
         Mapper = mapper;
     }
+
+    protected IKeycloakClient KeycloakClient { get; }
+
+    protected IKeycloakRoleMapper Mapper { get; }
 
     public async Task<KeycloakRoleDto> GetAsync(string id)
     {

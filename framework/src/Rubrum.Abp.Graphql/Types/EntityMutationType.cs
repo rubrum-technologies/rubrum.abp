@@ -20,10 +20,15 @@ public abstract class EntityMutationType<TEntityDto, TKey, TService, TCreateInpu
     IDeleteAppService<TKey>
 {
     protected abstract string TypeName { get; }
+
     protected abstract string TypeNameSingular { get; }
+
     protected abstract string TypeNameInPlural { get; }
+
     protected virtual string FieldNameCreate => $"create{TypeNameSingular}";
+
     protected virtual string FieldNameUpdate => $"update{TypeNameSingular}";
+
     protected virtual string FieldNameDelete => $"delete{TypeNameSingular}";
 
     protected override void Configure(IObjectTypeDescriptor descriptor)

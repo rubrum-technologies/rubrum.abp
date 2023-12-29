@@ -18,9 +18,7 @@ public class RubrumAbpHostingAspNetCoreMicroserviceModule : AbpModule
                 clientBuilder.AddTransientHttpErrorPolicy(policyBuilder =>
                     policyBuilder.WaitAndRetryAsync(
                         3,
-                        i => TimeSpan.FromSeconds(Math.Pow(2, i))
-                    )
-                );
+                        i => TimeSpan.FromSeconds(Math.Pow(2, i))));
             });
         });
     }

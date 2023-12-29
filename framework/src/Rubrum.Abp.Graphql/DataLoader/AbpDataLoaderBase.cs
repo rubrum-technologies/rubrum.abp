@@ -12,21 +12,24 @@ public class AbpDataLoaderBase<TEntityDto, TKey> : BatchDataLoader<TKey, TEntity
     where TKey : notnull
     where TEntityDto : IEntityDto<TKey>
 {
-    protected readonly IAsyncQueryableExecuter AsyncExecuter;
-    protected readonly IReadOnlyGraphqlService<TEntityDto, TKey> Service;
-    protected readonly IUnitOfWorkManager UnitOfWorkManager;
-
     public AbpDataLoaderBase(
         IBatchScheduler batchScheduler,
         IAsyncQueryableExecuter asyncExecuter,
         IUnitOfWorkManager unitOfWorkManager,
         IReadOnlyGraphqlService<TEntityDto, TKey> service,
-        DataLoaderOptions? options = null) : base(batchScheduler, options)
+        DataLoaderOptions? options = null)
+        : base(batchScheduler, options)
     {
         AsyncExecuter = asyncExecuter;
         UnitOfWorkManager = unitOfWorkManager;
         Service = service;
     }
+
+    protected IAsyncQueryableExecuter AsyncExecuter { get; }
+
+    protected IReadOnlyGraphqlService<TEntityDto, TKey> Service { get; }
+
+    protected IUnitOfWorkManager UnitOfWorkManager { get; }
 
     public async Task<TEntityDto?> LoadOrNullAsync(TKey? id, CancellationToken cancellationToken)
     {

@@ -13,7 +13,6 @@ public static class SerilogConfigurationHelper
         //     .AddJsonFile("appsettings.json")
         //     .AddEnvironmentVariables()
         //     .Build();
-
         Log.Logger = new LoggerConfiguration()
 #if DEBUG
             .MinimumLevel.Debug()
@@ -25,6 +24,7 @@ public static class SerilogConfigurationHelper
             .Enrich.FromLogContext()
             .Enrich.WithProperty("Application", $"{applicationName}")
             .WriteTo.Async(c => c.File("Logs/logs.txt"))
+
             // TODO: Uncomment following lines for ElasticSearch configuration
             // .WriteTo.Elasticsearch(
             //     new ElasticsearchSinkOptions(new Uri(configuration["ElasticSearch:Url"]))

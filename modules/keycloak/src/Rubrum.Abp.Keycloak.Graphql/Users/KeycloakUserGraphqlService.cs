@@ -7,7 +7,8 @@ public class KeycloakUserGraphqlService : KeycloakUserAppService, IKeycloakUserG
     public KeycloakUserGraphqlService(
         IKeycloakClient keycloakClient,
         IKeycloakUserMapper userMapper,
-        IKeycloakRoleMapper roleMapper) : base(keycloakClient, userMapper, roleMapper)
+        IKeycloakRoleMapper roleMapper)
+        : base(keycloakClient, userMapper, roleMapper)
     {
     }
 

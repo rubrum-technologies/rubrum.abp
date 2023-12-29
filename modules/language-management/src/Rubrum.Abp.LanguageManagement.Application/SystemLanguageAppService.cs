@@ -9,22 +9,25 @@ namespace Rubrum.Abp.LanguageManagement;
 
 public class SystemLanguageAppService : ApplicationService, ISystemLanguageAppService
 {
-    protected readonly ICancellationTokenProvider CancellationTokenProvider;
-    protected readonly SystemLanguageManager Manager;
-    protected readonly ISystemLanguageMapper Mapper;
-    protected readonly IRepository<SystemLanguage, string> Repository;
-
     public SystemLanguageAppService(
-        IRepository<SystemLanguage, string> repository,
-        SystemLanguageManager manager,
-        ISystemLanguageMapper mapper,
-        ICancellationTokenProvider cancellationTokenProvider)
+       IRepository<SystemLanguage, string> repository,
+       SystemLanguageManager manager,
+       ISystemLanguageMapper mapper,
+       ICancellationTokenProvider cancellationTokenProvider)
     {
         Repository = repository;
         Manager = manager;
         Mapper = mapper;
         CancellationTokenProvider = cancellationTokenProvider;
     }
+
+    protected SystemLanguageManager Manager { get; }
+
+    protected ISystemLanguageMapper Mapper { get; }
+
+    protected IRepository<SystemLanguage, string> Repository { get; }
+
+    protected ICancellationTokenProvider CancellationTokenProvider { get; }
 
     public async Task<SystemLanguageDto> GetAsync(string id)
     {

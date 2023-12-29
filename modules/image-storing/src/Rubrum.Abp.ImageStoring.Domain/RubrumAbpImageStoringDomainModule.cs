@@ -30,12 +30,11 @@ public class RubrumAbpImageStoringDomainModule : AbpModule
             ModuleExtensionConfigurationHelper.ApplyEntityConfigurationToEntity(
                 ImageStoringModuleExtensionConstants.ModuleName,
                 ImageStoringModuleExtensionConstants.EntityNames.ImageInformation,
-                typeof(ImageInformation)
-            );
+                typeof(ImageInformation));
         });
 
         var configuration = context.Services.GetConfiguration();
-        
+
         Configure<RubrumAbpImageStoringOptions>(options => configuration.GetSection("ImageStoring").Bind(options));
     }
 

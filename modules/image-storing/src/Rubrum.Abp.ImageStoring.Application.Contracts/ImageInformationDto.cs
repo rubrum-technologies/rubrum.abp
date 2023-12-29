@@ -10,8 +10,8 @@ public class ImageInformationDto : ExtensibleFullAuditedEntityDto<Guid>, IHasEnt
     public string? FileName { get; init; }
 
     public required string SystemFileName { get; init; }
-    
+
     public bool IsDisposable { get; init; }
-    
+
     public int EntityVersion { get; init; }
 }

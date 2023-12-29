@@ -4,7 +4,8 @@ namespace Rubrum.Abp.LanguageManagement;
 
 public class SystemLanguageNameAlreadyExistsException : BusinessException
 {
-    public SystemLanguageNameAlreadyExistsException(string name) : base("SystemLanguage:Error:NameAlreadyExists")
+    public SystemLanguageNameAlreadyExistsException(string name)
+        : base("SystemLanguage:Error:NameAlreadyExists")
     {
         Name = name;
     }

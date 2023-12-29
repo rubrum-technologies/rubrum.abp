@@ -8,16 +8,17 @@ namespace Rubrum.Abp.ImageStoring.EntityFrameworkCore;
 [ConnectionStringName(ConnectionStringName)]
 public class ImageStoringDbContext : AbpDbContext<ImageStoringDbContext>, IImageStoringDbContext
 {
-    public ImageStoringDbContext(DbContextOptions<ImageStoringDbContext> options) : base(options)
+    public ImageStoringDbContext(DbContextOptions<ImageStoringDbContext> options)
+        : base(options)
     {
     }
 
     public DbSet<ImageInformation> Images => Set<ImageInformation>();
 
-    protected override void OnModelCreating(ModelBuilder builder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(builder);
+        base.OnModelCreating(modelBuilder);
 
-        builder.ConfigureImageStoring();
+        modelBuilder.ConfigureImageStoring();
     }
 }

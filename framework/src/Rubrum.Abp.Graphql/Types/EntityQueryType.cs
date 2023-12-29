@@ -15,14 +15,21 @@ public abstract class EntityQueryType<TEntityDto, TKey, TService> :
     where TService : IReadOnlyGraphqlService<TEntityDto, TKey>
 {
     protected abstract string TypeName { get; }
+
     protected abstract string TypeNameSingular { get; }
+
     protected abstract string TypeNameInPlural { get; }
 
     protected virtual string FieldNameForGetById => $"{TypeNameSingular.ToLowerFirstChar()}ById";
+
     protected virtual string FieldNameForGet => TypeNameSingular.ToLowerFirstChar();
+
     protected virtual string FieldNameForGetList => $"{TypeNameInPlural.ToLowerFirstChar()}";
+
     protected virtual string FieldNameForAll => $"{TypeNameInPlural.ToLowerFirstChar()}All";
+
     protected virtual string FieldNameForAny => $"{TypeNameInPlural.ToLowerFirstChar()}Any";
+
     protected virtual string FieldNameForCount => $"{TypeNameInPlural.ToLowerFirstChar()}Count";
 
     protected virtual bool IsAddFieldByAll => false;
@@ -61,7 +68,7 @@ public abstract class EntityQueryType<TEntityDto, TKey, TService> :
                 .UseSorting<SortInputType<TEntityDto>>()
                 .ResolveWith<Resolves>(x => x.GetQueryableAsync(default!));
         }
-        
+
         descriptor
             .Field(FieldNameForAny)
             .UseUnitOfWork()
@@ -77,7 +84,7 @@ public abstract class EntityQueryType<TEntityDto, TKey, TService> :
             .ResolveWith<Resolves>(x => x.GetQueryableAsync(default!));
     }
 
-    private class Resolves
+    private sealed class Resolves
     {
         public Task<TEntityDto> GetByIdAsync(
             TKey id,

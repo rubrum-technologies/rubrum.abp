@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.AspNetCore.Mvc;
-using static Rubrum.Abp.LanguageManagement.Permissions.LanguageManagementPermissions.SystemLanguages;
 using static Rubrum.Abp.LanguageManagement.LanguageManagementRemoteServiceConstants;
+using static Rubrum.Abp.LanguageManagement.Permissions.LanguageManagementPermissions.SystemLanguages;
 
 namespace Rubrum.Abp.LanguageManagement.Controllers;
 

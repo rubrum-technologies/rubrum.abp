@@ -14,8 +14,7 @@ public static class SwaggerConfigurationHelper
         string apiVersion = "v1",
         string apiName = "v1",
         string[]? flows = null,
-        string? discoveryEndpoint = null
-    )
+        string? discoveryEndpoint = null)
     {
         context.Services.AddAbpSwaggerGenWithOidc(
             authority,

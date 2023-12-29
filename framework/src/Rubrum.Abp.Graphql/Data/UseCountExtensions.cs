@@ -19,16 +19,15 @@ public static class UseCountExtensions
                     !context.TypeInspector.TryCreateTypeInfo(definition.ResultType, out var typeInfo))
                 {
                     var resultType = definition.ResolverType ?? typeof(object);
-                    throw new ArgumentException(
-                        $"Cannot handle the specified type `{resultType.FullName}`.",
-                        nameof(descriptor));
+                    throw new ArgumentException($"Cannot handle the specified type `{resultType.FullName}`.");
                 }
 
                 var selectionType = typeInfo.NamedType;
                 definition.ResultType = typeof(int);
                 definition.Type = context.TypeInspector.GetTypeRef(typeof(int));
 
-                definition.Configurations.Add(new CompleteConfiguration<ObjectFieldDefinition>((_, def) =>
+                definition.Configurations.Add(new CompleteConfiguration<ObjectFieldDefinition>(
+                    (_, def) =>
                     {
                         CompileMiddleware(
                             selectionType,
@@ -52,7 +51,8 @@ public static class UseCountExtensions
         var middlewareType = middlewareDefinition.MakeGenericType(type);
         var middleware = FieldClassMiddlewareFactory.Create(middlewareType);
         var index = definition.MiddlewareDefinitions.IndexOf(placeholder);
-        definition.MiddlewareDefinitions[index] = new FieldMiddlewareDefinition(middleware,
+        definition.MiddlewareDefinitions[index] = new FieldMiddlewareDefinition(
+            middleware,
             key: "Rubrum.Abp.Graphql.CountMiddleware");
     }
 }

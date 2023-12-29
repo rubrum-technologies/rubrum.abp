@@ -12,7 +12,8 @@ public class CityAppService :
     CrudAppService<City, CityDto, int, PagedAndSortedResultRequestDto, CreateCityInput, UpdateCityInput>,
     ICityAppService
 {
-    public CityAppService(IRepository<City, int> repository) : base(repository)
+    public CityAppService(IRepository<City, int> repository)
+        : base(repository)
     {
     }
 

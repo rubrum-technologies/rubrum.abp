@@ -79,7 +79,7 @@ public class FluentValidationTypeInterceptor : TypeInterceptor
         }
     }
 
-    private static (IValidator? validator, Type Type) GetValidator(
+    private static (IValidator? Validator, Type Type) GetValidator(
         ITypeCompletionContext completionContext,
         Type runtimeType)
     {
@@ -133,7 +133,7 @@ public class FluentValidationTypeInterceptor : TypeInterceptor
             IComparisonValidator v => localizer["Validator:Comparison", v.ValueToCompare],
             IEmailValidator => localizer["Validator:Email"],
             IRegularExpressionValidator v => localizer["Validator:RegularExpression", v.Expression],
-            _ => ""
+            _ => string.Empty
         };
     }
 

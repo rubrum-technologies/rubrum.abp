@@ -12,6 +12,8 @@ public class EntityNotFoundError
     }
 
     public string? Id { get; }
+
     public string? Type { get; }
+
     public string Message { get; }
 }
