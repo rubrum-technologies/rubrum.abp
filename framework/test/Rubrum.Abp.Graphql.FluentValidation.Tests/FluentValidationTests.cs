@@ -1,4 +1,5 @@
 ﻿using CookieCrumble;
+using Shouldly;
 using Xunit;
 
 namespace Rubrum.Abp.Graphql;
@@ -22,8 +23,9 @@ public class FluentValidationTests : GraphqlFluentValidationTestBase
                     }
                 }
             }
-            """
-        ));
+            """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -45,8 +47,9 @@ public class FluentValidationTests : GraphqlFluentValidationTestBase
                     }
                 }
             }
-            """
-        ));
+            """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }

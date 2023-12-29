@@ -24,8 +24,7 @@ public class RubrumAbpLanguageManagementApplicationContractsModule : AbpModule
                     LanguageManagementModuleExtensionConstants.EntityNames.SystemLanguage,
                     new[] { typeof(SystemLanguageDto) },
                     new[] { typeof(CreateSystemLanguageInput) },
-                    new[] { typeof(UpdateSystemLanguageInput) }
-                );
+                    new[] { typeof(UpdateSystemLanguageInput) });
         });
     }
 }

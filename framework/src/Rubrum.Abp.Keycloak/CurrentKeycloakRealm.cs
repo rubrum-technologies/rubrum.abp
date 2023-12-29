@@ -24,7 +24,8 @@ public class CurrentKeycloakRealm : ICurrentKeycloakRealm, ITransientDependency
         var parentScope = _accessor.Current;
         _accessor.Current = new BasicKeycloakRealmInfo(realmName);
 
-        return new DisposeAction<ValueTuple<ICurrentKeycloakRealmAccessor, BasicKeycloakRealmInfo?>>(static state =>
+        return new DisposeAction<(ICurrentKeycloakRealmAccessor, BasicKeycloakRealmInfo?)>(
+            static state =>
             {
                 var (currentTenantAccessor, parentScope) = state;
                 currentTenantAccessor.Current = parentScope;

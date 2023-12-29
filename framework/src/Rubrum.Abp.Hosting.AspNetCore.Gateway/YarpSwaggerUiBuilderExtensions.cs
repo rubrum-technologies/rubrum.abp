@@ -19,10 +19,11 @@ public static class YarpSwaggerUiBuilderExtensions
             var configuration = context.ServiceProvider.GetRequiredService<IConfiguration>();
             var proxyConfig = context.ServiceProvider.GetRequiredService<IProxyConfigProvider>().GetConfig();
 
-            foreach (var cluster in proxyConfig.Clusters)
+            foreach (var clusterId in proxyConfig.Clusters.Select(x => x.ClusterId))
             {
-                options.SwaggerEndpoint($"/api/{cluster.ClusterId.ToLower()}/swagger/v1/swagger.json",
-                    $"{cluster.ClusterId} API");
+                options.SwaggerEndpoint(
+                    $"/api/{clusterId.ToLower()}/swagger/v1/swagger.json",
+                    $"{clusterId} API");
                 options.OAuthClientId(configuration["Swagger:ClientId"]);
                 options.OAuthClientSecret(configuration["Swagger:ClientSecret"]);
             }

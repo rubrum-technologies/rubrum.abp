@@ -8,6 +8,8 @@ public class CountryMutationType :
     EntityMutationType<CountryDto, Guid, ICountryGraphqlService, CreateCountryInput, UpdateCountryInput>
 {
     protected override string TypeName => CountryConstants.TypeName;
+
     protected override string TypeNameSingular => "Country";
+
     protected override string TypeNameInPlural => "Countries";
 }

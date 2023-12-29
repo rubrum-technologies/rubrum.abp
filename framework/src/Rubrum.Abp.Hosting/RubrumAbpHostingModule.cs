@@ -6,5 +6,4 @@ namespace Rubrum.Abp.Hosting;
 [DependsOn(typeof(AbpAutofacModule))]
 public class RubrumAbpHostingModule : AbpModule
 {
-    
 }

@@ -141,7 +141,9 @@ public class PermissionGroupDefinitionRecordRepositoryGrpcService :
             ? new PermissionGroupDefinitionRecordResponse()
             : new PermissionGroupDefinitionRecordResponse
             {
-                Id = entity.Id.ToString(), Name = entity.Name, DisplayName = entity.DisplayName
+                Id = entity.Id.ToString(),
+                Name = entity.Name,
+                DisplayName = entity.DisplayName
             };
     }
 

@@ -10,12 +10,12 @@ public static class ResolverContextExtensions
         var input = context.ArgumentLiteral<ObjectValueNode>("input");
         return input.Fields.Single(x => x.Name.Value == fieldName);
     }
-    
+
     public static TKey GetFiledKeyForInput<TKey>(this IResolverContext context, string? fieldName = null)
         where TKey : notnull
     {
         var key = context.GetFiledForInput(fieldName ?? "id");
-        
+
         var idSerializer = context.Service<IIdSerializer>();
         return (TKey)idSerializer.Deserialize((string)key.Value.Value!).Value;
     }

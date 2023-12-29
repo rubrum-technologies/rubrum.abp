@@ -19,9 +19,7 @@ public static class UseAnyExtensions
                     !context.TypeInspector.TryCreateTypeInfo(definition.ResultType, out var typeInfo))
                 {
                     var resultType = definition.ResolverType ?? typeof(object);
-                    throw new ArgumentException(
-                        $"Cannot handle the specified type `{resultType.FullName}`.",
-                        nameof(descriptor));
+                    throw new ArgumentException($"Cannot handle the specified type `{resultType.FullName}`.");
                 }
 
                 var selectionType = typeInfo.NamedType;
@@ -53,7 +51,8 @@ public static class UseAnyExtensions
         var middlewareType = middlewareDefinition.MakeGenericType(type);
         var middleware = FieldClassMiddlewareFactory.Create(middlewareType);
         var index = definition.MiddlewareDefinitions.IndexOf(placeholder);
-        definition.MiddlewareDefinitions[index] = new FieldMiddlewareDefinition(middleware,
+        definition.MiddlewareDefinitions[index] = new FieldMiddlewareDefinition(
+            middleware,
             key: "Rubrum.Abp.Graphql.AnyMiddleware");
     }
 }

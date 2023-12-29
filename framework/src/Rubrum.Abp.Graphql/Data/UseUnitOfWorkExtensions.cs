@@ -10,7 +10,8 @@ public static class UseUnitOfWorkExtensions
 {
     public static IObjectFieldDescriptor UseUnitOfWork(this IObjectFieldDescriptor descriptor)
     {
-        var placeholder = new FieldMiddlewareDefinition(next => async context =>
+        var placeholder = new FieldMiddlewareDefinition(
+            next => async context =>
             {
                 var unitOfWorkManager = context.Services.GetRequiredService<IUnitOfWorkManager>();
                 using var uow = unitOfWorkManager.Begin(true, true);
@@ -32,7 +33,7 @@ public static class UseUnitOfWorkExtensions
                     return;
                 }
 
-                var genericType = resultType.GenericTypeArguments.First();
+                var genericType = resultType.GenericTypeArguments[0];
                 if (resultType == typeof(IQueryable<>).MakeGenericType(genericType))
                 {
                     definition.Configurations.Add(new CompleteConfiguration<ObjectFieldDefinition>(
@@ -42,7 +43,8 @@ public static class UseUnitOfWorkExtensions
                                 genericType);
                             var middleware = FieldClassMiddlewareFactory.Create(middlewareType);
                             var index = def.MiddlewareDefinitions.IndexOf(placeholder);
-                            def.MiddlewareDefinitions[index] = new FieldMiddlewareDefinition(middleware,
+                            def.MiddlewareDefinitions[index] = new FieldMiddlewareDefinition(
+                                middleware,
                                 key: "Rubrum.Abp.Graphql.UnitOfWorkMiddleware");
                         },
                         definition,

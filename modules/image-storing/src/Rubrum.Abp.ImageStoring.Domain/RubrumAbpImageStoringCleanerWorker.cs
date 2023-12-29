@@ -10,7 +10,8 @@ namespace Rubrum.Abp.ImageStoring;
 
 public class RubrumAbpImageStoringCleanerWorker : AsyncPeriodicBackgroundWorkerBase
 {
-    public RubrumAbpImageStoringCleanerWorker(AbpAsyncTimer timer, IServiceScopeFactory serviceScopeFactory) : base(
+    public RubrumAbpImageStoringCleanerWorker(AbpAsyncTimer timer, IServiceScopeFactory serviceScopeFactory)
+        : base(
         timer,
         serviceScopeFactory)
     {
@@ -36,7 +37,7 @@ public class RubrumAbpImageStoringCleanerWorker : AsyncPeriodicBackgroundWorkerB
         using (cancellationTokenProvider.Use(cancellationToken))
         {
             var query = (await repository.GetQueryableAsync())
-                .Where(x => x.IsDisposable == true && x.CreationTime < dateTime)
+                .Where(x => x.IsDisposable && x.CreationTime < dateTime)
                 .Select(x => x.Id);
 
             foreach (var id in await asyncExecuter.ToListAsync(query, cancellationToken))

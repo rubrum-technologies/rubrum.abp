@@ -48,7 +48,7 @@ public class SystemLanguageDataSeedContributor : IDataSeedContributor, ITransien
         {
             return;
         }
-        
+
         foreach (var (code, name) in Languages)
         {
             var language = await _manager.CreateAsync(code, name);

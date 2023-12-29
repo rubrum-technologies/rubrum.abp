@@ -21,7 +21,7 @@ public class LibreTranslatorContributor : ITranslatorContributor, ITransientDepe
     {
         try
         {
-            if (!(await CheckSupportLanguageAsync("auto", into)))
+            if (!await CheckSupportLanguageAsync("auto", into))
             {
                 return new TranslateProcessResult(text, TranslateProcessState.Unsupported);
             }
@@ -44,7 +44,7 @@ public class LibreTranslatorContributor : ITranslatorContributor, ITransientDepe
     {
         try
         {
-            if (!(await CheckSupportLanguageAsync(from, into)))
+            if (!await CheckSupportLanguageAsync(from, into))
             {
                 return new TranslateProcessResult(text, TranslateProcessState.Unsupported);
             }
@@ -69,6 +69,6 @@ public class LibreTranslatorContributor : ITranslatorContributor, ITransientDepe
             return false;
         }
 
-        return from == "auto" || language.Targets.Any(target => target == from);
+        return from == "auto" || language.Targets.Contains(from);
     }
 }

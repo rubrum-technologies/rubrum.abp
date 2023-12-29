@@ -5,9 +5,6 @@ namespace Rubrum.Abp.Translator;
 
 public class Translator : ITranslator, ITransientDependency
 {
-    protected readonly IEnumerable<ITranslatorContributor> TranslatorContributors;
-    protected readonly ICancellationTokenProvider CancellationTokenProvider;
-
     public Translator(
         IEnumerable<ITranslatorContributor> translatorContributors,
         ICancellationTokenProvider cancellationTokenProvider)
@@ -15,6 +12,10 @@ public class Translator : ITranslator, ITransientDependency
         TranslatorContributors = translatorContributors;
         CancellationTokenProvider = cancellationTokenProvider;
     }
+
+    protected IEnumerable<ITranslatorContributor> TranslatorContributors { get; }
+
+    protected ICancellationTokenProvider CancellationTokenProvider { get; }
 
     public async Task<TranslateProcessResult> TranslateAsync(
         string into,
@@ -27,7 +28,7 @@ public class Translator : ITranslator, ITransientDependency
                 into,
                 text,
                 CancellationTokenProvider.FallbackToProvider(cancellationToken));
-            
+
             if (result.State == TranslateProcessState.Unsupported)
             {
                 continue;

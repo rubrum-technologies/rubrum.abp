@@ -21,8 +21,7 @@ public class RubrumAbpLanguageManagementDomainModule : AbpModule
             ModuleExtensionConfigurationHelper.ApplyEntityConfigurationToEntity(
                 LanguageManagementModuleExtensionConstants.ModuleName,
                 LanguageManagementModuleExtensionConstants.EntityNames.SystemLanguage,
-                typeof(SystemLanguage)
-            );
+                typeof(SystemLanguage));
         });
     }
 }

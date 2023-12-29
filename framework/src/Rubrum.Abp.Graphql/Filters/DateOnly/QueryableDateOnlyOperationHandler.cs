@@ -10,7 +10,8 @@ public abstract class QueryableDateOnlyOperationHandler : QueryableComparableOpe
 {
     protected QueryableDateOnlyOperationHandler(
         ITypeConverter typeConverter,
-        InputParser inputParser) : base(typeConverter, inputParser)
+        InputParser inputParser)
+        : base(typeConverter, inputParser)
     {
     }
 

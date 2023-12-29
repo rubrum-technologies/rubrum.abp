@@ -19,7 +19,7 @@ public class PermissionDefinitionRecordRepository : IPermissionDefinitionRecordR
     public async Task<PermissionDefinitionRecord> GetAsync(
         Guid id,
         bool includeDetails = true,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.GetAsync(
             new PermissionDefinitionRecordGetRequest { Id = id.ToString(), IncludeDetails = includeDetails },
@@ -31,7 +31,7 @@ public class PermissionDefinitionRecordRepository : IPermissionDefinitionRecordR
     public async Task<PermissionDefinitionRecord?> FindAsync(
         Guid id,
         bool includeDetails = true,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.FindAsync(
             new PermissionDefinitionRecordFindRequest { Id = id.ToString(), IncludeDetails = includeDetails },
@@ -42,7 +42,7 @@ public class PermissionDefinitionRecordRepository : IPermissionDefinitionRecordR
 
     public async Task<PermissionDefinitionRecord> FindByNameAsync(
         string name,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.FindByNameAsync(
             new PermissionDefinitionRecordFindByNameRequest { Name = name },
@@ -53,7 +53,7 @@ public class PermissionDefinitionRecordRepository : IPermissionDefinitionRecordR
 
     public async Task<List<PermissionDefinitionRecord>> GetListAsync(
         bool includeDetails = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.GetListAsync(
             new PermissionDefinitionRecordListRequest { IncludeDetails = includeDetails },
@@ -62,7 +62,7 @@ public class PermissionDefinitionRecordRepository : IPermissionDefinitionRecordR
         return response.Entities.Select(ToEntity).ToList();
     }
 
-    public async Task<long> GetCountAsync(CancellationToken cancellationToken = new())
+    public async Task<long> GetCountAsync(CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.GetCountAsync(
             new Empty(),
@@ -76,7 +76,7 @@ public class PermissionDefinitionRecordRepository : IPermissionDefinitionRecordR
         int maxResultCount,
         string sorting,
         bool includeDetails = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.GetListAsync(
             new PermissionDefinitionRecordListRequest { IncludeDetails = includeDetails },
@@ -88,7 +88,7 @@ public class PermissionDefinitionRecordRepository : IPermissionDefinitionRecordR
     public async Task<PermissionDefinitionRecord> InsertAsync(
         PermissionDefinitionRecord entity,
         bool autoSave = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.InsertAsync(
             ToInsertRequest(entity),
@@ -100,7 +100,7 @@ public class PermissionDefinitionRecordRepository : IPermissionDefinitionRecordR
     public async Task InsertManyAsync(
         IEnumerable<PermissionDefinitionRecord> entities,
         bool autoSave = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var request = new PermissionDefinitionRecordInsertManyRequest();
         request.Inputs.AddRange(entities.Select(ToInsertRequest));
@@ -111,7 +111,7 @@ public class PermissionDefinitionRecordRepository : IPermissionDefinitionRecordR
     public async Task<PermissionDefinitionRecord> UpdateAsync(
         PermissionDefinitionRecord entity,
         bool autoSave = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.UpdateAsync(
             ToUpdateRequest(entity),
@@ -123,7 +123,7 @@ public class PermissionDefinitionRecordRepository : IPermissionDefinitionRecordR
     public async Task UpdateManyAsync(
         IEnumerable<PermissionDefinitionRecord> entities,
         bool autoSave = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var request = new PermissionDefinitionRecordUpdateManyRequest();
         request.Inputs.AddRange(entities.Select(ToUpdateRequest));
@@ -134,7 +134,7 @@ public class PermissionDefinitionRecordRepository : IPermissionDefinitionRecordR
     public async Task DeleteAsync(
         PermissionDefinitionRecord entity,
         bool autoSave = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         await DeleteAsync(entity.Id, autoSave, cancellationToken);
     }
@@ -142,7 +142,7 @@ public class PermissionDefinitionRecordRepository : IPermissionDefinitionRecordR
     public async Task DeleteManyAsync(
         IEnumerable<PermissionDefinitionRecord> entities,
         bool autoSave = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         await DeleteManyAsync(entities.Select(x => x.Id), autoSave, cancellationToken);
     }
@@ -150,7 +150,7 @@ public class PermissionDefinitionRecordRepository : IPermissionDefinitionRecordR
     public async Task DeleteAsync(
         Guid id,
         bool autoSave = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         await _client.DeleteAsync(
             new PermissionDefinitionRecordDeleteRequest { Id = id.ToString() },
@@ -160,7 +160,7 @@ public class PermissionDefinitionRecordRepository : IPermissionDefinitionRecordR
     public async Task DeleteManyAsync(
         IEnumerable<Guid> ids,
         bool autoSave = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var request = new PermissionDefinitionRecordDeleteManyRequest();
         request.Ids.AddRange(ids.Select(x => new PermissionDefinitionRecordDeleteRequest { Id = x.ToString() }));

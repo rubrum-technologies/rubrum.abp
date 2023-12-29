@@ -11,6 +11,11 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.507" PrivateAssets="all"/>
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="9.15.0.81779" PrivateAssets="all"/>
+  </ItemGroup>
+
   <Target Name="Mapster">
   </Target>
 </Project>

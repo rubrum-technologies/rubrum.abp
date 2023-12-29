@@ -1,14 +1,17 @@
 ﻿using CookieCrumble;
 using HotChocolate.Types.Relay;
+using Rubrum.Abp.Graphql.Types;
+using Shouldly;
 using Xunit;
+using static Rubrum.Abp.Graphql.RubrumAbpGraphqlTestConstants;
 
-namespace Rubrum.Abp.LanguageManagement;
+namespace Rubrum.Abp.Graphql;
 
-public class SystemLanguageTests : LanguageManagementGraphqlTestBase
+public class CountryTests : RubrumAbpGraphqlTestBase
 {
     private readonly IIdSerializer _idSerializer;
 
-    public SystemLanguageTests()
+    public CountryTests()
     {
         _idSerializer = GetRequiredService<IIdSerializer>();
     }
@@ -16,19 +19,19 @@ public class SystemLanguageTests : LanguageManagementGraphqlTestBase
     [Fact]
     public async Task FetchById()
     {
-        var id = _idSerializer.Serialize(null, SystemLanguageConstants.TypeName, "ru");
+        var id = _idSerializer.Serialize(null, CountryConstants.TypeName, CountryId);
 
         await using var result = await ExecuteRequestAsync(b => b.SetQuery(
             $$"""
               query {
-                  systemLanguageById(id: "{{id}}") {
+                  countryById(id: "{{id}}") {
                       id
-                      code
                       name
                   }
               }
-              """
-        ));
+              """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -36,19 +39,19 @@ public class SystemLanguageTests : LanguageManagementGraphqlTestBase
     [Fact]
     public async Task Fetch()
     {
-        var id = _idSerializer.Serialize(null, SystemLanguageConstants.TypeName, "en");
+        var id = _idSerializer.Serialize(null, CountryConstants.TypeName, CountryId);
 
         await using var result = await ExecuteRequestAsync(b => b.SetQuery(
             $$"""
               query {
-                  systemLanguage(where: { id: { eq: "{{id}}" } }) {
+                  country(where: { id: { eq: "{{id}}" } }) {
                       id
-                      code
                       name
                   }
               }
-              """
-        ));
+              """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -59,10 +62,9 @@ public class SystemLanguageTests : LanguageManagementGraphqlTestBase
         await using var result = await ExecuteRequestAsync(b => b.SetQuery(
             """
             query {
-                systemLanguages {
+                countries {
                     nodes {
                       id
-                      code
                       name
                     }
                     pageInfo {
@@ -73,8 +75,9 @@ public class SystemLanguageTests : LanguageManagementGraphqlTestBase
                     }
                 }
             }
-            """
-        ));
+            """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -85,10 +88,11 @@ public class SystemLanguageTests : LanguageManagementGraphqlTestBase
         await using var result = await ExecuteRequestAsync(b => b.SetQuery(
             """
             query {
-                systemLanguagesAny(where: { name: { eq: "Русский" } })
+                countriesAny(where: { name: { eq: "USA" } })
             }
-            """
-        ));
+            """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -99,10 +103,11 @@ public class SystemLanguageTests : LanguageManagementGraphqlTestBase
         await using var result = await ExecuteRequestAsync(b => b.SetQuery(
             """
             query {
-                systemLanguagesCount
+                countriesCount
             }
-            """
-        ));
+            """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -113,10 +118,8 @@ public class SystemLanguageTests : LanguageManagementGraphqlTestBase
         await using var result = await ExecuteRequestAsync(b => b.SetQuery(
             """
             mutation {
-                createSystemLanguage (input: { code: "test", name: "Test" }) {
-                    systemLanguage {
-                        id
-                        code
+                createCountry (input: { name: "USA" }) {
+                    country {
                         name
                     }
                     errors {
@@ -126,8 +129,9 @@ public class SystemLanguageTests : LanguageManagementGraphqlTestBase
                     }
                 }
             }
-            """
-        ));
+            """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -135,14 +139,13 @@ public class SystemLanguageTests : LanguageManagementGraphqlTestBase
     [Fact]
     public async Task Update()
     {
-        var id = _idSerializer.Serialize(null, SystemLanguageConstants.TypeName, "zh");
+        var id = _idSerializer.Serialize(null, CountryConstants.TypeName, CountryId);
         await using var result = await ExecuteRequestAsync(b => b.SetQuery(
             $$"""
               mutation {
-                  updateSystemLanguage (input: { id: "{{id}}", name: "CH" }) {
-                      systemLanguage {
+                  updateCountry (input: { id: "{{id}}", name: "USA" }) {
+                      country {
                           id
-                          code
                           name
                       }
                       errors {
@@ -152,8 +155,9 @@ public class SystemLanguageTests : LanguageManagementGraphqlTestBase
                       }
                   }
               }
-              """
-        ));
+              """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -161,14 +165,13 @@ public class SystemLanguageTests : LanguageManagementGraphqlTestBase
     [Fact]
     public async Task Delete()
     {
-        var id = _idSerializer.Serialize(null, SystemLanguageConstants.TypeName, "gu");
+        var id = _idSerializer.Serialize(null, CountryConstants.TypeName, CountryId);
         await using var result = await ExecuteRequestAsync(b => b.SetQuery(
             $$"""
               mutation {
-                  deleteSystemLanguage (input: { id: "{{id}}" }) {
-                      systemLanguage {
+                  deleteCountry (input: { id: "{{id}}" }) {
+                      country {
                           id
-                          code
                           name
                       }
                       errors {
@@ -178,8 +181,9 @@ public class SystemLanguageTests : LanguageManagementGraphqlTestBase
                       }
                   }
               }
-              """
-        ));
+              """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }

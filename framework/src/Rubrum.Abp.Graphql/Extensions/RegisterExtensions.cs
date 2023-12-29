@@ -61,7 +61,7 @@ public static class RegisterExtensions
     {
         var types = typeFinder.Types
             .Where(IsEntityDtoType)
-            .Select(x => x.BaseType!.GenericTypeArguments.First())
+            .Select(x => x.BaseType!.GenericTypeArguments[0])
             .ToList();
 
         return types;
@@ -79,14 +79,14 @@ public static class RegisterExtensions
             return false;
         }
 
-        var entityType = type.BaseType.GenericTypeArguments.First();
+        var entityType = type.BaseType.GenericTypeArguments[0];
         return entityType is { IsClass: true } && typeof(IEntityDto).IsAssignableFrom(entityType);
     }
 
     private static Type? GetKeyEntityDto(Type type)
     {
-        var entityInterface = type.GetInterfaces()
-            .FirstOrDefault(x => typeof(IEntityDto).IsAssignableFrom(x) && x.GenericTypeArguments.Length == 1);
-        return entityInterface?.GenericTypeArguments.First();
+        var entityInterface = Array.Find(type.GetInterfaces(), x => typeof(IEntityDto).IsAssignableFrom(x) && x.GenericTypeArguments.Length == 1);
+
+        return entityInterface?.GenericTypeArguments[0];
     }
 }

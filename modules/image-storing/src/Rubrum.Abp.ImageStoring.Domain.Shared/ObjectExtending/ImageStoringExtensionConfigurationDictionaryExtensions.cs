@@ -10,7 +10,6 @@ public static class ImageStoringExtensionConfigurationDictionaryExtensions
     {
         return modules.ConfigureModule(
             ImageStoringModuleExtensionConstants.ModuleName,
-            configureAction
-        );
+            configureAction);
     }
 }

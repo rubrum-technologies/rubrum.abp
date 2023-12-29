@@ -10,10 +10,8 @@ public class SystemLanguageGraphqlService : SystemLanguageAppService, ISystemLan
         IRepository<SystemLanguage, string> repository,
         SystemLanguageManager manager,
         ISystemLanguageMapper mapper,
-        ICancellationTokenProvider cancellationTokenProvider) : base(repository,
-        manager,
-        mapper,
-        cancellationTokenProvider)
+        ICancellationTokenProvider cancellationTokenProvider)
+        : base(repository, manager, mapper, cancellationTokenProvider)
     {
     }
 

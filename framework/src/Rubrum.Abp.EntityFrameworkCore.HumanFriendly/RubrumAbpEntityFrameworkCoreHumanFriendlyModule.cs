@@ -8,5 +8,4 @@ namespace Rubrum.Abp.EntityFrameworkCore.HumanFriendly;
 [DependsOn(typeof(RubrumAbpDddHumanFriendlyModule))]
 public class RubrumAbpEntityFrameworkCoreHumanFriendlyModule : AbpModule
 {
-    
 }

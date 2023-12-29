@@ -16,6 +16,7 @@ public class GraphQlSubscriptionClientFactory : IGraphQLSubscriptionClientFactor
         .First(x => x.GetParameters().Length == 2);
 
     private readonly IConfiguration _configuration;
+
     private readonly IGraphQLSubscriptionClientFactory _graphQlSubscriptionClientFactory;
 
     public GraphQlSubscriptionClientFactory(
@@ -24,8 +25,7 @@ public class GraphQlSubscriptionClientFactory : IGraphQLSubscriptionClientFactor
         IWebSocketConnectionFactory connectionFactory)
     {
         _configuration = configuration;
-        _graphQlSubscriptionClientFactory = (IGraphQLSubscriptionClientFactory)
-            DefaultWebSocketGraphQlSubscriptionClientFactoryConstructor
+        _graphQlSubscriptionClientFactory = (IGraphQLSubscriptionClientFactory)DefaultWebSocketGraphQlSubscriptionClientFactoryConstructor
                 .Invoke(new object[] { httpClientFactory, connectionFactory });
     }
 

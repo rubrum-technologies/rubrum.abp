@@ -1,11 +1,12 @@
 ﻿using CookieCrumble;
 using HotChocolate.Execution;
 using HotChocolate.Execution.Configuration;
+using Shouldly;
 using Xunit;
 
-namespace Rubrum.Abp.Keycloak;
+namespace Rubrum.Abp.ImageStoring;
 
-public class SchemaTests : RubrumAbpKeycloakGraphqlTestBase
+public class SchemaTests : ImageStoringGraphqlTestBase
 {
     private readonly IRequestExecutorBuilder _builder;
 
@@ -18,6 +19,9 @@ public class SchemaTests : RubrumAbpKeycloakGraphqlTestBase
     public async Task SchemaChangeTest()
     {
         var schema = await _builder.BuildSchemaAsync();
+
+        schema.ShouldNotBeNull();
+
         schema.MatchSnapshot();
     }
 }

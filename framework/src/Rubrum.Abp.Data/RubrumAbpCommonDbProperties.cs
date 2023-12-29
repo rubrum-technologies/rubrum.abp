@@ -1,6 +1,6 @@
 ﻿namespace Rubrum.Abp.Data;
 
-public class RubrumAbpCommonDbProperties
+public static class RubrumAbpCommonDbProperties
 {
     public static string? DbTablePrefix { get; set; } = "Rubrum";
 

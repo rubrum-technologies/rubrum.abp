@@ -11,13 +11,14 @@ public class SystemLanguage : FullAuditedAggregateRoot<string>, IHasEntityVersio
 {
     private string _name;
 
-    protected SystemLanguage()
-    {
-    }
-
-    internal SystemLanguage(string id, string name) : base(id)
+    internal SystemLanguage(string id, string name)
+        : base(id)
     {
         Name = name;
+    }
+
+    protected SystemLanguage()
+    {
     }
 
     public string Name

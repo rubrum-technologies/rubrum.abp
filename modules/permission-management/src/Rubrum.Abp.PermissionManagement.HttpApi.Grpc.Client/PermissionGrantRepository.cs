@@ -18,7 +18,7 @@ public class PermissionGrantRepository : IPermissionGrantRepository, ITransientD
     public async Task<PermissionGrant> GetAsync(
         Guid id,
         bool includeDetails = true,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.GetAsync(
             new PermissionGrantGetRequest { Id = id.ToString(), IncludeDetails = includeDetails },
@@ -30,7 +30,7 @@ public class PermissionGrantRepository : IPermissionGrantRepository, ITransientD
     public async Task<PermissionGrant?> FindAsync(
         Guid id,
         bool includeDetails = true,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.FindAsync(
             new PermissionGrantFindRequest { Id = id.ToString(), IncludeDetails = includeDetails },
@@ -43,12 +43,14 @@ public class PermissionGrantRepository : IPermissionGrantRepository, ITransientD
         string name,
         string providerName,
         string providerKey,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.FindByNameAsync(
             new PermissionGrantFindByNameRequest
             {
-                Name = name, ProviderName = providerName, ProviderKey = providerKey
+                Name = name,
+                ProviderName = providerName,
+                ProviderKey = providerKey
             },
             cancellationToken: cancellationToken);
 
@@ -57,7 +59,7 @@ public class PermissionGrantRepository : IPermissionGrantRepository, ITransientD
 
     public async Task<List<PermissionGrant>> GetListAsync(
         bool includeDetails = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.GetListAsync(
             new PermissionGrantListRequest { IncludeDetails = includeDetails },
@@ -69,7 +71,7 @@ public class PermissionGrantRepository : IPermissionGrantRepository, ITransientD
     public async Task<List<PermissionGrant>> GetListAsync(
         string providerName,
         string providerKey,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.GetListByProviderAsync(
             new PermissionGrantListByProviderRequest { ProviderName = providerName, ProviderKey = providerKey },
@@ -82,19 +84,21 @@ public class PermissionGrantRepository : IPermissionGrantRepository, ITransientD
         string[] names,
         string providerName,
         string providerKey,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.GetListByNamesAsync(
             new PermissionGrantListByNamesRequest
             {
-                Names = { names }, ProviderName = providerName, ProviderKey = providerKey
+                Names = { names },
+                ProviderName = providerName,
+                ProviderKey = providerKey
             },
             cancellationToken: cancellationToken);
 
         return response.Entities.Select(ToEntity).ToList();
     }
 
-    public async Task<long> GetCountAsync(CancellationToken cancellationToken = new())
+    public async Task<long> GetCountAsync(CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.GetCountAsync(
             new Empty(),
@@ -108,7 +112,7 @@ public class PermissionGrantRepository : IPermissionGrantRepository, ITransientD
         int maxResultCount,
         string sorting,
         bool includeDetails = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.GetListAsync(
             new PermissionGrantListRequest { IncludeDetails = includeDetails },
@@ -120,7 +124,7 @@ public class PermissionGrantRepository : IPermissionGrantRepository, ITransientD
     public async Task<PermissionGrant> InsertAsync(
         PermissionGrant entity,
         bool autoSave = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.InsertAsync(
             ToInsertRequest(entity),
@@ -132,7 +136,7 @@ public class PermissionGrantRepository : IPermissionGrantRepository, ITransientD
     public async Task InsertManyAsync(
         IEnumerable<PermissionGrant> entities,
         bool autoSave = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var request = new PermissionGrantInsertManyRequest();
         request.Inputs.AddRange(entities.Select(ToInsertRequest));
@@ -143,7 +147,7 @@ public class PermissionGrantRepository : IPermissionGrantRepository, ITransientD
     public async Task<PermissionGrant> UpdateAsync(
         PermissionGrant entity,
         bool autoSave = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.UpdateAsync(
             ToUpdateRequest(entity),
@@ -155,7 +159,7 @@ public class PermissionGrantRepository : IPermissionGrantRepository, ITransientD
     public async Task UpdateManyAsync(
         IEnumerable<PermissionGrant> entities,
         bool autoSave = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var request = new PermissionGrantUpdateManyRequest();
         request.Inputs.AddRange(entities.Select(ToUpdateRequest));
@@ -166,7 +170,7 @@ public class PermissionGrantRepository : IPermissionGrantRepository, ITransientD
     public async Task DeleteAsync(
         PermissionGrant entity,
         bool autoSave = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         await DeleteAsync(entity.Id, autoSave, cancellationToken);
     }
@@ -174,7 +178,7 @@ public class PermissionGrantRepository : IPermissionGrantRepository, ITransientD
     public async Task DeleteManyAsync(
         IEnumerable<PermissionGrant> entities,
         bool autoSave = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         await DeleteManyAsync(entities.Select(x => x.Id), autoSave, cancellationToken);
     }
@@ -182,7 +186,7 @@ public class PermissionGrantRepository : IPermissionGrantRepository, ITransientD
     public async Task DeleteAsync(
         Guid id,
         bool autoSave = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         await _client.DeleteAsync(
             new PermissionGrantDeleteRequest { Id = id.ToString() },
@@ -192,7 +196,7 @@ public class PermissionGrantRepository : IPermissionGrantRepository, ITransientD
     public async Task DeleteManyAsync(
         IEnumerable<Guid> ids,
         bool autoSave = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var request = new PermissionGrantDeleteManyRequest();
         request.Ids.AddRange(ids.Select(x => new PermissionGrantDeleteRequest { Id = x.ToString() }));
@@ -201,7 +205,6 @@ public class PermissionGrantRepository : IPermissionGrantRepository, ITransientD
             request,
             cancellationToken: cancellationToken);
     }
-
 
     private static PermissionGrant ToEntity(
         PermissionGrantResponse response)

@@ -6,7 +6,7 @@ using Volo.Abp.Uow;
 
 namespace Rubrum.Abp.ImageStoring;
 
-public class ImageUrlsByTagDataLoader : 
+public class ImageUrlsByTagDataLoader :
     GroupedDataLoader<string, string>,
     IImageUrlsByTagDataLoader,
     IScopedDependency
@@ -22,8 +22,8 @@ public class ImageUrlsByTagDataLoader :
         IAsyncQueryableExecuter asyncExecuter,
         IImageInformationRepository repository,
         IOptions<RubrumAbpImageStoringOptions> imageStoringOptions,
-        DataLoaderOptions? options = null) : base(batchScheduler,
-        options)
+        DataLoaderOptions? options = null)
+        : base(batchScheduler, options)
     {
         _unitOfWorkManager = unitOfWorkManager;
         _asyncExecuter = asyncExecuter;
@@ -35,8 +35,8 @@ public class ImageUrlsByTagDataLoader :
         IReadOnlyList<string> keys,
         CancellationToken cancellationToken)
     {
-        using var uow = _unitOfWorkManager.Begin(true); 
-        
+        using var uow = _unitOfWorkManager.Begin(true);
+
         var prefixUrl = _imageStoringOptions.PrefixUrl.TrimStart('/').TrimEnd('/');
         var query = (await _repository.GetQueryableAsync())
             .Where(x => keys.Contains(x.Tag))

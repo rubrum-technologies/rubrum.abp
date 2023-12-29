@@ -7,6 +7,6 @@ public class MappingRegister : IRegister
     public void Register(TypeAdapterConfig config)
     {
         config.NewConfig<SystemLanguage, SystemLanguageDto>()
-            .Ignore(x=>x.ExtraProperties);
+            .Ignore(x => x.ExtraProperties);
     }
 }

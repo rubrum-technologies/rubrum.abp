@@ -23,8 +23,8 @@ public class KeycloakDataSeederTests : RubrumAbpKeycloakDomainTestBase
 
         var clients = (await _keycloakClient.GetClientsAsync()).ToList();
 
-        clients.FirstOrDefault(x => x.Name == "swagger-test").ShouldNotBeNull();
-        clients.FirstOrDefault(x => x.Name == "test-app").ShouldNotBeNull();
-        clients.FirstOrDefault(x => x.Name == "test-microservice-1").ShouldNotBeNull();
+        clients.Find(x => x.Name == "swagger-test").ShouldNotBeNull();
+        clients.Find(x => x.Name == "test-app").ShouldNotBeNull();
+        clients.Find(x => x.Name == "test-microservice-1").ShouldNotBeNull();
     }
 }

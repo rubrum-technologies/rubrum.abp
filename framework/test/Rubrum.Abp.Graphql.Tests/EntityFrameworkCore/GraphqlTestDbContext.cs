@@ -6,10 +6,12 @@ namespace Rubrum.Abp.Graphql.EntityFrameworkCore;
 
 public class GraphqlTestDbContext : AbpDbContext<GraphqlTestDbContext>
 {
-    public GraphqlTestDbContext(DbContextOptions<GraphqlTestDbContext> options) : base(options)
+    public GraphqlTestDbContext(DbContextOptions<GraphqlTestDbContext> options)
+        : base(options)
     {
     }
 
     public DbSet<Country> Countries => Set<Country>();
+
     public DbSet<City> Cities => Set<City>();
 }

@@ -5,12 +5,12 @@ namespace Rubrum.Abp.EntityFrameworkCore.HumanFriendly;
 
 public static class HumanFriendlyIdConfigurationExtensions
 {
-    public static void ConfigureByHumanFriendlyId<T>(this EntityTypeBuilder builder)
+    public static void ConfigureByHumanFriendlyId(this EntityTypeBuilder builder)
     {
         if (builder.Metadata.ClrType.IsAssignableTo<IHumanFriendlyId>())
         {
             builder.HasIndex(nameof(IHumanFriendlyId.HumanFriendlyId));
-            
+
             builder.Property(nameof(IHumanFriendlyId.HumanFriendlyId))
                 .ValueGeneratedOnAdd()
                 .IsRequired();

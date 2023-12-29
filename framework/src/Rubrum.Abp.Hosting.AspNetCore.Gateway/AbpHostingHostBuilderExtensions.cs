@@ -18,8 +18,7 @@ public static class AbpHostingHostBuilderExtensions
             builder.AddJsonFile(
                     AppYarpJsonPath,
                     optional,
-                    reloadOnChange
-                )
+                    reloadOnChange)
                 .AddEnvironmentVariables();
         });
     }

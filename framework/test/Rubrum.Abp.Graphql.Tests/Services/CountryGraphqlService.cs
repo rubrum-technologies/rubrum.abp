@@ -7,7 +7,8 @@ namespace Rubrum.Abp.Graphql.Services;
 
 public class CountryGraphqlService : CountryAppService, ICountryGraphqlService
 {
-    public CountryGraphqlService(IRepository<Country, Guid> repository) : base(repository)
+    public CountryGraphqlService(IRepository<Country, Guid> repository)
+        : base(repository)
     {
     }
 

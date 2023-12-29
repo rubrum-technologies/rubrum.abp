@@ -8,7 +8,8 @@ namespace Rubrum.Abp.LanguageManagement.EntityFrameworkCore;
 [ConnectionStringName(ConnectionStringName)]
 public class LanguageManagementDbContext : AbpDbContext<LanguageManagementDbContext>, ILanguageManagementDbContext
 {
-    public LanguageManagementDbContext(DbContextOptions<LanguageManagementDbContext> options) : base(options)
+    public LanguageManagementDbContext(DbContextOptions<LanguageManagementDbContext> options)
+        : base(options)
     {
     }
 

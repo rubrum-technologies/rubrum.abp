@@ -9,7 +9,6 @@ public class ImageStoringModuleExtensionConfiguration : ModuleExtensionConfigura
     {
         return this.ConfigureEntity(
             ImageStoringModuleExtensionConstants.EntityNames.ImageInformation,
-            configureAction
-        );
+            configureAction);
     }
 }

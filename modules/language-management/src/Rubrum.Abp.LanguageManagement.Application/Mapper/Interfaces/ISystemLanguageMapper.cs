@@ -8,5 +8,6 @@ namespace Rubrum.Abp.LanguageManagement.Mapper.Interfaces;
 public interface ISystemLanguageMapper : ITransientDependency
 {
     Expression<Func<SystemLanguage, SystemLanguageDto>> Expression { get; }
+
     SystemLanguageDto Map(SystemLanguage language);
 }

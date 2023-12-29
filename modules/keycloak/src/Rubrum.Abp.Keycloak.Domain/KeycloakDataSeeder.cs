@@ -55,8 +55,7 @@ public class KeycloakDataSeeder : IKeycloakDataSeeder, ITransientDependency
         var adminUser = users.FirstOrDefault();
         if (adminUser == null)
         {
-            throw new Exception(
-                "Keycloak admin user is not provided, check if KEYCLOAK_ADMIN environment variable is passed properly.");
+            throw new AdminUserNotProvidedException();
         }
 
         if (string.IsNullOrEmpty(adminUser.Email))
@@ -76,9 +75,11 @@ public class KeycloakDataSeeder : IKeycloakDataSeeder, ITransientDependency
             .FirstOrDefault(q => q.Name == "roles");
 
         if (roleScope == null)
+        {
             return;
+        }
 
-        if (roleScope.ProtocolMappers?.All(q => q.Name != "roles") == true)
+        if (roleScope.ProtocolMappers?.TrueForAll(q => q.Name != "roles") == true)
         {
             await _keycloakClient.CreateClientScopeProtocolMapperAsync(
                 roleScope.Id!,
@@ -271,20 +272,17 @@ public class KeycloakDataSeeder : IKeycloakDataSeeder, ITransientDependency
         var clientOptionalScopes = (await _keycloakClient.GetOptionalClientScopesAsync(client.Id!)).ToList();
         var clientScopes = (await _keycloakClient.GetClientScopesAsync()).ToList();
 
-        foreach (var scope in scopes)
+        foreach (var scope in scopes.Where(scope => clientOptionalScopes.TrueForAll(q => q.Name != scope)))
         {
-            if (clientOptionalScopes.All(q => q.Name != scope))
+            var serviceScope = clientScopes.Find(q => q.Name == scope);
+
+            if (serviceScope is null)
             {
-                var serviceScope = clientScopes.FirstOrDefault(q => q.Name == scope);
-
-                if (serviceScope is null)
-                {
-                    continue;
-                }
-
-                _logger.LogInformation("Seeding {Scope} scope to {Client}", scope, clientId);
-                await _keycloakClient.UpdateOptionalClientScopeAsync(client.Id!, serviceScope.Id!);
+                continue;
             }
+
+            _logger.LogInformation("Seeding {Scope} scope to {Client}", scope, clientId);
+            await _keycloakClient.UpdateOptionalClientScopeAsync(client.Id!, serviceScope.Id!);
         }
     }
 }

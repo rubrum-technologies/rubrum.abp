@@ -48,7 +48,7 @@ public class LibreTranslateClient : ILibreTranslateClient, ITransientDependency
         using var client = GetHttpClient();
         using var content = new FormUrlEncodedContent(new Dictionary<string, string>
         {
-            { "q", q }, { "source", source }, { "target", target }, { "api_key", "" }
+            { "q", q }, { "source", source }, { "target", target }, { "api_key", string.Empty }
         });
         using var response = await client.PostAsync(CreateUri("/translate"), content, cancellationToken);
 

@@ -115,7 +115,7 @@ public class ImageContainerTests : ImageStoringDomainTestBase
     {
         var jpeg = _virtualFileProvider.GetFileInfo("/Files/2.jpeg");
         var jpegId = Guid.NewGuid();
-        await _imageContainer.CreateAsync(new ImageFile(jpegId, jpeg.CreateReadStream(), null,"test", true));
+        await _imageContainer.CreateAsync(new ImageFile(jpegId, jpeg.CreateReadStream(), null, "test", true));
 
         var jpegStream = await _imageContainer.GetOrNullAsync(jpegId);
         jpegStream.ShouldNotBeNull();

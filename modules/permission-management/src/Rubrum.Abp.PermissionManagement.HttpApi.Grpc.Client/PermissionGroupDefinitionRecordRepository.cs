@@ -22,7 +22,7 @@ public class PermissionGroupDefinitionRecordRepository :
     public async Task<PermissionGroupDefinitionRecord> GetAsync(
         Guid id,
         bool includeDetails = true,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.GetAsync(
             new PermissionGroupDefinitionRecordGetRequest { Id = id.ToString(), IncludeDetails = includeDetails },
@@ -34,7 +34,7 @@ public class PermissionGroupDefinitionRecordRepository :
     public async Task<PermissionGroupDefinitionRecord?> FindAsync(
         Guid id,
         bool includeDetails = true,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.FindAsync(
             new PermissionGroupDefinitionRecordFindRequest { Id = id.ToString(), IncludeDetails = includeDetails },
@@ -45,7 +45,7 @@ public class PermissionGroupDefinitionRecordRepository :
 
     public async Task<List<PermissionGroupDefinitionRecord>> GetListAsync(
         bool includeDetails = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.GetListAsync(
             new PermissionGroupDefinitionRecordListRequest { IncludeDetails = includeDetails },
@@ -54,7 +54,7 @@ public class PermissionGroupDefinitionRecordRepository :
         return response.Entities.Select(ToEntity).ToList();
     }
 
-    public async Task<long> GetCountAsync(CancellationToken cancellationToken = new())
+    public async Task<long> GetCountAsync(CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.GetCountAsync(
             new Empty(),
@@ -68,7 +68,7 @@ public class PermissionGroupDefinitionRecordRepository :
         int maxResultCount,
         string sorting,
         bool includeDetails = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.GetListAsync(
             new PermissionGroupDefinitionRecordListRequest { IncludeDetails = includeDetails },
@@ -80,7 +80,7 @@ public class PermissionGroupDefinitionRecordRepository :
     public async Task<PermissionGroupDefinitionRecord> InsertAsync(
         PermissionGroupDefinitionRecord entity,
         bool autoSave = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.InsertAsync(
             ToInsertRequest(entity),
@@ -92,7 +92,7 @@ public class PermissionGroupDefinitionRecordRepository :
     public async Task InsertManyAsync(
         IEnumerable<PermissionGroupDefinitionRecord> entities,
         bool autoSave = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var request = new PermissionGroupDefinitionRecordInsertManyRequest();
         request.Inputs.AddRange(entities.Select(ToInsertRequest));
@@ -103,7 +103,7 @@ public class PermissionGroupDefinitionRecordRepository :
     public async Task<PermissionGroupDefinitionRecord> UpdateAsync(
         PermissionGroupDefinitionRecord entity,
         bool autoSave = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _client.UpdateAsync(
             ToUpdateRequest(entity),
@@ -115,7 +115,7 @@ public class PermissionGroupDefinitionRecordRepository :
     public async Task UpdateManyAsync(
         IEnumerable<PermissionGroupDefinitionRecord> entities,
         bool autoSave = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var request = new PermissionGroupDefinitionRecordUpdateManyRequest();
         request.Inputs.AddRange(entities.Select(ToUpdateRequest));
@@ -126,7 +126,7 @@ public class PermissionGroupDefinitionRecordRepository :
     public async Task DeleteAsync(
         PermissionGroupDefinitionRecord entity,
         bool autoSave = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         await DeleteAsync(entity.Id, autoSave, cancellationToken);
     }
@@ -134,7 +134,7 @@ public class PermissionGroupDefinitionRecordRepository :
     public async Task DeleteManyAsync(
         IEnumerable<PermissionGroupDefinitionRecord> entities,
         bool autoSave = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         await DeleteManyAsync(entities.Select(x => x.Id), autoSave, cancellationToken);
     }
@@ -142,7 +142,7 @@ public class PermissionGroupDefinitionRecordRepository :
     public async Task DeleteAsync(
         Guid id,
         bool autoSave = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         await _client.DeleteAsync(
             new PermissionGroupDefinitionRecordDeleteRequest { Id = id.ToString() },
@@ -152,7 +152,7 @@ public class PermissionGroupDefinitionRecordRepository :
     public async Task DeleteManyAsync(
         IEnumerable<Guid> ids,
         bool autoSave = false,
-        CancellationToken cancellationToken = new())
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         var request = new PermissionGroupDefinitionRecordDeleteManyRequest();
         request.Ids.AddRange(ids.Select(x => new PermissionGroupDefinitionRecordDeleteRequest { Id = x.ToString() }));
@@ -175,7 +175,9 @@ public class PermissionGroupDefinitionRecordRepository :
     {
         return new PermissionGroupDefinitionRecordInsertRequest
         {
-            Id = entity.Id.ToString(), Name = entity.Name, DisplayName = entity.DisplayName
+            Id = entity.Id.ToString(),
+            Name = entity.Name,
+            DisplayName = entity.DisplayName
         };
     }
 
@@ -183,7 +185,9 @@ public class PermissionGroupDefinitionRecordRepository :
     {
         return new PermissionGroupDefinitionRecordUpdateRequest
         {
-            Id = entity.Id.ToString(), Name = entity.Name, DisplayName = entity.DisplayName
+            Id = entity.Id.ToString(),
+            Name = entity.Name,
+            DisplayName = entity.DisplayName
         };
     }
 }

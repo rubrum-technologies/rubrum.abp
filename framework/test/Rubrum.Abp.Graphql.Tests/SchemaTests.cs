@@ -1,11 +1,12 @@
 ﻿using CookieCrumble;
 using HotChocolate.Execution;
 using HotChocolate.Execution.Configuration;
+using Shouldly;
 using Xunit;
 
-namespace Rubrum.Abp.Graphql.MultilingualObjects;
+namespace Rubrum.Abp.Graphql;
 
-public class SchemaTests : MultilingualObjectsTestBase
+public class SchemaTests : RubrumAbpGraphqlTestBase
 {
     private readonly IRequestExecutorBuilder _builder;
 
@@ -18,6 +19,9 @@ public class SchemaTests : MultilingualObjectsTestBase
     public async Task SchemaChangeTest()
     {
         var schema = await _builder.BuildSchemaAsync();
+
+        schema.ShouldNotBeNull();
+
         schema.MatchSnapshot();
     }
 }

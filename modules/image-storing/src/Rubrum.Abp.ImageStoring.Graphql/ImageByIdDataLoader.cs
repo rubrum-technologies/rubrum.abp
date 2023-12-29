@@ -29,7 +29,7 @@ public class ImageByIdDataLoader : BatchDataLoader<Guid, ImageInformationDto>, I
         CancellationToken cancellationToken)
     {
         using var uow = _unitOfWorkManager.Begin(true);
-        
+
         var images = await _repository.GetListAsync(x => keys.Contains(x.Id), true, cancellationToken);
 
         return images.Select(_mapper.Map).ToDictionary(x => x.Id, x => x);

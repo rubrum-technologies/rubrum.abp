@@ -15,6 +15,7 @@ public class GraphQlClientFactory : IGraphQLClientFactory
         .First(x => x.GetParameters().Length == 1);
 
     private readonly IConfiguration _configuration;
+
     private readonly IGraphQLClientFactory _graphQlClientFactory;
 
     public GraphQlClientFactory(

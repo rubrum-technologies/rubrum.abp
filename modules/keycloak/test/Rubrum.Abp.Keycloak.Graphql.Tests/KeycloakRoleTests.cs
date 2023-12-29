@@ -1,6 +1,7 @@
 ﻿using CookieCrumble;
 using HotChocolate.Types.Relay;
 using Rubrum.Abp.Keycloak.Roles;
+using Shouldly;
 using Xunit;
 
 namespace Rubrum.Abp.Keycloak;
@@ -31,8 +32,9 @@ public class KeycloakRoleTests : RubrumAbpKeycloakGraphqlTestBase
                       name
                   }
               }
-              """
-        ));
+              """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -47,8 +49,9 @@ public class KeycloakRoleTests : RubrumAbpKeycloakGraphqlTestBase
                     name
                 }
             }
-            """
-        ));
+            """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -71,8 +74,9 @@ public class KeycloakRoleTests : RubrumAbpKeycloakGraphqlTestBase
                     }
                 }
             }
-            """
-        ));
+            """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -85,8 +89,9 @@ public class KeycloakRoleTests : RubrumAbpKeycloakGraphqlTestBase
             query {
                 keycloakRolesAny(where: { name: { eq: "admin" } })
             }
-            """
-        ));
+            """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -99,8 +104,9 @@ public class KeycloakRoleTests : RubrumAbpKeycloakGraphqlTestBase
               query {
                   keycloakRolesCount(where: { name: { eq: "admin" } })
               }
-            """
-        ));
+            """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -119,8 +125,9 @@ public class KeycloakRoleTests : RubrumAbpKeycloakGraphqlTestBase
                       }
                   }
               }
-              """
-        ));
+              """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -151,8 +158,9 @@ public class KeycloakRoleTests : RubrumAbpKeycloakGraphqlTestBase
                       }
                   }
               }
-              """
-        ));
+              """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }
@@ -177,8 +185,9 @@ public class KeycloakRoleTests : RubrumAbpKeycloakGraphqlTestBase
                       }
                   }
               }
-              """
-        ));
+              """));
+
+        result.ShouldNotBeNull();
 
         result.MatchSnapshot();
     }

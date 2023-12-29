@@ -8,6 +8,8 @@ public interface IKeycloakUserAppService :
     ICrudAppService<KeycloakUserDto, string, PagedResultRequestDto, CreateKeycloakUserInput, UpdateKeycloakUserInput>
 {
     Task<ListResultDto<KeycloakRoleDto>> GetRolesAsync(string id);
+
     Task<KeycloakUserDto> ChangePasswordAsync(string id, ChangePasswordKeycloakUserInput input);
+
     Task<KeycloakUserDto> ChangeRolesAsync(string id, ChangeRolesKeycloakUserInput input);
 }
