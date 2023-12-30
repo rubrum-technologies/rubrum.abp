@@ -8,31 +8,23 @@ using Volo.Abp.Threading;
 
 namespace Rubrum.Abp.Keycloak;
 
-public class KeycloakClient : IKeycloakClient, ITransientDependency
+public class KeycloakClient(
+    IHttpClientFactory httpClientFactory,
+    ICurrentKeycloakRealm currentKeycloakRealm,
+    IJsonSerializer serializer,
+    ICancellationTokenProvider cancellationTokenProvider,
+    IOptions<RubrumAbpKeycloakOptions> options)
+    : IKeycloakClient, ITransientDependency
 {
-    public KeycloakClient(
-        IHttpClientFactory httpClientFactory,
-        ICurrentKeycloakRealm currentKeycloakRealm,
-        IJsonSerializer serializer,
-        ICancellationTokenProvider cancellationTokenProvider,
-        IOptions<RubrumAbpKeycloakOptions> options)
-    {
-        HttpClientFactory = httpClientFactory;
-        CurrentKeycloakRealm = currentKeycloakRealm;
-        Serializer = serializer;
-        CancellationTokenProvider = cancellationTokenProvider;
-        Options = options.Value;
-    }
+    protected IHttpClientFactory HttpClientFactory => httpClientFactory;
 
-    protected IHttpClientFactory HttpClientFactory { get; }
+    protected ICurrentKeycloakRealm CurrentKeycloakRealm => currentKeycloakRealm;
 
-    protected ICurrentKeycloakRealm CurrentKeycloakRealm { get; }
+    protected RubrumAbpKeycloakOptions Options => options.Value;
 
-    protected RubrumAbpKeycloakOptions Options { get; }
+    protected IJsonSerializer Serializer => serializer;
 
-    protected IJsonSerializer Serializer { get; }
-
-    protected ICancellationTokenProvider CancellationTokenProvider { get; }
+    protected ICancellationTokenProvider CancellationTokenProvider => cancellationTokenProvider;
 
     protected string RealmName => CurrentKeycloakRealm.RealmName;
 

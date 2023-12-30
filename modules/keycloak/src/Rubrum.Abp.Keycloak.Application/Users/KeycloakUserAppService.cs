@@ -6,23 +6,17 @@ using static Rubrum.Abp.Keycloak.Permissions.KeycloakUserPermissions.Users;
 
 namespace Rubrum.Abp.Keycloak.Users;
 
-public class KeycloakUserAppService : ApplicationService, IKeycloakUserAppService
+public class KeycloakUserAppService(
+    IKeycloakClient keycloakClient,
+    IKeycloakUserMapper userMapper,
+    IKeycloakRoleMapper roleMapper)
+    : ApplicationService, IKeycloakUserAppService
 {
-    public KeycloakUserAppService(
-        IKeycloakClient keycloakClient,
-        IKeycloakUserMapper userMapper,
-        IKeycloakRoleMapper roleMapper)
-    {
-        KeycloakClient = keycloakClient;
-        UserMapper = userMapper;
-        RoleMapper = roleMapper;
-    }
+    protected IKeycloakClient KeycloakClient => keycloakClient;
 
-    protected IKeycloakClient KeycloakClient { get; }
+    protected IKeycloakRoleMapper RoleMapper => roleMapper;
 
-    protected IKeycloakRoleMapper RoleMapper { get; }
-
-    protected IKeycloakUserMapper UserMapper { get; }
+    protected IKeycloakUserMapper UserMapper => userMapper;
 
     public async Task<KeycloakUserDto> GetAsync(string id)
     {
@@ -92,7 +86,7 @@ public class KeycloakUserAppService : ApplicationService, IKeycloakUserAppServic
         await CheckPolicyAsync(Default);
 
         var mappings = await KeycloakClient.GetUserRoleMappingsAsync(id);
-        var roles = mappings.RealmMappings ?? new List<RoleRepresentation>();
+        var roles = mappings.RealmMappings ?? [];
 
         return new ListResultDto<KeycloakRoleDto>(roles.Select(RoleMapper.Map).ToList());
     }

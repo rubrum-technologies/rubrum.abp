@@ -14,5 +14,6 @@ public static class ImageStoringPermissions
     public static class Images
     {
         public const string Upload = GroupName + ".Upload";
+        public const string Delete = GroupName + ".Delete";
     }
 }

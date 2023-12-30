@@ -1,6 +1,4 @@
-﻿using HotChocolate.Language;
-using HotChocolate.Resolvers;
-using Rubrum.Abp.Graphql.Data;
+﻿using Rubrum.Abp.Graphql.Data;
 using Rubrum.Abp.Graphql.DataLoader;
 using Rubrum.Abp.Graphql.Extensions;
 using Rubrum.Abp.Graphql.Services;

@@ -1,5 +1,4 @@
-﻿using HotChocolate.Data.Filters;
-using HotChocolate.Types;
+﻿using HotChocolate.Types;
 using Microsoft.Extensions.DependencyInjection;
 using Rubrum.Abp.Graphql;
 using Rubrum.Abp.Graphql.Extensions;
