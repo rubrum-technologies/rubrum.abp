@@ -14,6 +14,9 @@ using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.Sqlite;
 using Volo.Abp.Modularity;
+using Volo.Abp.ObjectExtending;
+using Volo.Abp.TenantManagement;
+using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using Volo.Abp.Threading;
 using Volo.Abp.Uow;
 
@@ -22,11 +25,19 @@ namespace Rubrum.Abp.Graphql;
 [DependsOn(typeof(AbpAutofacModule))]
 [DependsOn(typeof(AbpAuthorizationModule))]
 [DependsOn(typeof(AbpDataModule))]
+[DependsOn(typeof(AbpTenantManagementApplicationModule))]
+[DependsOn(typeof(AbpTenantManagementEntityFrameworkCoreModule))]
 [DependsOn(typeof(AbpEntityFrameworkCoreSqliteModule))]
 [DependsOn(typeof(RubrumAbpGraphqlTestBaseModule))]
 public class RubrumAbpGraphqlTestModule : AbpModule
 {
+    private static readonly OneTimeRunner OneTimeRunner = new();
     private SqliteConnection? _sqliteConnection;
+
+    public override void PreConfigureServices(ServiceConfigurationContext context)
+    {
+        OneTimeRunner.Run(ConfigureExtraProperties);
+    }
 
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
@@ -106,5 +117,21 @@ public class RubrumAbpGraphqlTestModule : AbpModule
         context.GetService<IRelationalDatabaseCreator>().CreateTables();
 
         return connection;
+    }
+
+    private void ConfigureExtraProperties()
+    {
+        ObjectExtensionManager.Instance
+            .Modules()
+            .ConfigureTenantManagement(m =>
+            {
+                m.ConfigureTenant(config =>
+                {
+                    config.AddOrUpdateProperty<string>("Test");
+                });
+            });
+
+        ObjectExtensionManager.Instance
+            .AddOrUpdateProperty<TenantDto, string>("Test");
     }
 }

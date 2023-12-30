@@ -6,6 +6,4 @@ namespace Rubrum.Abp.EntityFrameworkCore.HumanFriendly;
 
 [DependsOn(typeof(AbpEntityFrameworkCoreModule))]
 [DependsOn(typeof(RubrumAbpDddHumanFriendlyModule))]
-public class RubrumAbpEntityFrameworkCoreHumanFriendlyModule : AbpModule
-{
-}
+public class RubrumAbpEntityFrameworkCoreHumanFriendlyModule : AbpModule;

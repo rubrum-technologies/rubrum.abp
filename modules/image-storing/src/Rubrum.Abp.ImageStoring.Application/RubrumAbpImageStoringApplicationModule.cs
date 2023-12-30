@@ -6,6 +6,4 @@ namespace Rubrum.Abp.ImageStoring;
 [DependsOn(typeof(AbpDddApplicationModule))]
 [DependsOn(typeof(RubrumAbpImageStoringDomainModule))]
 [DependsOn(typeof(RubrumAbpImageStoringApplicationContractsModule))]
-public class RubrumAbpImageStoringApplicationModule : AbpModule
-{
-}
+public class RubrumAbpImageStoringApplicationModule : AbpModule;

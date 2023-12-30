@@ -4,6 +4,4 @@ using Volo.Abp.Modularity;
 namespace Rubrum.Abp.MultilingualObjects;
 
 [DependsOn(typeof(RubrumAbpDataModule))]
-public class RubrumAbpMultilingualObjectsModule : AbpModule
-{
-}
+public class RubrumAbpMultilingualObjectsModule : AbpModule;

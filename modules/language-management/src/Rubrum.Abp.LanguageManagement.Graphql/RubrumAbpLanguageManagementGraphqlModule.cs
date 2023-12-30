@@ -7,6 +7,4 @@ namespace Rubrum.Abp.LanguageManagement;
 [DependsOn(typeof(RubrumAbpGraphqlFluentValidationModule))]
 [DependsOn(typeof(RubrumAbpLanguageManagementApplicationModule))]
 [DependsOn(typeof(RubrumAbpLanguageManagementGraphqlContractsModule))]
-public class RubrumAbpLanguageManagementGraphqlModule : AbpModule
-{
-}
+public class RubrumAbpLanguageManagementGraphqlModule : AbpModule;

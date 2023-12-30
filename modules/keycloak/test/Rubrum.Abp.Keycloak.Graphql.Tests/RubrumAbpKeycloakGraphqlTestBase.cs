@@ -2,6 +2,4 @@
 
 namespace Rubrum.Abp.Keycloak;
 
-public class RubrumAbpKeycloakGraphqlTestBase : RubrumAbpGraphqlTestBase<RubrumAbpKeycloakGraphqlTestModule>
-{
-}
+public class RubrumAbpKeycloakGraphqlTestBase : RubrumAbpGraphqlTestBase<RubrumAbpKeycloakGraphqlTestModule>;

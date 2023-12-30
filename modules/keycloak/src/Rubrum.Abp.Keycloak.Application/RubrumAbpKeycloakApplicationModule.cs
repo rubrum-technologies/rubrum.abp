@@ -8,6 +8,4 @@ namespace Rubrum.Abp.Keycloak;
 [DependsOn(typeof(AbpFluentValidationModule))]
 [DependsOn(typeof(RubrumAbpKeycloakApplicationContractsModule))]
 [DependsOn(typeof(RubrumAbpKeycloakDomainModule))]
-public class RubrumAbpKeycloakApplicationModule : AbpModule
-{
-}
+public class RubrumAbpKeycloakApplicationModule : AbpModule;

@@ -8,6 +8,6 @@ public class UpdateKeycloakUserInputType : InputObjectType<UpdateKeycloakUserInp
 {
     protected override void Configure(IInputObjectTypeDescriptor<UpdateKeycloakUserInput> descriptor)
     {
-        descriptor.AddFieldKey<UpdateKeycloakUserInput, string>("KeycloakUser");
+        descriptor.UpdateInput<string>("KeycloakUser");
     }
 }

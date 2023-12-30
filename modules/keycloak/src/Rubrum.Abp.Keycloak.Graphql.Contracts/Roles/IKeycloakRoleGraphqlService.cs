@@ -4,6 +4,4 @@ namespace Rubrum.Abp.Keycloak.Roles;
 
 public interface IKeycloakRoleGraphqlService :
     IKeycloakRoleAppService,
-    ICrudGraphqlService<KeycloakRoleDto, string, CreateKeycloakRoleInput, UpdateKeycloakRoleInput>
-{
-}
+    ICrudGraphqlService<KeycloakRoleDto, string, CreateKeycloakRoleInput, UpdateKeycloakRoleInput>;

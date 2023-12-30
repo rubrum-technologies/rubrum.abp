@@ -3,6 +3,4 @@ using Rubrum.Abp.Graphql.Application.Dtos;
 
 namespace Rubrum.Abp.Graphql.Types;
 
-public class CountryFilterType : FilterInputType<CountryDto>
-{
-}
+public class CountryFilterType : FilterInputType<CountryDto>;

@@ -8,6 +8,6 @@ public class UpdateCountryInputType : InputObjectType<UpdateCountryInput>, IGrap
 {
     protected override void Configure(IInputObjectTypeDescriptor<UpdateCountryInput> descriptor)
     {
-        descriptor.AddFieldKey<UpdateCountryInput, Guid>(CountryConstants.TypeName);
+        descriptor.UpdateInput<Guid>(CountryConstants.TypeName);
     }
 }

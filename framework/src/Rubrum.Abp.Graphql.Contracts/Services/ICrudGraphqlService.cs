@@ -8,6 +8,4 @@ public interface ICrudGraphqlService<TEntityDto, in TKey, in TCreateInput, in TU
     ICreateUpdateAppService<TEntityDto, TKey, TCreateInput, TUpdateInput>,
     IDeleteAppService<TKey>
     where TKey : notnull
-    where TEntityDto : IEntityDto<TKey>
-{
-}
+    where TEntityDto : IEntityDto<TKey>;

@@ -1,5 +1,3 @@
 ﻿namespace Rubrum.Abp.Graphql.Types;
 
-public interface IGraphqlType
-{
-}
+public interface IGraphqlType;

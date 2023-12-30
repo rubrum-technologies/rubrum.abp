@@ -3,6 +3,4 @@
 namespace Rubrum.Abp.Keycloak;
 
 [DependsOn(typeof(RubrumAbpKeycloakTestBaseModule))]
-public class RubrumAbpKeycloakDomainTestModule : AbpModule
-{
-}
+public class RubrumAbpKeycloakDomainTestModule : AbpModule;

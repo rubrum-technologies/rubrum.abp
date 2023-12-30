@@ -4,6 +4,4 @@ using Volo.Abp.Modularity;
 namespace Rubrum.Abp.Imaging;
 
 [DependsOn(typeof(AbpImagingAbstractionsModule))]
-public class RubrumAbpImagingAbstractionsModule : AbpModule
-{
-}
+public class RubrumAbpImagingAbstractionsModule : AbpModule;

@@ -4,6 +4,4 @@ namespace Rubrum.Abp.Keycloak.Users;
 
 public interface IKeycloakUserGraphqlService :
     IKeycloakUserAppService,
-    ICrudGraphqlService<KeycloakUserDto, string, CreateKeycloakUserInput, UpdateKeycloakUserInput>
-{
-}
+    ICrudGraphqlService<KeycloakUserDto, string, CreateKeycloakUserInput, UpdateKeycloakUserInput>;

@@ -3,6 +3,4 @@
 namespace Rubrum.Abp.LanguageManagement.Localization.Rubrum.Abp;
 
 [LocalizationResourceName("RubrumAbpLanguageManagementResource")]
-public class RubrumAbpLanguageManagementResource
-{
-}
+public class RubrumAbpLanguageManagementResource;

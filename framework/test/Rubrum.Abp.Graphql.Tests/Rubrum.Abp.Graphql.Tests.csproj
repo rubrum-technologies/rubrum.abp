@@ -18,6 +18,8 @@
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Authorization" Version="$(AbpPackageVersion)"/>
     <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="$(AbpPackageVersion)"/>
+    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="$(AbpPackageVersion)"/>
+    <PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="$(AbpPackageVersion)"/>
   </ItemGroup>
 
   <ItemGroup>
