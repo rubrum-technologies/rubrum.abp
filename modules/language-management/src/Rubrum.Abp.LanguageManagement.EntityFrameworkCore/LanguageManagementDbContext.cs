@@ -6,13 +6,9 @@ using static Rubrum.Abp.LanguageManagement.RubrumAbpLanguageManagementDbProperti
 namespace Rubrum.Abp.LanguageManagement.EntityFrameworkCore;
 
 [ConnectionStringName(ConnectionStringName)]
-public class LanguageManagementDbContext : AbpDbContext<LanguageManagementDbContext>, ILanguageManagementDbContext
+public class LanguageManagementDbContext(DbContextOptions<LanguageManagementDbContext> options)
+    : AbpDbContext<LanguageManagementDbContext>(options), ILanguageManagementDbContext
 {
-    public LanguageManagementDbContext(DbContextOptions<LanguageManagementDbContext> options)
-        : base(options)
-    {
-    }
-
     public DbSet<SystemLanguage> Languages => Set<SystemLanguage>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

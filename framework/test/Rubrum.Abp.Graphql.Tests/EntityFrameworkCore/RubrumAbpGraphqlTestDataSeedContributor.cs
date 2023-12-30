@@ -6,17 +6,11 @@ using static Rubrum.Abp.Graphql.RubrumAbpGraphqlTestConstants;
 
 namespace Rubrum.Abp.Graphql.EntityFrameworkCore;
 
-public class RubrumAbpGraphqlTestDataSeedContributor : IDataSeedContributor, ITransientDependency
+public class RubrumAbpGraphqlTestDataSeedContributor(IBasicRepository<Country> countryRepository)
+    : IDataSeedContributor, ITransientDependency
 {
-    private readonly IRepository<Country, Guid> _countryRepository;
-
-    public RubrumAbpGraphqlTestDataSeedContributor(IRepository<Country, Guid> countryRepository)
-    {
-        _countryRepository = countryRepository;
-    }
-
     public async Task SeedAsync(DataSeedContext context)
     {
-        await _countryRepository.InsertAsync(new Country(CountryId, "Russian"));
+        await countryRepository.InsertAsync(new Country(CountryId, "Russian"));
     }
 }
