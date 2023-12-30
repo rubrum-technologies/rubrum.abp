@@ -7,6 +7,4 @@ namespace Rubrum.Abp.Hosting;
 [DependsOn(typeof(AbpSwashbuckleModule))]
 [DependsOn(typeof(AbpAspNetCoreSerilogModule))]
 [DependsOn(typeof(RubrumAbpHostingModule))]
-public class RubrumAbpHostingAspNetCoreModule : AbpModule
-{
-}
+public class RubrumAbpHostingAspNetCoreModule : AbpModule;

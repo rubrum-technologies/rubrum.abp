@@ -5,6 +5,4 @@ namespace Rubrum.Abp.ImageStoring;
 
 [DependsOn(typeof(RubrumAbpImageStoringEntityFrameworkCoreTestModule))]
 [DependsOn(typeof(RubrumAbpImageStoringApplicationModule))]
-public class RubrumAbpImageStoringApplicationTestModule : AbpModule
-{
-}
+public class RubrumAbpImageStoringApplicationTestModule : AbpModule;

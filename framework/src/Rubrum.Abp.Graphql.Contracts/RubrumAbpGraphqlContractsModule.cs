@@ -8,6 +8,4 @@ namespace Rubrum.Abp.Graphql;
 [DependsOn(typeof(AbpDddApplicationContractsModule))]
 [DependsOn(typeof(AbpAuditingContractsModule))]
 [DependsOn(typeof(AbpExceptionHandlingModule))]
-public class RubrumAbpGraphqlContractsModule : AbpModule
-{
-}
+public class RubrumAbpGraphqlContractsModule : AbpModule;

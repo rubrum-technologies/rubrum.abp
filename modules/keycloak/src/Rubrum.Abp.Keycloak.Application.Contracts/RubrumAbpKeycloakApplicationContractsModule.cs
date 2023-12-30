@@ -7,6 +7,4 @@ namespace Rubrum.Abp.Keycloak;
 [DependsOn(typeof(AbpAuthorizationAbstractionsModule))]
 [DependsOn(typeof(AbpDddApplicationContractsModule))]
 [DependsOn(typeof(RubrumAbpKeycloakDomainSharedModule))]
-public class RubrumAbpKeycloakApplicationContractsModule : AbpModule
-{
-}
+public class RubrumAbpKeycloakApplicationContractsModule : AbpModule;

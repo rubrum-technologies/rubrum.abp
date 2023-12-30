@@ -2,6 +2,4 @@
 
 namespace Rubrum.Abp.ImageStoring;
 
-public interface IImageInformationRepository : IRepository<ImageInformation, Guid>
-{
-}
+public interface IImageInformationRepository : IRepository<ImageInformation, Guid>;

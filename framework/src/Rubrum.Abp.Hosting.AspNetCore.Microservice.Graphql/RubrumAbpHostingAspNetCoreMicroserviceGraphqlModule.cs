@@ -5,6 +5,4 @@ namespace Rubrum.Abp.Hosting;
 
 [DependsOn(typeof(RubrumAbpGraphqlModule))]
 [DependsOn(typeof(RubrumAbpHostingAspNetCoreMicroserviceModule))]
-public class RubrumAbpHostingAspNetCoreMicroserviceGraphqlModule : AbpModule
-{
-}
+public class RubrumAbpHostingAspNetCoreMicroserviceGraphqlModule : AbpModule;

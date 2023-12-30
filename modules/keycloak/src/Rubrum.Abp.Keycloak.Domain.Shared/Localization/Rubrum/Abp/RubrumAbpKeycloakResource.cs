@@ -3,6 +3,4 @@
 namespace Rubrum.Abp.Keycloak.Localization.Rubrum.Abp;
 
 [LocalizationResourceName("RubrumAbpKeycloakResource")]
-public class RubrumAbpKeycloakResource
-{
-}
+public class RubrumAbpKeycloakResource;

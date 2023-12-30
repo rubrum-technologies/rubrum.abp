@@ -3,6 +3,4 @@
 namespace Rubrum.Abp.ImageStoring.Localization.Rubrum.Abp;
 
 [LocalizationResourceName("RubrumAbpImageStoringResource")]
-public class RubrumAbpImageStoringResource
-{
-}
+public class RubrumAbpImageStoringResource;

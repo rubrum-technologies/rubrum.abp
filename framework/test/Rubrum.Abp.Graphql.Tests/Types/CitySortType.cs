@@ -3,6 +3,4 @@ using Rubrum.Abp.Graphql.Application.Dtos;
 
 namespace Rubrum.Abp.Graphql.Types;
 
-public class CitySortType : SortInputType<CityDto>
-{
-}
+public class CitySortType : SortInputType<CityDto>;

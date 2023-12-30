@@ -168,7 +168,7 @@ public class KeycloakRoleTests : RubrumAbpKeycloakGraphqlTestBase
     [Fact]
     public async Task Delete()
     {
-        var role = await CreateRoleAsync("test-delete-graphql-8");
+        var role = await CreateRoleAsync($"test-delete-graphql-{Random.Shared.Next(1000, 10000)}");
         var id = _idSerializer.Serialize(null, "KeycloakRole", role.Id);
 
         await using var result = await ExecuteRequestAsync(b => b.SetQuery(
@@ -189,7 +189,19 @@ public class KeycloakRoleTests : RubrumAbpKeycloakGraphqlTestBase
 
         result.ShouldNotBeNull();
 
-        result.MatchSnapshot();
+        result.MatchInlineSnapshot(
+            $$"""
+            {
+              "data": {
+                "deleteKeycloakRole": {
+                  "keycloakRole": {
+                    "name": "{{role.Name}}"
+                  },
+                  "errors": null
+                }
+              }
+            }
+            """);
     }
 
     private Task<KeycloakRoleDto> CreateRoleAsync(string? name = null)

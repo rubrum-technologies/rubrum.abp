@@ -8,6 +8,4 @@ namespace Rubrum.Abp.LanguageManagement;
 [DependsOn(typeof(AbpFluentValidationModule))]
 [DependsOn(typeof(RubrumAbpLanguageManagementApplicationContractsModule))]
 [DependsOn(typeof(RubrumAbpLanguageManagementDomainModule))]
-public class RubrumAbpLanguageManagementApplicationModule : AbpModule
-{
-}
+public class RubrumAbpLanguageManagementApplicationModule : AbpModule;

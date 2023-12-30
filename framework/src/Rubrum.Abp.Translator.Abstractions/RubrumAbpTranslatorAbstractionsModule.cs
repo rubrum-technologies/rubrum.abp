@@ -4,6 +4,4 @@ using Volo.Abp.Threading;
 namespace Rubrum.Abp.Translator;
 
 [DependsOn(typeof(AbpThreadingModule))]
-public class RubrumAbpTranslatorAbstractionsModule : AbpModule
-{
-}
+public class RubrumAbpTranslatorAbstractionsModule : AbpModule;

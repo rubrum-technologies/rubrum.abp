@@ -5,6 +5,4 @@ namespace Rubrum.Abp.Graphql.MultilingualObjects;
 
 [DependsOn(typeof(RubrumAbpGraphqlContractsModule))]
 [DependsOn(typeof(RubrumAbpMultilingualObjectsModule))]
-public class RubrumAbpGraphqlMultilingualObjectsModule : AbpModule
-{
-}
+public class RubrumAbpGraphqlMultilingualObjectsModule : AbpModule;

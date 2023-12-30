@@ -1,12 +1,15 @@
 ﻿using HotChocolate.Data.Filters;
 using HotChocolate.Data.Sorting;
 using HotChocolate.Types;
+using HotChocolate.Types.Descriptors.Definitions;
 using HotChocolate.Types.Relay;
 using Rubrum.Abp.Graphql.DataLoader;
+using Rubrum.Abp.Graphql.Extensions;
 using Rubrum.Abp.Graphql.Filters.DateOnly;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Auditing;
+using Volo.Abp.Data;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.ObjectExtending;
 
@@ -14,20 +17,6 @@ namespace Rubrum.Abp.Graphql.Types.Ddd;
 
 public static class AbpTypeExtensions
 {
-    public static IInputObjectTypeDescriptor<TInput> AddFieldKey<TInput, TKey>(
-        this IInputObjectTypeDescriptor<TInput> descriptor,
-        string typeName,
-        string? fieldName = null)
-        where TKey : notnull
-    {
-        descriptor
-            .Field(fieldName ?? "id")
-            .Type<NonNullType<InputObjectType<TKey>>>()
-            .ID(typeName);
-
-        return descriptor;
-    }
-
     public static IInterfaceTypeDescriptor<TEntityDto> Entity<TEntityDto, TKey>(
         this IInterfaceTypeDescriptor<TEntityDto> descriptor)
         where TKey : notnull
@@ -102,7 +91,21 @@ public static class AbpTypeExtensions
         where TEntityDto : ExtensibleObject
     {
         descriptor.Implements<HasExtraPropertiesType>();
+
+        descriptor
+            .Field(x => x.ExtraProperties)
+            .Type<JsonType>();
+
         descriptor.Ignore(x => x.Validate(default!));
+
+        var properties = ObjectExtensionManager.Instance.GetProperties(typeof(TEntityDto));
+
+        foreach (var property in properties)
+        {
+            descriptor
+                .Field(property.Name.ToLowerFirstChar())
+                .Type(property.Type);
+        }
 
         return descriptor;
     }
@@ -119,6 +122,21 @@ public static class AbpTypeExtensions
 
         descriptor.Ignore(x => x.Validate(default!));
 
+        var properties = ObjectExtensionManager.Instance.GetProperties(typeof(TEntityDto));
+
+        foreach (var property in properties)
+        {
+            descriptor
+                .Field(property.Name.ToLowerFirstChar())
+                .Resolve(context =>
+                {
+                    var parent = context.Parent<TEntityDto>();
+
+                    return parent.GetProperty(property.Name);
+                })
+                .Type(property.Type);
+        }
+
         return descriptor;
     }
 
@@ -127,6 +145,7 @@ public static class AbpTypeExtensions
         where TEntityDto : ExtensibleObject
     {
         descriptor.Ignore(x => x.ExtraProperties);
+
         return descriptor;
     }
 
@@ -586,5 +605,24 @@ public static class AbpTypeExtensions
     {
         descriptor.Ignore(x => x.TenantId);
         return descriptor;
+    }
+
+    public static void AddFieldKey<TKey>(
+        this IDescriptor<InputObjectTypeDefinition> descriptor,
+        string typeName)
+        where TKey : notnull
+    {
+        descriptor
+            .Field("id")
+            .Type<NonNullType<InputObjectType<TKey>>>()
+            .ID(typeName);
+    }
+
+    public static void UpdateInput<TKey>(
+        this IDescriptor<InputObjectTypeDefinition> descriptor,
+        string typeName)
+        where TKey : notnull
+    {
+        descriptor.AddFieldKey<TKey>(typeName);
     }
 }

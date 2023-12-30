@@ -2,6 +2,4 @@
 
 namespace Rubrum.Abp.ImageStoring;
 
-public interface IImageUrlByIdDataLoader : IDataLoader<Guid, string>
-{
-}
+public interface IImageUrlByIdDataLoader : IDataLoader<Guid, string>;

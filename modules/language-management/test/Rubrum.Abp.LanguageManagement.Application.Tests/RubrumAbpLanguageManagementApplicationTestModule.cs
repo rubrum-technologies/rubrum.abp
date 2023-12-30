@@ -4,6 +4,4 @@ namespace Rubrum.Abp.LanguageManagement;
 
 [DependsOn(typeof(RubrumAbpLanguageManagementEntityFrameworkCoreTestModule))]
 [DependsOn(typeof(RubrumAbpLanguageManagementApplicationModule))]
-public class RubrumAbpLanguageManagementApplicationTestModule : AbpModule
-{
-}
+public class RubrumAbpLanguageManagementApplicationTestModule : AbpModule;

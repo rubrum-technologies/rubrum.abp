@@ -6,6 +6,4 @@ namespace Rubrum.Abp.Keycloak;
 [DependsOn(typeof(RubrumAbpGraphqlModule))]
 [DependsOn(typeof(RubrumAbpKeycloakApplicationModule))]
 [DependsOn(typeof(RubrumAbpKeycloakGraphqlContractsModule))]
-public class RubrumAbpKeycloakGraphqlModule : AbpModule
-{
-}
+public class RubrumAbpKeycloakGraphqlModule : AbpModule;

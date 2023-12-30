@@ -3,6 +3,4 @@
 namespace Rubrum.Abp.ImageStoring;
 
 public class ImageStoringGraphqlTestBase :
-    RubrumAbpGraphqlTestBase<RubrumAbpImageStoringGraphqlTestModule>
-{
-}
+    RubrumAbpGraphqlTestBase<RubrumAbpImageStoringGraphqlTestModule>;
