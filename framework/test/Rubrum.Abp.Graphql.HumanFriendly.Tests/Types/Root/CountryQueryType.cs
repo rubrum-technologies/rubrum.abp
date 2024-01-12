@@ -1,7 +1,8 @@
 ﻿using HotChocolate.Types;
-using Rubrum.Abp.Graphql.Application.Dtos;
+using Rubrum.Abp.Graphql.HumanFriendly.Application;
+using Rubrum.Abp.Graphql.Types;
 
-namespace Rubrum.Abp.Graphql.Types.Root;
+namespace Rubrum.Abp.Graphql.HumanFriendly.Types.Root;
 
 public class CountryQueryType : ObjectTypeExtension, IGraphqlType
 {
@@ -11,5 +12,7 @@ public class CountryQueryType : ObjectTypeExtension, IGraphqlType
             CountryConstants.TypeName,
             "Country",
             "Countries");
+
+        descriptor.HumanFriendly<CountryDto, Guid>("Country");
     }
 }

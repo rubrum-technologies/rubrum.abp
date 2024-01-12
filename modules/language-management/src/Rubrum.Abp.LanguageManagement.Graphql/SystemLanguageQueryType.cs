@@ -1,14 +1,16 @@
-﻿using Rubrum.Abp.Graphql.Types;
+﻿using HotChocolate.Types;
+using Rubrum.Abp.Graphql.Types;
 
 namespace Rubrum.Abp.LanguageManagement;
 
-public class SystemLanguageQueryType : EntityQueryType<SystemLanguageDto, string, ISystemLanguageGraphqlService>
+public class SystemLanguageQueryType : ObjectTypeExtension, IGraphqlType
 {
-    protected override string TypeName => SystemLanguageConstants.TypeName;
-
-    protected override string TypeNameSingular => "SystemLanguage";
-
-    protected override string TypeNameInPlural => "SystemLanguages";
-
-    protected override bool IsAddFieldByAll => true;
+    protected override void Configure(IObjectTypeDescriptor descriptor)
+    {
+        descriptor.EntityQuery<SystemLanguageDto, string>(
+            SystemLanguageConstants.TypeName,
+            "SystemLanguage",
+            "SystemLanguages",
+            true);
+    }
 }

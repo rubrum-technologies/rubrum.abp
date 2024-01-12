@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Rubrum.Abp.LanguageManagement.Mapper.Interfaces;
+﻿using Rubrum.Abp.LanguageManagement.Mapper.Interfaces;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
@@ -24,27 +23,30 @@ public class SystemLanguageAppService(
 
     protected ICancellationTokenProvider CancellationTokenProvider => cancellationTokenProvider;
 
-    [Authorize(Policy = Default)]
     public async Task<SystemLanguageDto> GetAsync(string id)
     {
+        await CheckPolicyAsync(Default);
+
         var cancellationToken = CancellationTokenProvider.Token;
 
         var language = await Repository.GetAsync(id, true, cancellationToken);
         return Mapper.Map(language);
     }
 
-    [Authorize(Policy = Default)]
     public async Task<ListResultDto<SystemLanguageDto>> GetListAsync()
     {
+        await CheckPolicyAsync(Default);
+
         var cancellationToken = CancellationTokenProvider.Token;
 
         var languages = await Repository.GetListAsync(true, cancellationToken);
         return new ListResultDto<SystemLanguageDto>(languages.Select(Mapper.Map).ToList());
     }
 
-    [Authorize(Policy = Create)]
     public async Task<SystemLanguageDto> CreateAsync(CreateSystemLanguageInput input)
     {
+        await CheckPolicyAsync(Create);
+
         var cancellationToken = CancellationTokenProvider.Token;
 
         var language = await Manager.CreateAsync(input.Code, input.Name);
@@ -55,9 +57,10 @@ public class SystemLanguageAppService(
         return Mapper.Map(language);
     }
 
-    [Authorize(Policy = Update)]
     public async Task<SystemLanguageDto> UpdateAsync(string id, UpdateSystemLanguageInput input)
     {
+        await CheckPolicyAsync(Update);
+
         var cancellationToken = CancellationTokenProvider.Token;
 
         var language = await Repository.GetAsync(id, true, cancellationToken);
@@ -69,9 +72,10 @@ public class SystemLanguageAppService(
         return Mapper.Map(language);
     }
 
-    [Authorize(Policy = Delete)]
     public async Task DeleteAsync(string id)
     {
+        await CheckPolicyAsync(Delete);
+
         var cancellationToken = CancellationTokenProvider.Token;
 
         var language = await Repository.GetAsync(id, true, cancellationToken);

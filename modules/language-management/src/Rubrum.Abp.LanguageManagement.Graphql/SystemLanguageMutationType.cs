@@ -1,13 +1,13 @@
-﻿using Rubrum.Abp.Graphql.Types;
+﻿using HotChocolate.Types;
+using Rubrum.Abp.Graphql.Types;
 
 namespace Rubrum.Abp.LanguageManagement;
 
-public class SystemLanguageMutationType :
-    EntityMutationType<SystemLanguageDto, string, ISystemLanguageGraphqlService, CreateSystemLanguageInput, UpdateSystemLanguageInput>
+public class SystemLanguageMutationType : ObjectTypeExtension, IGraphqlType
 {
-    protected override string TypeName => SystemLanguageConstants.TypeName;
-
-    protected override string TypeNameSingular => "SystemLanguage";
-
-    protected override string TypeNameInPlural => "SystemLanguages";
+    protected override void Configure(IObjectTypeDescriptor descriptor)
+    {
+        descriptor.EntityMutation<SystemLanguageDto, string, ISystemLanguageGraphqlService, CreateSystemLanguageInput,
+            UpdateSystemLanguageInput>(SystemLanguageConstants.TypeName, "SystemLanguage");
+    }
 }

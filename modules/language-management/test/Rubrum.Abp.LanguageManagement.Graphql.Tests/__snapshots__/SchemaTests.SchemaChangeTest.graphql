@@ -113,9 +113,9 @@ type Query {
   systemLanguageById(id: ID): SystemLanguage!
   systemLanguage(where: SystemLanguageFilterInput): SystemLanguage
   systemLanguages("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: SystemLanguageFilterInput order: [SystemLanguageSortInput!]): SystemLanguagesConnection
-  systemLanguagesAll(where: SystemLanguageFilterInput order: [SystemLanguageSortInput!]): [SystemLanguage!]!
   systemLanguagesAny(where: SystemLanguageFilterInput): Boolean!
   systemLanguagesCount(where: SystemLanguageFilterInput): Int!
+  systemLanguagesAll(where: SystemLanguageFilterInput order: [SystemLanguageSortInput!]): [SystemLanguage!]!
 }
 
 type SystemLanguage implements EntityOfString & Node & IHasExtraProperties & MayHaveCreator & HasCreationTime & CreationAuditedObject & HasModificationTime & ModificationAuditedObject & SoftDelete & HasDeletionTime & DeletionAuditedObject {

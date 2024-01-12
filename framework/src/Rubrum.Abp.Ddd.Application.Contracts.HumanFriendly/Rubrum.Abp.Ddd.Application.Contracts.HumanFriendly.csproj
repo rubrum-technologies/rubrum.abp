@@ -3,11 +3,11 @@
   <Import Project="..\..\..\fody.props"/>
 
   <PropertyGroup>
-    <RootNamespace>Rubrum.Abp.EntityFrameworkCore.HumanFriendly</RootNamespace>
+    <RootNamespace>Rubrum.Abp.Ddd.HumanFriendly</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="$(AbpPackageVersion)"/>
+    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="$(AbpPackageVersion)"/>
   </ItemGroup>
 
   <ItemGroup>
