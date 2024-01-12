@@ -1,6 +1,7 @@
 ﻿using HotChocolate;
 using HotChocolate.Language;
 using HotChocolate.Types;
+using HotChocolate.Types.Relay;
 using Rubrum.Abp.Graphql.Types;
 using Rubrum.Abp.Keycloak.Roles;
 
@@ -11,7 +12,7 @@ public class KeycloakUserQuery : IGraphqlType
 {
     [GraphQLName("keycloakRolesByUserId")]
     public async Task<IReadOnlyList<KeycloakRoleDto>> GetRolesAsync(
-        string id,
+        [ID(KeycloakUserConstants.TypeName)] string id,
         [Service] IKeycloakUserGraphqlService service)
     {
         var roles = await service.GetRolesAsync(id);

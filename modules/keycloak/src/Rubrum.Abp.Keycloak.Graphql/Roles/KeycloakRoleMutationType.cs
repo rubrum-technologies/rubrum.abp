@@ -8,6 +8,6 @@ public class KeycloakRoleMutationType : ObjectTypeExtension, IGraphqlType
     protected override void Configure(IObjectTypeDescriptor descriptor)
     {
         descriptor.EntityMutation<KeycloakRoleDto, string, IKeycloakRoleGraphqlService, CreateKeycloakRoleInput,
-            UpdateKeycloakRoleInput>("KeycloakRole", "KeycloakRole");
+            UpdateKeycloakRoleInput>(KeycloakRoleConstants.TypeName, "KeycloakRole");
     }
 }

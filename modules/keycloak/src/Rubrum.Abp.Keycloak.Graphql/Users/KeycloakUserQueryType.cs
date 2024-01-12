@@ -7,6 +7,9 @@ public class KeycloakUserQueryType : ObjectTypeExtension, IGraphqlType
 {
     protected override void Configure(IObjectTypeDescriptor descriptor)
     {
-        descriptor.EntityQuery<KeycloakUserDto, string>("KeycloakUser", "KeycloakUser", "KeycloakUsers");
+        descriptor.EntityQuery<KeycloakUserDto, string>(
+            KeycloakUserConstants.TypeName,
+            "KeycloakUser",
+            "KeycloakUsers");
     }
 }
