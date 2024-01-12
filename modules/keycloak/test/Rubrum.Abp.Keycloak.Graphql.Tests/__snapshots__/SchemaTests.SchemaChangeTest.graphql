@@ -153,7 +153,7 @@ type Query {
   keycloakRoles("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: KeycloakRoleFilterInput order: [KeycloakRoleSortInput!]): KeycloakRolesConnection
   keycloakRolesAny(where: KeycloakRoleFilterInput): Boolean!
   keycloakRolesCount(where: KeycloakRoleFilterInput): Int!
-  keycloakRolesByUserId(id: String!): [KeycloakRole!]!
+  keycloakRolesByUserId(id: ID!): [KeycloakRole!]!
 }
 
 type UpdateKeycloakRolePayload {
