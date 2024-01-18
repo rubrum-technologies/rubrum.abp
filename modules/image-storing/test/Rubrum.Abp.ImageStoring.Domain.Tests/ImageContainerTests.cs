@@ -139,4 +139,19 @@ public class ImageContainerTests : ImageStoringDomainTestBase
             svg.ShouldBeNull();
         });
     }
+
+    [Fact]
+    public async Task DeleteByTagAsync()
+    {
+        await WithUnitOfWorkAsync(async () =>
+        {
+            await _imageContainer.DeleteByTagAsync(ImageTag);
+
+            foreach (var id in new[] { SvgId, JpgId, PngId })
+            {
+                var img = await _imageContainer.GetOrNullAsync(id);
+                img.ShouldBeNull();
+            }
+        });
+    }
 }

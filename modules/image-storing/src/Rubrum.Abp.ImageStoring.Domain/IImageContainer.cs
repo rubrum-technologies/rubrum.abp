@@ -19,4 +19,6 @@ public interface IImageContainer
     Task MarkAsPermanentAsync(Guid id, CancellationToken cancellationToken = default);
 
     Task DeleteAsync(Guid id, CancellationToken cancellationToken = default);
+
+    Task DeleteByTagAsync(string tag, CancellationToken cancellationToken = default);
 }
