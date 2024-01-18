@@ -5,19 +5,14 @@ using static Rubrum.Abp.Keycloak.Permissions.KeycloakRolePermissions.Roles;
 
 namespace Rubrum.Abp.Keycloak.Roles;
 
-public class KeycloakRoleAppService : ApplicationService, IKeycloakRoleAppService
+public class KeycloakRoleAppService(
+    IKeycloakClient keycloakClient,
+    IKeycloakRoleMapper mapper)
+    : ApplicationService, IKeycloakRoleAppService
 {
-    public KeycloakRoleAppService(
-        IKeycloakClient keycloakClient,
-        IKeycloakRoleMapper mapper)
-    {
-        KeycloakClient = keycloakClient;
-        Mapper = mapper;
-    }
+    protected IKeycloakClient KeycloakClient => keycloakClient;
 
-    protected IKeycloakClient KeycloakClient { get; }
-
-    protected IKeycloakRoleMapper Mapper { get; }
+    protected IKeycloakRoleMapper Mapper => mapper;
 
     public async Task<KeycloakRoleDto> GetAsync(string id)
     {

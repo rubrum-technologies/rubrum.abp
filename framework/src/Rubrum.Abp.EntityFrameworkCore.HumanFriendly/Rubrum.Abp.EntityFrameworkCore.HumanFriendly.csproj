@@ -11,6 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Rubrum.Abp.Ddd.HumanFriendly\Rubrum.Abp.Ddd.HumanFriendly.csproj" />
+    <ProjectReference Include="..\Rubrum.Abp.Ddd.Shared.HumanFriendly\Rubrum.Abp.Ddd.Shared.HumanFriendly.csproj" />
   </ItemGroup>
 </Project>

@@ -4,25 +4,19 @@ using Volo.Abp.DependencyInjection;
 
 namespace Rubrum.Abp.Keycloak;
 
-public class CurrentKeycloakRealm : ICurrentKeycloakRealm, ITransientDependency
+public class CurrentKeycloakRealm(
+    ICurrentKeycloakRealmAccessor accessor,
+    IOptions<RubrumAbpKeycloakOptions> options)
+    : ICurrentKeycloakRealm, ITransientDependency
 {
-    private readonly ICurrentKeycloakRealmAccessor _accessor;
-    private readonly RubrumAbpKeycloakOptions _options;
+    private readonly RubrumAbpKeycloakOptions _options = options.Value;
 
-    public CurrentKeycloakRealm(
-        ICurrentKeycloakRealmAccessor accessor,
-        IOptions<RubrumAbpKeycloakOptions> options)
-    {
-        _accessor = accessor;
-        _options = options.Value;
-    }
-
-    public string RealmName => _accessor.Current?.RealmName ?? _options.DefaultRealmName ?? "master";
+    public string RealmName => accessor.Current?.RealmName ?? _options.DefaultRealmName ?? "master";
 
     public IDisposable Change(string realmName)
     {
-        var parentScope = _accessor.Current;
-        _accessor.Current = new BasicKeycloakRealmInfo(realmName);
+        var parentScope = accessor.Current;
+        accessor.Current = new BasicKeycloakRealmInfo(realmName);
 
         return new DisposeAction<(ICurrentKeycloakRealmAccessor, BasicKeycloakRealmInfo?)>(
             static state =>
@@ -30,6 +24,6 @@ public class CurrentKeycloakRealm : ICurrentKeycloakRealm, ITransientDependency
                 var (currentTenantAccessor, parentScope) = state;
                 currentTenantAccessor.Current = parentScope;
             },
-            (_accessor, parentScope));
+            (accessor, parentScope));
     }
 }

@@ -4,17 +4,13 @@ using Volo.Abp.Threading;
 
 namespace Rubrum.Abp.LanguageManagement;
 
-public class SystemLanguageGraphqlService : SystemLanguageAppService, ISystemLanguageGraphqlService
+public class SystemLanguageGraphqlService(
+    IRepository<SystemLanguage, string> repository,
+    SystemLanguageManager manager,
+    ISystemLanguageMapper mapper,
+    ICancellationTokenProvider cancellationTokenProvider)
+    : SystemLanguageAppService(repository, manager, mapper, cancellationTokenProvider), ISystemLanguageGraphqlService
 {
-    public SystemLanguageGraphqlService(
-        IRepository<SystemLanguage, string> repository,
-        SystemLanguageManager manager,
-        ISystemLanguageMapper mapper,
-        ICancellationTokenProvider cancellationTokenProvider)
-        : base(repository, manager, mapper, cancellationTokenProvider)
-    {
-    }
-
     public async Task<IQueryable<SystemLanguageDto>> GetQueryableAsync()
     {
         return (await Repository.GetQueryableAsync()).Select(Mapper.Expression);

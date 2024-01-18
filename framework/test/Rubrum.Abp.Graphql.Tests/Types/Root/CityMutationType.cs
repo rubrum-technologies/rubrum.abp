@@ -1,14 +1,14 @@
-﻿using Rubrum.Abp.Graphql.Application.Dtos;
+﻿using HotChocolate.Types;
+using Rubrum.Abp.Graphql.Application.Dtos;
 using Rubrum.Abp.Graphql.Application.Inputs;
 using Rubrum.Abp.Graphql.Services.Contracts;
 
 namespace Rubrum.Abp.Graphql.Types.Root;
 
-public class CityMutationType : EntityMutationType<CityDto, int, ICityGraphqlService, CreateCityInput, UpdateCityInput>
+public class CityMutationType : ObjectTypeExtension, IGraphqlType
 {
-    protected override string TypeName => "City";
-
-    protected override string TypeNameSingular => "City";
-
-    protected override string TypeNameInPlural => "Cities";
+    protected override void Configure(IObjectTypeDescriptor descriptor)
+    {
+        descriptor.EntityMutation<CityDto, int, ICityGraphqlService, CreateCityInput, UpdateCityInput>("City", "City");
+    }
 }

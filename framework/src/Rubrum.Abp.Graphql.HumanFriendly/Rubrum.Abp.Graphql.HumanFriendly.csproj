@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\common.props"/>
+  <Import Project="..\..\..\fody.props"/>
+
+  <PropertyGroup>
+    <RootNamespace>Rubrum.Abp.Graphql.HumanFriendly</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Rubrum.Abp.Ddd.Application.Contracts.HumanFriendly\Rubrum.Abp.Ddd.Application.Contracts.HumanFriendly.csproj" />
+    <ProjectReference Include="..\Rubrum.Abp.Graphql\Rubrum.Abp.Graphql.csproj" />
+  </ItemGroup>
+</Project>

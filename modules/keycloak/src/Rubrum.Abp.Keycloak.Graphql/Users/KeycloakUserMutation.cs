@@ -14,7 +14,7 @@ public class KeycloakUserMutation : IGraphqlType
     [UseMutationConvention]
     [UseAbpError]
     public async Task<KeycloakUserDto> ChangePasswordAsync(
-        [ID("KeycloakUser")] string id,
+        [ID(KeycloakUserConstants.TypeName)] string id,
         string password,
         [Service] IKeycloakUserGraphqlService service)
     {
@@ -25,7 +25,7 @@ public class KeycloakUserMutation : IGraphqlType
     [UseMutationConvention]
     [UseAbpError]
     public async Task<KeycloakUserDto> ChangeRolesAsync(
-        [ID("KeycloakUser")] string id,
+        [ID(KeycloakUserConstants.TypeName)] string id,
         string[] roleNames,
         [Service] IKeycloakUserGraphqlService service)
     {

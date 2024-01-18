@@ -1,14 +1,13 @@
-﻿using Rubrum.Abp.Graphql.Types;
+﻿using HotChocolate.Types;
+using Rubrum.Abp.Graphql.Types;
 
 namespace Rubrum.Abp.Keycloak.Users;
 
-public class KeycloakUserMutationType :
-    EntityMutationType<KeycloakUserDto, string, IKeycloakUserGraphqlService, CreateKeycloakUserInput,
-        UpdateKeycloakUserInput>
+public class KeycloakUserMutationType : ObjectTypeExtension, IGraphqlType
 {
-    protected override string TypeName => "KeycloakUser";
-
-    protected override string TypeNameSingular => "KeycloakUser";
-
-    protected override string TypeNameInPlural => "KeycloakUsers";
+    protected override void Configure(IObjectTypeDescriptor descriptor)
+    {
+        descriptor.EntityMutation<KeycloakUserDto, string, IKeycloakUserGraphqlService, CreateKeycloakUserInput,
+            UpdateKeycloakUserInput>(KeycloakUserConstants.TypeName, "KeycloakUser");
+    }
 }

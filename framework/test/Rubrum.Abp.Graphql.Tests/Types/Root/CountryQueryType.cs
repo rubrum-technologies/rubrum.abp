@@ -1,13 +1,15 @@
-﻿using Rubrum.Abp.Graphql.Application.Dtos;
-using Rubrum.Abp.Graphql.Services.Contracts;
+﻿using HotChocolate.Types;
+using Rubrum.Abp.Graphql.Application.Dtos;
 
 namespace Rubrum.Abp.Graphql.Types.Root;
 
-public class CountryQueryType : EntityQueryType<CountryDto, Guid, ICountryGraphqlService>
+public class CountryQueryType : ObjectTypeExtension, IGraphqlType
 {
-    protected override string TypeName => CountryConstants.TypeName;
-
-    protected override string TypeNameSingular => "Country";
-
-    protected override string TypeNameInPlural => "Countries";
+    protected override void Configure(IObjectTypeDescriptor descriptor)
+    {
+        descriptor.EntityQuery<CountryDto, Guid>(
+            CountryConstants.TypeName,
+            "Country",
+            "Countries");
+    }
 }

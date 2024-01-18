@@ -1,15 +1,12 @@
-﻿using Rubrum.Abp.Graphql.Application.Dtos;
-using Rubrum.Abp.Graphql.Services.Contracts;
+﻿using HotChocolate.Types;
+using Rubrum.Abp.Graphql.Application.Dtos;
 
 namespace Rubrum.Abp.Graphql.Types.Root;
 
-public class CityQueryType : EntityQueryType<CityDto, int, ICityGraphqlService>
+public class CityQueryType : ObjectTypeExtension, IGraphqlType
 {
-    protected override string TypeName => "City";
-
-    protected override string TypeNameSingular => "City";
-
-    protected override string TypeNameInPlural => "Cities";
-
-    protected override bool IsAddFieldByAll => true;
+    protected override void Configure(IObjectTypeDescriptor descriptor)
+    {
+        descriptor.EntityQuery<CityDto, int>("City", "City", "Cities", true);
+    }
 }
