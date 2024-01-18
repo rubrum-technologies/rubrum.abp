@@ -3,7 +3,7 @@
   <Import Project="..\..\..\fody.props"/>
 
   <PropertyGroup>
-    <RootNamespace>Rubrum.Abp.Ddd.HumanFriendly</RootNamespace>
+    <RootNamespace>Rubrum.Abp.HumanFriendly</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Rubrum.Abp.Ddd.Shared.HumanFriendly\Rubrum.Abp.Ddd.Shared.HumanFriendly.csproj" />
+    <ProjectReference Include="..\Rubrum.Abp.Ddd.Domain.Shared.HumanFriendly\Rubrum.Abp.Ddd.Domain.Shared.HumanFriendly.csproj" />
   </ItemGroup>
 </Project>

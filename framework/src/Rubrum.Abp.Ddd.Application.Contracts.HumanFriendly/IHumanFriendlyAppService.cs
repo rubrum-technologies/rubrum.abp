@@ -1,7 +1,7 @@
 ﻿using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 
-namespace Rubrum.Abp.Ddd.HumanFriendly;
+namespace Rubrum.Abp.HumanFriendly;
 
 public interface IHumanFriendlyAppService<TEntityDto, TKey> : IApplicationService
     where TKey : notnull

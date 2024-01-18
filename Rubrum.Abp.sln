@@ -178,7 +178,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.ImageStoring.Gra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Graphql.HumanFriendly", "framework\src\Rubrum.Abp.Graphql.HumanFriendly\Rubrum.Abp.Graphql.HumanFriendly.csproj", "{2F751C49-C630-46E4-A32E-94E2773E1966}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Ddd.Shared.HumanFriendly", "framework\src\Rubrum.Abp.Ddd.Shared.HumanFriendly\Rubrum.Abp.Ddd.Shared.HumanFriendly.csproj", "{F39D129A-D79C-4E3F-8F44-7B42E37AA84D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Ddd.Domain.Shared.HumanFriendly", "framework\src\Rubrum.Abp.Ddd.Domain.Shared.HumanFriendly\Rubrum.Abp.Ddd.Domain.Shared.HumanFriendly.csproj", "{F39D129A-D79C-4E3F-8F44-7B42E37AA84D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Ddd.Application.Contracts.HumanFriendly", "framework\src\Rubrum.Abp.Ddd.Application.Contracts.HumanFriendly\Rubrum.Abp.Ddd.Application.Contracts.HumanFriendly.csproj", "{3380B3D9-F02F-4293-B6A2-ABACB5F9740E}"
 EndProject

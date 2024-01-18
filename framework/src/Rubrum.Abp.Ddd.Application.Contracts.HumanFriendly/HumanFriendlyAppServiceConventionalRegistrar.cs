@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.DependencyInjection;
 
-namespace Rubrum.Abp.Ddd.HumanFriendly;
+namespace Rubrum.Abp.HumanFriendly;
 
 public class HumanFriendlyAppServiceConventionalRegistrar : DefaultConventionalRegistrar
 {

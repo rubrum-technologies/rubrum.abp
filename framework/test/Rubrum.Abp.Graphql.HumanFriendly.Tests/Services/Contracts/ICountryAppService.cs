@@ -1,5 +1,5 @@
-﻿using Rubrum.Abp.Ddd.HumanFriendly;
-using Rubrum.Abp.Graphql.HumanFriendly.Application;
+﻿using Rubrum.Abp.Graphql.HumanFriendly.Application;
+using Rubrum.Abp.HumanFriendly;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 

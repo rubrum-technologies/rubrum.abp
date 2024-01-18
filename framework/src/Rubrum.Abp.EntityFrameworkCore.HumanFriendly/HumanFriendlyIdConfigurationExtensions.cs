@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Rubrum.Abp.Ddd.HumanFriendly;
+using Rubrum.Abp.HumanFriendly;
 
 namespace Rubrum.Abp.EntityFrameworkCore.HumanFriendly;
 

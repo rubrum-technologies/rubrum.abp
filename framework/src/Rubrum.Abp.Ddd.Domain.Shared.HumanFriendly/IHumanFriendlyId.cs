@@ -1,4 +1,4 @@
-﻿namespace Rubrum.Abp.Ddd.HumanFriendly;
+﻿namespace Rubrum.Abp.HumanFriendly;
 
 public interface IHumanFriendlyId
 {

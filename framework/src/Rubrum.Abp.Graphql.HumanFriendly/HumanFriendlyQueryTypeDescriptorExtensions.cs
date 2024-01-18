@@ -1,6 +1,6 @@
 ﻿using HotChocolate.Types;
-using Rubrum.Abp.Ddd.HumanFriendly;
 using Rubrum.Abp.Graphql.Data;
+using Rubrum.Abp.HumanFriendly;
 using Volo.Abp.Application.Dtos;
 
 namespace Rubrum.Abp.Graphql.HumanFriendly;

@@ -3,7 +3,7 @@
   <Import Project="..\..\..\fody.props"/>
 
   <PropertyGroup>
-    <RootNamespace>Rubrum.Abp.Ddd.HumanFriendly</RootNamespace>
+    <RootNamespace>Rubrum.Abp.HumanFriendly</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

@@ -2,10 +2,10 @@
 using Volo.Abp.Application;
 using Volo.Abp.Modularity;
 
-namespace Rubrum.Abp.Ddd.HumanFriendly;
+namespace Rubrum.Abp.HumanFriendly;
 
 [DependsOn(typeof(AbpDddApplicationContractsModule))]
-[DependsOn(typeof(RubrumAbpDddSharedHumanFriendlyModule))]
+[DependsOn(typeof(RubrumAbpDddDomainSharedHumanFriendlyModule))]
 public class RubrumAbpDddApplicationContractsHumanFriendlyModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
