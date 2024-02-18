@@ -10,7 +10,11 @@ public class CountryMutationType : ObjectTypeExtension, IGraphqlType
     protected override void Configure(IObjectTypeDescriptor descriptor)
     {
         descriptor.EntityMutation<CountryDto, Guid, ICountryGraphqlService, CreateCountryInput, UpdateCountryInput>(
-            CountryConstants.TypeName,
-            "Country");
+            new EntityMutationOptions
+            {
+                TypeName = CountryConstants.TypeName,
+                TypeNameSingular = "Country",
+                IsAuthorize = false
+            });
     }
 }

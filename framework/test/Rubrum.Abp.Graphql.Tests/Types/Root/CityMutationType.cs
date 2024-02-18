@@ -9,6 +9,12 @@ public class CityMutationType : ObjectTypeExtension, IGraphqlType
 {
     protected override void Configure(IObjectTypeDescriptor descriptor)
     {
-        descriptor.EntityMutation<CityDto, int, ICityGraphqlService, CreateCityInput, UpdateCityInput>("City", "City");
+        descriptor.EntityMutation<CityDto, int, ICityGraphqlService, CreateCityInput, UpdateCityInput>(
+            new EntityMutationOptions
+            {
+                TypeName = "City",
+                TypeNameSingular = "City",
+                IsAuthorize = false
+            });
     }
 }

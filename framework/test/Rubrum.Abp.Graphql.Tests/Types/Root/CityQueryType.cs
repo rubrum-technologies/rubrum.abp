@@ -7,6 +7,13 @@ public class CityQueryType : ObjectTypeExtension, IGraphqlType
 {
     protected override void Configure(IObjectTypeDescriptor descriptor)
     {
-        descriptor.EntityQuery<CityDto, int>("City", "City", "Cities", true);
+        descriptor.EntityQuery<CityDto, int>(new EntityQueryOptions
+        {
+            TypeName = "City",
+            TypeNameSingular = "City",
+            TypeNameInPlural = "Cities",
+            IsAddFieldByAll = true,
+            IsAuthorize = false
+        });
     }
 }

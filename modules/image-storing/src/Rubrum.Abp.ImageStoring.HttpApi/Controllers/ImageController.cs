@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.AspNetCore.Mvc;
@@ -11,46 +12,41 @@ namespace Rubrum.Abp.ImageStoring.Controllers;
 [RemoteService(Name = RemoteServiceName)]
 [Area(ModuleName)]
 [Route("api/image-storing/images")]
-public class ImageController : AbpControllerBase, IImageAppService
+public class ImageController(IImageAppService service) : AbpControllerBase, IImageAppService
 {
-    private readonly IImageAppService _service;
-
-    public ImageController(IImageAppService service)
-    {
-        _service = service;
-    }
-
-    [HttpGet]
-    [Route("{id:guid}")]
+    [HttpGet("{id:guid}")]
     public Task<IRemoteStreamContent?> DownloadAsync(Guid id)
     {
-        return _service.DownloadAsync(id);
+        return service.DownloadAsync(id);
     }
 
+    [Authorize]
     [HttpPut]
     [Route("{id:guid}")]
     public Task UploadAsync(Guid id, IRemoteStreamContent file)
     {
-        return _service.UploadAsync(id, file);
+        return service.UploadAsync(id, file);
     }
 
+    [Authorize]
     [HttpPost]
     public Task<ImageInformationDto> UploadAsync([FromForm] UploadImageInput input)
     {
-        return _service.UploadAsync(input);
+        return service.UploadAsync(input);
     }
 
+    [Authorize]
     [HttpPost]
     [Route("many")]
     public Task<ListResultDto<ImageInformationDto>> UploadAsync([FromForm] UploadImagesInput input)
     {
-        return _service.UploadAsync(input);
+        return service.UploadAsync(input);
     }
 
-    [HttpDelete]
-    [Route("{id:guid}")]
+    [Authorize]
+    [HttpDelete("{id:guid}")]
     public Task DeleteAsync(Guid id)
     {
-        return _service.DeleteAsync(id);
+        return service.DeleteAsync(id);
     }
 }

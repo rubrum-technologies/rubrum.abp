@@ -12,12 +12,19 @@ public static class EntityQueryTypeExtensions
     public static IObjectTypeDescriptor EntityQueryById<TEntityDto, TKey>(
         this IObjectTypeDescriptor descriptor,
         string typeName,
-        string fieldName)
+        string fieldName,
+        bool isAuthorize)
         where TKey : notnull
         where TEntityDto : IEntityDto<TKey>
     {
-        descriptor
-            .Field(fieldName)
+        var field = descriptor.Field(fieldName);
+
+        if (isAuthorize)
+        {
+            field.Authorize();
+        }
+
+        field
             .UseUnitOfWork()
             .Argument("id", x => x.Type(typeof(TKey)).ID(typeName))
             .ResolveWith<Resolves>(x => x.GetByIdAsync<TEntityDto, TKey>(default!, default!, default!));
@@ -27,12 +34,19 @@ public static class EntityQueryTypeExtensions
 
     public static IObjectTypeDescriptor EntityQueryGet<TEntityDto, TKey>(
         this IObjectTypeDescriptor descriptor,
-        string fieldName)
+        string fieldName,
+        bool isAuthorize)
         where TKey : notnull
         where TEntityDto : IEntityDto<TKey>
     {
-        descriptor
-            .Field(fieldName)
+        var field = descriptor.Field(fieldName);
+
+        if (isAuthorize)
+        {
+            field.Authorize();
+        }
+
+        field
             .UseUnitOfWork()
             .UseFirstOrDefault()
             .UseFiltering<FilterInputType<TEntityDto>>()
@@ -43,12 +57,19 @@ public static class EntityQueryTypeExtensions
 
     public static IObjectTypeDescriptor EntityQueryGetList<TEntityDto, TKey>(
         this IObjectTypeDescriptor descriptor,
-        string fieldName)
+        string fieldName,
+        bool isAuthorize)
         where TKey : notnull
         where TEntityDto : IEntityDto<TKey>
     {
-        descriptor
-            .Field(fieldName)
+        var field = descriptor.Field(fieldName);
+
+        if (isAuthorize)
+        {
+            field.Authorize();
+        }
+
+        field
             .UseUnitOfWork()
             .UsePaging()
             .UseFiltering<FilterInputType<TEntityDto>>()
@@ -60,12 +81,19 @@ public static class EntityQueryTypeExtensions
 
     public static IObjectTypeDescriptor EntityQueryAll<TEntityDto, TKey>(
         this IObjectTypeDescriptor descriptor,
-        string fieldName)
+        string fieldName,
+        bool isAuthorize)
         where TKey : notnull
         where TEntityDto : IEntityDto<TKey>
     {
-        descriptor
-            .Field(fieldName)
+        var field = descriptor.Field(fieldName);
+
+        if (isAuthorize)
+        {
+            field.Authorize();
+        }
+
+        field
             .UseUnitOfWork()
             .UseFiltering<FilterInputType<TEntityDto>>()
             .UseSorting<SortInputType<TEntityDto>>()
@@ -76,12 +104,19 @@ public static class EntityQueryTypeExtensions
 
     public static IObjectTypeDescriptor EntityQueryAny<TEntityDto, TKey>(
         this IObjectTypeDescriptor descriptor,
-        string fieldName)
+        string fieldName,
+        bool isAuthorize)
         where TKey : notnull
         where TEntityDto : IEntityDto<TKey>
     {
-        descriptor
-            .Field(fieldName)
+        var field = descriptor.Field(fieldName);
+
+        if (isAuthorize)
+        {
+            field.Authorize();
+        }
+
+        field
             .UseUnitOfWork()
             .UseAny()
             .UseFiltering<FilterInputType<TEntityDto>>()
@@ -92,12 +127,19 @@ public static class EntityQueryTypeExtensions
 
     public static IObjectTypeDescriptor EntityQueryCount<TEntityDto, TKey>(
         this IObjectTypeDescriptor descriptor,
-        string fieldName)
+        string fieldName,
+        bool isAuthorize)
         where TKey : notnull
         where TEntityDto : IEntityDto<TKey>
     {
-        descriptor
-            .Field(fieldName)
+        var field = descriptor.Field(fieldName);
+
+        if (isAuthorize)
+        {
+            field.Authorize();
+        }
+
+        field
             .UseUnitOfWork()
             .UseCount()
             .UseFiltering<FilterInputType<TEntityDto>>()
@@ -108,24 +150,26 @@ public static class EntityQueryTypeExtensions
 
     public static IObjectTypeDescriptor EntityQuery<TEntityDto, TKey>(
         this IObjectTypeDescriptor descriptor,
-        string typeName,
-        string typeNameSingular,
-        string typeNameInPlural,
-        bool isAddFieldByAll = false)
+        EntityQueryOptions options)
         where TKey : notnull
         where TEntityDto : IEntityDto<TKey>
     {
+        var typeName = options.TypeName;
+        var typeNameSingular = options.TypeNameSingular;
+        var typeNameInPlural = options.TypeNameInPlural;
+        var isAuthorize = options.IsAuthorize;
+
         descriptor
             .Name(OperationTypeNames.Query)
-            .EntityQueryById<TEntityDto, TKey>(typeName, $"{typeNameSingular.ToLowerFirstChar()}ById")
-            .EntityQueryGet<TEntityDto, TKey>(typeNameSingular.ToLowerFirstChar())
-            .EntityQueryGetList<TEntityDto, TKey>(typeNameInPlural.ToLowerFirstChar())
-            .EntityQueryAny<TEntityDto, TKey>($"{typeNameInPlural.ToLowerFirstChar()}Any")
-            .EntityQueryCount<TEntityDto, TKey>($"{typeNameInPlural.ToLowerFirstChar()}Count");
+            .EntityQueryById<TEntityDto, TKey>(typeName, $"{typeNameSingular.ToLowerFirstChar()}ById", isAuthorize)
+            .EntityQueryGet<TEntityDto, TKey>(typeNameSingular.ToLowerFirstChar(), isAuthorize)
+            .EntityQueryGetList<TEntityDto, TKey>(typeNameInPlural.ToLowerFirstChar(), isAuthorize)
+            .EntityQueryAny<TEntityDto, TKey>($"{typeNameInPlural.ToLowerFirstChar()}Any", isAuthorize)
+            .EntityQueryCount<TEntityDto, TKey>($"{typeNameInPlural.ToLowerFirstChar()}Count", isAuthorize);
 
-        if (isAddFieldByAll)
+        if (options.IsAddFieldByAll)
         {
-            descriptor.EntityQueryAll<TEntityDto, TKey>($"{typeNameInPlural.ToLowerFirstChar()}All");
+            descriptor.EntityQueryAll<TEntityDto, TKey>($"{typeNameInPlural.ToLowerFirstChar()}All", isAuthorize);
         }
 
         return descriptor;
