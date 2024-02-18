@@ -26,7 +26,7 @@ public class GraphQlSubscriptionClientFactory : IGraphQLSubscriptionClientFactor
     {
         _configuration = configuration;
         _graphQlSubscriptionClientFactory = (IGraphQLSubscriptionClientFactory)DefaultWebSocketGraphQlSubscriptionClientFactoryConstructor
-                .Invoke(new object[] { httpClientFactory, connectionFactory });
+                .Invoke([httpClientFactory, connectionFactory]);
     }
 
     public IGraphQLSubscriptionClient CreateClient(IGraphQLClientConfiguration configuration)

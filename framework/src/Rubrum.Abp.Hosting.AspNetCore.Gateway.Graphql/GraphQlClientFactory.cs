@@ -24,7 +24,7 @@ public class GraphQlClientFactory : IGraphQLClientFactory
     {
         _configuration = configuration;
         _graphQlClientFactory = (IGraphQLClientFactory)DefaultHttpGraphQlClientFactoryConstructor
-            .Invoke(new object[] { httpClientFactory });
+            .Invoke([httpClientFactory]);
     }
 
     public IGraphQLClient CreateClient(HttpClientConfiguration configuration)

@@ -62,8 +62,6 @@ public class RubrumAbpGraphqlModule : AbpModule
     {
         var graphql = context.Services.GetGraphql();
 
-        graphql
-            .TryAddTypeInterceptor<NewLineTypeInterceptor>()
-            .InitializeOnStartup();
+        graphql.TryAddTypeInterceptor<NewLineTypeInterceptor>();
     }
 }

@@ -10,6 +10,4 @@
     <ProjectReference Include="..\Rubrum.Abp.Graphql\Rubrum.Abp.Graphql.csproj" />
     <ProjectReference Include="..\Rubrum.Abp.Hosting.AspNetCore.Microservice\Rubrum.Abp.Hosting.AspNetCore.Microservice.csproj" />
   </ItemGroup>
-
-
 </Project>

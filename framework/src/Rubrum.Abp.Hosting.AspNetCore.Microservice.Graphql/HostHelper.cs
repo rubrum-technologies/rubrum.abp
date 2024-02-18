@@ -17,8 +17,6 @@ public static class HostHelper
     {
         var assemblyName = Assembly.GetAssembly(typeof(TModule))?.GetName().Name;
 
-        SerilogConfigurationHelper.Configure(assemblyName);
-
         try
         {
             Log.Information("Starting {AssemblyName}", assemblyName);
