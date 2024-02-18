@@ -1,4 +1,5 @@
 ﻿using HotChocolate;
+using HotChocolate.Authorization;
 using HotChocolate.Language;
 using HotChocolate.Types;
 using HotChocolate.Types.Relay;
@@ -11,6 +12,7 @@ namespace Rubrum.Abp.Keycloak.Users;
 public class KeycloakUserMutation : IGraphqlType
 {
     [GraphQLName("changePassword")]
+    [Authorize]
     [UseMutationConvention]
     [UseAbpError]
     public async Task<KeycloakUserDto> ChangePasswordAsync(
@@ -22,6 +24,7 @@ public class KeycloakUserMutation : IGraphqlType
     }
 
     [GraphQLName("changeRolesForUser")]
+    [Authorize]
     [UseMutationConvention]
     [UseAbpError]
     public async Task<KeycloakUserDto> ChangeRolesAsync(

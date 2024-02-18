@@ -21,6 +21,7 @@ public class RubrumAbpGraphqlMultilingualObjectsTestModule : AbpModule
             .ModifyRequestOptions(options =>
             {
                 options.IncludeExceptionDetails = true;
-            });
+            })
+            .AddFakeAuthorizationHandler();
     }
 }

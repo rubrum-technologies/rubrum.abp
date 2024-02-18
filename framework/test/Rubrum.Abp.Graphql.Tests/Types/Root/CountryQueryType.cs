@@ -7,9 +7,11 @@ public class CountryQueryType : ObjectTypeExtension, IGraphqlType
 {
     protected override void Configure(IObjectTypeDescriptor descriptor)
     {
-        descriptor.EntityQuery<CountryDto, Guid>(
-            CountryConstants.TypeName,
-            "Country",
-            "Countries");
+        descriptor.EntityQuery<CountryDto, Guid>(new EntityQueryOptions
+        {
+            TypeName = CountryConstants.TypeName,
+            TypeNameSingular = "Country",
+            TypeNameInPlural = "Countries"
+        });
     }
 }

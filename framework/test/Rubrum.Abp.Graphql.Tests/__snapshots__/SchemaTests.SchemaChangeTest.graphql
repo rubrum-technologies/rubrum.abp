@@ -194,11 +194,11 @@ type Query {
   citiesAny(where: CityFilterInput): Boolean!
   citiesCount(where: CityFilterInput): Int!
   citiesAll(where: CityFilterInput order: [CitySortInput!]): [City!]!
-  countryById(id: ID!): Country!
-  country(where: CountryFilterInput): Country
-  countries("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: CountryFilterInput order: [CountrySortInput!]): CountriesConnection
-  countriesAny(where: CountryFilterInput): Boolean!
-  countriesCount(where: CountryFilterInput): Int!
+  countryById(id: ID!): Country! @authorize
+  country(where: CountryFilterInput): Country @authorize
+  countries("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: CountryFilterInput order: [CountrySortInput!]): CountriesConnection @authorize
+  countriesAny(where: CountryFilterInput): Boolean! @authorize
+  countriesCount(where: CountryFilterInput): Int! @authorize
   tenantById(id: ID!): Tenant!
 }
 
@@ -422,6 +422,8 @@ enum SortEnumType {
   ASC
   DESC
 }
+
+directive @authorize("The name of the authorization policy that determines access to the annotated resource." policy: String "Roles that are allowed to access the annotated resource." roles: [String!] "Defines when when the authorize directive shall be applied.By default the authorize directives are applied during the validation phase." apply: ApplyPolicy! = BEFORE_RESOLVER) repeatable on OBJECT | FIELD_DEFINITION
 
 "The `Date` scalar represents an ISO-8601 compliant date type."
 scalar Date

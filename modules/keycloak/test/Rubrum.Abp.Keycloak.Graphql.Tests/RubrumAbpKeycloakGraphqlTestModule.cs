@@ -1,9 +1,13 @@
-﻿using HotChocolate.Data.Filters;
+﻿using System.Security.Claims;
+using HotChocolate;
+using HotChocolate.Data.Filters;
 using HotChocolate.Types;
 using Microsoft.Extensions.DependencyInjection;
 using Rubrum.Abp.Graphql;
 using Rubrum.Abp.Graphql.Extensions;
 using Volo.Abp.Modularity;
+using Volo.Abp.Security.Claims;
+using WellKnownContextData = Rubrum.Abp.Graphql.WellKnownContextData;
 
 namespace Rubrum.Abp.Keycloak;
 
@@ -27,6 +31,7 @@ public class RubrumAbpKeycloakGraphqlTestModule : AbpModule
             .ModifyRequestOptions(options =>
             {
                 options.IncludeExceptionDetails = true;
-            });
+            })
+            .AddFakeAuthorizationHandler();
     }
 }

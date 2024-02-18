@@ -51,7 +51,8 @@ public class RubrumAbpGraphqlHumanFriendlyTestModule : AbpModule
             .ModifyRequestOptions(options =>
             {
                 options.IncludeExceptionDetails = true;
-            });
+            })
+            .AddFakeAuthorizationHandler();
     }
 
     public override void OnApplicationInitialization(ApplicationInitializationContext context)

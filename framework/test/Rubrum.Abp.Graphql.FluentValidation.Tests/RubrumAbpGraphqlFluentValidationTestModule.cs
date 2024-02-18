@@ -13,7 +13,9 @@ public class RubrumAbpGraphqlFluentValidationTestModule : AbpModule
     {
         var graphql = context.Services.GetGraphql();
 
-        graphql.AddQueryType(d => d.Name(OperationTypeNames.Query));
-        graphql.AddMutationType(d => d.Name(OperationTypeNames.Mutation));
+        graphql
+            .AddQueryType(d => d.Name(OperationTypeNames.Query))
+            .AddMutationType(d => d.Name(OperationTypeNames.Mutation))
+            .AddFakeAuthorizationHandler();
     }
 }

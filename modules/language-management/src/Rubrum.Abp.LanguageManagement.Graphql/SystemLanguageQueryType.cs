@@ -7,10 +7,12 @@ public class SystemLanguageQueryType : ObjectTypeExtension, IGraphqlType
 {
     protected override void Configure(IObjectTypeDescriptor descriptor)
     {
-        descriptor.EntityQuery<SystemLanguageDto, string>(
-            SystemLanguageConstants.TypeName,
-            "SystemLanguage",
-            "SystemLanguages",
-            true);
+        descriptor.EntityQuery<SystemLanguageDto, string>(new EntityQueryOptions
+        {
+            TypeName = SystemLanguageConstants.TypeName,
+            TypeNameSingular = "SystemLanguage",
+            TypeNameInPlural = "SystemLanguages",
+            IsAuthorize = true
+        });
     }
 }

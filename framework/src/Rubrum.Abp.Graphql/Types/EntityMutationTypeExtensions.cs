@@ -11,13 +11,20 @@ public static class EntityMutationTypeExtensions
 {
     public static IObjectTypeDescriptor EntityMutationCreate<TEntityDto, TKey, TService, TCreateInput>(
         this IObjectTypeDescriptor descriptor,
-        string fieldName)
+        string fieldName,
+        bool isAuthorize)
         where TKey : notnull
         where TEntityDto : IEntityDto<TKey>
         where TService : ICreateAppService<TEntityDto, TCreateInput>
     {
-        descriptor
-            .Field(fieldName)
+        var field = descriptor.Field(fieldName);
+
+        if (isAuthorize)
+        {
+            field.Authorize();
+        }
+
+        field
             .Argument("input", a => a.Type<NonNullType<InputObjectType<TCreateInput>>>())
             .UseUnitOfWork()
             .UseAbpError()
@@ -34,13 +41,20 @@ public static class EntityMutationTypeExtensions
 
     public static IObjectTypeDescriptor EntityMutationUpdate<TEntityDto, TKey, TService, TUpdateInput>(
         this IObjectTypeDescriptor descriptor,
-        string fieldName)
+        string fieldName,
+        bool isAuthorize)
         where TKey : notnull
         where TEntityDto : IEntityDto<TKey>
         where TService : IUpdateAppService<TEntityDto, TKey, TUpdateInput>
     {
-        descriptor
-            .Field(fieldName)
+        var field = descriptor.Field(fieldName);
+
+        if (isAuthorize)
+        {
+            field.Authorize();
+        }
+
+        field
             .Argument("input", a => a.Type<NonNullType<InputObjectType<TUpdateInput>>>())
             .UseUnitOfWork()
             .UseAbpError()
@@ -61,13 +75,20 @@ public static class EntityMutationTypeExtensions
     public static IObjectTypeDescriptor EntityMutationDelete<TEntityDto, TKey, TService>(
         this IObjectTypeDescriptor descriptor,
         string typeName,
-        string fieldName)
+        string fieldName,
+        bool isAuthorize)
         where TKey : notnull
         where TEntityDto : IEntityDto<TKey>
         where TService : IDeleteAppService<TKey>
     {
-        descriptor
-            .Field(fieldName)
+        var field = descriptor.Field(fieldName);
+
+        if (isAuthorize)
+        {
+            field.Authorize();
+        }
+
+        field
             .Argument("id", a => a.Type<NonNullType<InputObjectType<TKey>>>().ID(typeName))
             .UseUnitOfWork()
             .UseAbpError()
@@ -89,17 +110,20 @@ public static class EntityMutationTypeExtensions
 
     public static IObjectTypeDescriptor EntityMutation<TEntityDto, TKey, TService, TCreateInput, TUpdateInput>(
         this IObjectTypeDescriptor descriptor,
-        string typeName,
-        string typeNameSingular)
+        EntityMutationOptions options)
         where TKey : notnull
         where TEntityDto : IEntityDto<TKey>
         where TService : ICreateUpdateAppService<TEntityDto, TKey, TCreateInput, TUpdateInput>, IDeleteAppService<TKey>
     {
+        var typeName = options.TypeName;
+        var typeNameSingular = options.TypeNameSingular;
+        var isAuthorize = options.IsAuthorize;
+
         descriptor
             .Name(OperationTypeNames.Mutation)
-            .EntityMutationCreate<TEntityDto, TKey, TService, TCreateInput>($"create{typeNameSingular}")
-            .EntityMutationUpdate<TEntityDto, TKey, TService, TUpdateInput>($"update{typeNameSingular}")
-            .EntityMutationDelete<TEntityDto, TKey, TService>(typeName, $"delete{typeNameSingular}");
+            .EntityMutationCreate<TEntityDto, TKey, TService, TCreateInput>($"create{typeNameSingular}", isAuthorize)
+            .EntityMutationUpdate<TEntityDto, TKey, TService, TUpdateInput>($"update{typeNameSingular}", isAuthorize)
+            .EntityMutationDelete<TEntityDto, TKey, TService>(typeName, $"delete{typeNameSingular}", isAuthorize);
 
         return descriptor;
     }

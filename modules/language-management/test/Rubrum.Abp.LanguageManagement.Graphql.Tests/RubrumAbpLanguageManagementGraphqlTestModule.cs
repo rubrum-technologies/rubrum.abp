@@ -14,6 +14,8 @@ public class RubrumAbpLanguageManagementGraphqlTestModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
+        context.Services.AddAlwaysAllowAuthorization();
+
         var graphql = context.Services.GetGraphql();
 
         graphql
@@ -26,6 +28,7 @@ public class RubrumAbpLanguageManagementGraphqlTestModule : AbpModule
             .ModifyRequestOptions(options =>
             {
                 options.IncludeExceptionDetails = true;
-            });
+            })
+            .AddFakeAuthorizationHandler();
     }
 }

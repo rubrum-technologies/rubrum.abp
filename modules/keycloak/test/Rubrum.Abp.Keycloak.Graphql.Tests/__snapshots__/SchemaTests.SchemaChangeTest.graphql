@@ -116,14 +116,14 @@ type KeycloakUsersEdge {
 }
 
 type Mutation {
-  createKeycloakUser(input: CreateKeycloakUserInput!): CreateKeycloakUserPayload!
-  updateKeycloakUser(input: UpdateKeycloakUserInput!): UpdateKeycloakUserPayload!
-  deleteKeycloakUser(input: DeleteKeycloakUserInput!): DeleteKeycloakUserPayload!
-  createKeycloakRole(input: CreateKeycloakRoleInput!): CreateKeycloakRolePayload!
-  updateKeycloakRole(input: UpdateKeycloakRoleInput!): UpdateKeycloakRolePayload!
-  deleteKeycloakRole(input: DeleteKeycloakRoleInput!): DeleteKeycloakRolePayload!
-  changePassword(input: ChangePasswordInput!): ChangePasswordPayload!
-  changeRolesForUser(input: ChangeRolesForUserInput!): ChangeRolesForUserPayload!
+  createKeycloakUser(input: CreateKeycloakUserInput!): CreateKeycloakUserPayload! @authorize
+  updateKeycloakUser(input: UpdateKeycloakUserInput!): UpdateKeycloakUserPayload! @authorize
+  deleteKeycloakUser(input: DeleteKeycloakUserInput!): DeleteKeycloakUserPayload! @authorize
+  createKeycloakRole(input: CreateKeycloakRoleInput!): CreateKeycloakRolePayload! @authorize
+  updateKeycloakRole(input: UpdateKeycloakRoleInput!): UpdateKeycloakRolePayload! @authorize
+  deleteKeycloakRole(input: DeleteKeycloakRoleInput!): DeleteKeycloakRolePayload! @authorize
+  changePassword(input: ChangePasswordInput!): ChangePasswordPayload! @authorize
+  changeRolesForUser(input: ChangeRolesForUserInput!): ChangeRolesForUserPayload! @authorize
 }
 
 "Information about pagination in a connection."
@@ -143,17 +143,17 @@ type Query {
   node("ID of the object." id: ID!): Node
   "Lookup nodes by a list of IDs."
   nodes("The list of node IDs." ids: [ID!]!): [Node]!
-  keycloakUserById(id: ID): KeycloakUser!
-  keycloakUser(where: KeycloakUserFilterInput): KeycloakUser
-  keycloakUsers("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: KeycloakUserFilterInput order: [KeycloakUserSortInput!]): KeycloakUsersConnection
-  keycloakUsersAny(where: KeycloakUserFilterInput): Boolean!
-  keycloakUsersCount(where: KeycloakUserFilterInput): Int!
-  keycloakRoleById(id: ID): KeycloakRole!
-  keycloakRole(where: KeycloakRoleFilterInput): KeycloakRole
-  keycloakRoles("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: KeycloakRoleFilterInput order: [KeycloakRoleSortInput!]): KeycloakRolesConnection
-  keycloakRolesAny(where: KeycloakRoleFilterInput): Boolean!
-  keycloakRolesCount(where: KeycloakRoleFilterInput): Int!
-  keycloakRolesByUserId(id: ID!): [KeycloakRole!]!
+  keycloakUserById(id: ID): KeycloakUser! @authorize
+  keycloakUser(where: KeycloakUserFilterInput): KeycloakUser @authorize
+  keycloakUsers("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: KeycloakUserFilterInput order: [KeycloakUserSortInput!]): KeycloakUsersConnection @authorize
+  keycloakUsersAny(where: KeycloakUserFilterInput): Boolean! @authorize
+  keycloakUsersCount(where: KeycloakUserFilterInput): Int! @authorize
+  keycloakRoleById(id: ID): KeycloakRole! @authorize
+  keycloakRole(where: KeycloakRoleFilterInput): KeycloakRole @authorize
+  keycloakRoles("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: KeycloakRoleFilterInput order: [KeycloakRoleSortInput!]): KeycloakRolesConnection @authorize
+  keycloakRolesAny(where: KeycloakRoleFilterInput): Boolean! @authorize
+  keycloakRolesCount(where: KeycloakRoleFilterInput): Int! @authorize
+  keycloakRolesByUserId(id: ID!): [KeycloakRole!]! @authorize
 }
 
 type UpdateKeycloakRolePayload {
@@ -338,6 +338,8 @@ enum SortEnumType {
   ASC
   DESC
 }
+
+directive @authorize("The name of the authorization policy that determines access to the annotated resource." policy: String "Roles that are allowed to access the annotated resource." roles: [String!] "Defines when when the authorize directive shall be applied.By default the authorize directives are applied during the validation phase." apply: ApplyPolicy! = BEFORE_RESOLVER) repeatable on OBJECT | FIELD_DEFINITION
 
 "The `Date` scalar represents an ISO-8601 compliant date type."
 scalar Date

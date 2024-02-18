@@ -35,14 +35,14 @@ public class RubrumAbpKeycloakTestBaseModule : AbpModule
                 Name = "swagger-test",
                 Secret = Guid.NewGuid().ToString(),
                 RootUrl = "http://test.io",
-                Scopes = new[]
-                {
+                Scopes =
+                [
                     "test-microservice-1",
                     "test-microservice-2",
                     "test-microservice-3",
                     "test-microservice-4",
                     "test-microservice-5"
-                }
+                ]
             };
 
             options.Apps = new Dictionary<string, KeycloakClientOptions>
@@ -54,14 +54,14 @@ public class RubrumAbpKeycloakTestBaseModule : AbpModule
                         Name = "test-app",
                         RootUrl = "http://test-app.io",
                         Secret = Guid.NewGuid().ToString(),
-                        Scopes = new[]
-                        {
+                        Scopes =
+                        [
                             "test-microservice-1",
                             "test-microservice-2",
                             "test-microservice-3",
                             "test-microservice-4",
                             "test-microservice-5"
-                        }
+                        ]
                     }
                 }
             };
@@ -82,7 +82,7 @@ public class RubrumAbpKeycloakTestBaseModule : AbpModule
                         Name = "test-microservice-1",
                         RootUrl = "http://test-microservice-1.io",
                         Secret = Guid.NewGuid().ToString(),
-                        Scopes = new[] { "test-microservice-4" }
+                        Scopes = ["test-microservice-4"]
                     }
                 },
                 {

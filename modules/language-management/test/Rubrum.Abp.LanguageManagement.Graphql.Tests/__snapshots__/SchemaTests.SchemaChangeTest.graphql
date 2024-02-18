@@ -88,9 +88,9 @@ type EntityNotFoundError implements Error {
 }
 
 type Mutation {
-  createSystemLanguage(input: CreateSystemLanguageInput!): CreateSystemLanguagePayload!
-  updateSystemLanguage(input: UpdateSystemLanguageInput!): UpdateSystemLanguagePayload!
-  deleteSystemLanguage(input: DeleteSystemLanguageInput!): DeleteSystemLanguagePayload!
+  createSystemLanguage(input: CreateSystemLanguageInput!): CreateSystemLanguagePayload! @authorize
+  updateSystemLanguage(input: UpdateSystemLanguageInput!): UpdateSystemLanguagePayload! @authorize
+  deleteSystemLanguage(input: DeleteSystemLanguageInput!): DeleteSystemLanguagePayload! @authorize
 }
 
 "Information about pagination in a connection."
@@ -110,12 +110,11 @@ type Query {
   node("ID of the object." id: ID!): Node
   "Lookup nodes by a list of IDs."
   nodes("The list of node IDs." ids: [ID!]!): [Node]!
-  systemLanguageById(id: ID): SystemLanguage!
-  systemLanguage(where: SystemLanguageFilterInput): SystemLanguage
-  systemLanguages("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: SystemLanguageFilterInput order: [SystemLanguageSortInput!]): SystemLanguagesConnection
-  systemLanguagesAny(where: SystemLanguageFilterInput): Boolean!
-  systemLanguagesCount(where: SystemLanguageFilterInput): Int!
-  systemLanguagesAll(where: SystemLanguageFilterInput order: [SystemLanguageSortInput!]): [SystemLanguage!]!
+  systemLanguageById(id: ID): SystemLanguage! @authorize
+  systemLanguage(where: SystemLanguageFilterInput): SystemLanguage @authorize
+  systemLanguages("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: SystemLanguageFilterInput order: [SystemLanguageSortInput!]): SystemLanguagesConnection @authorize
+  systemLanguagesAny(where: SystemLanguageFilterInput): Boolean! @authorize
+  systemLanguagesCount(where: SystemLanguageFilterInput): Int! @authorize
 }
 
 type SystemLanguage implements EntityOfString & Node & IHasExtraProperties & MayHaveCreator & HasCreationTime & CreationAuditedObject & HasModificationTime & ModificationAuditedObject & SoftDelete & HasDeletionTime & DeletionAuditedObject {
@@ -299,6 +298,8 @@ enum SortEnumType {
   ASC
   DESC
 }
+
+directive @authorize("The name of the authorization policy that determines access to the annotated resource." policy: String "Roles that are allowed to access the annotated resource." roles: [String!] "Defines when when the authorize directive shall be applied.By default the authorize directives are applied during the validation phase." apply: ApplyPolicy! = BEFORE_RESOLVER) repeatable on OBJECT | FIELD_DEFINITION
 
 "The `Date` scalar represents an ISO-8601 compliant date type."
 scalar Date
