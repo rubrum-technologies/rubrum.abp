@@ -11,8 +11,10 @@ public class RubrumAbpHostingAspNetCoreGatewayModule : AbpModule
         var configuration = context.Services.GetConfiguration();
         var proxy = configuration.GetSection("ReverseProxy");
 
-        context.Services
-            .AddReverseProxy()
-            .LoadFromConfig(proxy);
+        var reverseProxyBuilder = context.Services.AddReverseProxy();
+
+        reverseProxyBuilder.LoadFromConfig(proxy);
+
+        context.Services.AddSingleton(reverseProxyBuilder);
     }
 }
