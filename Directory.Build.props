@@ -37,7 +37,7 @@
         <NpgsqlPackageVersion>8.0.*</NpgsqlPackageVersion>
 
         <!-- Graphql Platform https://github.com/ChilliCream/graphql-platform -->
-        <HotChocolatePackageVersion>13.8.*</HotChocolatePackageVersion>
+        <HotChocolatePackageVersion>13.9.*</HotChocolatePackageVersion>
 
         <!-- MediatR https://www.nuget.org/packages/MediatR -->
         <MediatRPackageVersion>12.2.*</MediatRPackageVersion>
