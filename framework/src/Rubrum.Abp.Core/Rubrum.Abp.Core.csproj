@@ -7,6 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Core" Version="$(AbpPackageVersion)"/>
+    <PackageReference Include="Volo.Abp.Core" />
   </ItemGroup>
 </Project>

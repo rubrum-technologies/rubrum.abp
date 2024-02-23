@@ -7,15 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="$(GoogleProtobufPackageVersion)"/>
-    <PackageReference Include="Google.Protobuf.Tools" Version="$(GoogleProtobufToolsPackageVersion)" PrivateAssets="All"/>
-    <PackageReference Include="Grpc.Core" Version="$(GrpcCorePackageVersion)"/>
-    <PackageReference Include="Grpc.Tools" Version="$(GrpcToolsPackageVersion)" PrivateAssets="All"/>
-    <PackageReference Include="Grpc.Net.ClientFactory" Version="$(GrpcNetClientFactoryPackageVersion)"/>
+    <PackageReference Include="Google.Protobuf"/>
+    <PackageReference Include="Google.Protobuf.Tools" PrivateAssets="All"/>
+    <PackageReference Include="Grpc.Core"/>
+    <PackageReference Include="Grpc.Tools" PrivateAssets="All"/>
+    <PackageReference Include="Grpc.Net.ClientFactory"/>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.PermissionManagement.Domain" Version="$(AbpPackageVersion)"/>
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain"/>
   </ItemGroup>
 
   <ItemGroup>

@@ -7,14 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HotChocolate" Version="$(HotChocolatePackageVersion)"/>
-    <PackageReference Include="HotChocolate.Data" Version="$(HotChocolatePackageVersion)"/>
+    <PackageReference Include="HotChocolate" />
+    <PackageReference Include="HotChocolate.Data" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Authorization.Abstractions" Version="$(AbpPackageVersion)"/>
-    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="$(AbpPackageVersion)"/>
-    <PackageReference Include="Volo.Abp.ExceptionHandling" Version="$(AbpPackageVersion)"/>
+    <PackageReference Include="Volo.Abp.Authorization.Abstractions" />
+    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" />
+    <PackageReference Include="Volo.Abp.ExceptionHandling" />
   </ItemGroup>
 
   <ItemGroup>

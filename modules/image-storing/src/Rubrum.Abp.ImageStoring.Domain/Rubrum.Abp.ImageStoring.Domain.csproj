@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="$(AbpPackageVersion)"/>
-    <PackageReference Include="Volo.Abp.BlobStoring" Version="$(AbpPackageVersion)"/>
-    <PackageReference Include="Volo.Abp.BackgroundWorkers" Version="$(AbpPackageVersion)"/>
+    <PackageReference Include="Volo.Abp.Ddd.Domain" />
+    <PackageReference Include="Volo.Abp.BlobStoring" />
+    <PackageReference Include="Volo.Abp.BackgroundWorkers" />
   </ItemGroup>
 
   <ItemGroup>

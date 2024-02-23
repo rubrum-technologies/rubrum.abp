@@ -7,12 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.TestBase" Version="$(AbpPackageVersion)"/>
-    <PackageReference Include="Volo.Abp.Autofac" Version="$(AbpPackageVersion)"/>
+    <PackageReference Include="Volo.Abp.TestBase" />
+    <PackageReference Include="Volo.Abp.Autofac" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CookieCrumble" Version="$(HotChocolatePackageVersion)"/>
+    <PackageReference Include="CookieCrumble" />
   </ItemGroup>
 
   <ItemGroup>

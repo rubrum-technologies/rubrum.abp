@@ -7,12 +7,12 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Serilog.AspNetCore" Version="8.0.1"/>
+    <PackageReference Include="Serilog.AspNetCore"/>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="$(AbpPackageVersion)"/>
-    <PackageReference Include="Volo.Abp.Swashbuckle" Version="$(AbpPackageVersion)"/>
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" />
   </ItemGroup>
 
   <ItemGroup>

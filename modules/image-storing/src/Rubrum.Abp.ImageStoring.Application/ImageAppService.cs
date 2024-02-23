@@ -8,7 +8,6 @@ using Volo.Abp.Threading;
 namespace Rubrum.Abp.ImageStoring;
 
 public class ImageAppService(
-    IImageInformationRepository repository,
     IImageContainer imageContainer,
     IImageMapper mapper,
     ICancellationTokenProvider cancellationTokenProvider)

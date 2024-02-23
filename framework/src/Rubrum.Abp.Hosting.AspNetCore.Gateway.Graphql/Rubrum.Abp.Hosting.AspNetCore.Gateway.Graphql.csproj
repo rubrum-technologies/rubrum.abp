@@ -7,9 +7,9 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="HotChocolate.AspNetCore" Version="$(HotChocolatePackageVersion)"/>
-    <PackageReference Include="HotChocolate.Stitching.Redis" Version="$(HotChocolatePackageVersion)"/>
-    <PackageReference Include="HotChocolate.Fusion" Version="$(HotChocolatePackageVersion)"/>
+    <PackageReference Include="HotChocolate.AspNetCore" />
+    <PackageReference Include="HotChocolate.Stitching.Redis" />
+    <PackageReference Include="HotChocolate.Fusion" />
   </ItemGroup>
 
   <ItemGroup>

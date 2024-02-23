@@ -7,24 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Interactive.Async" Version="6.0.1"/>
+    <PackageReference Include="System.Interactive.Async"/>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Ddd.Application" Version="$(AbpPackageVersion)"/>
+    <PackageReference Include="Volo.Abp.Ddd.Application" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="HotChocolate.AspNetCore" Version="$(HotChocolatePackageVersion)"/>
-    <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="$(HotChocolatePackageVersion)"/>
-    <PackageReference Include="HotChocolate.AspNetCore.CommandLine" Version="$(HotChocolatePackageVersion)"/>
-    <PackageReference Include="HotChocolate.PersistedQueries.Redis" Version="$(HotChocolatePackageVersion)"/>
-    <PackageReference Include="HotChocolate.Subscriptions.Redis" Version="$(HotChocolatePackageVersion)"/>
-    <PackageReference Include="HotChocolate.Stitching.Redis" Version="$(HotChocolatePackageVersion)"/>
-    <PackageReference Include="HotChocolate.Types.Scalars" Version="$(HotChocolatePackageVersion)"/>
-    <PackageReference Include="HotChocolate.Types.Scalars.Upload" Version="$(HotChocolatePackageVersion)"/>
-    <PackageReference Include="HotChocolate.Data" Version="$(HotChocolatePackageVersion)"/>
-    <PackageReference Include="HotChocolate.Diagnostics" Version="$(HotChocolatePackageVersion)"/>
+    <PackageReference Include="HotChocolate.AspNetCore" />
+    <PackageReference Include="HotChocolate.AspNetCore.Authorization" />
+    <PackageReference Include="HotChocolate.AspNetCore.CommandLine" />
+    <PackageReference Include="HotChocolate.PersistedQueries.Redis" />
+    <PackageReference Include="HotChocolate.Subscriptions.Redis" />
+    <PackageReference Include="HotChocolate.Stitching.Redis" />
+    <PackageReference Include="HotChocolate.Types.Scalars" />
+    <PackageReference Include="HotChocolate.Types.Scalars.Upload" />
+    <PackageReference Include="HotChocolate.Data" />
+    <PackageReference Include="HotChocolate.Diagnostics" />
   </ItemGroup>
 
   <ItemGroup>

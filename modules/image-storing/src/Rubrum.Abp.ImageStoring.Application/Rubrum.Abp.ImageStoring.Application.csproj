@@ -8,11 +8,11 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Mapster" Version="$(MapsterPackageVersion)"/>
+    <PackageReference Include="Mapster" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Ddd.Application" Version="$(AbpPackageVersion)"/>
+    <PackageReference Include="Volo.Abp.Ddd.Application" />
   </ItemGroup>
 
   <ItemGroup>
