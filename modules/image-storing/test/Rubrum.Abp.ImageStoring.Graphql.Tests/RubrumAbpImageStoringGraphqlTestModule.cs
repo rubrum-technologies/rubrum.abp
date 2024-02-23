@@ -12,13 +12,20 @@ namespace Rubrum.Abp.ImageStoring;
 [DependsOn(typeof(RubrumAbpImageStoringGraphqlModule))]
 public class RubrumAbpImageStoringGraphqlTestModule : AbpModule
 {
+    public override void PreConfigureServices(ServiceConfigurationContext context)
+    {
+        PreConfigure<RubrumAbpGraphqlOptions>(options =>
+        {
+            options.EnableGlobalObjectIdentification = false;
+        });
+    }
+
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         var graphql = context.Services.GetGraphql();
 
         graphql
             .AddQueryType(d => d.Name(OperationTypeNames.Query))
-            .AddMutationType(d => d.Name(OperationTypeNames.Mutation))
             .ModifyRequestOptions(options =>
             {
                 options.IncludeExceptionDetails = true;

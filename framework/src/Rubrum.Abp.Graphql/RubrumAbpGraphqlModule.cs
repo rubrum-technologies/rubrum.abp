@@ -16,6 +16,7 @@ public class RubrumAbpGraphqlModule : AbpModule
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         context.Services.AddConventionalRegistrar(new GraphqlServiceConventionalRegistrar());
+        var options = context.Services.ExecutePreConfiguredActions<RubrumAbpGraphqlOptions>();
 
         var graphql = context.Services
             .AddGraphQL()
@@ -23,7 +24,6 @@ public class RubrumAbpGraphqlModule : AbpModule
 
         graphql
             .AddAuthorization()
-            .AddGlobalObjectIdentification()
             .AddMutationConventions()
             .AddFiltering(descriptor =>
             {
@@ -54,6 +54,11 @@ public class RubrumAbpGraphqlModule : AbpModule
             .TryAddTypeInterceptor<DtoTypeInterceptor>()
             .RegisterGraphqlTypes()
             .RegisterDataLoaders();
+
+        if (options.EnableGlobalObjectIdentification)
+        {
+            graphql.AddGlobalObjectIdentification();
+        }
 
         context.Services.AddSingleton(graphql);
     }

@@ -1,0 +1,40 @@
+schema {
+  query: Query
+}
+
+interface IHasExtraProperties {
+  extraProperties: JSON
+}
+
+type Query {
+  imageUrl(id: ID!): String!
+  imageUrlByTag(tag: String!): [String!]!
+}
+
+input DateOnlyOperationFilterInput {
+  and: [DateOnlyOperationFilterInput!]
+  or: [DateOnlyOperationFilterInput!]
+  eq: Date
+  neq: Date
+  in: [Date!]
+  nin: [Date!]
+  gt: Date
+  ngt: Date
+  gte: Date
+  ngte: Date
+  lt: Date
+  nlt: Date
+  lte: Date
+  nlte: Date
+}
+
+enum ApplyPolicy {
+  BEFORE_RESOLVER
+  AFTER_RESOLVER
+  VALIDATION
+}
+
+"The `Date` scalar represents an ISO-8601 compliant date type."
+scalar Date
+
+scalar JSON
