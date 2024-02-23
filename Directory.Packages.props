@@ -83,7 +83,6 @@
         <PackageVersion Include="HotChocolate.Stitching.Redis" Version="$(HotChocolatePackageVersion)"/>
         <PackageVersion Include="HotChocolate.Types.Scalars" Version="$(HotChocolatePackageVersion)"/>
         <PackageVersion Include="HotChocolate.Types.Scalars.Upload" Version="$(HotChocolatePackageVersion)"/>
-        <PackageVersion Include="HotChocolate.Data" Version="$(HotChocolatePackageVersion)"/>
         <PackageVersion Include="HotChocolate.Diagnostics" Version="$(HotChocolatePackageVersion)"/>
         <PackageVersion Include="HotChocolate.Fusion" Version="$(HotChocolatePackageVersion)"/>
         <PackageVersion Include="CookieCrumble" Version="$(HotChocolatePackageVersion)"/>
