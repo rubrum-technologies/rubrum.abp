@@ -19,6 +19,10 @@ public class ImageBlobContainerFactory : IImageBlobContainerFactory, ITransientD
 
     public Task<IBlobContainer> CreateAsync(ImageInformation information)
     {
-        return Task.FromResult(_blobContainerFactory.Create(information.Tag ?? _options.NameContainer));
+        var name = string.IsNullOrEmpty(information.Tag)
+            ? _options.NameContainer
+            : $"{_options.NameContainer}-{information.Tag}";
+
+        return Task.FromResult(_blobContainerFactory.Create(name));
     }
 }

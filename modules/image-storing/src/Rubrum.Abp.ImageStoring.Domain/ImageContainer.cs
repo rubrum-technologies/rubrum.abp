@@ -96,6 +96,11 @@ public class ImageContainer(
         var file = await GetAsync(id, cancellationToken);
         var information = file.Information;
 
+        if (information.Tag == tag)
+        {
+            return;
+        }
+
         var blobContainer = await imageBlobContainerFactory.CreateAsync(information);
         await blobContainer.DeleteAsync(information.SystemFileName, cancellationToken);
 
@@ -119,10 +124,8 @@ public class ImageContainer(
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
         var information = await imageRepository.GetAsync(id, true, cancellationToken);
-        var blobContainer = await imageBlobContainerFactory.CreateAsync(information);
 
         await imageRepository.DeleteAsync(information, true, cancellationToken);
-        await blobContainer.DeleteAsync(information.SystemFileName, cancellationToken);
     }
 
     public async Task DeleteByTagAsync(string tag, CancellationToken cancellationToken = default)
@@ -133,10 +136,7 @@ public class ImageContainer(
 
         var ids = await asyncExecuter.ToListAsync(idsQuery, cancellationToken);
 
-        foreach (var id in ids)
-        {
-            await DeleteAsync(id, cancellationToken);
-        }
+        await imageRepository.DeleteManyAsync(ids, true, cancellationToken);
     }
 
     protected virtual async Task<Stream> CreateImageAsync(Stream stream)

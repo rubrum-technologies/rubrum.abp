@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.FileProviders;
 using Shouldly;
+using Volo.Abp.BlobStoring;
 using Volo.Abp.Content;
 using Volo.Abp.VirtualFileSystem;
 using Xunit;
@@ -132,6 +133,47 @@ public class ImageAppServiceTests : ImageStoringApplicationTestBase
 
         result.ShouldNotBeNull();
         result.Items.Count.ShouldBe(5);
+    }
+
+    [Fact]
+    public async Task ChangeTagAsync()
+    {
+        await _imageAppService.ChangeTagAsync(new ChangeTagInput
+        {
+            Ids = [SvgId, JpegId, PngId, TifId],
+            Tag = "Test"
+        });
+
+        foreach (var id in new[] { SvgId, JpegId, PngId, TifId })
+        {
+            var image = await _imageContainer.GetOrNullAsync(id);
+
+            image.ShouldNotBeNull();
+            image.Tag.ShouldBe("Test");
+        }
+    }
+
+    [Fact]
+    public async Task DeleteAsync()
+    {
+        await _imageAppService.DeleteAsync(SvgId);
+
+        var image = await _imageContainer.GetOrNullAsync(SvgId);
+
+        image.ShouldBeNull();
+    }
+
+    [Fact]
+    public async Task DeleteByTagAsync()
+    {
+        var images = await _imageContainer.GetByTagAsync(ImageTag);
+
+        await _imageAppService.DeleteByTagAsync(ImageTag);
+
+        foreach (var image in images)
+        {
+            (await _imageContainer.GetOrNullAsync(image.Id)).ShouldBeNull();
+        }
     }
 
     [Fact]

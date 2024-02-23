@@ -8,6 +8,7 @@ using Volo.Abp.Threading;
 namespace Rubrum.Abp.ImageStoring;
 
 public class ImageAppService(
+    IImageInformationRepository repository,
     IImageContainer imageContainer,
     IImageMapper mapper,
     ICancellationTokenProvider cancellationTokenProvider)
@@ -67,6 +68,18 @@ public class ImageAppService(
         return new ListResultDto<ImageInformationDto>(result);
     }
 
+    public async Task ChangeTagAsync(ChangeTagInput input)
+    {
+        await CheckPolicyAsync(ImageStoringPermissions.Images.Upload);
+
+        var cancellationToken = cancellationTokenProvider.Token;
+
+        foreach (var id in input.Ids)
+        {
+            await imageContainer.UpdateTagAsync(id, input.Tag, cancellationToken);
+        }
+    }
+
     public async Task DeleteAsync(Guid id)
     {
         await CheckPolicyAsync(ImageStoringPermissions.Images.Delete);
@@ -74,5 +87,14 @@ public class ImageAppService(
         var cancellationToken = cancellationTokenProvider.Token;
 
         await imageContainer.DeleteAsync(id, cancellationToken);
+    }
+
+    public async Task DeleteByTagAsync(string tag)
+    {
+        await CheckPolicyAsync(ImageStoringPermissions.Images.Delete);
+
+        var cancellationToken = cancellationTokenProvider.Token;
+
+        await imageContainer.DeleteByTagAsync(tag, cancellationToken);
     }
 }

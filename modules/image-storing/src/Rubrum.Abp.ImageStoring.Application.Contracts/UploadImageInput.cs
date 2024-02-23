@@ -6,7 +6,7 @@ namespace Rubrum.Abp.ImageStoring;
 
 public class UploadImageInput
 {
-    public required IRemoteStreamContent Content { get; set; }
+    public required IRemoteStreamContent Content { get; init; }
 
     public string Tag { get; init; }
 

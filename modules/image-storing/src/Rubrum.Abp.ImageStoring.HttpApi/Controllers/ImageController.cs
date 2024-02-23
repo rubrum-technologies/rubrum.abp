@@ -44,9 +44,24 @@ public class ImageController(IImageAppService service) : AbpControllerBase, IIma
     }
 
     [Authorize]
+    [HttpPut]
+    [Route("change-tag")]
+    public Task ChangeTagAsync(ChangeTagInput input)
+    {
+        return service.ChangeTagAsync(input);
+    }
+
+    [Authorize]
     [HttpDelete("{id:guid}")]
     public Task DeleteAsync(Guid id)
     {
         return service.DeleteAsync(id);
+    }
+
+    [Authorize]
+    [HttpDelete("tag/{tag}")]
+    public Task DeleteByTagAsync(string tag)
+    {
+        return service.DeleteByTagAsync(tag);
     }
 }

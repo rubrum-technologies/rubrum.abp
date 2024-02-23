@@ -8,11 +8,13 @@ namespace Rubrum.Abp.ImageStoring;
 public class ImageContainerTests : ImageStoringDomainTestBase
 {
     private readonly IImageContainer _imageContainer;
+    private readonly IImageBlobContainerFactory _imageBlobContainerFactory;
     private readonly IVirtualFileProvider _virtualFileProvider;
 
     public ImageContainerTests()
     {
         _imageContainer = GetRequiredService<IImageContainer>();
+        _imageBlobContainerFactory = GetRequiredService<IImageBlobContainerFactory>();
         _virtualFileProvider = GetRequiredService<IVirtualFileProvider>();
     }
 
@@ -104,7 +106,7 @@ public class ImageContainerTests : ImageStoringDomainTestBase
         {
             await _imageContainer.UpdateTagAsync(TifId, "Test");
             var image = await _imageContainer.GetAsync(TifId);
-            image.Information.Tag.ShouldBe("Test");
+            image.Tag.ShouldBe("Test");
             image.Information.EntityVersion.ShouldBe(1);
         });
     }
@@ -119,18 +121,21 @@ public class ImageContainerTests : ImageStoringDomainTestBase
         var jpegStream = await _imageContainer.GetOrNullAsync(jpegId);
         jpegStream.ShouldNotBeNull();
         jpegStream.Information.ShouldNotBeNull();
-        jpegStream.Information.IsDisposable.ShouldBeTrue();
+        jpegStream.IsDisposable.ShouldBeTrue();
 
         await _imageContainer.MarkAsPermanentAsync(jpegId);
 
         var image = await _imageContainer.GetAsync(jpegId);
         image.ShouldNotBeNull();
-        image.Information.IsDisposable.ShouldBeFalse();
+        image.IsDisposable.ShouldBeFalse();
     }
 
     [Fact]
     public async Task DeleteAsync()
     {
+        var image = await _imageContainer.GetAsync(SvgId);
+        var container = await _imageBlobContainerFactory.CreateAsync(image.Information);
+
         await WithUnitOfWorkAsync(async () =>
         {
             await _imageContainer.DeleteAsync(SvgId);
@@ -138,20 +143,30 @@ public class ImageContainerTests : ImageStoringDomainTestBase
             var svg = await _imageContainer.GetOrNullAsync(SvgId);
             svg.ShouldBeNull();
         });
+
+        (await container.ExistsAsync(image.SystemFileName)).ShouldBeFalse();
     }
 
     [Fact]
     public async Task DeleteByTagAsync()
     {
+        var images = await _imageContainer.GetByTagAsync(ImageTag);
+        var container = await _imageBlobContainerFactory.CreateAsync(images.First().Information);
+
         await WithUnitOfWorkAsync(async () =>
         {
             await _imageContainer.DeleteByTagAsync(ImageTag);
 
-            foreach (var id in new[] { SvgId, JpgId, PngId })
+            foreach (var image in images)
             {
-                var img = await _imageContainer.GetOrNullAsync(id);
+                var img = await _imageContainer.GetOrNullAsync(image.Id);
                 img.ShouldBeNull();
             }
         });
+
+        foreach (var image in images)
+        {
+            (await container.ExistsAsync(image.SystemFileName)).ShouldBeFalse();
+        }
     }
 }

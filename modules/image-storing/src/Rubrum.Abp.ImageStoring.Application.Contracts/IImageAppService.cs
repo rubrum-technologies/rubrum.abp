@@ -14,5 +14,9 @@ public interface IImageAppService : IApplicationService
 
     Task<ListResultDto<ImageInformationDto>> UploadAsync(UploadImagesInput input);
 
+    Task ChangeTagAsync(ChangeTagInput input);
+
     Task DeleteAsync(Guid id);
+
+    Task DeleteByTagAsync(string tag);
 }

@@ -20,6 +20,14 @@ public class ImageFile
         Stream = stream;
     }
 
+    public Guid Id => Information.Id;
+
+    public string? Tag => Information.Tag;
+
+    public string SystemFileName => Information.SystemFileName;
+
+    public bool IsDisposable => Information.IsDisposable;
+
     public ImageInformation Information { get; }
 
     public Stream Stream { get; }
