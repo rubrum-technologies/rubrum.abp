@@ -18,8 +18,8 @@ public class ImageQuery : IGraphqlType
         return dataLoader.LoadAsync(id, cancellationToken);
     }
 
-    [GraphQLName("imageUrlByTag")]
-    public Task<string[]> GetImageUrlByTag(
+    [GraphQLName("imageUrlsByTag")]
+    public Task<string[]> GetImageUrlsByTag(
         string tag,
         [Service] IImageUrlsByTagDataLoader dataLoader,
         CancellationToken cancellationToken)
