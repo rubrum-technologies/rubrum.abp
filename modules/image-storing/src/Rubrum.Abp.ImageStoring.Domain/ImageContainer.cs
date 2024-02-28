@@ -75,7 +75,7 @@ public class ImageContainer(
         return information;
     }
 
-    public async Task UpdateAsync(
+    public async Task ChangeImageAsync(
         Guid id,
         Stream stream,
         CancellationToken cancellationToken = default)
@@ -91,7 +91,7 @@ public class ImageContainer(
         await imageRepository.UpdateAsync(information, true, cancellationToken);
     }
 
-    public async Task UpdateTagAsync(Guid id, string? tag, CancellationToken cancellationToken = default)
+    public async Task ChangeTagAsync(Guid id, string? tag, CancellationToken cancellationToken = default)
     {
         var file = await GetAsync(id, cancellationToken);
         var information = file.Information;

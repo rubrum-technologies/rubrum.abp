@@ -86,12 +86,12 @@ public class ImageContainerTests : ImageStoringDomainTestBase
     }
 
     [Fact]
-    public async Task UpdateAsync()
+    public async Task ChangeImageAsync()
     {
         await WithUnitOfWorkAsync(async () =>
         {
             var png = _virtualFileProvider.GetFileInfo("/Files/5.png");
-            await _imageContainer.UpdateAsync(PngId, png.CreateReadStream());
+            await _imageContainer.ChangeImageAsync(PngId, png.CreateReadStream());
         });
 
         var pngStream = await _imageContainer.GetOrNullAsync(PngId);
@@ -100,11 +100,11 @@ public class ImageContainerTests : ImageStoringDomainTestBase
     }
 
     [Fact]
-    public async Task UpdateTagAsync()
+    public async Task ChangeTagAsync()
     {
         await WithUnitOfWorkAsync(async () =>
         {
-            await _imageContainer.UpdateTagAsync(TifId, "Test");
+            await _imageContainer.ChangeTagAsync(TifId, "Test");
             var image = await _imageContainer.GetAsync(TifId);
             image.Tag.ShouldBe("Test");
             image.Information.EntityVersion.ShouldBe(1);

@@ -30,7 +30,7 @@ public class ImageAppService(
 
         var cancellationToken = cancellationTokenProvider.Token;
 
-        await imageContainer.UpdateAsync(id, file.GetStream(), cancellationToken);
+        await imageContainer.ChangeImageAsync(id, file.GetStream(), cancellationToken);
     }
 
     public async Task<ImageInformationDto> UploadAsync(UploadImageInput input)
@@ -75,7 +75,7 @@ public class ImageAppService(
 
         foreach (var id in input.Ids)
         {
-            await imageContainer.UpdateTagAsync(id, input.Tag, cancellationToken);
+            await imageContainer.ChangeTagAsync(id, input.Tag, cancellationToken);
         }
     }
 
