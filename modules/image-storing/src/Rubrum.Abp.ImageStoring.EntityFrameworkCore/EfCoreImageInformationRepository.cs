@@ -5,12 +5,6 @@ namespace Rubrum.Abp.ImageStoring.EntityFrameworkCore;
 
 #pragma warning disable CS8613
 
-public class EfCoreImageInformationRepository :
-    EfCoreRepository<IImageStoringDbContext, ImageInformation, Guid>,
-    IImageInformationRepository
-{
-    public EfCoreImageInformationRepository(IDbContextProvider<IImageStoringDbContext> dbContextProvider)
-        : base(dbContextProvider)
-    {
-    }
-}
+public class EfCoreImageInformationRepository(IDbContextProvider<IImageStoringDbContext> dbContextProvider)
+    : EfCoreRepository<IImageStoringDbContext, ImageInformation, Guid>(dbContextProvider),
+        IImageInformationRepository;

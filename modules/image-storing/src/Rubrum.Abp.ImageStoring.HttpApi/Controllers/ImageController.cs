@@ -15,6 +15,24 @@ namespace Rubrum.Abp.ImageStoring.Controllers;
 public class ImageController(IImageAppService service) : AbpControllerBase, IImageAppService
 {
     [HttpGet("{id:guid}")]
+    public Task<ImageInformationDto> GetAsync(Guid id)
+    {
+        return service.GetAsync(id);
+    }
+
+    [HttpGet("by-tag/{tag}")]
+    public Task<ListResultDto<ImageInformationDto>> GetByTagAsync(string tag)
+    {
+        return service.GetByTagAsync(tag);
+    }
+
+    [HttpGet]
+    public Task<ListResultDto<ImageInformationDto>> GetListAsync()
+    {
+        return service.GetListAsync();
+    }
+
+    [HttpGet("download/{id:guid}")]
     public Task<IRemoteStreamContent?> DownloadAsync(Guid id)
     {
         return service.DownloadAsync(id);

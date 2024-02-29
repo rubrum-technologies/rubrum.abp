@@ -1,47 +1,31 @@
 ﻿using GreenDonut;
-using Rubrum.Abp.ImageStoring.Mapper.Interfaces;
+using Rubrum.Abp.ImageStoring.Mapper;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Linq;
 using Volo.Abp.Uow;
 
 namespace Rubrum.Abp.ImageStoring;
 
-public class ImagesByTagDataLoader :
-    GroupedDataLoader<string, ImageInformationDto>,
-    IImagesByTagDataLoader,
-    IScopedDependency
+public class ImagesByTagDataLoader(
+    IBatchScheduler batchScheduler,
+    IUnitOfWorkManager unitOfWorkManager,
+    IImageInformationRepository imageRepository,
+    IAsyncQueryableExecuter asyncExecuter,
+    IImageInformationMapper mapper,
+    DataLoaderOptions? options = null)
+    : GroupedDataLoader<string, ImageInformationDto>(batchScheduler, options), IImagesByTagDataLoader, IScopedDependency
 {
-    private readonly IUnitOfWorkManager _unitOfWorkManager;
-    private readonly IImageInformationRepository _imageRepository;
-    private readonly IAsyncQueryableExecuter _asyncExecuter;
-    private readonly IImageMapper _mapper;
-
-    public ImagesByTagDataLoader(
-        IBatchScheduler batchScheduler,
-        IUnitOfWorkManager unitOfWorkManager,
-        IImageInformationRepository imageRepository,
-        IAsyncQueryableExecuter asyncExecuter,
-        IImageMapper mapper,
-        DataLoaderOptions? options = null)
-        : base(batchScheduler, options)
-    {
-        _unitOfWorkManager = unitOfWorkManager;
-        _imageRepository = imageRepository;
-        _asyncExecuter = asyncExecuter;
-        _mapper = mapper;
-    }
-
     protected override async Task<ILookup<string, ImageInformationDto>> LoadGroupedBatchAsync(
         IReadOnlyList<string> keys,
         CancellationToken cancellationToken)
     {
-        using var uow = _unitOfWorkManager.Begin(true);
+        using var uow = unitOfWorkManager.Begin(true);
 
-        var query = (await _imageRepository.GetQueryableAsync())
+        var query = (await imageRepository.GetQueryableAsync())
             .Where(x => keys.Contains(x.Tag));
 
-        var result = await _asyncExecuter.ToListAsync(query, cancellationToken);
+        var result = await asyncExecuter.ToListAsync(query, cancellationToken);
 
-        return result.Select(_mapper.Map).ToLookup(x => x.Tag!, x => x);
+        return result.Select(mapper.Map).ToLookup(x => x.Tag!, x => x);
     }
 }

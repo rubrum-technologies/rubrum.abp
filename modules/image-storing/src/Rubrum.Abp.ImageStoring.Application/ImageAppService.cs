@@ -1,18 +1,52 @@
-﻿using Rubrum.Abp.ImageStoring.Mapper.Interfaces;
+﻿using Rubrum.Abp.ImageStoring.Mapper;
 using Rubrum.Abp.ImageStoring.Permissions;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Content;
+using Volo.Abp.Linq;
 using Volo.Abp.Threading;
 
 namespace Rubrum.Abp.ImageStoring;
 
 public class ImageAppService(
+    IImageInformationRepository repository,
+    IAsyncQueryableExecuter asyncExecuter,
     IImageContainer imageContainer,
-    IImageMapper mapper,
+    IImageInformationMapper mapper,
     ICancellationTokenProvider cancellationTokenProvider)
     : ApplicationService, IImageAppService
 {
+    public async Task<ImageInformationDto> GetAsync(Guid id)
+    {
+        var cancellationToken = cancellationTokenProvider.Token;
+
+        var image = await repository.GetAsync(id, true, cancellationToken);
+
+        return mapper.Map(image);
+    }
+
+    public async Task<ListResultDto<ImageInformationDto>> GetByTagAsync(string tag)
+    {
+        var cancellationToken = cancellationTokenProvider.Token;
+
+        var query = (await repository.GetQueryableAsync())
+            .Where(x => x.Tag == tag)
+            .Select(mapper.Projection);
+        var images = await asyncExecuter.ToListAsync(query, cancellationToken);
+
+        return new ListResultDto<ImageInformationDto>(images);
+    }
+
+    public async Task<ListResultDto<ImageInformationDto>> GetListAsync()
+    {
+        var cancellationToken = cancellationTokenProvider.Token;
+
+        var query = (await repository.GetQueryableAsync()).Select(mapper.Projection);
+        var images = await asyncExecuter.ToListAsync(query, cancellationToken);
+
+        return new ListResultDto<ImageInformationDto>(images);
+    }
+
     public async Task<IRemoteStreamContent?> DownloadAsync(Guid id)
     {
         var cancellationToken = cancellationTokenProvider.Token;

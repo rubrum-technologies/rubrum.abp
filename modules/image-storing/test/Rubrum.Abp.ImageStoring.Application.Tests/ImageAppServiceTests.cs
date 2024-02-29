@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.FileProviders;
 using Shouldly;
-using Volo.Abp.BlobStoring;
 using Volo.Abp.Content;
 using Volo.Abp.VirtualFileSystem;
 using Xunit;
@@ -19,6 +18,52 @@ public class ImageAppServiceTests : ImageStoringApplicationTestBase
         _imageContainer = GetRequiredService<IImageContainer>();
         _imageAppService = GetRequiredService<IImageAppService>();
         _virtualFileProvider = GetRequiredService<IVirtualFileProvider>();
+    }
+
+    [Fact]
+    public async Task GetAsync()
+    {
+        var image = await _imageAppService.GetAsync(TifId);
+        var dbImage = await _imageContainer.GetAsync(TifId);
+
+        image.ShouldNotBeNull();
+        image.Tag.ShouldBe(dbImage.Tag);
+        image.FileName.ShouldBe(dbImage.Information.FileName);
+        image.IsDisposable.ShouldBe(dbImage.IsDisposable);
+    }
+
+    [Fact]
+    public async Task GetByTagAsync()
+    {
+        var images = await _imageAppService.GetByTagAsync(ImageTag);
+        var dbImages = await _imageContainer.GetByTagAsync(ImageTag);
+
+        foreach (var dbImage in dbImages)
+        {
+            var image = images.Items.SingleOrDefault(x => x.Id == dbImage.Id);
+
+            image.ShouldNotBeNull();
+            image.Tag.ShouldBe(dbImage.Tag);
+            image.FileName.ShouldBe(dbImage.Information.FileName);
+            image.IsDisposable.ShouldBe(dbImage.IsDisposable);
+        }
+    }
+
+    [Fact]
+    public async Task GetListAsync()
+    {
+        var images = await _imageAppService.GetListAsync();
+
+        foreach (var imageId in ImageIds)
+        {
+            var image = images.Items.SingleOrDefault(x => x.Id == imageId);
+            var dbImage = await _imageContainer.GetAsync(imageId);
+
+            image.ShouldNotBeNull();
+            image.Tag.ShouldBe(dbImage.Tag);
+            image.FileName.ShouldBe(dbImage.Information.FileName);
+            image.IsDisposable.ShouldBe(dbImage.IsDisposable);
+        }
     }
 
     [Fact]
