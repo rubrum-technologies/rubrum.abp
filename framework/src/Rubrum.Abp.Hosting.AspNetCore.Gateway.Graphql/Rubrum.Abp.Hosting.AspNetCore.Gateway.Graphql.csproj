@@ -11,8 +11,8 @@
     <PackageReference Include="HotChocolate.Stitching.Redis" />
     <PackageReference Include="HotChocolate.Fusion" />
   </ItemGroup>
-
+  
   <ItemGroup>
-    <ProjectReference Include="..\Rubrum.Abp.Hosting.AspNetCore\Rubrum.Abp.Hosting.AspNetCore.csproj"/>
+    <ProjectReference Include="..\Rubrum.Abp.Hosting.AspNetCore.Gateway\Rubrum.Abp.Hosting.AspNetCore.Gateway.csproj" />
   </ItemGroup>
 </Project>

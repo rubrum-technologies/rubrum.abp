@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Rubrum.Abp.Hosting;
 
-public static class AbpHostingHostBuilderExtensions
+public static class RubrumHostingHostBuilderExtensions
 {
     public const string AppYarpJsonPath = "yarp.json";
 
