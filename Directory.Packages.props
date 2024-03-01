@@ -47,6 +47,8 @@
         <PackageVersion Include="Volo.Abp.SettingManagement.Domain" Version="$(AbpPackageVersion)"/>
         <PackageVersion Include="Volo.Abp.SettingManagement.Domain.Shared" Version="$(AbpPackageVersion)"/>
         <PackageVersion Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="$(AbpPackageVersion)"/>
+        <PackageVersion Include="Volo.Abp.PermissionManagement.Application" Version="$(AbpPackageVersion)"/>
+        <PackageVersion Include="Volo.Abp.PermissionManagement.Application.Contracts" Version="$(AbpPackageVersion)"/>
         <PackageVersion Include="Volo.Abp.AuditLogging.Domain" Version="$(AbpPackageVersion)"/>
         <PackageVersion Include="Volo.Abp.AuditLogging.Domain.Shared" Version="$(AbpPackageVersion)"/>
         <PackageVersion Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="$(AbpPackageVersion)"/>

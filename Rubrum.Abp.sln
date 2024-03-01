@@ -184,6 +184,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Ddd.Application.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.Graphql.HumanFriendly.Tests", "framework\test\Rubrum.Abp.Graphql.HumanFriendly.Tests\Rubrum.Abp.Graphql.HumanFriendly.Tests.csproj", "{2CC765DF-F5FB-48C2-8BE2-ECFA3FD56B21}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.PermissionManagement.Graphql", "modules\permission-management\src\Rubrum.Abp.PermissionManagement.Graphql\Rubrum.Abp.PermissionManagement.Graphql.csproj", "{D539775C-F812-4189-B11A-0A2EB19A7265}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.PermissionManagement.Graphql.Contracts", "modules\permission-management\src\Rubrum.Abp.PermissionManagement.Graphql.Contracts\Rubrum.Abp.PermissionManagement.Graphql.Contracts.csproj", "{F79E2EF5-E606-441F-ACFE-36A9EFA6FCF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.PermissionManagement.Graphql.Tests", "modules\permission-management\test\Rubrum.Abp.PermissionManagement.Graphql.Tests\Rubrum.Abp.PermissionManagement.Graphql.Tests.csproj", "{22D15FFF-CD26-48C9-8FEC-6CC1A22F99CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -280,6 +286,9 @@ Global
 		{F39D129A-D79C-4E3F-8F44-7B42E37AA84D} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
 		{3380B3D9-F02F-4293-B6A2-ABACB5F9740E} = {D71118A1-1B5E-4C05-8C24-4D3AAAE1BEEB}
 		{2CC765DF-F5FB-48C2-8BE2-ECFA3FD56B21} = {545294C3-2CC7-4F40-8FE2-7C49D898FD55}
+		{D539775C-F812-4189-B11A-0A2EB19A7265} = {1DD6CFF6-C68E-4BA8-A4A2-E9F95204146F}
+		{F79E2EF5-E606-441F-ACFE-36A9EFA6FCF4} = {1DD6CFF6-C68E-4BA8-A4A2-E9F95204146F}
+		{22D15FFF-CD26-48C9-8FEC-6CC1A22F99CF} = {8BFCA1E3-3455-4C12-B4D5-C09F427E067E}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4B66683B-4CA4-430A-9DBB-8A190FE25F86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -586,5 +595,17 @@ Global
 		{2CC765DF-F5FB-48C2-8BE2-ECFA3FD56B21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CC765DF-F5FB-48C2-8BE2-ECFA3FD56B21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CC765DF-F5FB-48C2-8BE2-ECFA3FD56B21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D539775C-F812-4189-B11A-0A2EB19A7265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D539775C-F812-4189-B11A-0A2EB19A7265}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D539775C-F812-4189-B11A-0A2EB19A7265}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D539775C-F812-4189-B11A-0A2EB19A7265}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F79E2EF5-E606-441F-ACFE-36A9EFA6FCF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F79E2EF5-E606-441F-ACFE-36A9EFA6FCF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F79E2EF5-E606-441F-ACFE-36A9EFA6FCF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F79E2EF5-E606-441F-ACFE-36A9EFA6FCF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22D15FFF-CD26-48C9-8FEC-6CC1A22F99CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22D15FFF-CD26-48C9-8FEC-6CC1A22F99CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22D15FFF-CD26-48C9-8FEC-6CC1A22F99CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22D15FFF-CD26-48C9-8FEC-6CC1A22F99CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

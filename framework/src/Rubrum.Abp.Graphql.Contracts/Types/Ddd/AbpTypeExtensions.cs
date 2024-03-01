@@ -613,7 +613,7 @@ public static class AbpTypeExtensions
         where TKey : notnull
     {
         descriptor
-            .Field("id")
+            .GetField("id")
             .Type<NonNullType<InputObjectType<TKey>>>()
             .ID(typeName);
     }

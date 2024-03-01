@@ -5,7 +5,7 @@ namespace Rubrum.Abp.Graphql.Extensions;
 
 public static class DescriptorExtensions
 {
-    public static IInputFieldDescriptor Field(this IDescriptor<InputObjectTypeDefinition> descriptor, string name)
+    public static IInputFieldDescriptor GetField(this IDescriptor<InputObjectTypeDefinition> descriptor, string name)
     {
         var type = descriptor.GetType();
         var method = type.GetMethods()
@@ -17,7 +17,7 @@ public static class DescriptorExtensions
         return (IInputFieldDescriptor)method.Invoke(descriptor, [name])!;
     }
 
-    public static IObjectFieldDescriptor Field(this IDescriptor<ObjectTypeDefinition> descriptor, string name)
+    public static IObjectFieldDescriptor GetField(this IDescriptor<ObjectTypeDefinition> descriptor, string name)
     {
         var type = descriptor.GetType();
         var method = type.GetMethods()

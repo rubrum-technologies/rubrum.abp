@@ -1,0 +1,137 @@
+schema {
+  query: Query
+}
+
+interface IHasExtraProperties {
+  extraProperties: JSON
+}
+
+type PermissionGrantInfo {
+  name: String!
+  displayName: String!
+  parentName: String!
+  isGranted: Boolean!
+  allowedProviders(where: StringOperationFilterInput): [String!]!
+  grantedProviders(where: ProviderInfoDtoFilterInput): [PermissionProviderInfo!]!
+}
+
+type PermissionGroup {
+  name: String!
+  displayName: String!
+  displayNameKey: String!
+  displayNameResource: String!
+  permissions(where: PermissionGrantInfoDtoFilterInput): [PermissionGrantInfo!]!
+}
+
+type PermissionList {
+  entityDisplayName: String!
+  groups(where: PermissionGroupDtoFilterInput): [PermissionGroup!]!
+}
+
+type PermissionProviderInfo {
+  providerName: String!
+  providerKey: String!
+}
+
+type Query {
+  permissions(providerName: String! providerKey: String!): PermissionList! @authorize
+}
+
+input BooleanOperationFilterInput {
+  eq: Boolean
+  neq: Boolean
+}
+
+input DateOnlyOperationFilterInput {
+  and: [DateOnlyOperationFilterInput!]
+  or: [DateOnlyOperationFilterInput!]
+  eq: Date
+  neq: Date
+  in: [Date!]
+  nin: [Date!]
+  gt: Date
+  ngt: Date
+  gte: Date
+  ngte: Date
+  lt: Date
+  nlt: Date
+  lte: Date
+  nlte: Date
+}
+
+input ListFilterInputTypeOfPermissionGrantInfoDtoFilterInput {
+  all: PermissionGrantInfoDtoFilterInput
+  none: PermissionGrantInfoDtoFilterInput
+  some: PermissionGrantInfoDtoFilterInput
+  any: Boolean
+}
+
+input ListFilterInputTypeOfProviderInfoDtoFilterInput {
+  all: ProviderInfoDtoFilterInput
+  none: ProviderInfoDtoFilterInput
+  some: ProviderInfoDtoFilterInput
+  any: Boolean
+}
+
+input ListStringOperationFilterInput {
+  all: StringOperationFilterInput
+  none: StringOperationFilterInput
+  some: StringOperationFilterInput
+  any: Boolean
+}
+
+input PermissionGrantInfoDtoFilterInput {
+  and: [PermissionGrantInfoDtoFilterInput!]
+  or: [PermissionGrantInfoDtoFilterInput!]
+  name: StringOperationFilterInput
+  displayName: StringOperationFilterInput
+  parentName: StringOperationFilterInput
+  isGranted: BooleanOperationFilterInput
+  allowedProviders: ListStringOperationFilterInput
+  grantedProviders: ListFilterInputTypeOfProviderInfoDtoFilterInput
+}
+
+input PermissionGroupDtoFilterInput {
+  and: [PermissionGroupDtoFilterInput!]
+  or: [PermissionGroupDtoFilterInput!]
+  name: StringOperationFilterInput
+  displayName: StringOperationFilterInput
+  displayNameKey: StringOperationFilterInput
+  displayNameResource: StringOperationFilterInput
+  permissions: ListFilterInputTypeOfPermissionGrantInfoDtoFilterInput
+}
+
+input ProviderInfoDtoFilterInput {
+  and: [ProviderInfoDtoFilterInput!]
+  or: [ProviderInfoDtoFilterInput!]
+  providerName: StringOperationFilterInput
+  providerKey: StringOperationFilterInput
+}
+
+input StringOperationFilterInput {
+  and: [StringOperationFilterInput!]
+  or: [StringOperationFilterInput!]
+  eq: String
+  neq: String
+  contains: String
+  ncontains: String
+  in: [String]
+  nin: [String]
+  startsWith: String
+  nstartsWith: String
+  endsWith: String
+  nendsWith: String
+}
+
+enum ApplyPolicy {
+  BEFORE_RESOLVER
+  AFTER_RESOLVER
+  VALIDATION
+}
+
+directive @authorize("The name of the authorization policy that determines access to the annotated resource." policy: String "Roles that are allowed to access the annotated resource." roles: [String!] "Defines when when the authorize directive shall be applied.By default the authorize directives are applied during the validation phase." apply: ApplyPolicy! = BEFORE_RESOLVER) repeatable on OBJECT | FIELD_DEFINITION
+
+"The `Date` scalar represents an ISO-8601 compliant date type."
+scalar Date
+
+scalar JSON

@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\..\common.test.props"/>
+  <Import Project="..\..\..\..\fody.props"/>
+
+  <PropertyGroup>
+    <RootNamespace>Rubrum.Abp.PermissionManagement</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+    <PackageReference Include="NSubstitute"/>
+    <PackageReference Include="Shouldly"/>
+    <PackageReference Include="xunit"/>
+    <PackageReference Include="xunit.extensibility.execution"/>
+    <PackageReference Include="xunit.runner.visualstudio"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.TestBase"/>
+    <PackageReference Include="Volo.Abp.Autofac"/>
+    <PackageReference Include="Volo.Abp.Authorization"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\framework\src\Rubrum.Abp.Graphql.TestBase\Rubrum.Abp.Graphql.TestBase.csproj" />
+    <ProjectReference Include="..\..\src\Rubrum.Abp.PermissionManagement.Graphql\Rubrum.Abp.PermissionManagement.Graphql.csproj" />
+  </ItemGroup>
+</Project>
