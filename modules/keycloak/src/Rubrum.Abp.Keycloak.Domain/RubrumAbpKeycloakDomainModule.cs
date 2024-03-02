@@ -15,8 +15,8 @@ public class RubrumAbpKeycloakDomainModule : AbpModule
         var configuration = context.Services.GetConfiguration();
 
         Configure<RubrumAbpKeycloakClientsOptions>(options => configuration
-            .GetSection("keycloak")
-            .GetSection("clients")
+            .GetSection("Keycloak")
+            .GetSection("Clients")
             .Bind(options));
     }
 }

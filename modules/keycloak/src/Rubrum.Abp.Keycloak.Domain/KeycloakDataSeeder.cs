@@ -1,24 +1,18 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Volo.Abp.DependencyInjection;
 
 namespace Rubrum.Abp.Keycloak;
 
-public class KeycloakDataSeeder : IKeycloakDataSeeder, ITransientDependency
+public class KeycloakDataSeeder(
+    IKeycloakClient keycloakClient,
+    IConfiguration configuration,
+    IOptions<RubrumAbpKeycloakClientsOptions> clientsOptions,
+    ILogger<KeycloakDataSeeder> logger)
+    : IKeycloakDataSeeder, ITransientDependency
 {
-    private readonly RubrumAbpKeycloakClientsOptions _clientsOptions;
-    private readonly IKeycloakClient _keycloakClient;
-    private readonly ILogger<KeycloakDataSeeder> _logger;
-
-    public KeycloakDataSeeder(
-        IKeycloakClient keycloakClient,
-        IOptions<RubrumAbpKeycloakClientsOptions> clientsOptions,
-        ILogger<KeycloakDataSeeder> logger)
-    {
-        _keycloakClient = keycloakClient;
-        _clientsOptions = clientsOptions.Value;
-        _logger = logger;
-    }
+    private readonly RubrumAbpKeycloakClientsOptions _clientsOptions = clientsOptions.Value;
 
     protected IReadOnlyDictionary<string, GatewayOptions> Gateways =>
         _clientsOptions.Gateways ?? new Dictionary<string, GatewayOptions>();
@@ -41,17 +35,17 @@ public class KeycloakDataSeeder : IKeycloakDataSeeder, ITransientDependency
 
     protected virtual async Task UpdateRealmSettingsAsync()
     {
-        var realm = await _keycloakClient.GetRealmAsync();
+        var realm = await keycloakClient.GetRealmAsync();
         if (realm.AccessTokenLifespan != 30 * 60)
         {
             realm.AccessTokenLifespan = 30 * 60;
-            await _keycloakClient.UpdateRealmAsync(realm);
+            await keycloakClient.UpdateRealmAsync(realm);
         }
     }
 
     protected virtual async Task UpdateAdminUserAsync()
     {
-        var users = await _keycloakClient.GetUsersAsync(username: "admin");
+        var users = await keycloakClient.GetUsersAsync(username: "admin");
         var adminUser = users.FirstOrDefault();
         if (adminUser == null)
         {
@@ -60,18 +54,18 @@ public class KeycloakDataSeeder : IKeycloakDataSeeder, ITransientDependency
 
         if (string.IsNullOrEmpty(adminUser.Email))
         {
-            adminUser.Email = "admin@admin.ru";
+            adminUser.Email = configuration["Keycloak:AdminEmail"] ?? "admin@admin.ru";
             adminUser.FirstName = "admin";
             adminUser.EmailVerified = true;
 
-            _logger.LogInformation("Updating admin user with email and first name...");
-            await _keycloakClient.UpdateUserAsync(adminUser.Id!, adminUser);
+            logger.LogInformation("Updating admin user with email and first name...");
+            await keycloakClient.UpdateUserAsync(adminUser.Id!, adminUser);
         }
     }
 
     protected virtual async Task CreateRoleMapperAsync()
     {
-        var roleScope = (await _keycloakClient.GetClientScopesAsync())
+        var roleScope = (await keycloakClient.GetClientScopesAsync())
             .FirstOrDefault(q => q.Name == "roles");
 
         if (roleScope == null)
@@ -81,7 +75,7 @@ public class KeycloakDataSeeder : IKeycloakDataSeeder, ITransientDependency
 
         if (roleScope.ProtocolMappers?.TrueForAll(q => q.Name != "roles") == true)
         {
-            await _keycloakClient.CreateClientScopeProtocolMapperAsync(
+            await keycloakClient.CreateClientScopeProtocolMapperAsync(
                 roleScope.Id!,
                 new ProtocolMapperRepresentation
                 {
@@ -110,7 +104,7 @@ public class KeycloakDataSeeder : IKeycloakDataSeeder, ITransientDependency
 
     private async Task CreateScopeAsync(string scopeName)
     {
-        var scope = (await _keycloakClient.GetClientScopesAsync())
+        var scope = (await keycloakClient.GetClientScopesAsync())
             .FirstOrDefault(q => q.Name == scopeName);
 
         if (scope == null)
@@ -144,7 +138,7 @@ public class KeycloakDataSeeder : IKeycloakDataSeeder, ITransientDependency
                 }
             };
 
-            await _keycloakClient.CreateClientScopeAsync(scope);
+            await keycloakClient.CreateClientScopeAsync(scope);
         }
     }
 
@@ -152,7 +146,7 @@ public class KeycloakDataSeeder : IKeycloakDataSeeder, ITransientDependency
     {
         foreach (var (clientId, microservice) in Microservices)
         {
-            await CreateClientAsync(clientId, microservice);
+            await CreateMicroserviceClientAsync(clientId, microservice);
         }
 
         foreach (var (clientId, app) in Apps)
@@ -161,9 +155,9 @@ public class KeycloakDataSeeder : IKeycloakDataSeeder, ITransientDependency
         }
     }
 
-    private async Task CreateClientAsync(string clientId, KeycloakClientOptions microservice)
+    private async Task CreateMicroserviceClientAsync(string clientId, KeycloakClientOptions microservice)
     {
-        var client = (await _keycloakClient.GetClientsAsync(clientId)).FirstOrDefault();
+        var client = (await keycloakClient.GetClientsAsync(clientId)).FirstOrDefault();
 
         if (client == null)
         {
@@ -186,22 +180,22 @@ public class KeycloakDataSeeder : IKeycloakDataSeeder, ITransientDependency
                 }
             };
 
-            await _keycloakClient.CreateClientAsync(client);
+            await keycloakClient.CreateClientAsync(client);
 
             await AddOptionalClientScopesAsync(clientId, microservice);
 
-            var insertedClient = (await _keycloakClient.GetClientsAsync(clientId)).First();
+            var insertedClient = (await keycloakClient.GetClientsAsync(clientId)).First();
 
             var clientIdProtocolMapper = insertedClient.ProtocolMappers!.First(q => q.Name == "Client ID");
             clientIdProtocolMapper.Config!["claim.name"] = "client_id";
 
-            await _keycloakClient.UpdateClientAsync(insertedClient.Id!, insertedClient);
+            await keycloakClient.UpdateClientAsync(insertedClient.Id!, insertedClient);
         }
     }
 
     private async Task CreateAppClientAsync(string clientId, KeycloakClientOptions app)
     {
-        var client = (await _keycloakClient.GetClientsAsync(clientId)).FirstOrDefault();
+        var client = (await keycloakClient.GetClientsAsync(clientId)).FirstOrDefault();
 
         if (client == null)
         {
@@ -211,12 +205,19 @@ public class KeycloakDataSeeder : IKeycloakDataSeeder, ITransientDependency
                 Name = app.Name,
                 Protocol = "openid-connect",
                 Enabled = true,
+                BaseUrl = app.RootUrl,
+                RedirectUris = [$"{app.RootUrl.TrimEnd('/')}/signin-oidc"],
                 Secret = app.Secret,
                 FrontChannelLogout = true,
-                PublicClient = true
+                PublicClient = true,
+                ImplicitFlowEnabled = true,
+                Attributes = new Dictionary<string, string>
+                {
+                    { "post.logout.redirect.uris", $"{app.RootUrl.TrimEnd('/')}/signout-callback-oidc" }
+                }
             };
 
-            await _keycloakClient.CreateClientAsync(client);
+            await keycloakClient.CreateClientAsync(client);
 
             await AddOptionalClientScopesAsync(clientId, app);
         }
@@ -231,7 +232,7 @@ public class KeycloakDataSeeder : IKeycloakDataSeeder, ITransientDependency
             return;
         }
 
-        var client = (await _keycloakClient.GetClientsAsync(swagger.Id))
+        var client = (await keycloakClient.GetClientsAsync(swagger.Id))
             .FirstOrDefault();
 
         if (client == null)
@@ -252,25 +253,25 @@ public class KeycloakDataSeeder : IKeycloakDataSeeder, ITransientDependency
                 PublicClient = true
             };
 
-            await _keycloakClient.CreateClientAsync(client);
+            await keycloakClient.CreateClientAsync(client);
             await AddOptionalClientScopesAsync(swagger.Id, swagger);
         }
     }
 
-    private async Task AddOptionalClientScopesAsync(string clientId, KeycloakClientOptions keycloakClient)
+    private async Task AddOptionalClientScopesAsync(string clientId, KeycloakClientOptions clientOptions)
     {
-        var scopes = keycloakClient.Scopes ?? Array.Empty<string>();
+        var scopes = clientOptions.Scopes ?? Array.Empty<string>();
 
-        var client = (await _keycloakClient.GetClientsAsync(clientId)).FirstOrDefault();
+        var client = (await keycloakClient.GetClientsAsync(clientId)).FirstOrDefault();
 
         if (client == null)
         {
-            _logger.LogError("Couldn't find {Client}! Could not seed optional scopes!", clientId);
+            logger.LogError("Couldn't find {Client}! Could not seed optional scopes!", clientId);
             return;
         }
 
-        var clientOptionalScopes = (await _keycloakClient.GetOptionalClientScopesAsync(client.Id!)).ToList();
-        var clientScopes = (await _keycloakClient.GetClientScopesAsync()).ToList();
+        var clientOptionalScopes = (await keycloakClient.GetOptionalClientScopesAsync(client.Id!)).ToList();
+        var clientScopes = (await keycloakClient.GetClientScopesAsync()).ToList();
 
         foreach (var scope in scopes.Where(scope => clientOptionalScopes.TrueForAll(q => q.Name != scope)))
         {
@@ -281,8 +282,8 @@ public class KeycloakDataSeeder : IKeycloakDataSeeder, ITransientDependency
                 continue;
             }
 
-            _logger.LogInformation("Seeding {Scope} scope to {Client}", scope, clientId);
-            await _keycloakClient.UpdateOptionalClientScopeAsync(client.Id!, serviceScope.Id!);
+            logger.LogInformation("Seeding {Scope} scope to {Client}", scope, clientId);
+            await keycloakClient.UpdateOptionalClientScopeAsync(client.Id!, serviceScope.Id!);
         }
     }
 }
