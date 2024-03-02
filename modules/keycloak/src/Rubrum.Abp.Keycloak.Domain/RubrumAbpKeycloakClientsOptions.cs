@@ -8,5 +8,5 @@ public class RubrumAbpKeycloakClientsOptions
 
     public IReadOnlyDictionary<string, KeycloakClientOptions>? Apps { get; set; }
 
-    public SwaggerClientOptions? Swagger { get; set; }
+    public KeycloakClientOptions? Swagger { get; set; }
 }

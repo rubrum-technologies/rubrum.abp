@@ -29,7 +29,7 @@ public class RubrumAbpKeycloakTestBaseModule : AbpModule
 
         Configure<RubrumAbpKeycloakClientsOptions>(options =>
         {
-            options.Swagger = new SwaggerClientOptions
+            options.Swagger = new KeycloakClientOptions
             {
                 Id = "swagger-test",
                 Name = "swagger-test",
@@ -51,6 +51,7 @@ public class RubrumAbpKeycloakTestBaseModule : AbpModule
                     "test-app",
                     new KeycloakClientOptions
                     {
+                        Id = "test-app",
                         Name = "test-app",
                         RootUrl = "http://test-app.io",
                         Secret = Guid.NewGuid().ToString(),
@@ -79,6 +80,7 @@ public class RubrumAbpKeycloakTestBaseModule : AbpModule
                     "test-microservice-1",
                     new KeycloakClientOptions
                     {
+                        Id = "test-microservice-1",
                         Name = "test-microservice-1",
                         RootUrl = "http://test-microservice-1.io",
                         Secret = Guid.NewGuid().ToString(),
@@ -89,6 +91,7 @@ public class RubrumAbpKeycloakTestBaseModule : AbpModule
                     "test-microservice-2",
                     new KeycloakClientOptions
                     {
+                        Id = "test-microservice-2",
                         Name = "test-microservice-2",
                         RootUrl = "http://test-microservice-2.io",
                         Secret = Guid.NewGuid().ToString(),
@@ -99,6 +102,7 @@ public class RubrumAbpKeycloakTestBaseModule : AbpModule
                     "test-microservice-3",
                     new KeycloakClientOptions
                     {
+                        Id = "test-microservice-3",
                         Name = "test-microservice-3",
                         RootUrl = "http://test-microservice-3.io",
                         Secret = Guid.NewGuid().ToString(),
@@ -109,6 +113,7 @@ public class RubrumAbpKeycloakTestBaseModule : AbpModule
                     "test-microservice-4",
                     new KeycloakClientOptions
                     {
+                        Id = "test-microservice-4",
                         Name = "test-microservice-4",
                         RootUrl = "http://test-microservice-4.io",
                         Secret = Guid.NewGuid().ToString(),
@@ -119,6 +124,7 @@ public class RubrumAbpKeycloakTestBaseModule : AbpModule
                     "test-microservice-5",
                     new KeycloakClientOptions
                     {
+                        Id = "test-microservice-5",
                         Name = "test-microservice-5",
                         RootUrl = "http://test-microservice-5.io",
                         Secret = Guid.NewGuid().ToString(),

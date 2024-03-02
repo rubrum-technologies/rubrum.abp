@@ -14,14 +14,14 @@ public class KeycloakDataSeeder(
 {
     private readonly RubrumAbpKeycloakClientsOptions _clientsOptions = clientsOptions.Value;
 
-    protected IReadOnlyDictionary<string, GatewayOptions> Gateways =>
-        _clientsOptions.Gateways ?? new Dictionary<string, GatewayOptions>();
+    protected IReadOnlyList<GatewayOptions> Gateways =>
+        (_clientsOptions.Gateways?.Values ?? []).ToList().AsReadOnly();
 
-    protected IReadOnlyDictionary<string, KeycloakClientOptions> Microservices =>
-        _clientsOptions.Microservices ?? new Dictionary<string, KeycloakClientOptions>();
+    protected IReadOnlyList<KeycloakClientOptions> Microservices =>
+        (_clientsOptions.Microservices?.Values ?? []).ToList().AsReadOnly();
 
-    protected IReadOnlyDictionary<string, KeycloakClientOptions> Apps =>
-        _clientsOptions.Apps ?? new Dictionary<string, KeycloakClientOptions>();
+    protected IReadOnlyList<KeycloakClientOptions> Apps =>
+        (_clientsOptions.Apps?.Values ?? []).ToList().AsReadOnly();
 
     public virtual async Task SeedAsync()
     {
@@ -96,14 +96,15 @@ public class KeycloakDataSeeder(
 
     private async Task CreateClientScopesAsync()
     {
-        foreach (var (clientId, _) in Microservices)
+        foreach (var microservice in Microservices)
         {
-            await CreateScopeAsync(clientId);
+            await CreateScopeAsync(microservice);
         }
     }
 
-    private async Task CreateScopeAsync(string scopeName)
+    private async Task CreateScopeAsync(KeycloakClientOptions clientOptions)
     {
+        var scopeName = clientOptions.Id;
         var scope = (await keycloakClient.GetClientScopesAsync())
             .FirstOrDefault(q => q.Name == scopeName);
 
@@ -144,19 +145,20 @@ public class KeycloakDataSeeder(
 
     private async Task CreateClientsAsync()
     {
-        foreach (var (clientId, microservice) in Microservices)
+        foreach (var microservice in Microservices)
         {
-            await CreateMicroserviceClientAsync(clientId, microservice);
+            await CreateMicroserviceClientAsync(microservice);
         }
 
-        foreach (var (clientId, app) in Apps)
+        foreach (var app in Apps)
         {
-            await CreateAppClientAsync(clientId, app);
+            await CreateAppClientAsync(app);
         }
     }
 
-    private async Task CreateMicroserviceClientAsync(string clientId, KeycloakClientOptions microservice)
+    private async Task CreateMicroserviceClientAsync(KeycloakClientOptions microservice)
     {
+        var clientId = microservice.Id;
         var client = (await keycloakClient.GetClientsAsync(clientId)).FirstOrDefault();
 
         if (client == null)
@@ -182,7 +184,7 @@ public class KeycloakDataSeeder(
 
             await keycloakClient.CreateClientAsync(client);
 
-            await AddOptionalClientScopesAsync(clientId, microservice);
+            await AddOptionalClientScopesAsync(microservice);
 
             var insertedClient = (await keycloakClient.GetClientsAsync(clientId)).First();
 
@@ -193,8 +195,9 @@ public class KeycloakDataSeeder(
         }
     }
 
-    private async Task CreateAppClientAsync(string clientId, KeycloakClientOptions app)
+    private async Task CreateAppClientAsync(KeycloakClientOptions app)
     {
+        var clientId = app.Id;
         var client = (await keycloakClient.GetClientsAsync(clientId)).FirstOrDefault();
 
         if (client == null)
@@ -219,7 +222,7 @@ public class KeycloakDataSeeder(
 
             await keycloakClient.CreateClientAsync(client);
 
-            await AddOptionalClientScopesAsync(clientId, app);
+            await AddOptionalClientScopesAsync(app);
         }
     }
 
@@ -244,8 +247,8 @@ public class KeycloakDataSeeder(
                 Protocol = "openid-connect",
                 Enabled = true,
                 RedirectUris = Microservices
-                    .Select(x => $"{x.Value.RootUrl}/swagger/oauth2-redirect.html")
-                    .Union(Gateways.Select(x => $"{x.Value.RootUrl}/swagger/oauth2-redirect.html"))
+                    .Select(x => $"{x.RootUrl}/swagger/oauth2-redirect.html")
+                    .Union(Gateways.Select(x => $"{x.RootUrl}/swagger/oauth2-redirect.html"))
                     .Union(new[] { swagger.RootUrl })
                     .ToList(),
                 Secret = swagger.Secret,
@@ -254,13 +257,14 @@ public class KeycloakDataSeeder(
             };
 
             await keycloakClient.CreateClientAsync(client);
-            await AddOptionalClientScopesAsync(swagger.Id, swagger);
+            await AddOptionalClientScopesAsync(swagger);
         }
     }
 
-    private async Task AddOptionalClientScopesAsync(string clientId, KeycloakClientOptions clientOptions)
+    private async Task AddOptionalClientScopesAsync(KeycloakClientOptions clientOptions)
     {
-        var scopes = clientOptions.Scopes ?? Array.Empty<string>();
+        var clientId = clientOptions.Id;
+        var scopes = clientOptions.Scopes;
 
         var client = (await keycloakClient.GetClientsAsync(clientId)).FirstOrDefault();
 
