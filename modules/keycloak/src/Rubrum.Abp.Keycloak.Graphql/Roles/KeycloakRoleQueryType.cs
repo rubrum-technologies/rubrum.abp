@@ -12,7 +12,9 @@ public class KeycloakRoleQueryType : ObjectTypeExtension, IGraphqlType
             {
                 TypeName = KeycloakRoleConstants.TypeName,
                 TypeNameSingular = "KeycloakRole",
-                TypeNameInPlural = "KeycloakRoles"
+                TypeNameInPlural = "KeycloakRoles",
+                IsAddFieldByAll = true,
+                IsAuthorize = true
             });
     }
 }

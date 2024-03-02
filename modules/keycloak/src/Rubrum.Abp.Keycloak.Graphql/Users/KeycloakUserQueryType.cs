@@ -12,7 +12,8 @@ public class KeycloakUserQueryType : ObjectTypeExtension, IGraphqlType
             TypeName = KeycloakUserConstants.TypeName,
             TypeNameSingular = "KeycloakUser",
             TypeNameInPlural = "KeycloakUsers",
-            IsAuthorize = true
+            IsAuthorize = true,
+            IsAddFieldByAll = true
         });
     }
 }
