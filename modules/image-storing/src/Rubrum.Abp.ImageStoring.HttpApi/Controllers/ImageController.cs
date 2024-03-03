@@ -14,24 +14,28 @@ namespace Rubrum.Abp.ImageStoring.Controllers;
 [Route("api/image-storing/images")]
 public class ImageController(IImageAppService service) : AbpControllerBase, IImageAppService
 {
+    [Authorize]
     [HttpGet("{id:guid}")]
     public Task<ImageInformationDto> GetAsync(Guid id)
     {
         return service.GetAsync(id);
     }
 
+    [Authorize]
     [HttpGet("by-tag/{tag}")]
     public Task<ListResultDto<ImageInformationDto>> GetByTagAsync(string tag)
     {
         return service.GetByTagAsync(tag);
     }
 
+    [Authorize]
     [HttpGet]
     public Task<ListResultDto<ImageInformationDto>> GetListAsync()
     {
         return service.GetListAsync();
     }
 
+    [ResponseCache(Duration = 86400 * 7, Location = ResponseCacheLocation.Client)]
     [HttpGet("download/{id:guid}")]
     public Task<IRemoteStreamContent?> DownloadAsync(Guid id)
     {
@@ -39,8 +43,7 @@ public class ImageController(IImageAppService service) : AbpControllerBase, IIma
     }
 
     [Authorize]
-    [HttpPut]
-    [Route("{id:guid}")]
+    [HttpPut("{id:guid}")]
     public Task UploadAsync(Guid id, IRemoteStreamContent file)
     {
         return service.UploadAsync(id, file);
@@ -54,16 +57,14 @@ public class ImageController(IImageAppService service) : AbpControllerBase, IIma
     }
 
     [Authorize]
-    [HttpPost]
-    [Route("many")]
+    [HttpPost("many")]
     public Task<ListResultDto<ImageInformationDto>> UploadAsync([FromForm] UploadImagesInput input)
     {
         return service.UploadAsync(input);
     }
 
     [Authorize]
-    [HttpPut]
-    [Route("change-tag")]
+    [HttpPut("change-tag")]
     public Task ChangeTagAsync(ChangeTagInput input)
     {
         return service.ChangeTagAsync(input);
