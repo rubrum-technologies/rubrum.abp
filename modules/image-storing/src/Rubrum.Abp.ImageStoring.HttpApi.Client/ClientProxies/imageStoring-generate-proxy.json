@@ -1,0 +1,622 @@
+{
+  "modules": {
+    "imageStoring": {
+      "rootPath": "imageStoring",
+      "remoteServiceName": "RubrumAbpImageStoring",
+      "controllers": {
+        "Rubrum.Abp.ImageStoring.Controllers.ImageStoringController": {
+          "controllerName": "ImageStoring",
+          "controllerGroupName": "ImageStoring",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "Rubrum.Abp.ImageStoring.Controllers.ImageStoringController",
+          "interfaces": [
+            {
+              "type": "Rubrum.Abp.ImageStoring.IImageStoringAppService",
+              "name": "IImageStoringAppService",
+              "methods": [
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Rubrum.Abp.ImageStoring.ImageInformationDto",
+                    "typeSimple": "Rubrum.Abp.ImageStoring.ImageInformationDto"
+                  }
+                },
+                {
+                  "name": "GetByTagAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "tag",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.ListResultDto<Rubrum.Abp.ImageStoring.ImageInformationDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<Rubrum.Abp.ImageStoring.ImageInformationDto>"
+                  }
+                },
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.ListResultDto<Rubrum.Abp.ImageStoring.ImageInformationDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<Rubrum.Abp.ImageStoring.ImageInformationDto>"
+                  }
+                },
+                {
+                  "name": "DownloadAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Content.IRemoteStreamContent",
+                    "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+                  }
+                },
+                {
+                  "name": "UploadAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "file",
+                      "typeAsString": "Volo.Abp.Content.IRemoteStreamContent, Volo.Abp.Core",
+                      "type": "Volo.Abp.Content.IRemoteStreamContent",
+                      "typeSimple": "Volo.Abp.Content.IRemoteStreamContent",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "UploadAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "Rubrum.Abp.ImageStoring.UploadImageInput, Rubrum.Abp.ImageStoring.Application.Contracts",
+                      "type": "Rubrum.Abp.ImageStoring.UploadImageInput",
+                      "typeSimple": "Rubrum.Abp.ImageStoring.UploadImageInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Rubrum.Abp.ImageStoring.ImageInformationDto",
+                    "typeSimple": "Rubrum.Abp.ImageStoring.ImageInformationDto"
+                  }
+                },
+                {
+                  "name": "UploadManyAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "Rubrum.Abp.ImageStoring.UploadImagesInput, Rubrum.Abp.ImageStoring.Application.Contracts",
+                      "type": "Rubrum.Abp.ImageStoring.UploadImagesInput",
+                      "typeSimple": "Rubrum.Abp.ImageStoring.UploadImagesInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.ListResultDto<Rubrum.Abp.ImageStoring.ImageInformationDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<Rubrum.Abp.ImageStoring.ImageInformationDto>"
+                  }
+                },
+                {
+                  "name": "ChangeTagAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "Rubrum.Abp.ImageStoring.ChangeTagInput, Rubrum.Abp.ImageStoring.Application.Contracts",
+                      "type": "Rubrum.Abp.ImageStoring.ChangeTagInput",
+                      "typeSimple": "Rubrum.Abp.ImageStoring.ChangeTagInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "DeleteAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "DeleteByTagAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "tag",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/image-storing/images/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [
+                    "GuidRouteConstraint"
+                  ],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Rubrum.Abp.ImageStoring.ImageInformationDto",
+                "typeSimple": "Rubrum.Abp.ImageStoring.ImageInformationDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Rubrum.Abp.ImageStoring.IImageStoringAppService"
+            },
+            "GetByTagAsyncByTag": {
+              "uniqueName": "GetByTagAsyncByTag",
+              "name": "GetByTagAsync",
+              "httpMethod": "GET",
+              "url": "api/image-storing/images/by-tag/{tag}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "tag",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "tag",
+                  "name": "tag",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.ListResultDto<Rubrum.Abp.ImageStoring.ImageInformationDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<Rubrum.Abp.ImageStoring.ImageInformationDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Rubrum.Abp.ImageStoring.IImageStoringAppService"
+            },
+            "GetListAsync": {
+              "uniqueName": "GetListAsync",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/image-storing/images",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.ListResultDto<Rubrum.Abp.ImageStoring.ImageInformationDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<Rubrum.Abp.ImageStoring.ImageInformationDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Rubrum.Abp.ImageStoring.IImageStoringAppService"
+            },
+            "DownloadAsyncById": {
+              "uniqueName": "DownloadAsyncById",
+              "name": "DownloadAsync",
+              "httpMethod": "GET",
+              "url": "api/image-storing/images/download/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [
+                    "GuidRouteConstraint"
+                  ],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Content.IRemoteStreamContent",
+                "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Rubrum.Abp.ImageStoring.IImageStoringAppService"
+            },
+            "UploadAsyncByIdAndFile": {
+              "uniqueName": "UploadAsyncByIdAndFile",
+              "name": "UploadAsync",
+              "httpMethod": "PUT",
+              "url": "api/image-storing/images/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "file",
+                  "typeAsString": "Volo.Abp.Content.IRemoteStreamContent, Volo.Abp.Core",
+                  "type": "Volo.Abp.Content.IRemoteStreamContent",
+                  "typeSimple": "Volo.Abp.Content.IRemoteStreamContent",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [
+                    "GuidRouteConstraint"
+                  ],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "file",
+                  "name": "file",
+                  "jsonName": null,
+                  "type": "Volo.Abp.Content.IRemoteStreamContent",
+                  "typeSimple": "Volo.Abp.Content.IRemoteStreamContent",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "FormFile",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Rubrum.Abp.ImageStoring.IImageStoringAppService"
+            },
+            "UploadAsyncByInput": {
+              "uniqueName": "UploadAsyncByInput",
+              "name": "UploadAsync",
+              "httpMethod": "POST",
+              "url": "api/image-storing/images",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Rubrum.Abp.ImageStoring.UploadImageInput, Rubrum.Abp.ImageStoring.Application.Contracts",
+                  "type": "Rubrum.Abp.ImageStoring.UploadImageInput",
+                  "typeSimple": "Rubrum.Abp.ImageStoring.UploadImageInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Content",
+                  "jsonName": null,
+                  "type": "Volo.Abp.Content.IRemoteStreamContent",
+                  "typeSimple": "Volo.Abp.Content.IRemoteStreamContent",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "FormFile",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Tag",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Form",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "IsDisposable",
+                  "jsonName": null,
+                  "type": "System.Boolean",
+                  "typeSimple": "boolean",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Form",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Rubrum.Abp.ImageStoring.ImageInformationDto",
+                "typeSimple": "Rubrum.Abp.ImageStoring.ImageInformationDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Rubrum.Abp.ImageStoring.IImageStoringAppService"
+            },
+            "UploadManyAsyncByInput": {
+              "uniqueName": "UploadManyAsyncByInput",
+              "name": "UploadManyAsync",
+              "httpMethod": "POST",
+              "url": "api/image-storing/images/many",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Rubrum.Abp.ImageStoring.UploadImagesInput, Rubrum.Abp.ImageStoring.Application.Contracts",
+                  "type": "Rubrum.Abp.ImageStoring.UploadImagesInput",
+                  "typeSimple": "Rubrum.Abp.ImageStoring.UploadImagesInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Contents",
+                  "jsonName": null,
+                  "type": "System.Collections.Generic.IEnumerable<Volo.Abp.Content.IRemoteStreamContent>",
+                  "typeSimple": "[Volo.Abp.Content.IRemoteStreamContent]",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "FormFile",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Tag",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Form",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "IsDisposable",
+                  "jsonName": null,
+                  "type": "System.Boolean",
+                  "typeSimple": "boolean",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Form",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.ListResultDto<Rubrum.Abp.ImageStoring.ImageInformationDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<Rubrum.Abp.ImageStoring.ImageInformationDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Rubrum.Abp.ImageStoring.IImageStoringAppService"
+            },
+            "ChangeTagAsyncByInput": {
+              "uniqueName": "ChangeTagAsyncByInput",
+              "name": "ChangeTagAsync",
+              "httpMethod": "PUT",
+              "url": "api/image-storing/images/change-tag",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Rubrum.Abp.ImageStoring.ChangeTagInput, Rubrum.Abp.ImageStoring.Application.Contracts",
+                  "type": "Rubrum.Abp.ImageStoring.ChangeTagInput",
+                  "typeSimple": "Rubrum.Abp.ImageStoring.ChangeTagInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "Rubrum.Abp.ImageStoring.ChangeTagInput",
+                  "typeSimple": "Rubrum.Abp.ImageStoring.ChangeTagInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Rubrum.Abp.ImageStoring.IImageStoringAppService"
+            },
+            "DeleteAsyncById": {
+              "uniqueName": "DeleteAsyncById",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/image-storing/images/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [
+                    "GuidRouteConstraint"
+                  ],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Rubrum.Abp.ImageStoring.IImageStoringAppService"
+            },
+            "DeleteByTagAsyncByTag": {
+              "uniqueName": "DeleteByTagAsyncByTag",
+              "name": "DeleteByTagAsync",
+              "httpMethod": "DELETE",
+              "url": "api/image-storing/images/tag/{tag}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "tag",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "tag",
+                  "name": "tag",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Rubrum.Abp.ImageStoring.IImageStoringAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}

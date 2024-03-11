@@ -4,7 +4,7 @@ using Volo.Abp.Content;
 
 namespace Rubrum.Abp.ImageStoring;
 
-public interface IImageAppService : IApplicationService
+public interface IImageStoringAppService : IApplicationService
 {
     Task<ImageInformationDto> GetAsync(Guid id);
 
@@ -18,7 +18,7 @@ public interface IImageAppService : IApplicationService
 
     Task<ImageInformationDto> UploadAsync(UploadImageInput input);
 
-    Task<ListResultDto<ImageInformationDto>> UploadAsync(UploadImagesInput input);
+    Task<ListResultDto<ImageInformationDto>> UploadManyAsync(UploadImagesInput input);
 
     Task ChangeTagAsync(ChangeTagInput input);
 

@@ -4,5 +4,5 @@ public static class ImageStoringRemoteServiceConstants
 {
     public const string RemoteServiceName = "RubrumAbpImageStoring";
 
-    public const string ModuleName = "image-storing";
+    public const string ModuleName = "imageStoring";
 }

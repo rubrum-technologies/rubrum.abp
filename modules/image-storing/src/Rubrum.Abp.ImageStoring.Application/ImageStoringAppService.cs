@@ -8,13 +8,13 @@ using Volo.Abp.Threading;
 
 namespace Rubrum.Abp.ImageStoring;
 
-public class ImageAppService(
+public class ImageStoringAppService(
     IImageInformationRepository repository,
     IAsyncQueryableExecuter asyncExecuter,
     IImageContainer imageContainer,
     IImageInformationMapper mapper,
     ICancellationTokenProvider cancellationTokenProvider)
-    : ApplicationService, IImageAppService
+    : ApplicationService, IImageStoringAppService
 {
     public async Task<ImageInformationDto> GetAsync(Guid id)
     {
@@ -55,7 +55,7 @@ public class ImageAppService(
 
         return file is null
             ? null
-            : new RemoteStreamContent(file.Stream, file.Information.SystemFileName, "image/webp");
+            : new RemoteStreamContent(file.Stream, file.Information.FileName, "image/webp");
     }
 
     public async Task UploadAsync(Guid id, IRemoteStreamContent file)
@@ -81,7 +81,7 @@ public class ImageAppService(
         return mapper.Map(file);
     }
 
-    public async Task<ListResultDto<ImageInformationDto>> UploadAsync(UploadImagesInput input)
+    public async Task<ListResultDto<ImageInformationDto>> UploadManyAsync(UploadImagesInput input)
     {
         await CheckPolicyAsync(ImageStoringPermissions.Images.Upload);
 

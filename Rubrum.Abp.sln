@@ -190,6 +190,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.PermissionManage
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrum.Abp.PermissionManagement.Graphql.Tests", "modules\permission-management\test\Rubrum.Abp.PermissionManagement.Graphql.Tests\Rubrum.Abp.PermissionManagement.Graphql.Tests.csproj", "{22D15FFF-CD26-48C9-8FEC-6CC1A22F99CF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "other", "other", "{1EC5B6C6-F736-4744-8B29-E57E67F3FEB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateProxy", "other\GenerateProxy\GenerateProxy.csproj", "{1F13CA25-946A-40BD-A018-71F97ED980C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -289,6 +293,7 @@ Global
 		{D539775C-F812-4189-B11A-0A2EB19A7265} = {1DD6CFF6-C68E-4BA8-A4A2-E9F95204146F}
 		{F79E2EF5-E606-441F-ACFE-36A9EFA6FCF4} = {1DD6CFF6-C68E-4BA8-A4A2-E9F95204146F}
 		{22D15FFF-CD26-48C9-8FEC-6CC1A22F99CF} = {8BFCA1E3-3455-4C12-B4D5-C09F427E067E}
+		{1F13CA25-946A-40BD-A018-71F97ED980C3} = {1EC5B6C6-F736-4744-8B29-E57E67F3FEB0}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4B66683B-4CA4-430A-9DBB-8A190FE25F86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -607,5 +612,9 @@ Global
 		{22D15FFF-CD26-48C9-8FEC-6CC1A22F99CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22D15FFF-CD26-48C9-8FEC-6CC1A22F99CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22D15FFF-CD26-48C9-8FEC-6CC1A22F99CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F13CA25-946A-40BD-A018-71F97ED980C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F13CA25-946A-40BD-A018-71F97ED980C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F13CA25-946A-40BD-A018-71F97ED980C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F13CA25-946A-40BD-A018-71F97ED980C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

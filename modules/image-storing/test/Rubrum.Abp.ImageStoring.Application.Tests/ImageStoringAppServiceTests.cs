@@ -7,23 +7,23 @@ using static Rubrum.Abp.ImageStoring.ImageStoringTestConstants;
 
 namespace Rubrum.Abp.ImageStoring;
 
-public class ImageAppServiceTests : ImageStoringApplicationTestBase
+public class ImageStoringAppServiceTests : ImageStoringApplicationTestBase
 {
-    private readonly IImageAppService _imageAppService;
+    private readonly IImageStoringAppService _imageStoringAppService;
     private readonly IImageContainer _imageContainer;
     private readonly IVirtualFileProvider _virtualFileProvider;
 
-    public ImageAppServiceTests()
+    public ImageStoringAppServiceTests()
     {
         _imageContainer = GetRequiredService<IImageContainer>();
-        _imageAppService = GetRequiredService<IImageAppService>();
+        _imageStoringAppService = GetRequiredService<IImageStoringAppService>();
         _virtualFileProvider = GetRequiredService<IVirtualFileProvider>();
     }
 
     [Fact]
     public async Task GetAsync()
     {
-        var image = await _imageAppService.GetAsync(TifId);
+        var image = await _imageStoringAppService.GetAsync(TifId);
         var dbImage = await _imageContainer.GetAsync(TifId);
 
         image.ShouldNotBeNull();
@@ -35,7 +35,7 @@ public class ImageAppServiceTests : ImageStoringApplicationTestBase
     [Fact]
     public async Task GetByTagAsync()
     {
-        var images = await _imageAppService.GetByTagAsync(ImageTag);
+        var images = await _imageStoringAppService.GetByTagAsync(ImageTag);
         var dbImages = await _imageContainer.GetByTagAsync(ImageTag);
 
         foreach (var dbImage in dbImages)
@@ -52,7 +52,7 @@ public class ImageAppServiceTests : ImageStoringApplicationTestBase
     [Fact]
     public async Task GetListAsync()
     {
-        var images = await _imageAppService.GetListAsync();
+        var images = await _imageStoringAppService.GetListAsync();
 
         foreach (var imageId in ImageIds)
         {
@@ -71,12 +71,12 @@ public class ImageAppServiceTests : ImageStoringApplicationTestBase
     {
         foreach (var imageId in ImageIds)
         {
-            var content = await _imageAppService.DownloadAsync(imageId);
+            var content = await _imageStoringAppService.DownloadAsync(imageId);
             content.ShouldNotBeNull();
             content.ContentType.ShouldBe("image/webp");
         }
 
-        var image = await _imageAppService.DownloadAsync(Guid.NewGuid());
+        var image = await _imageStoringAppService.DownloadAsync(Guid.NewGuid());
         image.ShouldBeNull();
     }
 
@@ -99,7 +99,7 @@ public class ImageAppServiceTests : ImageStoringApplicationTestBase
 
         async Task TestAsync(IFileInfo file, string contentType)
         {
-            var image = await _imageAppService.UploadAsync(new UploadImageInput
+            var image = await _imageStoringAppService.UploadAsync(new UploadImageInput
             {
                 Content = new RemoteStreamContent(
                     file.CreateReadStream(),
@@ -131,7 +131,7 @@ public class ImageAppServiceTests : ImageStoringApplicationTestBase
 
         async Task TestAsync(Guid id, IFileInfo file, string contentType)
         {
-            await _imageAppService.UploadAsync(
+            await _imageStoringAppService.UploadAsync(
                 id,
                 new RemoteStreamContent(
                     file.CreateReadStream(),
@@ -147,7 +147,7 @@ public class ImageAppServiceTests : ImageStoringApplicationTestBase
     {
         var jpgFile = _virtualFileProvider.GetFileInfo("/Files/3.jpg");
 
-        var result = await _imageAppService.UploadAsync(new UploadImageInput
+        var result = await _imageStoringAppService.UploadAsync(new UploadImageInput
         {
             Content = new RemoteStreamContent(jpgFile.CreateReadStream())
         });
@@ -164,7 +164,7 @@ public class ImageAppServiceTests : ImageStoringApplicationTestBase
         var pngFile = _virtualFileProvider.GetFileInfo("/Files/5.png");
         var gifFile = _virtualFileProvider.GetFileInfo("/Files/6.gif");
 
-        var result = await _imageAppService.UploadAsync(new UploadImagesInput
+        var result = await _imageStoringAppService.UploadManyAsync(new UploadImagesInput
         {
             Contents = new[]
             {
@@ -183,7 +183,7 @@ public class ImageAppServiceTests : ImageStoringApplicationTestBase
     [Fact]
     public async Task ChangeTagAsync()
     {
-        await _imageAppService.ChangeTagAsync(new ChangeTagInput
+        await _imageStoringAppService.ChangeTagAsync(new ChangeTagInput
         {
             Ids = [SvgId, JpegId, PngId, TifId],
             Tag = "Test"
@@ -201,7 +201,7 @@ public class ImageAppServiceTests : ImageStoringApplicationTestBase
     [Fact]
     public async Task DeleteAsync()
     {
-        await _imageAppService.DeleteAsync(SvgId);
+        await _imageStoringAppService.DeleteAsync(SvgId);
 
         var image = await _imageContainer.GetOrNullAsync(SvgId);
 
@@ -213,7 +213,7 @@ public class ImageAppServiceTests : ImageStoringApplicationTestBase
     {
         var images = await _imageContainer.GetByTagAsync(ImageTag);
 
-        await _imageAppService.DeleteByTagAsync(ImageTag);
+        await _imageStoringAppService.DeleteByTagAsync(ImageTag);
 
         foreach (var image in images)
         {
@@ -228,7 +228,7 @@ public class ImageAppServiceTests : ImageStoringApplicationTestBase
         {
             var file = _virtualFileProvider.GetFileInfo("/Files/test.md");
 
-            await _imageAppService.UploadAsync(new UploadImageInput
+            await _imageStoringAppService.UploadAsync(new UploadImageInput
             {
                 Content = new RemoteStreamContent(file.CreateReadStream()),
             });
