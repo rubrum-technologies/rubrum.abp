@@ -12,7 +12,7 @@ namespace Rubrum.Abp.ImageStoring.Controllers;
 [RemoteService(Name = RemoteServiceName)]
 [Area(ModuleName)]
 [Route("api/image-storing/images")]
-public class ImageController(IImageAppService service) : AbpControllerBase, IImageAppService
+public class ImageStoringController(IImageStoringAppService service) : AbpControllerBase, IImageStoringAppService
 {
     [Authorize]
     [HttpGet("{id:guid}")]
@@ -58,9 +58,9 @@ public class ImageController(IImageAppService service) : AbpControllerBase, IIma
 
     [Authorize]
     [HttpPost("many")]
-    public Task<ListResultDto<ImageInformationDto>> UploadAsync([FromForm] UploadImagesInput input)
+    public Task<ListResultDto<ImageInformationDto>> UploadManyAsync([FromForm] UploadImagesInput input)
     {
-        return service.UploadAsync(input);
+        return service.UploadManyAsync(input);
     }
 
     [Authorize]
