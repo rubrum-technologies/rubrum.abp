@@ -13,4 +13,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Rubrum.Abp.ImageStoring.Application.Contracts\Rubrum.Abp.ImageStoring.Application.Contracts.csproj"/>
   </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="**\*generate-proxy.json"/>
+    <Content Remove="**\*generate-proxy.json"/>
+  </ItemGroup>
 </Project>
