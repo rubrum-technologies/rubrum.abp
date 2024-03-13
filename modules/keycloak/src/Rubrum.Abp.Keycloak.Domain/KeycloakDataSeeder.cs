@@ -14,14 +14,11 @@ public class KeycloakDataSeeder(
 {
     private readonly RubrumAbpKeycloakClientsOptions _clientsOptions = clientsOptions.Value;
 
-    protected IReadOnlyList<GatewayOptions> Gateways =>
-        (_clientsOptions.Gateways?.Values ?? []).ToList().AsReadOnly();
+    protected IReadOnlyList<KeycloakClientOptions> Apps =>
+        (_clientsOptions.Apps?.Values ?? []).ToList().AsReadOnly();
 
     protected IReadOnlyList<KeycloakClientOptions> Microservices =>
         (_clientsOptions.Microservices?.Values ?? []).ToList().AsReadOnly();
-
-    protected IReadOnlyList<KeycloakClientOptions> Apps =>
-        (_clientsOptions.Apps?.Values ?? []).ToList().AsReadOnly();
 
     public virtual async Task SeedAsync()
     {
@@ -30,7 +27,6 @@ public class KeycloakDataSeeder(
         await CreateRoleMapperAsync();
         await CreateClientScopesAsync();
         await CreateClientsAsync();
-        await CreateSwaggerClientAsync();
     }
 
     protected virtual async Task UpdateRealmSettingsAsync()
@@ -104,7 +100,14 @@ public class KeycloakDataSeeder(
 
     private async Task CreateScopeAsync(KeycloakClientOptions clientOptions)
     {
-        var scopeName = clientOptions.Id;
+        var scopeName = clientOptions.ClientId;
+
+        if (string.IsNullOrWhiteSpace(scopeName))
+        {
+            logger.LogError("Client Id is null!");
+            return;
+        }
+
         var scope = (await keycloakClient.GetClientScopesAsync())
             .FirstOrDefault(q => q.Name == scopeName);
 
@@ -158,29 +161,12 @@ public class KeycloakDataSeeder(
 
     private async Task CreateMicroserviceClientAsync(KeycloakClientOptions microservice)
     {
-        var clientId = microservice.Id;
+        var clientId = microservice.ClientId;
         var client = (await keycloakClient.GetClientsAsync(clientId)).FirstOrDefault();
 
         if (client == null)
         {
-            client = new ClientRepresentation
-            {
-                ClientId = clientId,
-                Name = microservice.Name,
-                Protocol = "openid-connect",
-                PublicClient = false,
-                ImplicitFlowEnabled = false,
-                AuthorizationServicesEnabled = false,
-                StandardFlowEnabled = false,
-                DirectAccessGrantsEnabled = false,
-                ServiceAccountsEnabled = true,
-                Secret = microservice.Secret,
-                Attributes = new Dictionary<string, string>
-                {
-                    { "oauth2.device.authorization.grant.enabled", "false" },
-                    { "oidc.ciba.grant.enabled", "false" }
-                }
-            };
+            client = microservice;
 
             await keycloakClient.CreateClientAsync(client);
 
@@ -197,73 +183,21 @@ public class KeycloakDataSeeder(
 
     private async Task CreateAppClientAsync(KeycloakClientOptions app)
     {
-        var clientId = app.Id;
+        var clientId = app.ClientId;
         var client = (await keycloakClient.GetClientsAsync(clientId)).FirstOrDefault();
 
         if (client == null)
         {
-            client = new ClientRepresentation
-            {
-                ClientId = clientId,
-                Name = app.Name,
-                Protocol = "openid-connect",
-                Enabled = true,
-                BaseUrl = app.RootUrl,
-                RedirectUris = [$"{app.RootUrl.TrimEnd('/')}/signin-oidc"],
-                Secret = app.Secret,
-                FrontChannelLogout = true,
-                PublicClient = true,
-                ImplicitFlowEnabled = true,
-                Attributes = new Dictionary<string, string>
-                {
-                    { "post.logout.redirect.uris", $"{app.RootUrl.TrimEnd('/')}/signout-callback-oidc" }
-                }
-            };
+            client = app;
 
             await keycloakClient.CreateClientAsync(client);
-
             await AddOptionalClientScopesAsync(app);
-        }
-    }
-
-    private async Task CreateSwaggerClientAsync()
-    {
-        var swagger = _clientsOptions.Swagger;
-
-        if (swagger is null)
-        {
-            return;
-        }
-
-        var client = (await keycloakClient.GetClientsAsync(swagger.Id))
-            .FirstOrDefault();
-
-        if (client == null)
-        {
-            client = new ClientRepresentation
-            {
-                ClientId = swagger.Id,
-                Name = swagger.Name,
-                Protocol = "openid-connect",
-                Enabled = true,
-                RedirectUris = Microservices
-                    .Select(x => $"{x.RootUrl}/swagger/oauth2-redirect.html")
-                    .Union(Gateways.Select(x => $"{x.RootUrl}/swagger/oauth2-redirect.html"))
-                    .Union(new[] { swagger.RootUrl })
-                    .ToList(),
-                Secret = swagger.Secret,
-                FrontChannelLogout = true,
-                PublicClient = true
-            };
-
-            await keycloakClient.CreateClientAsync(client);
-            await AddOptionalClientScopesAsync(swagger);
         }
     }
 
     private async Task AddOptionalClientScopesAsync(KeycloakClientOptions clientOptions)
     {
-        var clientId = clientOptions.Id;
+        var clientId = clientOptions.ClientId;
         var scopes = clientOptions.Scopes;
 
         var client = (await keycloakClient.GetClientsAsync(clientId)).FirstOrDefault();

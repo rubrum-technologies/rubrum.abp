@@ -1,9 +1,11 @@
 ﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Volo.Abp.DependencyInjection;
-using Volo.Abp.Json;
 using Volo.Abp.Threading;
 
 namespace Rubrum.Abp.Keycloak;
@@ -11,18 +13,22 @@ namespace Rubrum.Abp.Keycloak;
 public class KeycloakClient(
     IHttpClientFactory httpClientFactory,
     ICurrentKeycloakRealm currentKeycloakRealm,
-    IJsonSerializer serializer,
     ICancellationTokenProvider cancellationTokenProvider,
+    ILogger<KeycloakClient> logger,
     IOptions<RubrumAbpKeycloakOptions> options)
     : IKeycloakClient, ITransientDependency
 {
+    protected virtual JsonSerializerOptions SerializerOptions { get; } = new()
+    {
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+    };
+
     protected IHttpClientFactory HttpClientFactory => httpClientFactory;
 
     protected ICurrentKeycloakRealm CurrentKeycloakRealm => currentKeycloakRealm;
 
     protected RubrumAbpKeycloakOptions Options => options.Value;
-
-    protected IJsonSerializer Serializer => serializer;
 
     protected ICancellationTokenProvider CancellationTokenProvider => cancellationTokenProvider;
 
@@ -3273,9 +3279,10 @@ public class KeycloakClient(
 
         if (value is not null)
         {
-            var content = Serializer.Serialize(value);
-            request.Content =
-                new StringContent(content, new MediaTypeHeaderValue("application/json") { CharSet = "utf-8" });
+            var content = JsonSerializer.Serialize<TValue>(value, SerializerOptions);
+            request.Content = new StringContent(
+                content,
+                new MediaTypeHeaderValue("application/json") { CharSet = "utf-8" });
         }
 
         request.Method = method;
@@ -3286,7 +3293,18 @@ public class KeycloakClient(
 
         using var response = await httpClient.SendAsync(request, cancellationToken);
 
-        response.EnsureSuccessStatusCode();
+        try
+        {
+            response.EnsureSuccessStatusCode();
+        }
+        catch (Exception ex)
+        {
+            var content = await response.Content.ReadAsStringAsync(cancellationToken);
+
+            logger.LogException(ex);
+            logger.LogError("Response: {Content}", content);
+            throw;
+        }
     }
 
     protected virtual async Task<TResult> SendAsync<TResult, TValue>(
@@ -3315,7 +3333,7 @@ public class KeycloakClient(
         response.EnsureSuccessStatusCode();
 
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
-        return Serializer.Deserialize<TResult>(json);
+        return JsonSerializer.Deserialize<TResult>(json, SerializerOptions)!;
     }
 
     protected virtual async Task<string> GetAccessTokenAsync(CancellationToken cancellationToken = default)
@@ -3340,7 +3358,7 @@ public class KeycloakClient(
         response.EnsureSuccessStatusCode();
 
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
-        var result = Serializer.Deserialize<OAuth2Token>(json);
+        var result = JsonSerializer.Deserialize<OAuth2Token>(json, SerializerOptions)!;
 
         return result.AccessToken;
     }
@@ -3354,7 +3372,7 @@ public class KeycloakClient(
                 continue;
             }
 
-            uri = QueryHelpers.AddQueryString(uri, key, value.ToString());
+            uri = QueryHelpers.AddQueryString(uri, key, value.ToString()!);
         }
 
         return uri;
