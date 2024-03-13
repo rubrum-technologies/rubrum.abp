@@ -1,14 +1,12 @@
 ﻿namespace Rubrum.Abp.Keycloak;
 
-public class KeycloakClientOptions
+public class KeycloakClientOptions : ClientRepresentation
 {
-    public required string Id { get; set; }
-
-    public required string Name { get; set; }
-
-    public required string Secret { get; set; }
-
-    public required string RootUrl { get; set; }
+    public KeycloakClientOptions()
+    {
+        Enabled = true;
+        Protocol = "openid-connect";
+    }
 
     public string[] Scopes { get; set; } = [];
 }
