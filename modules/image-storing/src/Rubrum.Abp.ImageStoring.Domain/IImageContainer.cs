@@ -12,13 +12,9 @@ public interface IImageContainer
 
     Task<ImageInformation> CreateAsync(ImageFile file, CancellationToken cancellationToken = default);
 
-    Task ChangeImageAsync(Guid id, Stream stream, CancellationToken cancellationToken = default);
+    Task ChangeImageAsync(ImageInformation information, byte[] image, CancellationToken cancellationToken = default);
 
-    Task ChangeTagAsync(Guid id, string? tag, CancellationToken cancellationToken = default);
+    Task ChangeImageAsync(ImageInformation information, Stream image, CancellationToken cancellationToken = default);
 
-    Task MarkAsPermanentAsync(Guid id, CancellationToken cancellationToken = default);
-
-    Task DeleteAsync(Guid id, CancellationToken cancellationToken = default);
-
-    Task DeleteByTagAsync(string tag, CancellationToken cancellationToken = default);
+    Task ChangeTagAsync(ImageInformation information, string? tag, CancellationToken cancellationToken = default);
 }

@@ -7,14 +7,14 @@ namespace Rubrum.Abp.ImageStoring;
 
 public class ImageContainerTests : ImageStoringDomainTestBase
 {
+    private readonly IImageInformationRepository _repository;
     private readonly IImageContainer _imageContainer;
-    private readonly IImageBlobContainerFactory _imageBlobContainerFactory;
     private readonly IVirtualFileProvider _virtualFileProvider;
 
     public ImageContainerTests()
     {
+        _repository = GetRequiredService<IImageInformationRepository>();
         _imageContainer = GetRequiredService<IImageContainer>();
-        _imageBlobContainerFactory = GetRequiredService<IImageBlobContainerFactory>();
         _virtualFileProvider = GetRequiredService<IVirtualFileProvider>();
     }
 
@@ -76,7 +76,8 @@ public class ImageContainerTests : ImageStoringDomainTestBase
         {
             var jpeg = _virtualFileProvider.GetFileInfo("/Files/2.jpeg");
             var jpegId = Guid.NewGuid();
-            await _imageContainer.CreateAsync(new ImageFile(jpegId, jpeg.CreateReadStream()));
+            var information = await _imageContainer.CreateAsync(new ImageFile(jpegId, jpeg.CreateReadStream()));
+            await _repository.InsertAsync(information, true);
 
             var jpegStream = await _imageContainer.GetOrNullAsync(jpegId);
             jpegStream.ShouldNotBeNull();
@@ -91,7 +92,9 @@ public class ImageContainerTests : ImageStoringDomainTestBase
         await WithUnitOfWorkAsync(async () =>
         {
             var png = _virtualFileProvider.GetFileInfo("/Files/5.png");
-            await _imageContainer.ChangeImageAsync(PngId, png.CreateReadStream());
+            var info = await _repository.GetAsync(PngId);
+
+            await _imageContainer.ChangeImageAsync(info, png.CreateReadStream());
         });
 
         var pngStream = await _imageContainer.GetOrNullAsync(PngId);
@@ -104,69 +107,11 @@ public class ImageContainerTests : ImageStoringDomainTestBase
     {
         await WithUnitOfWorkAsync(async () =>
         {
-            await _imageContainer.ChangeTagAsync(TifId, "Test");
+            var info = await _repository.GetAsync(TifId);
+            await _imageContainer.ChangeTagAsync(info, "Test");
             var image = await _imageContainer.GetAsync(TifId);
             image.Tag.ShouldBe("Test");
             image.Information.EntityVersion.ShouldBe(1);
         });
-    }
-
-    [Fact]
-    public async Task MarkAsPermanentAsync()
-    {
-        var jpeg = _virtualFileProvider.GetFileInfo("/Files/2.jpeg");
-        var jpegId = Guid.NewGuid();
-        await _imageContainer.CreateAsync(new ImageFile(jpegId, jpeg.CreateReadStream(), null, "test", true));
-
-        var jpegStream = await _imageContainer.GetOrNullAsync(jpegId);
-        jpegStream.ShouldNotBeNull();
-        jpegStream.Information.ShouldNotBeNull();
-        jpegStream.IsDisposable.ShouldBeTrue();
-
-        await _imageContainer.MarkAsPermanentAsync(jpegId);
-
-        var image = await _imageContainer.GetAsync(jpegId);
-        image.ShouldNotBeNull();
-        image.IsDisposable.ShouldBeFalse();
-    }
-
-    [Fact]
-    public async Task DeleteAsync()
-    {
-        var image = await _imageContainer.GetAsync(SvgId);
-        var container = await _imageBlobContainerFactory.CreateAsync(image.Information);
-
-        await WithUnitOfWorkAsync(async () =>
-        {
-            await _imageContainer.DeleteAsync(SvgId);
-
-            var svg = await _imageContainer.GetOrNullAsync(SvgId);
-            svg.ShouldBeNull();
-        });
-
-        (await container.ExistsAsync(image.SystemFileName)).ShouldBeFalse();
-    }
-
-    [Fact]
-    public async Task DeleteByTagAsync()
-    {
-        var images = await _imageContainer.GetByTagAsync(ImageTag);
-        var container = await _imageBlobContainerFactory.CreateAsync(images.First().Information);
-
-        await WithUnitOfWorkAsync(async () =>
-        {
-            await _imageContainer.DeleteByTagAsync(ImageTag);
-
-            foreach (var image in images)
-            {
-                var img = await _imageContainer.GetOrNullAsync(image.Id);
-                img.ShouldBeNull();
-            }
-        });
-
-        foreach (var image in images)
-        {
-            (await container.ExistsAsync(image.SystemFileName)).ShouldBeFalse();
-        }
     }
 }

@@ -2,15 +2,13 @@
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Imaging;
-using Volo.Abp.Linq;
 
 namespace Rubrum.Abp.ImageStoring;
 
 public class ImageContainer(
     IImageConverter imageConverter,
     IImageInformationRepository imageRepository,
-    IImageBlobContainerFactory imageBlobContainerFactory,
-    IAsyncQueryableExecuter asyncExecuter)
+    IImageBlobContainerFactory imageBlobContainerFactory)
     : IImageContainer, ITransientDependency
 {
     public async Task<ImageFile> GetAsync(Guid id, CancellationToken cancellationToken = default)
@@ -70,73 +68,56 @@ public class ImageContainer(
             stream,
             true,
             cancellationToken);
-        await imageRepository.InsertAsync(information, true, cancellationToken);
 
         return information;
     }
 
-    public async Task ChangeImageAsync(
-        Guid id,
-        Stream stream,
+    public Task ChangeImageAsync(
+        ImageInformation information,
+        byte[] image,
         CancellationToken cancellationToken = default)
     {
-        var information = await imageRepository.GetAsync(id, true, cancellationToken);
+        using var stream = new MemoryStream(image);
+
+        return ChangeImageAsync(information, stream, cancellationToken);
+    }
+
+    public async Task ChangeImageAsync(
+        ImageInformation information,
+        Stream image,
+        CancellationToken cancellationToken = default)
+    {
         var blobContainer = await imageBlobContainerFactory.CreateAsync(information);
 
         await blobContainer.SaveAsync(
             information.SystemFileName,
-            await CreateImageAsync(stream),
+            await CreateImageAsync(image),
             true,
             cancellationToken);
         await imageRepository.UpdateAsync(information, true, cancellationToken);
     }
 
-    public async Task ChangeTagAsync(Guid id, string? tag, CancellationToken cancellationToken = default)
+    public async Task ChangeTagAsync(
+        ImageInformation information,
+        string? tag,
+        CancellationToken cancellationToken = default)
     {
-        var file = await GetAsync(id, cancellationToken);
-        var information = file.Information;
+        var blobContainer = await imageBlobContainerFactory.CreateAsync(information);
+        await using var file = await blobContainer.GetAsync(information.SystemFileName, cancellationToken);
 
         if (information.Tag == tag)
         {
             return;
         }
 
-        var blobContainer = await imageBlobContainerFactory.CreateAsync(information);
         await blobContainer.DeleteAsync(information.SystemFileName, cancellationToken);
 
         information.Tag = tag;
 
         blobContainer = await imageBlobContainerFactory.CreateAsync(information);
 
-        await blobContainer.SaveAsync(information.SystemFileName, file.Stream, true, cancellationToken);
+        await blobContainer.SaveAsync(information.SystemFileName, file, true, cancellationToken);
         await imageRepository.UpdateAsync(information, true, cancellationToken);
-    }
-
-    public async Task MarkAsPermanentAsync(Guid id, CancellationToken cancellationToken = default)
-    {
-        var information = await imageRepository.GetAsync(id, true, cancellationToken);
-
-        information.IsDisposable = false;
-
-        await imageRepository.UpdateAsync(information, true, cancellationToken);
-    }
-
-    public async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
-    {
-        var information = await imageRepository.GetAsync(id, true, cancellationToken);
-
-        await imageRepository.DeleteAsync(information, true, cancellationToken);
-    }
-
-    public async Task DeleteByTagAsync(string tag, CancellationToken cancellationToken = default)
-    {
-        var idsQuery = (await imageRepository.GetQueryableAsync())
-            .Where(x => x.Tag == tag)
-            .Select(x => x.Id);
-
-        var ids = await asyncExecuter.ToListAsync(idsQuery, cancellationToken);
-
-        await imageRepository.DeleteManyAsync(ids, true, cancellationToken);
     }
 
     protected virtual async Task<Stream> CreateImageAsync(Stream stream)

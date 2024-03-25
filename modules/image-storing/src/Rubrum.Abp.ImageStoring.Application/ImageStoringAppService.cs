@@ -64,7 +64,8 @@ public class ImageStoringAppService(
 
         var cancellationToken = cancellationTokenProvider.Token;
 
-        await imageContainer.ChangeImageAsync(id, file.GetStream(), cancellationToken);
+        var info = await repository.GetAsync(id, true, cancellationToken);
+        await imageContainer.ChangeImageAsync(info, file.GetStream(), cancellationToken);
     }
 
     public async Task<ImageInformationDto> UploadAsync(UploadImageInput input)
@@ -76,7 +77,8 @@ public class ImageStoringAppService(
         var id = GuidGenerator.Create();
         var bytes = await input.Content.GetStream().GetAllBytesAsync(cancellationToken);
         var file = new ImageFile(id, bytes, input.Content.FileName, input.Tag, input.IsDisposable);
-        await imageContainer.CreateAsync(file, cancellationToken);
+        var information = await imageContainer.CreateAsync(file, cancellationToken);
+        await repository.InsertAsync(information, true, cancellationToken);
 
         return mapper.Map(file);
     }
@@ -93,7 +95,8 @@ public class ImageStoringAppService(
             var id = GuidGenerator.Create();
             var bytes = await content.GetStream().GetAllBytesAsync(cancellationToken);
             var file = new ImageFile(id, bytes, content.FileName, input.Tag, input.IsDisposable);
-            await imageContainer.CreateAsync(file, cancellationToken);
+            var information = await imageContainer.CreateAsync(file, cancellationToken);
+            await repository.InsertAsync(information, true, cancellationToken);
 
             result.Add(mapper.Map(file));
         }
@@ -109,7 +112,8 @@ public class ImageStoringAppService(
 
         foreach (var id in input.Ids)
         {
-            await imageContainer.ChangeTagAsync(id, input.Tag, cancellationToken);
+            var info = await repository.GetAsync(id, true, cancellationToken);
+            await imageContainer.ChangeTagAsync(info, input.Tag, cancellationToken);
         }
     }
 
@@ -119,7 +123,8 @@ public class ImageStoringAppService(
 
         var cancellationToken = cancellationTokenProvider.Token;
 
-        await imageContainer.DeleteAsync(id, cancellationToken);
+        var info = await repository.GetAsync(id, true, cancellationToken);
+        await repository.DeleteAsync(info, true, cancellationToken);
     }
 
     public async Task DeleteByTagAsync(string tag)
@@ -128,6 +133,8 @@ public class ImageStoringAppService(
 
         var cancellationToken = cancellationTokenProvider.Token;
 
-        await imageContainer.DeleteByTagAsync(tag, cancellationToken);
+        var infos = await repository.GetListAsync(x => x.Tag == tag, true, cancellationToken);
+
+        await repository.DeleteManyAsync(infos, true, cancellationToken);
     }
 }

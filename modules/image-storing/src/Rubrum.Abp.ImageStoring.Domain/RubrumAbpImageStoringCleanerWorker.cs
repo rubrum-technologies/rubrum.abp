@@ -29,7 +29,6 @@ public class RubrumAbpImageStoringCleanerWorker : AsyncPeriodicBackgroundWorkerB
         var unitOfWorkManager = serviceProvider.GetRequiredService<IUnitOfWorkManager>();
         var repository = serviceProvider.GetRequiredService<IImageInformationRepository>();
         var asyncExecuter = serviceProvider.GetRequiredService<IAsyncQueryableExecuter>();
-        var imageContainer = serviceProvider.GetRequiredService<IImageContainer>();
         var dateTime = DateTime.Now.AddSeconds(-options.Lifetime);
 
         logger.LogInformation("Start cleaning temporary images");
@@ -42,7 +41,7 @@ public class RubrumAbpImageStoringCleanerWorker : AsyncPeriodicBackgroundWorkerB
 
             foreach (var id in await asyncExecuter.ToListAsync(query, cancellationToken))
             {
-                await imageContainer.DeleteAsync(id, cancellationToken);
+                await repository.DeleteAsync(id, true, cancellationToken);
             }
         }
 
