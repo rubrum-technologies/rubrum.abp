@@ -20,12 +20,32 @@ public static class RegisterExtensions
         var services = builder.Services;
         var typeFinder = services.GetSingletonInstance<ITypeFinder>();
 
-        var types = typeFinder.Types
-            .Where(x => typeof(IGraphqlType).IsAssignableFrom(x) &&
-                        x is { IsClass: true, IsPublic: true, IsAbstract: false, IsGenericParameter: false })
+        var types = FiltrationGraphqlTypes(typeFinder.Types)
             .ToList();
 
         builder.AddTypes(types.ToArray());
+
+        return builder;
+    }
+
+    public static IRequestExecutorBuilder RegisterGraphqlTypes(this IRequestExecutorBuilder builder, Assembly assembly)
+    {
+        var types = FiltrationGraphqlTypes(assembly.GetTypes())
+            .ToList();
+
+        builder.AddTypes(types.ToArray());
+
+        return builder;
+    }
+
+    public static IRequestExecutorBuilder RegisterGraphqlTypes(
+        this IRequestExecutorBuilder builder,
+        IEnumerable<Assembly> assemblies)
+    {
+        foreach (var assembly in assemblies)
+        {
+            RegisterGraphqlTypes(builder, assembly);
+        }
 
         return builder;
     }
@@ -57,6 +77,12 @@ public static class RegisterExtensions
         return builder;
     }
 
+    private static IEnumerable<Type> FiltrationGraphqlTypes(IEnumerable<Type> types)
+    {
+        return types.Where(x => typeof(IGraphqlType).IsAssignableFrom(x) &&
+                                x is { IsClass: true, IsPublic: true, IsAbstract: false, IsGenericParameter: false });
+    }
+
     private static List<Type> GetEntityDtoTypes(ITypeFinder typeFinder)
     {
         var types = typeFinder.Types
@@ -85,7 +111,9 @@ public static class RegisterExtensions
 
     private static Type? GetKeyEntityDto(Type type)
     {
-        var entityInterface = Array.Find(type.GetInterfaces(), x => typeof(IEntityDto).IsAssignableFrom(x) && x.GenericTypeArguments.Length == 1);
+        var entityInterface = Array.Find(
+            type.GetInterfaces(),
+            x => typeof(IEntityDto).IsAssignableFrom(x) && x.GenericTypeArguments.Length == 1);
 
         return entityInterface?.GenericTypeArguments[0];
     }
