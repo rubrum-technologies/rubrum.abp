@@ -6,7 +6,7 @@ using static Rubrum.Abp.ImageStoring.ImageStoringTestConstants;
 
 namespace Rubrum.Abp.ImageStoring;
 
-public class ImageInformationTests : ImageStoringGraphqlTestBase
+public sealed class ImageInformationTests : ImageStoringGraphqlTestBase
 {
     private readonly IImageInformationRepository _repository;
     private readonly IIdSerializer _idSerializer;

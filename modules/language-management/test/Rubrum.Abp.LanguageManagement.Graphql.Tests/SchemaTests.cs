@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Rubrum.Abp.LanguageManagement;
 
-public class SchemaTests : LanguageManagementGraphqlTestBase
+public sealed class SchemaTests : LanguageManagementGraphqlTestBase
 {
     private readonly IRequestExecutorBuilder _builder;
 

@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Rubrum.Abp.Keycloak;
 
-public class KeycloakDataSeederTests : RubrumAbpKeycloakDomainTestBase
+public sealed class KeycloakDataSeederTests : RubrumAbpKeycloakDomainTestBase
 {
     private readonly IKeycloakClient _keycloakClient;
 

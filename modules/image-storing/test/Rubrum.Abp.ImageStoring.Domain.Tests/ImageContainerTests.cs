@@ -5,7 +5,7 @@ using static Rubrum.Abp.ImageStoring.ImageStoringTestConstants;
 
 namespace Rubrum.Abp.ImageStoring;
 
-public class ImageContainerTests : ImageStoringDomainTestBase
+public sealed class ImageContainerTests : ImageStoringDomainTestBase
 {
     private readonly IImageInformationRepository _repository;
     private readonly IImageContainer _imageContainer;

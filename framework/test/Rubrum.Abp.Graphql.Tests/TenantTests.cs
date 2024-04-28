@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Rubrum.Abp.Graphql;
 
-public class TenantTests : RubrumAbpGraphqlTestBase
+public sealed class TenantTests : RubrumAbpGraphqlTestBase
 {
     private readonly IIdSerializer _idSerializer;
     private readonly ITenantManager _manager;

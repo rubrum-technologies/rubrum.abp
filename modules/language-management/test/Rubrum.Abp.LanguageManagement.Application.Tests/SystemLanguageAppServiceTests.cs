@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Rubrum.Abp.LanguageManagement;
 
-public class SystemLanguageAppServiceTests : LanguageManagementApplicationTestBase
+public sealed class SystemLanguageAppServiceTests : LanguageManagementApplicationTestBase
 {
     private readonly ISystemLanguageAppService _service;
 

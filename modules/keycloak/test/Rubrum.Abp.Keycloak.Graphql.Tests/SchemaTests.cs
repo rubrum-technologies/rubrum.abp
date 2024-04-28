@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Rubrum.Abp.Keycloak;
 
-public class SchemaTests : RubrumAbpKeycloakGraphqlTestBase
+public sealed class SchemaTests : RubrumAbpKeycloakGraphqlTestBase
 {
     private readonly IRequestExecutorBuilder _builder;
 

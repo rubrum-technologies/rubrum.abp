@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Rubrum.Abp.Keycloak;
 
-public class KeycloakUserTests : RubrumAbpKeycloakGraphqlTestBase
+public sealed class KeycloakUserTests : RubrumAbpKeycloakGraphqlTestBase
 {
     private readonly IIdSerializer _idSerializer;
     private readonly IKeycloakClient _keycloakClient;

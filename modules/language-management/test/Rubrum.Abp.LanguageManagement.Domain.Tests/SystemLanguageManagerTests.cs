@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Rubrum.Abp.LanguageManagement;
 
-public class SystemLanguageManagerTests : LanguageManagementDomainTestBase
+public sealed class SystemLanguageManagerTests : LanguageManagementDomainTestBase
 {
     private readonly SystemLanguageManager _manager;
     private readonly IRepository<SystemLanguage, string> _repository;
