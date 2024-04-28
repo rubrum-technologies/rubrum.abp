@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Rubrum.Abp.Imaging.MagickNet;
 
-public class ImageConverterTests : ImagingMagickNetTestBase
+public sealed class ImageConverterTests : ImagingMagickNetTestBase
 {
     private static readonly string[] Files =
     {

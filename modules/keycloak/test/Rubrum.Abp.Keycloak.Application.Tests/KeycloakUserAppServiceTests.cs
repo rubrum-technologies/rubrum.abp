@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Rubrum.Abp.Keycloak;
 
-public class KeycloakUserAppServiceTests : RubrumAbpKeycloakApplicationTestBase
+public sealed class KeycloakUserAppServiceTests : RubrumAbpKeycloakApplicationTestBase
 {
     private readonly IKeycloakClient _keycloakClient;
     private readonly IKeycloakUserAppService _service;

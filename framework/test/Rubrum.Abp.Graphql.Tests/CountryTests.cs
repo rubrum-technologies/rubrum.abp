@@ -7,7 +7,7 @@ using static Rubrum.Abp.Graphql.RubrumAbpGraphqlTestConstants;
 
 namespace Rubrum.Abp.Graphql;
 
-public class CountryTests : RubrumAbpGraphqlTestBase
+public sealed class CountryTests : RubrumAbpGraphqlTestBase
 {
     private readonly IIdSerializer _idSerializer;
 

@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Rubrum.Abp.Graphql.MultilingualObjects;
 
-public class SchemaTests : MultilingualObjectsTestBase
+public sealed class SchemaTests : MultilingualObjectsTestBase
 {
     private readonly IRequestExecutorBuilder _builder;
 

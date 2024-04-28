@@ -14,7 +14,6 @@ public class KeycloakClient(
     IHttpClientFactory httpClientFactory,
     ICurrentKeycloakRealm currentKeycloakRealm,
     ICancellationTokenProvider cancellationTokenProvider,
-    ILogger<KeycloakClient> logger,
     IOptions<RubrumAbpKeycloakOptions> options)
     : IKeycloakClient, ITransientDependency
 {
@@ -3293,18 +3292,7 @@ public class KeycloakClient(
 
         using var response = await httpClient.SendAsync(request, cancellationToken);
 
-        try
-        {
-            response.EnsureSuccessStatusCode();
-        }
-        catch (Exception ex)
-        {
-            var content = await response.Content.ReadAsStringAsync(cancellationToken);
-
-            logger.LogException(ex);
-            logger.LogError("Response: {Content}", content);
-            throw;
-        }
+        response.EnsureSuccessStatusCode();
     }
 
     protected virtual async Task<TResult> SendAsync<TResult, TValue>(

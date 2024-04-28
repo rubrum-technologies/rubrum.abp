@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Rubrum.Abp.PermissionManagement;
 
-public class SchemaTests : RubrumAbpPermissionManagementGraphqlTestBase
+public sealed class SchemaTests : RubrumAbpPermissionManagementGraphqlTestBase
 {
     private readonly IRequestExecutorBuilder _builder;
 

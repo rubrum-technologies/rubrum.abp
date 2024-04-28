@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Rubrum.Abp.ImageStoring;
 
-public class SchemaTests : ImageStoringGraphqlTestBase
+public sealed class SchemaTests : ImageStoringGraphqlTestBase
 {
     private readonly IRequestExecutorBuilder _builder;
 

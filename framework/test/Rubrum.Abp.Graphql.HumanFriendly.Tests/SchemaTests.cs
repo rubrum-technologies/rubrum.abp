@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Rubrum.Abp.Graphql.HumanFriendly;
 
-public class SchemaTests : RubrumAbpGraphqlHumanFriendlyTestBase
+public sealed class SchemaTests : RubrumAbpGraphqlHumanFriendlyTestBase
 {
     private readonly IRequestExecutorBuilder _builder;
 

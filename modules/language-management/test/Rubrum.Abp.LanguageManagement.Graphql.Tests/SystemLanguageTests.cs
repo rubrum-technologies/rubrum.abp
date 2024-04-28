@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Rubrum.Abp.LanguageManagement;
 
-public class SystemLanguageTests : LanguageManagementGraphqlTestBase
+public sealed class SystemLanguageTests : LanguageManagementGraphqlTestBase
 {
     private readonly IIdSerializer _idSerializer;
 
