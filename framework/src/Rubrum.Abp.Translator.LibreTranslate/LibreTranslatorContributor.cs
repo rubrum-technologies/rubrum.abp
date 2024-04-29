@@ -1,19 +1,16 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Logging;
+using Volo.Abp.Caching;
 using Volo.Abp.DependencyInjection;
 
 namespace Rubrum.Abp.Translator;
 
-public class LibreTranslatorContributor : ITranslatorContributor, ITransientDependency
+public class LibreTranslatorContributor(
+    ILibreTranslateClient client,
+    IDistributedCache<ICollection<SupportedLanguage>> supportedLanguagesCache,
+    ILogger<LibreTranslatorContributor> logger)
+    : ITranslatorContributor, ITransientDependency
 {
-    private readonly ILibreTranslateClient _client;
-    private readonly ILogger<LibreTranslatorContributor> _logger;
-
-    public LibreTranslatorContributor(ILibreTranslateClient client, ILogger<LibreTranslatorContributor> logger)
-    {
-        _client = client;
-        _logger = logger;
-    }
-
     public async Task<TranslateProcessResult> TryTranslateAsync(
         string into,
         string text,
@@ -26,12 +23,12 @@ public class LibreTranslatorContributor : ITranslatorContributor, ITransientDepe
                 return new TranslateProcessResult(text, TranslateProcessState.Unsupported);
             }
 
-            var result = await _client.TranslateAsync(text, "auto", into, cancellationToken);
+            var result = await client.TranslateAsync(text, "auto", into, cancellationToken);
             return new TranslateProcessResult(result.Text, TranslateProcessState.Done);
         }
         catch (Exception ex)
         {
-            _logger.LogException(ex);
+            logger.LogException(ex);
             return new TranslateProcessResult(text, TranslateProcessState.Unsupported);
         }
     }
@@ -49,19 +46,26 @@ public class LibreTranslatorContributor : ITranslatorContributor, ITransientDepe
                 return new TranslateProcessResult(text, TranslateProcessState.Unsupported);
             }
 
-            var result = await _client.TranslateAsync(text, from, into, cancellationToken);
+            var result = await client.TranslateAsync(text, from, into, cancellationToken);
             return new TranslateProcessResult(result.Text, TranslateProcessState.Done);
         }
         catch (Exception ex)
         {
-            _logger.LogException(ex);
+            logger.LogException(ex);
             return new TranslateProcessResult(text, TranslateProcessState.Unsupported);
         }
     }
 
     protected virtual async Task<bool> CheckSupportLanguageAsync(string from, string into)
     {
-        var languages = await _client.GetLanguagesAsync();
+        var languages = await supportedLanguagesCache.GetOrAddAsync(
+            GetSupportedLanguagesCacheKey(),
+            async () => await GetSupportedLanguagesAsync(),
+            () => new DistributedCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30)
+            },
+            true) ?? new List<SupportedLanguage>();
         var language = languages.FirstOrDefault(x => x.Code == into);
 
         if (language is null)
@@ -70,5 +74,15 @@ public class LibreTranslatorContributor : ITranslatorContributor, ITransientDepe
         }
 
         return from == "auto" || language.Targets.Contains(from);
+    }
+
+    protected virtual string GetSupportedLanguagesCacheKey()
+    {
+        return "Rubrum.Abp.Translator.LibreTranslate.SupportedLanguages";
+    }
+
+    private async Task<ICollection<SupportedLanguage>> GetSupportedLanguagesAsync()
+    {
+        return await client.GetLanguagesAsync();
     }
 }
