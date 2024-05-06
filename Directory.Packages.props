@@ -68,6 +68,7 @@
         <PackageVersion Include="Volo.Abp.Authorization.Abstractions" Version="$(AbpPackageVersion)"/>
         <PackageVersion Include="Volo.Abp.Http.Client" Version="$(AbpPackageVersion)"/>
         <PackageVersion Include="Volo.Abp.FluentValidation" Version="$(AbpPackageVersion)"/>
+        <PackageVersion Include="Volo.Abp.Caching" Version="$(AbpPackageVersion)"/>
         <PackageVersion Include="Volo.Abp.Caching.StackExchangeRedis" Version="$(AbpPackageVersion)"/>
         <PackageVersion Include="Volo.Abp.BackgroundJobs.RabbitMQ" Version="$(AbpPackageVersion)"/>
         <PackageVersion Include="Volo.Abp.VirtualFileSystem" Version="$(AbpPackageVersion)"/>
