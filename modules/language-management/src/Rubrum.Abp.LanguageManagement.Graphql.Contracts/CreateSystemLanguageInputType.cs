@@ -8,6 +8,6 @@ public class CreateSystemLanguageInputType : InputObjectType<CreateSystemLanguag
 {
     protected override void Configure(IInputObjectTypeDescriptor<CreateSystemLanguageInput> descriptor)
     {
-        descriptor.ExtraProperties();
+        descriptor.ExtensibleObject();
     }
 }

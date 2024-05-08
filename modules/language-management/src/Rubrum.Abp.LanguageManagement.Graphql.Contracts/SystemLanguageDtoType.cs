@@ -10,7 +10,7 @@ public class SystemLanguageDtoType : ObjectType<SystemLanguageDto>, IGraphqlType
     {
         descriptor
             .Entity<SystemLanguageDto, string>()
-            .ExtraProperties()
+            .ExtensibleObject()
             .FullAudited();
 
         descriptor

@@ -9,6 +9,6 @@ public class TenantType : ObjectType<TenantDto>, IGraphqlType
     protected override void Configure(IObjectTypeDescriptor<TenantDto> descriptor)
     {
         descriptor.Entity<TenantDto, Guid>();
-        descriptor.ExtraProperties();
+        descriptor.ExtensibleObject();
     }
 }

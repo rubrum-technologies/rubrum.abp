@@ -86,17 +86,15 @@ public static class AbpTypeExtensions
         return descriptor;
     }
 
-    public static IInterfaceTypeDescriptor<TEntityDto> ExtraProperties<TEntityDto>(
+    public static IInterfaceTypeDescriptor<TEntityDto> HasExtraProperties<TEntityDto>(
         this IInterfaceTypeDescriptor<TEntityDto> descriptor)
-        where TEntityDto : ExtensibleObject
+        where TEntityDto : IHasExtraProperties
     {
         descriptor.Implements<HasExtraPropertiesType>();
 
         descriptor
             .Field(x => x.ExtraProperties)
             .Type<JsonType>();
-
-        descriptor.Ignore(x => x.Validate(default!));
 
         var properties = ObjectExtensionManager.Instance.GetProperties(typeof(TEntityDto));
 
@@ -110,17 +108,15 @@ public static class AbpTypeExtensions
         return descriptor;
     }
 
-    public static IObjectTypeDescriptor<TEntityDto> ExtraProperties<TEntityDto>(
+    public static IObjectTypeDescriptor<TEntityDto> HasExtraProperties<TEntityDto>(
         this IObjectTypeDescriptor<TEntityDto> descriptor)
-        where TEntityDto : ExtensibleObject
+        where TEntityDto : IHasExtraProperties
     {
         descriptor.Implements<HasExtraPropertiesType>();
 
         descriptor
             .Field(x => x.ExtraProperties)
             .Type<JsonType>();
-
-        descriptor.Ignore(x => x.Validate(default!));
 
         var properties = ObjectExtensionManager.Instance.GetProperties(typeof(TEntityDto));
 
@@ -140,29 +136,76 @@ public static class AbpTypeExtensions
         return descriptor;
     }
 
-    public static IInputObjectTypeDescriptor<TEntityDto> ExtraProperties<TEntityDto>(
+    public static IInputObjectTypeDescriptor<TEntityDto> HasExtraProperties<TEntityDto>(
+        this IInputObjectTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IHasExtraProperties
+    {
+        descriptor.Ignore(x => x.ExtraProperties);
+
+        return descriptor;
+    }
+
+    public static IFilterInputTypeDescriptor<TEntityDto> HasExtraProperties<TEntityDto>(
+        this IFilterInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IHasExtraProperties
+    {
+        descriptor.Ignore(x => x.ExtraProperties);
+
+        return descriptor;
+    }
+
+    public static ISortInputTypeDescriptor<TEntityDto> HasExtraProperties<TEntityDto>(
+        this ISortInputTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : IHasExtraProperties
+    {
+        descriptor.Ignore(x => x.ExtraProperties);
+
+        return descriptor;
+    }
+
+    public static IInterfaceTypeDescriptor<TEntityDto> ExtensibleObject<TEntityDto>(
+        this IInterfaceTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : ExtensibleObject
+    {
+        descriptor.HasExtraProperties();
+        descriptor.Ignore(x => x.Validate(default!));
+
+        return descriptor;
+    }
+
+    public static IObjectTypeDescriptor<TEntityDto> ExtensibleObject<TEntityDto>(
+        this IObjectTypeDescriptor<TEntityDto> descriptor)
+        where TEntityDto : ExtensibleObject
+    {
+        descriptor.HasExtraProperties();
+        descriptor.Ignore(x => x.Validate(default!));
+
+        return descriptor;
+    }
+
+    public static IInputObjectTypeDescriptor<TEntityDto> ExtensibleObject<TEntityDto>(
         this IInputObjectTypeDescriptor<TEntityDto> descriptor)
         where TEntityDto : ExtensibleObject
     {
-        descriptor.Ignore(x => x.ExtraProperties);
+        descriptor.HasExtraProperties();
 
         return descriptor;
     }
 
-    public static IFilterInputTypeDescriptor<TEntityDto> ExtraProperties<TEntityDto>(
+    public static IFilterInputTypeDescriptor<TEntityDto> ExtensibleObject<TEntityDto>(
         this IFilterInputTypeDescriptor<TEntityDto> descriptor)
         where TEntityDto : ExtensibleObject
     {
-        descriptor.Ignore(x => x.ExtraProperties);
+        descriptor.HasExtraProperties();
 
         return descriptor;
     }
 
-    public static ISortInputTypeDescriptor<TEntityDto> ExtraProperties<TEntityDto>(
+    public static ISortInputTypeDescriptor<TEntityDto> ExtensibleObject<TEntityDto>(
         this ISortInputTypeDescriptor<TEntityDto> descriptor)
         where TEntityDto : ExtensibleObject
     {
-        descriptor.Ignore(x => x.ExtraProperties);
+        descriptor.HasExtraProperties();
 
         return descriptor;
     }

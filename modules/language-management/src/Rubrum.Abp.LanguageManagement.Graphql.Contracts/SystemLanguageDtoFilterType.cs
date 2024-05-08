@@ -10,7 +10,7 @@ public class SystemLanguageDtoFilterType : FilterInputType<SystemLanguageDto>, I
     {
         descriptor
             .Entity<SystemLanguageDto, string>()
-            .ExtraProperties()
+            .ExtensibleObject()
             .FullAudited();
     }
 }

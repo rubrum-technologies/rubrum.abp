@@ -10,7 +10,7 @@ public class SystemLanguageDtoSortType : SortInputType<SystemLanguageDto>, IGrap
     {
         descriptor
             .Entity<SystemLanguageDto, string>()
-            .ExtraProperties()
+            .ExtensibleObject()
             .FullAudited();
     }
 }
