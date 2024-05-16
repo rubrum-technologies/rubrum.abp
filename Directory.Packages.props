@@ -3,13 +3,13 @@
         <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 
         <!-- All Microsoft packages -->
-        <MicrosoftPackageVersion>8.0.4</MicrosoftPackageVersion>
+        <MicrosoftPackageVersion>8.0.5</MicrosoftPackageVersion>
 
         <!-- All Abp packages https://github.com/abpframework/abp -->
-        <AbpPackageVersion>8.1.1</AbpPackageVersion>
+        <AbpPackageVersion>8.1.3</AbpPackageVersion>
 
         <!-- Graphql Platform https://github.com/ChilliCream/graphql-platform -->
-        <HotChocolatePackageVersion>13.9.0</HotChocolatePackageVersion>
+        <HotChocolatePackageVersion>13.9.4</HotChocolatePackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
