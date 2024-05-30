@@ -1,11 +1,9 @@
-﻿using Rubrum.Abp.Hosting;
-using Rubrum.Abp.ImageStoring;
+﻿using Rubrum.Abp.ImageStoring;
 using Volo.Abp;
 using Volo.Abp.Modularity;
 
 namespace GenerateProxy;
 
-[DependsOn(typeof(RubrumAbpHostingAspNetCoreMicroserviceModule))]
 [DependsOn(typeof(RubrumAbpImageStoringHttpApiModule))]
 public class GenerateProxyModule : AbpModule
 {

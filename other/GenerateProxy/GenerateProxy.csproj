@@ -8,7 +8,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\..\framework\src\Rubrum.Abp.Hosting.AspNetCore.Microservice\Rubrum.Abp.Hosting.AspNetCore.Microservice.csproj" />
     <ProjectReference Include="..\..\modules\image-storing\src\Rubrum.Abp.ImageStoring.HttpApi\Rubrum.Abp.ImageStoring.HttpApi.csproj" />
   </ItemGroup>
 </Project>
