@@ -47,6 +47,11 @@ public class RubrumAbpGraphqlModule : AbpModule
 
                     provider.AddDefaultFieldHandlers();
                 }));
+
+                foreach (var action in options.FilterBuildActions)
+                {
+                    action.Invoke(descriptor);
+                }
             })
             .AddSorting()
             .AddProjections()
